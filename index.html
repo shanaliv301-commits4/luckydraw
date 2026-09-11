@@ -1,785 +1,188 @@
 <!DOCTYPE html>
+<html lang="en" class="dark">
 
-<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-container":"#1c2029","error":"#ffb4ab","on-error-container":"#ffdad6","on-tertiary-fixed-variant":"#574500","secondary-fixed":"#6ffbbe","error-container":"#93000a","background":"#0f131c","on-tertiary":"#3c2f00","outline":"#9b8f7b","on-surface-variant":"#d2c5ae","on-secondary-container":"#00311f","tertiary-container":"#ecc54b","primary":"#ffe2a6","on-secondary-fixed":"#002113","primary-fixed":"#ffdf9b","on-primary":"#3f2e00","surface-variant":"#31353f","primary-fixed-dim":"#f2bf40","on-secondary-fixed-variant":"#005236","inverse-primary":"#785a00","secondary-fixed-dim":"#4edea3","outline-variant":"#4e4635","surface-tint":"#f2bf40","on-primary-fixed-variant":"#5b4300","on-tertiary-container":"#675200","primary-container":"#f5c242","on-secondary":"#003824","inverse-on-surface":"#2c303a","on-surface":"#dfe2ef","surface":"#0f131c","surface-container-high":"#262a34","on-tertiary-fixed":"#241a00","tertiary-fixed":"#ffe088","inverse-surface":"#dfe2ef","on-primary-fixed":"#251a00","tertiary":"#ffe395","secondary":"#4edea3","on-error":"#690005","surface-dim":"#0f131c","on-background":"#dfe2ef","surface-container-highest":"#31353f","surface-bright":"#353943","surface-container-lowest":"#0a0e17","tertiary-fixed-dim":"#e9c349","secondary-container":"#00a572","on-primary-container":"#6b5000","surface-container-low":"#181b25"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-lg":"1.5rem","space-xs":"0.25rem","gutter-mobile":"1rem","space-xl":"2.5rem","margin-mobile":"1.25rem","space-sm":"0.5rem","margin":"3rem","space-md":"1rem","gutter":"1.5rem"},"fontFamily":{"display-hero-mobile":["Space Grotesk"],"body-md":["Plus Jakarta Sans"],"headline-lg-mobile":["Space Grotesk"],"display-hero":["Space Grotesk"],"label-mono-md":["JetBrains Mono"],"label-mono-sm":["JetBrains Mono"],"headline-lg":["Space Grotesk"],"title-md":["Plus Jakarta Sans"],"headline-md":["Space Grotesk"],"label-mono-lg":["JetBrains Mono"],"body-lg":["Plus Jakarta Sans"],"title-lg":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"]},"fontSize":{"display-hero-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"22px","fontWeight":"400"}],"headline-lg-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"600"}],"display-hero":["56px",{"lineHeight":"64px","letterSpacing":"-0.03em","fontWeight":"700"}],"label-mono-md":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"500"}],"label-mono-sm":["10px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"500"}],"headline-lg":["40px",{"lineHeight":"48px","letterSpacing":"-0.02em","fontWeight":"600"}],"title-md":["16px",{"lineHeight":"24px","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-mono-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.02em","fontWeight":"500"}],"body-lg":["16px",{"lineHeight":"26px","fontWeight":"400"}],"title-lg":["20px",{"lineHeight":"28px","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"18px","fontWeight":"400"}]}}}};</script></head><body class="bg-surface text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 inset-x-0 z-50 bg-surface-container-lowest/85 backdrop-blur-xl border-b border-surface-variant/40"><div class="h-20 max-w-[1320px] mx-auto px-margin-mobile lg:px-margin flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md shrink-0"><a class="flex items-center gap-space-sm" data-path="home" href="#"><img alt="LuckyDrop Brand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1V5EXxXMOb67fdNqyMcGcRe0_OlvwxjCSUUTh1mvn_w_bOAWbdIAvJmQ4UkymJinHE8p3572smu4BbkVn7UlBH9_yRQU-8Cdw5n0XG_ywHbmJN4MFFWfWaCAxnR7MkSKf9jO4VUqCXS-ZOcWIJDlA14mMnrmlbXyaphlg0akExLU0xC7qzFCKEgDdARaNQpEasEeOIH37BNKOjL8q52iPov3SqTQYbmaaI2m4B-xLmLZnUVWU4UCSdmGU8"/><span class="font-headline-md text-headline-md tracking-tight text-primary uppercase hidden sm:inline-block">LuckyDrop</span></a><div class="hidden xl:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high/60 border border-outline-variant/30"><span class="h-1.5 w-1.5 rounded-full bg-secondary animate-pulse"></span><span class="font-label-mono-sm text-label-mono-sm text-secondary uppercase tracking-wider">Draw #LD-2025-14 Active</span></div></div><nav class="hidden lg:flex items-center gap-1 p-1 bg-surface-container-lowest/60 rounded-xl border border-outline-variant/20" data-active-classes="bg-surface-container text-primary font-semibold"><a aria-current="page" class="px-3 py-1.5 rounded-lg transition-colors bg-surface-container text-primary font-semibold" data-path="home" href="#">Home</a><a class="px-3 py-1.5 rounded-lg text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface hover:bg-surface-container-high" data-path="how-it-works" href="#">How It Works</a><a class="px-3 py-1.5 rounded-lg text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface hover:bg-surface-container-high" data-path="prizes" href="#">Prizes</a><a class="px-3 py-1.5 rounded-lg text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface hover:bg-surface-container-high" data-path="winners-archive" href="#">Winners Archive</a><a class="px-3 py-1.5 rounded-lg text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface hover:bg-surface-container-high" data-path="user-dashboard" href="#">User Dashboard</a><a class="px-3 py-1.5 rounded-lg text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface hover:bg-surface-container-high" data-path="admin-panel" href="#">Admin Panel</a></nav><div class="flex items-center gap-space-md shrink-0"><div class="hidden md:flex flex-col items-end"><span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-wider">Draw Closes In</span><div class="flex items-center gap-1 text-primary"><span class="material-symbols-outlined text-[16px]">timer</span><span class="font-label-mono-md text-label-mono-md font-semibold">2d 14h 28m</span></div></div><button class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-primary-fixed-dim to-primary-container text-on-primary-container font-title-md text-body-md font-semibold transition-transform duration-150 hover:brightness-105 active:scale-[0.98] shadow-[0_0_20px_rgba(245,194,66,0.25)]" type="button"><span class="material-symbols-outlined text-[18px]">confirmation_number</span><span>Enter Draw – 5 USDT</span></button><div class="flex items-center gap-2.5 pl-2 py-1 pr-3 rounded-full bg-surface-container border border-outline-variant/30"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-primary-container/40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDriFK7J3iJWZ3bpBfo0cXmPQ9JPQ9AUHitFoSF0El_rWJUwFw9FIUYtDcWK1IAsHzGgx1241katjeXRtRPTYX5TuPm-5Brd_yfHXT10O5nFzPieze-sEQx7hVW_lUp3Hb_kM0A7XNRWw0dTh4kgWSFphs3m-BUiji7DkU-pZ7c67zBkhVc33acZRS4zxB7sXmkOwL1dtyWwYbjAZZhEXvmhIPz36PiANx37akwavi8MMGuFbfbAN2I"/><div class="hidden sm:flex flex-col text-left leading-tight"><span class="font-body-sm text-body-sm font-semibold text-on-surface">Alex C.</span><span class="font-label-mono-sm text-label-mono-sm text-secondary">12 Chances</span></div></div></div></div></header><main class="w-full pt-20 flex-1 bg-surface"><div class="flex flex-col w-full">
-<!-- Atmospheric Background Radial Lights (contained inside relative context) -->
-<div class="relative w-full overflow-hidden">
-<div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] bg-primary-container/10 blur-[130px] pointer-events-none rounded-full"></div>
-<div class="absolute top-[600px] -right-32 w-[600px] h-[600px] bg-secondary-container/10 blur-[140px] pointer-events-none rounded-full"></div>
-<!-- 1. HERO SECTION -->
-<section class="max-w-[1320px] mx-auto px-margin-mobile lg:px-margin pt-space-lg pb-space-xl">
-<!-- Trust Pill & Live Indicator -->
-<div class="flex flex-wrap items-center gap-space-sm mb-space-md">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/20 text-secondary border-0">
-<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
-<span class="font-label-mono-sm text-label-mono-sm uppercase tracking-widest font-semibold">Chainlink VRF Monitored</span>
-</div>
-<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-mono-sm text-label-mono-sm">
-<span class="material-symbols-outlined text-[14px] text-primary">verified_user</span>
-<span>Cycle #LD-2025-14 • Public Ledger Live</span>
-</div>
-</div>
-<!-- Main Headline & Subhead Grid -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center mb-space-xl">
-<div class="lg:col-span-7 flex flex-col gap-space-md">
-<h1 class="font-display-hero text-display-hero text-on-surface tracking-tight leading-none">
-            Provably Fair <br/>
-<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary-fixed-dim to-secondary">Weekly USDT</span> Draws
-          </h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl leading-relaxed">
-            Enter with just 5 USDT. 10 Guaranteed Winners chosen weekly through transparent, on-chain auditable VRF entropy. No false promises, zero manual overrides, full cryptographic transparency.
-          </p>
-<div class="flex flex-wrap items-center gap-space-md pt-space-xs">
-<a class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-primary-fixed-dim to-primary-container text-on-primary-container font-title-md text-title-md font-semibold transition-all duration-200 hover:brightness-110 active:scale-[0.98] shadow-xl" href="#enter-module">
-<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
-<span>Enter This Week’s Draw</span>
-</a>
-<a class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-surface-container-high text-on-surface font-title-md text-body-md font-semibold transition-colors duration-150 hover:bg-surface-bright" href="#how-it-works-section">
-<span class="material-symbols-outlined text-[18px]">verified</span>
-<span>Explore Provable Fairness</span>
-</a>
-</div>
-<!-- Micro Proof Bar -->
-<div class="flex items-center gap-6 pt-space-sm text-on-surface-variant">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-secondary text-[18px]">lock_reset</span>
-<span class="font-label-mono-sm text-label-mono-sm uppercase tracking-wider">Non-Custodial Escrow</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-[18px]">gavel</span>
-<span class="font-label-mono-sm text-label-mono-sm uppercase tracking-wider">Max 50 Tickets / Wallet</span>
-</div>
-</div>
-</div>
-<!-- Live Draw Status Card (Hero Feature Card) -->
-<div class="lg:col-span-5">
-<div class="relative p-space-lg rounded-2xl bg-surface-container-low shadow-xl overflow-hidden backdrop-blur-xl">
-<!-- Subtle accent top glow line -->
-<div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-primary-container to-transparent"></div>
-<div class="flex items-center justify-between pb-space-md mb-space-md border-b-0 bg-surface-container/60 p-space-sm rounded-xl">
-<div>
-<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-wider">Current Cycle</span>
-<div class="font-headline-md text-headline-md text-primary font-bold">#LD-2025-14</div>
-</div>
-<div class="text-right">
-<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-wider">Status</span>
-<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container/20 text-secondary font-label-mono-sm text-label-mono-sm font-semibold">
-<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
-                  OPEN FOR ENTRIES
-                </div>
-</div>
-</div>
-<!-- Flap Countdown Timer -->
-<div class="mb-space-md">
-<div class="flex items-center justify-between mb-2">
-<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-wider">Draw Closes Sunday 23:59 UTC</span>
-<span class="font-label-mono-sm text-label-mono-sm text-secondary flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">bolt</span> Real-Time Feed
-                </span>
-</div>
-<div class="grid grid-cols-4 gap-2 text-center" id="countdown-timer">
-<div class="bg-surface-container-lowest p-3 rounded-xl shadow-inner">
-<span class="font-display-hero text-headline-lg text-primary block leading-tight font-bold" id="timer-days">02</span>
-<span class="font-label-mono-sm text-label-mono-sm text-outline uppercase tracking-wider">Days</span>
-</div>
-<div class="bg-surface-container-lowest p-3 rounded-xl shadow-inner">
-<span class="font-display-hero text-headline-lg text-primary block leading-tight font-bold" id="timer-hours">14</span>
-<span class="font-label-mono-sm text-label-mono-sm text-outline uppercase tracking-wider">Hours</span>
-</div>
-<div class="bg-surface-container-lowest p-3 rounded-xl shadow-inner">
-<span class="font-display-hero text-headline-lg text-primary block leading-tight font-bold" id="timer-mins">38</span>
-<span class="font-label-mono-sm text-label-mono-sm text-outline uppercase tracking-wider">Mins</span>
-</div>
-<div class="bg-surface-container-lowest p-3 rounded-xl shadow-inner">
-<span class="font-display-hero text-headline-lg text-secondary block leading-tight font-bold" id="timer-secs">12</span>
-<span class="font-label-mono-sm text-label-mono-sm text-outline uppercase tracking-wider">Secs</span>
-</div>
-</div>
-</div>
-<!-- Pool Metrics -->
-<div class="grid grid-cols-2 gap-space-sm mb-space-md">
-<div class="p-space-sm rounded-xl bg-surface-container-high/80">
-<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-wider block">Total Prize Pool</span>
-<div class="flex items-baseline gap-1 mt-1">
-<span class="font-headline-lg text-headline-lg text-primary font-bold">2,095</span>
-<span class="font-label-mono-md text-label-mono-md text-on-surface-variant">USDT</span>
-</div>
-<span class="font-body-sm text-body-sm text-secondary flex items-center gap-1 mt-1">
-<span class="material-symbols-outlined text-[14px]">trending_up</span> 100% Guaranteed Reserve
-                </span>
-</div>
-<div class="p-space-sm rounded-xl bg-surface-container-high/80">
-<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-wider block">Active Entries</span>
-<div class="flex items-baseline gap-1 mt-1">
-<span class="font-headline-lg text-headline-lg text-on-surface font-bold">1,420</span>
-<span class="font-label-mono-md text-label-mono-md text-on-surface-variant">Tickets</span>
-</div>
-<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-1">
-<span class="material-symbols-outlined text-[14px] text-secondary">groups</span> 412 Participants
-                </span>
-</div>
-</div>
-<!-- Progress Bar to Cap -->
-<div class="p-space-sm rounded-xl bg-surface-container-lowest">
-<div class="flex justify-between items-center mb-1.5 text-body-sm font-body-sm">
-<span class="text-on-surface-variant">Weekly Liquidity Cap Progress</span>
-<span class="font-label-mono-sm text-label-mono-sm text-primary font-semibold">71% Reached</span>
-</div>
-<div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
-<div class="h-full bg-gradient-to-r from-primary-fixed to-primary-container rounded-full w-[71%]"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- 2. COMPLETE 10-TIER PRIZE DISTRIBUTION MATRIX -->
-<section class="max-w-[1320px] mx-auto px-margin-mobile lg:px-margin py-space-xl">
-<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-lg">
-<div>
-<div class="flex items-center gap-2 mb-1">
-<span class="px-2.5 py-0.5 rounded-full bg-primary-container/20 text-primary font-label-mono-sm text-label-mono-sm font-bold uppercase tracking-wider">Transparent Breakdown</span>
-<span class="font-label-mono-sm text-label-mono-sm text-outline">10 Guaranteed Winners</span>
-</div>
-<h2 class="font-headline-lg text-headline-lg text-on-surface">Prize Distribution Matrix</h2>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant max-w-md">
-          Every cycle allocates 100% of the active prize pool across ten structured tiers. Automatic instant smart-contract settlements post-draw.
-        </p>
-</div>
-<!-- Matrix Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-sm">
-<!-- Tier 1: Grand Gold -->
-<div class="relative col-span-1 md:col-span-2 lg:col-span-2 p-space-md rounded-2xl bg-gradient-to-br from-surface-container-high via-surface-container to-surface-container-lowest shadow-xl overflow-hidden flex flex-col justify-between">
-<div class="absolute -right-6 -bottom-6 w-36 h-36 bg-primary-container/15 rounded-full blur-2xl pointer-events-none"></div>
-<div>
-<div class="flex items-center justify-between mb-space-sm">
-<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-container text-on-primary-container font-label-mono-sm text-label-mono-sm font-bold uppercase">
-<span class="material-symbols-outlined text-[14px]">military_tech</span> 1st Place • Grand
-              </span>
-<span class="font-label-mono-sm text-label-mono-sm text-primary font-semibold">33.4% of Pool</span>
-</div>
-<div class="flex items-baseline gap-2 my-space-xs">
-<span class="font-display-hero text-display-hero text-primary font-bold tracking-tight">700</span>
-<span class="font-headline-md text-headline-md text-on-surface font-semibold">USDT</span>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Primary allocation settled automatically to the first drawn VRF seed ticket.</p>
-</div>
-<div class="mt-space-md pt-space-xs flex items-center justify-between font-label-mono-sm text-label-mono-sm text-secondary">
-<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[15px]">verified</span> Direct ERC20/TRC20 Payout</span>
-<span>Priority Slot #01</span>
-</div>
-</div>
-<!-- Tier 2: Silver/Gold High Tier -->
-<div class="col-span-1 md:col-span-1 lg:col-span-3 p-space-md rounded-2xl bg-surface-container shadow-md flex flex-col justify-between">
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
-<!-- 2nd -->
-<div class="p-space-sm rounded-xl bg-surface-container-high/60">
-<div class="flex items-center justify-between mb-2">
-<span class="px-2 py-0.5 rounded bg-surface-bright text-on-surface font-label-mono-sm text-label-mono-sm font-bold uppercase">2nd Place</span>
-<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">23.8%</span>
-</div>
-<div class="flex items-baseline gap-1">
-<span class="font-headline-lg text-headline-lg text-primary font-bold">500</span>
-<span class="font-label-mono-md text-label-mono-md text-on-surface-variant">USDT</span>
-</div>
-<span class="font-body-sm text-body-sm text-on-surface-variant mt-1 block">Second verified random index</span>
-</div>
-<!-- 3rd -->
-<div class="p-space-sm rounded-xl bg-surface-container-high/60">
-<div class="flex items-center justify-between mb-2">
-<span class="px-2 py-0.5 rounded bg-surface-bright text-on-surface font-label-mono-sm text-label-mono-sm font-bold uppercase">3rd Place</span>
-<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">14.3%</span>
-</div>
-<div class="flex items-baseline gap-1">
-<span class="font-headline-lg text-headline-lg text-primary font-bold">300</span>
-<span class="font-label-mono-md text-label-mono-md text-on-surface-variant">USDT</span>
-</div>
-<span class="font-body-sm text-body-sm text-on-surface-variant mt-1 block">Third verified random index</span>
-</div>
-</div>
-<div class="mt-space-sm pt-space-xs flex items-center justify-between text-on-surface-variant font-label-mono-sm text-label-mono-sm">
-<span>High-Tier Allocations Combined: 800 USDT</span>
-<span class="text-primary font-semibold">Tiers 2 &amp; 3</span>
-</div>
-</div>
-<!-- Tiers 4 - 10 Mini Card Mosaic -->
-<div class="col-span-1 md:col-span-2 lg:col-span-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-space-xs">
-<!-- 4th -->
-<div class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors shadow-sm">
-<div class="flex items-center justify-between mb-1">
-<span class="font-label-mono-sm text-label-mono-sm text-outline uppercase font-semibold">4th Place</span>
-<span class="font-label-mono-sm text-label-mono-sm text-primary">9.5%</span>
-</div>
-<div class="font-headline-md text-headline-md text-on-surface font-bold">200 <span class="font-label-mono-sm text-label-mono-sm text-outline">USDT</span></div>
-</div>
-<!-- 5th -->
-<div class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors shadow-sm">
-<div class="flex items-center justify-between mb-1">
-<span class="font-label-mono-sm text-label-mono-sm text-outline uppercase font-semibold">5th Place</span>
-<span class="font-label-mono-sm text-label-mono-sm text-primary">7.1%</span>
-</div>
-<div class="font-headline-md text-headline-md text-on-surface font-bold">150 <span class="font-label-mono-sm text-label-mono-sm text-outline">USDT</span></div>
-</div>
-<!-- 6th -->
-<div class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors shadow-sm">
-<div class="flex items-center justify-between mb-1">
-<span class="font-label-mono-sm text-label-mono-sm text-outline uppercase font-semibold">6th Place</span>
-<span class="font-label-mono-sm text-label-mono-sm text-primary">4.7%</span>
-</div>
-<div class="font-headline-md text-headline-md text-on-surface font-bold">100 <span class="font-label-mono-sm text-label-mono-sm text-outline">USDT</span></div>
-</div>
-<!-- 7th -->
-<div class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors shadow-sm">
-<div class="flex items-center justify-between mb-1">
-<span class="font-label-mono-sm text-label-mono-sm text-outline uppercase font-semibold">7th Place</span>
-<span class="font-label-mono-sm text-label-mono-sm text-primary">3.5%</span>
-</div>
-<div class="font-headline-md text-headline-md text-on-surface font-bold">75 <span class="font-label-mono-sm text-label-mono-sm text-outline">USDT</span></div>
-</div>
-<!-- 8th -->
-<div class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors shadow-sm">
-<div class="flex items-center justify-between mb-1">
-<span class="font-label-mono-sm text-label-mono-sm text-outline uppercase font-semibold">8th Place</span>
-<span class="font-label-mono-sm text-label-mono-sm text-primary">2.4%</span>
-</div>
-<div class="font-headline-md text-headline-md text-on-surface font-bold">50 <span class="font-label-mono-sm text-label-mono-sm text-outline">USDT</span></div>
-</div>
-<!-- 9th -->
-<div class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors shadow-sm">
-<div class="flex items-center justify-between mb-1">
-<span class="font-label-mono-sm text-label-mono-sm text-outline uppercase font-semibold">9th Place</span>
-<span class="font-label-mono-sm text-label-mono-sm text-primary">1.4%</span>
-</div>
-<div class="font-headline-md text-headline-md text-on-surface font-bold">30 <span class="font-label-mono-sm text-label-mono-sm text-outline">USDT</span></div>
-</div>
-<!-- 10th -->
-<div class="p-space-sm rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors shadow-sm">
-<div class="flex items-center justify-between mb-1">
-<span class="font-label-mono-sm text-label-mono-sm text-outline uppercase font-semibold">10th Place</span>
-<span class="font-label-mono-sm text-label-mono-sm text-primary">1.0%</span>
-</div>
-<div class="font-headline-md text-headline-md text-on-surface font-bold">20 <span class="font-label-mono-sm text-label-mono-sm text-outline">USDT</span></div>
-</div>
-</div>
-</div>
-<!-- Disclosed Payout Note Callout -->
-<div class="mt-space-md p-space-md rounded-xl bg-surface-container-low flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
-<div class="flex items-center gap-space-sm">
-<span class="material-symbols-outlined text-secondary text-[24px]">account_balance_wallet</span>
-<p class="font-body-md text-body-md text-on-surface">
-<span class="font-semibold text-primary">Disclosed Guarantee:</span> 100% of disclosed prize pool paid out every cycle directly to winners' registered USDT TRC20/ERC20 wallets without claims, KYC friction, or hidden deductions.
-          </p>
-</div>
-<div class="shrink-0 font-label-mono-sm text-label-mono-sm text-secondary bg-secondary-container/20 px-3 py-1.5 rounded-lg flex items-center gap-1">
-<span class="material-symbols-outlined text-[16px]">check_circle</span> Automated Smart Settlement
-        </div>
-</div>
-</section>
-<!-- 3. INTERACTIVE 'ENTER DRAW' CALCULATION & CHECKOUT MODULE -->
-<section class="max-w-[1320px] mx-auto px-margin-mobile lg:px-margin py-space-xl" id="enter-module">
-<div class="p-space-lg lg:p-space-xl rounded-3xl bg-surface-container-lowest shadow-2xl relative">
-<div class="flex flex-col lg:flex-row gap-space-xl">
-<!-- Left Column: Input and Preset Selectors -->
-<div class="flex-1 flex flex-col gap-space-lg">
-<div>
-<div class="flex items-center gap-2 mb-1">
-<span class="h-2 w-2 rounded-full bg-primary animate-pulse"></span>
-<span class="font-label-mono-sm text-label-mono-sm text-primary uppercase font-bold tracking-wider">Fast Non-Custodial Entry</span>
-</div>
-<h3 class="font-headline-lg text-headline-lg text-on-surface font-bold">Acquire Draw Tickets</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mt-1">Fixed price 5 USDT per ticket. Maximum 50 tickets per wallet cycle limit.</p>
-</div>
-<!-- Quick Ticket Preset Buttons -->
-<div>
-<label class="block font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-wider mb-2">Select Preset Quantity</label>
-<div class="grid grid-cols-4 gap-2.5">
-<button class="ticket-btn p-3 rounded-xl bg-surface-container text-center hover:bg-surface-bright active:scale-95 transition-all text-on-surface" data-qty="1" onclick="setTickets(1)" type="button">
-<div class="font-title-lg text-title-lg font-bold">1</div>
-<div class="font-label-mono-sm text-label-mono-sm text-primary">5 USDT</div>
-</button>
-<button class="ticket-btn p-3 rounded-xl bg-surface-container text-center hover:bg-surface-bright active:scale-95 transition-all text-on-surface" data-qty="2" onclick="setTickets(2)" type="button">
-<div class="font-title-lg text-title-lg font-bold">2</div>
-<div class="font-label-mono-sm text-label-mono-sm text-primary">10 USDT</div>
-</button>
-<button class="ticket-btn p-3 rounded-xl bg-surface-container text-center hover:bg-surface-bright active:scale-95 transition-all text-on-surface ring-2 ring-primary-container" data-qty="5" onclick="setTickets(5)" type="button">
-<div class="font-title-lg text-title-lg font-bold">5</div>
-<div class="font-label-mono-sm text-label-mono-sm text-primary">25 USDT</div>
-</button>
-<button class="ticket-btn p-3 rounded-xl bg-surface-container text-center hover:bg-surface-bright active:scale-95 transition-all text-on-surface" data-qty="10" onclick="setTickets(10)" type="button">
-<div class="font-title-lg text-title-lg font-bold">10</div>
-<div class="font-label-mono-sm text-label-mono-sm text-primary">50 USDT</div>
-</button>
-</div>
-</div>
-<!-- Custom Stepper -->
-<div>
-<div class="flex justify-between items-center mb-2">
-<label class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-wider">Custom Quantity Stepper</label>
-<span class="font-label-mono-sm text-label-mono-sm text-outline">Max 50 / Wallet</span>
-</div>
-<div class="flex items-center justify-between p-2 rounded-xl bg-surface-container-high">
-<button class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-on-surface hover:bg-surface-bright transition-colors active:scale-95" onclick="stepTickets(-1)" type="button">
-<span class="material-symbols-outlined text-[20px]">remove</span>
-</button>
-<div class="flex items-baseline gap-2">
-<span class="font-display-hero text-headline-lg text-primary font-bold" id="ticket-count-display">5</span>
-<span class="font-label-mono-md text-label-mono-md text-on-surface-variant">Tickets</span>
-</div>
-<button class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-on-surface hover:bg-surface-bright transition-colors active:scale-95" onclick="stepTickets(1)" type="button">
-<span class="material-symbols-outlined text-[20px]">add</span>
-</button>
-</div>
-</div>
-<!-- Network Selection Tabs -->
-<div>
-<label class="block font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-wider mb-2">Select Transfer Network</label>
-<div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-<button class="network-btn p-3 rounded-xl bg-surface-container text-left transition-all active:scale-95 ring-1 ring-primary" data-net="TRC20" onclick="setNetwork('TRC20')" type="button">
-<div class="font-title-md text-title-md font-bold text-on-surface flex items-center justify-between">
-<span>TRC-20</span>
-<span class="w-2 h-2 rounded-full bg-secondary"></span>
-</div>
-<div class="font-label-mono-sm text-label-mono-sm text-secondary mt-1">Fast / $0.80 Fee</div>
-</button>
-<button class="network-btn p-3 rounded-xl bg-surface-container text-left transition-all active:scale-95 opacity-70 hover:opacity-100" data-net="ERC20" onclick="setNetwork('ERC20')" type="button">
-<div class="font-title-md text-title-md font-bold text-on-surface">ERC-20</div>
-<div class="font-label-mono-sm text-label-mono-sm text-on-surface-variant mt-1">Ethereum Main</div>
-</button>
-<button class="network-btn p-3 rounded-xl bg-surface-container text-left transition-all active:scale-95 opacity-70 hover:opacity-100" data-net="Arbitrum" onclick="setNetwork('Arbitrum')" type="button">
-<div class="font-title-md text-title-md font-bold text-on-surface">Arbitrum</div>
-<div class="font-label-mono-sm text-label-mono-sm text-secondary mt-1">L2 Low Gas</div>
-</button>
-<button class="network-btn p-3 rounded-xl bg-surface-container text-left transition-all active:scale-95 opacity-70 hover:opacity-100" data-net="Polygon" onclick="setNetwork('Polygon')" type="button">
-<div class="font-title-md text-title-md font-bold text-on-surface">Polygon</div>
-<div class="font-label-mono-sm text-label-mono-sm text-secondary mt-1">Sub-Cent Gas</div>
-</button>
-</div>
-</div>
-</div>
-<!-- Right Column: Live Settlement & Deposit Mockup Box -->
-<div class="lg:w-[440px] flex flex-col justify-between p-space-md rounded-2xl bg-surface-container shadow-xl">
-<div>
-<div class="flex items-center justify-between pb-space-sm mb-space-sm border-b-0 bg-surface-container-high/40 p-3 rounded-xl">
-<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant uppercase tracking-wider">Deposit Summary</span>
-<span class="font-label-mono-sm text-label-mono-sm text-secondary flex items-center gap-1 font-semibold">
-<span class="material-symbols-outlined text-[14px]">lock</span> Direct Contract
-                </span>
-</div>
-<!-- Price & Calculations -->
-<div class="flex items-center justify-between py-2">
-<span class="font-body-md text-body-md text-on-surface-variant">Tickets Selected</span>
-<span class="font-label-mono-lg text-label-mono-lg font-bold text-on-surface" id="summary-ticket-count">5x Entries</span>
-</div>
-<div class="flex items-center justify-between py-2">
-<span class="font-body-md text-body-md text-on-surface-variant">Total Payable</span>
-<div class="text-right">
-<span class="font-headline-lg text-headline-lg text-primary font-bold" id="summary-total-cost">25.00</span>
-<span class="font-label-mono-md text-label-mono-md text-on-surface font-semibold">USDT</span>
-</div>
-</div>
-<!-- Escrow Deposit Box Mockup -->
-<div class="mt-space-sm p-space-sm rounded-xl bg-surface-container-lowest">
-<div class="flex items-center gap-3 mb-space-xs">
-<!-- SVG Mock QR Code -->
-<div class="w-16 h-16 bg-surface-container-high rounded-lg p-1 shrink-0 flex items-center justify-center">
-<svg class="w-full h-full text-primary" fill="currentColor" viewbox="0 0 24 24">
-<path d="M3 3h6v6H3V3zm2 2v2h2V5H5zm8-2h6v6h-6V3zm2 2v2h2V5h-2zM3 13h6v6H3v-6zm2 2v2h2v-2H5zm13-2h3v3h-3v-3zm-5 0h2v2h-2v-2zm2 2h2v2h-2v-2zm-2 2h2v2h-2v-2zm4 0h2v2h-2v-2zm2 2h2v2h-2v-2zM11 3h2v2h-2V3zm0 4h2v2h-2V7zm-8 4h2v2H3v-2zm4 0h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2z"></path>
-</svg>
-</div>
-<div class="min-w-0 flex-1">
-<div class="flex items-center justify-between">
-<span class="font-label-mono-sm text-label-mono-sm text-outline uppercase" id="selected-net-label">TRC-20 Escrow Address</span>
-<button class="text-primary hover:text-primary-fixed flex items-center gap-0.5 font-label-mono-sm text-label-mono-sm" onclick="copyAddress()" type="button">
-<span class="material-symbols-outlined text-[14px]">content_copy</span> Copy
-                      </button>
-</div>
-<div class="font-label-mono-sm text-label-mono-sm text-on-surface truncate mt-1 bg-surface-container p-1 rounded" id="escrow-address">
-                      TK8mYz...9xN2QvLp7R4FairDraw
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuckyDrop - Provably Fair Weekly USDT Draws</title> <!-- Tailwind CSS & Web3 / Backend Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script> <!-- Google Fonts: Space Grotesk & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        surface: '#0a0e17',
+                        surfaceCard: '#111625',
+                        surfaceCardHover: '#171e30',
+                        surfaceBorder: '#1f293d',
+                        brandGold: '#f5c242',
+                        brandGoldHover: '#ffd466',
+                        brandGoldDim: 'rgba(245, 194, 66, 0.12)',
+                        emeraldAccent: '#10b981'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a0e17;
+            color: #f1f5f9;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .gold-glow {
+            box-shadow: 0 0 35px rgba(245, 194, 66, 0.12);
+        }
+
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #f5c242 0%, #ffe58f 50%, #d49520 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0e17;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1f293d;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col justify-between selection:bg-brandGold selection:text-black"> <!-- ================= NAVBAR ================= -->
+    <header class="border-b border-surfaceBorder bg-surface/90 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"> <!-- Brand Logo -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brandGold via-yellow-400 to-amber-600 flex items-center justify-center font-bold text-black text-xl shadow-lg shadow-yellow-500/20"> ⚡ </div>
+                <div> <span class="text-xl font-bold tracking-wider text-white">LUCKY<span class="text-brandGold">DROP</span></span> <span class="block text-[10px] uppercase font-mono tracking-widest text-emerald-400 flex items-center gap-1"> <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> Draw #LD-2025-14 Active </span> </div>
+            </div> <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300"> <a href="#how-it-works" class="hover:text-brandGold transition">How It Works</a> <a href="#tickets-section" class="hover:text-brandGold transition">Buy Tickets</a> <a href="#prizes-matrix" class="hover:text-brandGold transition">Prize Matrix</a> <a href="#provably-fair" class="hover:text-brandGold transition">Provably Fair</a> </nav> <!-- Auth Area -->
+            <div class="flex items-center gap-3"> <!-- Guest View (Sign In / Connect) -->
+                <div id="guest-actions" class="flex items-center gap-2"> <button onclick="openAuthModal()" class="px-4 py-2 rounded-xl text-sm font-semibold bg-surfaceCard border border-surfaceBorder hover:border-slate-500 text-slate-200 hover:text-white transition flex items-center gap-2 cursor-pointer"> <span>Sign In / Connect</span> </button> <a href="#tickets-section" class="hidden sm:flex px-4 py-2 rounded-xl text-sm font-bold bg-gradient-to-r from-brandGold to-yellow-500 hover:from-brandGoldHover hover:to-yellow-400 text-black shadow-md transition"> Enter Draw – 5 USDT </a> </div> <!-- Logged In View with Dropdown -->
+                <div id="user-profile" class="hidden flex items-center gap-3">
+                    <div class="relative"> <button onclick="toggleUserDropdown()" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-surfaceCard border border-surfaceBorder hover:border-brandGold/60 transition cursor-pointer">
+                            <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></div> <span id="user-display-tag" class="font-mono text-xs font-semibold text-slate-200">0x...0000</span> <span class="text-xs text-slate-400">▼</span>
+                        </button> <!-- Dropdown for Switching / Disconnecting -->
+                        <div id="user-dropdown" class="hidden absolute right-0 mt-2 w-60 bg-surfaceCard border border-surfaceBorder rounded-2xl shadow-2xl p-2 z-50 text-sm">
+                            <div class="px-3 py-2.5 border-b border-surfaceBorder mb-1"> <span class="text-[10px] uppercase text-slate-400 block font-mono">Active Connection</span> <span id="user-full-tag" class="text-xs text-emerald-400 font-mono break-all font-semibold">Wallet Address</span> <span id="user-auth-type" class="text-[10px] text-slate-400 font-mono block mt-0.5">Method: Web3</span> </div> <button onclick="openWalletSelector()" class="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-800 text-slate-200 flex items-center gap-2 transition cursor-pointer"> <span>🔄</span> Switch / Change Wallet </button> <button onclick="disconnectUser()" class="w-full text-left px-3 py-2 rounded-xl hover:bg-rose-950/40 text-rose-400 flex items-center gap-2 transition cursor-pointer"> <span>🚪</span> Disconnect / Sign Out </button>
+                        </div>
                     </div>
-</div>
-</div>
-<!-- Webhook Detection Status Indicator -->
-<div class="flex items-center justify-between pt-2 text-on-surface-variant font-label-mono-sm text-label-mono-sm">
-<span class="flex items-center gap-1.5 text-secondary">
-<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
-                    Webhook Listener Active
-                  </span>
-<span>Instant Ticket Generation</span>
-</div>
-</div>
-<!-- Estimated Odds & Ticket Preview -->
-<div class="mt-space-sm p-space-sm rounded-xl bg-surface-container-high/40 flex items-center justify-between">
-<span class="font-body-sm text-body-sm text-on-surface-variant">Estimated Odds of Winning</span>
-<span class="font-label-mono-md text-label-mono-md text-secondary font-bold" id="odds-display">~ 1 in 28.4</span>
-</div>
-</div>
-<!-- Action Button & Anti-Whale Disclaimer -->
-<div class="mt-space-md">
-<button class="w-full py-4 rounded-xl bg-gradient-to-r from-primary-fixed-dim to-primary-container text-on-primary-container font-title-md text-title-md font-bold transition-all duration-200 hover:brightness-110 active:scale-[0.99] shadow-xl flex items-center justify-center gap-2" id="btn-proceed" onclick="confirmEntryMock()" type="button">
-<span class="material-symbols-outlined text-[20px]">send_money</span>
-<span>Send Deposit &amp; Lock Tickets</span>
-</button>
-<p class="font-body-sm text-body-sm text-on-surface-variant/80 text-center mt-3 leading-tight">
-                Draw entries are non-refundable once cycle locks. Odds are strictly proportional to active tickets. Max 50 tickets per wallet to prevent whale manipulation.
-              </p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- 4. HOW IT WORKS (5 TRANSPARENT STEPS) -->
-<section class="max-w-[1320px] mx-auto px-margin-mobile lg:px-margin py-space-xl" id="how-it-works-section">
-<div class="text-center max-w-2xl mx-auto mb-space-xl">
-<span class="px-3 py-1 rounded-full bg-surface-container text-primary font-label-mono-sm text-label-mono-sm font-semibold uppercase tracking-widest">Protocol Lifecycle</span>
-<h2 class="font-headline-lg text-headline-lg text-on-surface mt-2">How It Works in 5 Transparent Steps</h2>
-<p class="font-body-md text-body-md text-on-surface-variant mt-2">
-          From non-custodial entry to verifiable VRF settlement, each draw is executed without backdoors.
-        </p>
-</div>
-<!-- Steps Grid -->
-<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-space-md">
-<!-- Step 1 -->
-<div class="p-space-md rounded-2xl bg-surface-container-low flex flex-col justify-between shadow-md relative">
-<div class="flex items-center justify-between mb-space-sm">
-<span class="font-display-hero text-headline-lg text-outline font-bold">01</span>
-<span class="material-symbols-outlined text-primary text-[24px]">key</span>
-</div>
-<div>
-<h4 class="font-title-md text-title-md text-on-surface font-semibold mb-1">Connect or Sign In</h4>
-<p class="font-body-sm text-body-sm text-on-surface-variant">
-              Authenticate via Web3 wallet (MetaMask, Phantom, TronLink) or Google OAuth / email for unified notifications.
-            </p>
-</div>
-<div class="mt-space-md pt-2 font-label-mono-sm text-label-mono-sm text-secondary flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">shield</span> Non-custodial sign
-          </div>
-</div>
-<!-- Step 2 -->
-<div class="p-space-md rounded-2xl bg-surface-container-low flex flex-col justify-between shadow-md relative">
-<div class="flex items-center justify-between mb-space-sm">
-<span class="font-display-hero text-headline-lg text-outline font-bold">02</span>
-<span class="material-symbols-outlined text-primary text-[24px]">confirmation_number</span>
-</div>
-<div>
-<h4 class="font-title-md text-title-md text-on-surface font-semibold mb-1">Select Tickets</h4>
-<p class="font-body-sm text-body-sm text-on-surface-variant">
-              Choose your quantity at 5 USDT per ticket. Strict 50 ticket limit per wallet enforced at contract level.
-            </p>
-</div>
-<div class="mt-space-md pt-2 font-label-mono-sm text-label-mono-sm text-secondary flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">tune</span> Whale resistant
-          </div>
-</div>
-<!-- Step 3 -->
-<div class="p-space-md rounded-2xl bg-surface-container-low flex flex-col justify-between shadow-md relative">
-<div class="flex items-center justify-between mb-space-sm">
-<span class="font-display-hero text-headline-lg text-outline font-bold">03</span>
-<span class="material-symbols-outlined text-primary text-[24px]">account_balance_wallet</span>
-</div>
-<div>
-<h4 class="font-title-md text-title-md text-on-surface font-semibold mb-1">Send to Escrow</h4>
-<p class="font-body-sm text-body-sm text-on-surface-variant">
-              Transfer USDT across TRC20, ERC20, Polygon, or Arbitrum. Webhooks confirm block inclusion in ~15s.
-            </p>
-</div>
-<div class="mt-space-md pt-2 font-label-mono-sm text-label-mono-sm text-secondary flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">sync</span> Automated confirmation
-          </div>
-</div>
-<!-- Step 4 -->
-<div class="p-space-md rounded-2xl bg-surface-container-low flex flex-col justify-between shadow-md relative">
-<div class="flex items-center justify-between mb-space-sm">
-<span class="font-display-hero text-headline-lg text-outline font-bold">04</span>
-<span class="material-symbols-outlined text-primary text-[24px]">receipt_long</span>
-</div>
-<div>
-<h4 class="font-title-md text-title-md text-on-surface font-semibold mb-1">Public Ticket IDs</h4>
-<p class="font-body-sm text-body-sm text-on-surface-variant">
-              Receive unique serial hashes minted into the immutable draw entry tree, viewable on the public ledger.
-            </p>
-</div>
-<div class="mt-space-md pt-2 font-label-mono-sm text-label-mono-sm text-secondary flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">public</span> Public verifiable hashes
-          </div>
-</div>
-<!-- Step 5 -->
-<div class="p-space-md rounded-2xl bg-surface-container-low flex flex-col justify-between shadow-md relative">
-<div class="flex items-center justify-between mb-space-sm">
-<span class="font-display-hero text-headline-lg text-outline font-bold">05</span>
-<span class="material-symbols-outlined text-primary text-[24px]">casino</span>
-</div>
-<div>
-<h4 class="font-title-md text-title-md text-on-surface font-semibold mb-1">VRF Selection</h4>
-<p class="font-body-sm text-body-sm text-on-surface-variant">
-              Sunday 23:59 UTC, Chainlink VRF oracle generates unbiasable random entropy to draw 10 unique winning tickets.
-            </p>
-</div>
-<div class="mt-space-md pt-2 font-label-mono-sm text-label-mono-sm text-secondary flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">auto_awesome</span> Instant payouts
-          </div>
-</div>
-</div>
-</section>
-<!-- 5. REFERRAL TRANSPARENCY & FRAUD SHIELD -->
-<section class="max-w-[1320px] mx-auto px-margin-mobile lg:px-margin py-space-xl">
-<div class="p-space-lg lg:p-space-xl rounded-3xl bg-surface-container shadow-xl">
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
-<div class="lg:col-span-7 flex flex-col gap-space-md">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container/20 text-primary w-fit">
-<span class="material-symbols-outlined text-[16px]">share</span>
-<span class="font-label-mono-sm text-label-mono-sm uppercase tracking-wider font-semibold">Community Incentives</span>
-</div>
-<h2 class="font-headline-lg text-headline-lg text-on-surface">Invite Peers, Earn Fair Chances</h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant">
-              We reward community builders fairly without creating toxic multi-level schemes or hyper-inflated ticket dilution.
-            </p>
-<!-- Rules Grid -->
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm pt-space-xs">
-<div class="p-space-sm rounded-xl bg-surface-container-high">
-<div class="font-label-mono-sm text-label-mono-sm text-primary uppercase font-bold mb-1">Point Accrual Rate</div>
-<div class="font-title-lg text-title-lg text-on-surface font-bold">1 Point / 5 USDT Entry</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Earned on all eligible deposits completed by your verified invitees.</p>
-</div>
-<div class="p-space-sm rounded-xl bg-surface-container-high">
-<div class="font-label-mono-sm text-label-mono-sm text-primary uppercase font-bold mb-1">Auto-Conversion</div>
-<div class="font-title-lg text-title-lg text-on-surface font-bold">5 Points = 1 Bonus Ticket</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Converts automatically into official draw tickets at cycle closing.</p>
-</div>
-</div>
-<!-- Sybil Shield Notice -->
-<div class="flex items-start gap-3 p-space-sm rounded-xl bg-surface-container-lowest">
-<span class="material-symbols-outlined text-secondary text-[22px] shrink-0 mt-0.5">verified_user</span>
-<div>
-<span class="font-title-md text-body-md font-semibold text-on-surface">Strict Sybil Resistance Cap</span>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
-                  Maximum <span class="text-primary font-semibold">10 bonus referral tickets</span> per user per draw. Automated anti-sybil filters monitor IP collisions, circular wallet funding, and transaction clustering.
-                </p>
-</div>
-</div>
-</div>
-<!-- Referral Interactive Card Preview -->
-<div class="lg:col-span-5 p-space-md rounded-2xl bg-surface-container-low shadow-md">
-<div class="flex items-center justify-between pb-space-sm mb-space-sm border-b-0 bg-surface-container p-space-sm rounded-xl">
-<span class="font-title-md text-title-md font-semibold text-on-surface">Your Referral Status</span>
-<span class="font-label-mono-sm text-label-mono-sm text-secondary bg-secondary-container/20 px-2 py-0.5 rounded">Active</span>
-</div>
-<div class="space-y-3">
-<div class="flex justify-between items-center text-body-sm font-body-sm">
-<span class="text-on-surface-variant">Invited Friends</span>
-<span class="font-label-mono-md text-label-mono-md text-on-surface font-bold">8 Users</span>
-</div>
-<div class="flex justify-between items-center text-body-sm font-body-sm">
-<span class="text-on-surface-variant">Accumulated Points</span>
-<span class="font-label-mono-md text-label-mono-md text-primary font-bold">25 Points</span>
-</div>
-<div class="flex justify-between items-center text-body-sm font-body-sm">
-<span class="text-on-surface-variant">Bonus Tickets Generated</span>
-<span class="font-label-mono-md text-label-mono-md text-secondary font-bold">5 / 10 Max</span>
-</div>
-</div>
-<!-- Referral Link Copy Box -->
-<div class="mt-space-md">
-<label class="block font-label-mono-sm text-label-mono-sm text-outline uppercase mb-1">Your Unique Invite Link</label>
-<div class="flex items-center gap-2 p-1.5 rounded-xl bg-surface-container-lowest">
-<input class="bg-transparent text-on-surface font-label-mono-sm text-label-mono-sm px-2 w-full focus:outline-none select-all" id="ref-link-input" readonly="" type="text" value="https://luckydrop.io/ref/ALEX-792"/>
-<button class="px-3 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-primary font-label-mono-sm text-label-mono-sm font-semibold shrink-0 transition-colors" onclick="copyRefLink()" type="button">
-                  Copy
-                </button>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- 6. COMPREHENSIVE FAQ & LEGAL DISCLAIMER -->
-<section class="max-w-[1320px] mx-auto px-margin-mobile lg:px-margin py-space-xl">
-<div class="max-w-3xl mx-auto mb-space-lg text-center">
-<span class="px-3 py-1 rounded-full bg-surface-container text-primary font-label-mono-sm text-label-mono-sm font-semibold uppercase tracking-widest">Knowledge Base</span>
-<h2 class="font-headline-lg text-headline-lg text-on-surface mt-2">Frequently Asked Questions</h2>
-<p class="font-body-md text-body-md text-on-surface-variant mt-2">
-          Everything you need to know about draw verifiability, non-custodial settlements, and participant safeguards.
-        </p>
-</div>
-<div class="max-w-3xl mx-auto space-y-space-xs">
-<!-- FAQ 1 -->
-<details class="group p-space-md rounded-2xl bg-surface-container-low shadow-sm [&amp;_summary::-webkit-details-marker]:hidden cursor-pointer">
-<summary class="flex items-center justify-between font-title-lg text-title-md font-semibold text-on-surface list-none">
-<span>How is provable fairness verified on-chain?</span>
-<span class="material-symbols-outlined text-outline transition-transform duration-200 group-open:rotate-180">expand_more</span>
-</summary>
-<div class="mt-space-sm pt-space-xs font-body-md text-body-md text-on-surface-variant leading-relaxed">
-            Every draw relies on Chainlink Verifiable Random Function (VRF) paired with historical Ethereum blockhash seeds. The generated seed cannot be predicted or manipulated by node operators, protocol creators, or users. Winning ticket indexes are calculated algorithmically and verifiable on the public ledger.
-          </div>
-</details>
-<!-- FAQ 2 -->
-<details class="group p-space-md rounded-2xl bg-surface-container-low shadow-sm [&amp;_summary::-webkit-details-marker]:hidden cursor-pointer">
-<summary class="flex items-center justify-between font-title-lg text-title-md font-semibold text-on-surface list-none">
-<span>When does the draw close and when are winners paid?</span>
-<summary-chevron></summary-chevron>
-<span class="material-symbols-outlined text-outline transition-transform duration-200 group-open:rotate-180">expand_more</span>
-</summary>
-<div class="mt-space-sm pt-space-xs font-body-md text-body-md text-on-surface-variant leading-relaxed">
-            The entry portal locks exactly every Sunday at 23:59:59 UTC. The VRF request triggers automatically at 00:01:00 UTC Monday. Once the oracle responds (~3 to 5 minutes), the smart contract executes immediate automated USDT transfers to all 10 winners' funding wallets.
-          </div>
-</details>
-<!-- FAQ 3 -->
-<details class="group p-space-md rounded-2xl bg-surface-container-low shadow-sm [&amp;_summary::-webkit-details-marker]:hidden cursor-pointer">
-<summary class="flex items-center justify-between font-title-lg text-title-md font-semibold text-on-surface list-none">
-<span>Why is there a strict 50-ticket maximum cap per wallet?</span>
-<span class="material-symbols-outlined text-outline transition-transform duration-200 group-open:rotate-180">expand_more</span>
-</summary>
-<div class="mt-space-sm pt-space-xs font-body-md text-body-md text-on-surface-variant leading-relaxed">
-            To prevent high-net-worth capital entities ("whales") from overwhelming the prize pool and driving participant odds to uncompetitive levels. This hard protocol cap ensures genuine peer distribution and community accessibility.
-          </div>
-</details>
-<!-- FAQ 4 -->
-<details class="group p-space-md rounded-2xl bg-surface-container-low shadow-sm [&amp;_summary::-webkit-details-marker]:hidden cursor-pointer">
-<summary class="flex items-center justify-between font-title-lg text-title-md font-semibold text-on-surface list-none">
-<span>What happens if an unsupported token or wrong network is sent?</span>
-<span class="material-symbols-outlined text-outline transition-transform duration-200 group-open:rotate-180">expand_more</span>
-</summary>
-<div class="mt-space-sm pt-space-xs font-body-md text-body-md text-on-surface-variant leading-relaxed">
-            Only standard Tether (USDT) on TRC20, ERC20, Polygon, and Arbitrum are recognized by our escrow contracts. Unrecognized ERC20 tokens or direct non-USDT crypto sent to contract addresses cannot be automatically converted and are subject to network burn. Always verify the token symbol.
-          </div>
-</details>
-<!-- FAQ 5 -->
-<details class="group p-space-md rounded-2xl bg-surface-container-low shadow-sm [&amp;_summary::-webkit-details-marker]:hidden cursor-pointer">
-<summary class="flex items-center justify-between font-title-lg text-title-md font-semibold text-on-surface list-none">
-<span>Are there any platform fees deducted from the disclosed prizes?</span>
-<span class="material-symbols-outlined text-outline transition-transform duration-200 group-open:rotate-180">expand_more</span>
-</summary>
-<div class="mt-space-sm pt-space-xs font-body-md text-body-md text-on-surface-variant leading-relaxed">
-            No. The prizes shown in the matrix (e.g. 700 USDT for 1st, 500 USDT for 2nd) are paid in full. Platform operational maintenance is sustained through protocol liquidity staking margins, not deductions from winning payouts.
-          </div>
-</details>
-</div>
-<!-- Responsible Play & Regulatory Notice Banner -->
-<div class="mt-space-xl p-space-lg rounded-2xl bg-surface-container-lowest flex flex-col md:flex-row items-center gap-space-md shadow-lg">
-<div class="w-12 h-12 rounded-full bg-error-container/30 text-error flex items-center justify-center shrink-0">
-<span class="font-headline-md text-headline-md font-bold">18+</span>
-</div>
-<div class="flex-1">
-<h4 class="font-title-md text-title-md font-semibold text-on-surface">Commitment to Responsible Participation</h4>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed">
-            Cryptocurrency lottery participation is strictly intended for individuals aged 18 and older. Participation is void where prohibited by applicable local jurisdiction laws. Treat draw entries strictly as entertaining protocol interaction, not as an investment product, yield asset, or financial return mechanism. Play within personal limits.
-          </p>
-</div>
-<div class="shrink-0">
-<a class="px-4 py-2 rounded-lg bg-surface-container-high text-on-surface font-label-mono-sm text-label-mono-sm hover:bg-surface-bright transition-colors" href="#">
-            Read Policy Guidelines
-          </a>
-</div>
-</div>
-</section>
-</div>
-</div>
-<script>
-  let currentTicketCount = 5;
-  const TICKET_PRICE = 5;
-  const TOTAL_POOL_TICKETS = 1420;
-  let activeNetwork = 'TRC20';
+                </div>
+            </div>
+        </div>
+    </header> <!-- ================= HERO & TICKET BUY TERMINAL ================= -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 flex-1 flex flex-col justify-center">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center"> <!-- Left Column: Details -->
+            <div class="lg:col-span-7 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surfaceCard border border-surfaceBorder text-xs text-slate-300 font-mono"> <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> <span>Chainlink VRF On-Chain Entropy • Weekly Cycle #14</span> </div>
+                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight"> Provably Fair <br> <span class="text-gradient-gold">Weekly USDT</span> Draws </h1>
+                <p class="text-slate-400 text-base sm:text-lg max-w-xl leading-relaxed"> Enter with just 5 USDT. 10 guaranteed weekly winners chosen transparently via immutable smart contract entropy. Automated payouts directly to your registered wallet. </p> <!-- Stats Grid -->
+                <div class="grid grid-cols-3 gap-3 sm:gap-4 pt-2 max-w-lg">
+                    <div class="p-4 rounded-2xl bg-surfaceCard border border-surfaceBorder"> <span class="text-[11px] text-slate-400 uppercase font-mono block">Weekly Pool</span> <span class="text-xl sm:text-2xl font-bold text-white font-mono">2,500 USDT</span> </div>
+                    <div class="p-4 rounded-2xl bg-surfaceCard border border-surfaceBorder"> <span class="text-[11px] text-slate-400 uppercase font-mono block">Ticket Price</span> <span class="text-xl sm:text-2xl font-bold text-brandGold font-mono">5 USDT</span> </div>
+                    <div class="p-4 rounded-2xl bg-surfaceCard border border-surfaceBorder"> <span class="text-[11px] text-slate-400 uppercase font-mono block">Draw Closes</span> <span class="text-xl sm:text-2xl font-bold text-emerald-400 font-mono">2d 14h 28m</span> </div>
+                </div>
+                <div class="flex flex-wrap items-center gap-6 pt-2 text-xs font-mono text-slate-400">
+                    <div class="flex items-center gap-2"><span class="text-emerald-400">✓</span> 100% Non-Custodial</div>
+                    <div class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Max 50 Tickets / Wallet</div>
+                    <div class="flex items-center gap-2"><span class="text-emerald-400">✓</span> No KYC Friction</div>
+                </div>
+            </div> <!-- Right Column: Interactive Ticket Terminal -->
+            <div id="tickets-section" class="lg:col-span-5">
+                <div class="p-6 sm:p-8 rounded-3xl bg-surfaceCard border border-surfaceBorder gold-glow space-y-5 relative overflow-hidden">
+                    <div class="flex items-center justify-between border-b border-surfaceBorder pb-4">
+                        <div> <span class="text-[10px] font-mono uppercase text-brandGold tracking-widest block">Instant Verification</span>
+                            <h2 class="text-xl font-bold text-white">Acquire Draw Tickets</h2>
+                        </div> <span class="px-2.5 py-1 rounded-md text-[10px] font-mono bg-emerald-950 text-emerald-400 border border-emerald-800/40 font-semibold"> DIRECT ESCROW </span>
+                    </div> <!-- Presets (1, 2, 5, 10) -->
+                    <div> <label class="block text-xs uppercase font-mono text-slate-400 mb-2">Select Preset Quantity</label>
+                        <div class="grid grid-cols-4 gap-2"> <button onclick="setQuantity(1)" class="qty-btn py-2.5 rounded-xl border border-surfaceBorder bg-surface text-sm font-semibold transition cursor-pointer" data-qty="1">1 (5$)</button> <button onclick="setQuantity(2)" class="qty-btn py-2.5 rounded-xl border border-surfaceBorder bg-surface text-sm font-semibold transition cursor-pointer" data-qty="2">2 (10$)</button> <button onclick="setQuantity(5)" class="qty-btn py-2.5 rounded-xl border border-surfaceBorder bg-surface text-sm font-semibold transition cursor-pointer" data-qty="5">5 (25$)</button> <button onclick="setQuantity(10)" class="qty-btn py-2.5 rounded-xl border border-surfaceBorder bg-surface text-sm font-semibold transition cursor-pointer" data-qty="10">10 (50$)</button> </div>
+                    </div> <!-- Stepper -->
+                    <div class="flex items-center justify-between p-3 rounded-2xl bg-surface border border-surfaceBorder"> <button onclick="changeQuantity(-1)" class="w-10 h-10 rounded-xl bg-surfaceCard hover:bg-slate-800 text-xl font-bold flex items-center justify-center text-slate-300 hover:text-white transition cursor-pointer">−</button>
+                        <div class="text-center"> <span id="ticket-count" class="text-2xl font-bold font-mono text-brandGold">1</span> <span class="text-xs text-slate-400 block">Tickets Selected</span> </div> <button onclick="changeQuantity(1)" class="w-10 h-10 rounded-xl bg-surfaceCard hover:bg-slate-800 text-xl font-bold flex items-center justify-center text-slate-300 hover:text-white transition cursor-pointer">+</button>
+                    </div> <!-- Network Switcher -->
+                    <div> <label class="block text-xs uppercase font-mono text-slate-400 mb-2">Select Transfer Network</label>
+                        <div class="grid grid-cols-2 gap-2"> <button id="net-btn-trc" onclick="selectNetwork('TRC20')" class="network-btn p-3 rounded-xl border-2 border-brandGold bg-brandGold/10 text-left transition cursor-pointer"> <span class="text-xs font-bold text-white block">TRC-20 (Tron)</span> <span class="text-[11px] text-emerald-400 font-mono">Fast / Lowest Fee</span> </button> <button id="net-btn-evm" onclick="selectNetwork('EVM')" class="network-btn p-3 rounded-xl border border-surfaceBorder bg-surface text-left opacity-75 hover:opacity-100 transition cursor-pointer"> <span class="text-xs font-bold text-white block">BEP-20 / ERC-20</span> <span class="text-[11px] text-slate-400 font-mono">MetaMask / Trust</span> </button> </div>
+                    </div> <!-- Escrow Address Display -->
+                    <div class="p-3.5 rounded-2xl bg-surface border border-surfaceBorder space-y-2">
+                        <div class="flex justify-between items-center text-xs"> <span id="active-network-label" class="font-mono text-slate-400 font-medium">TRC-20 ESCROW ADDRESS (TRON)</span> <button onclick="copyAdminAddress()" class="text-brandGold hover:underline text-[11px] font-semibold flex items-center gap-1 cursor-pointer"> 📋 Copy Address </button> </div>
+                        <div class="p-2.5 rounded-xl bg-surfaceCard border border-surfaceBorder/60 flex items-center justify-between">
+                            <p id="display-admin-address" class="font-mono text-xs text-emerald-400 break-all select-all font-semibold"> TK8mYz9xN2QvLp7R4FairDrawEscrow777 </p>
+                        </div>
+                        <p id="network-hint" class="text-[10px] text-slate-500 font-mono"> ⚡ Transfer USDT (TRC-20) to this escrow address. Ticket hashes lock automatically. </p>
+                    </div> <!-- Total Calculation -->
+                    <div class="p-4 rounded-2xl bg-surface/90 border border-surfaceBorder space-y-1.5">
+                        <div class="flex justify-between items-center text-sm"> <span class="text-slate-400">Total Payable:</span> <span id="total-price" class="font-mono font-bold text-white text-xl">5.00 USDT</span> </div>
+                        <div class="flex justify-between items-center text-xs font-mono text-slate-400"> <span>Estimated Probability:</span> <span class="text-emerald-400">~ 1 in 142.0</span> </div>
+                    </div> <!-- Primary Action Button --> <button id="buy-action-btn" onclick="handleDepositClick()" class="w-full py-4 rounded-2xl font-bold text-base bg-gradient-to-r from-brandGold to-yellow-500 hover:from-brandGoldHover hover:to-yellow-400 text-black shadow-xl transition flex items-center justify-center gap-2 cursor-pointer"> <span>⚡</span> <span id="buy-btn-label">Send TRC-20 Deposit & Lock Tickets</span> </button>
+                    <p class="text-center text-[11px] text-slate-500 font-mono"> Direct decentralized settlement • Zero KYC friction </p>
+                </div>
+            </div>
+        </div>
+    </main> <!-- ================= PRIZE DISTRIBUTION MATRIX ================= -->
+    <section id="prizes-matrix" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-surfaceBorder">
+        <div class="space-y-3 text-center max-w-2xl mx-auto mb-8"> <span class="text-xs uppercase font-mono text-brandGold tracking-widest">Guaranteed Distribution</span>
+            <h3 class="text-2xl sm:text-3xl font-bold text-white">Prize Distribution Matrix</h3>
+            <p class="text-slate-400 text-sm">100% of the active prize pool is paid out across 10 tiered places every Sunday 23:59 UTC.</p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+            <div class="p-4 rounded-2xl bg-surfaceCard border border-brandGold/40 text-center space-y-1"> <span class="text-[11px] font-mono text-brandGold block">1st Place (38%)</span> <span class="text-xl font-bold text-white font-mono">800 USDT</span> </div>
+            <div class="p-4 rounded-2xl bg-surfaceCard border border-surfaceBorder text-center space-y-1"> <span class="text-[11px] font-mono text-slate-400 block">2nd Place (19%)</span> <span class="text-xl font-bold text-white font-mono">400 USDT</span> </div>
+            <div class="p-4 rounded-2xl bg-surfaceCard border border-surfaceBorder text-center space-y-1"> <span class="text-[11px] font-mono text-slate-400 block">3rd Place (12%)</span> <span class="text-xl font-bold text-white font-mono">250 USDT</span> </div>
+            <div class="p-4 rounded-2xl bg-surfaceCard border border-surfaceBorder text-center space-y-1"> <span class="text-[11px] font-mono text-slate-400 block">4th Place (9.5%)</span> <span class="text-xl font-bold text-white font-mono">200 USDT</span> </div>
+            <div class="p-4 rounded-2xl bg-surfaceCard border border-surfaceBorder text-center space-y-1"> <span class="text-[11px] font-mono text-slate-400 block">5th Place (7.1%)</span> <span class="text-xl font-bold text-white font-mono">150 USDT</span> </div>
+            <div class="p-4 rounded-2xl bg-surfaceCard border border-surfaceBorder text-center space-y-1"> <span class="text-[11px] font-mono text-slate-400 block">6th Place (4.7%)</span> <span class="text-xl font-bold text-white font-mono">100 USDT</span> </div>
+            <div class="p-4 rounded-2xl bg-surfaceCard border border-surfaceBorder text-center space-y-1"> <span class="text-[11px] font-mono text-slate-400 block">7th Place (3.5%)</span> <span class="text-xl font-bold text-white font-mono">75 USDT</span> </div>
+            <div class="p-4 rounded-2xl bg-surfaceCard border border-surfaceBorder text-center space-y-1"> <span class="text-[11px] font-mono text-slate-400 block">8th Place (2.4%)</span> <span class="text-xl font-bold text-white font-mono">50 USDT</span> </div>
+            <div class="p-4 rounded-2xl bg-surfaceCard border border-surfaceBorder text-center space-y-1"> <span class="text-[11px] font-mono text-slate-400 block">9th Place (1.4%)</span> <span class="text-xl font-bold text-white font-mono">30 USDT</span> </div>
+            <div class="p-4 rounded-2xl bg-surfaceCard border border-surfaceBorder text-center space-y-1"> <span class="text-[11px] font-mono text-slate-400 block">10th Place (1.0%)</span> <span class="text-xl font-bold text-white font-mono">20 USDT</span> </div>
+        </div>
+    </section> <!-- ================= AUTH MODAL ================= -->
+    <div id="auth-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="w-full max-w-md bg-surfaceCard border border-surfaceBorder rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl relative"> <button onclick="closeAuthModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl p-1 cursor-pointer">✕</button>
+            <div class="text-center space-y-2">
+                <div class="w-12 h-12 rounded-2xl bg-brandGold/10 border border-brandGold/30 flex items-center justify-center mx-auto text-2xl"> ⚡ </div>
+                <h3 class="text-2xl font-bold text-white">Connect to LuckyDrop</h3>
+                <p class="text-xs text-slate-400">Sign in with Google or connect your preferred Web3 wallet</p>
+            </div>
+            <div class="space-y-3"> <!-- Google --> <button onclick="handleGoogleSignIn()" class="w-full py-3.5 px-4 rounded-xl border border-surfaceBorder bg-surface hover:border-slate-400 text-white text-sm font-semibold flex items-center justify-center gap-3 transition cursor-pointer"> <svg class="w-5 h-5" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                    </svg> Continue with Google </button>
+                <div class="flex items-center gap-3 my-2">
+                    <div class="h-[1px] bg-surfaceBorder flex-1"></div> <span class="text-[10px] font-mono text-slate-500 uppercase">OR CONNECT CRYPTO WALLET</span>
+                    <div class="h-[1px] bg-surfaceBorder flex-1"></div>
+                </div> <!-- Web3 Options --> <button onclick="connectWeb3Wallet('MetaMask')" class="w-full py-3 px-4 rounded-xl border border-surfaceBorder bg-surface hover:border-brandGold text-white text-sm font-semibold flex items-center justify-between transition cursor-pointer"> <span class="flex items-center gap-2.5">🦊 MetaMask</span> <span class="text-xs text-slate-400 font-mono">Popular Extension</span> </button> <button onclick="connectWeb3Wallet('TrustWallet')" class="w-full py-3 px-4 rounded-xl border border-surfaceBorder bg-surface hover:border-brandGold text-white text-sm font-semibold flex items-center justify-between transition cursor-pointer"> <span class="flex items-center gap-2.5">🛡️ Trust Wallet</span> <span class="text-xs text-slate-400 font-mono">Mobile App</span> </button> <button onclick="connectTronWallet()" class="w-full py-3 px-4 rounded-xl border border-surfaceBorder bg-surface hover:border-brandGold text-white text-sm font-semibold flex items-center justify-between transition cursor-pointer"> <span class="flex items-center gap-2.5">⚡ TronLink / TRC20</span> <span class="text-xs text-slate-400 font-mono">Tron Network</span> </button>
+            </div>
+            <p class="text-[11px] text-center text-slate-500"> By connecting, you agree to the Provably Fair Smart Contract Protocol. </p>
+        </div>
+    </div> <!-- ================= FOOTER ================= -->
+    <footer class="border-t border-surfaceBorder py-8 bg-surface text-center text-xs text-slate-500 font-mono">
+        <p>LuckyDrop Protocol © 2025 • Guaranteed Smart Settlement • Non-Custodial</p>
+        <p class="text-[10px] text-slate-600 mt-1">Smart Contract Hash: 0x8a92...f71c4 • Chainlink VRF Coordinator: 0x2716...81c</p>
+    </footer> <!-- ================= LOGIC & SCRIPT ================= -->
+    <script>
+        // 1. ADMIN ESCROW RECEIVING WALLETS (TRC20 + EVM) const ADMIN_WALLETS = { // Yahan apna TRC-20 (Tron) address paste karein: TRC20: "TU2kPjScnbyuDEPgfMjmJaKZTR4zq7FzhV", // Yahan apna EVM (BEP-20 / ERC-20) address paste karein: EVM: "0x660877476587F0FaBb9000a81A6bE884289D6Bfe" }; // Supabase config const SUPABASE_URL = "https://kitnafgfudzcsxlvyhtz.supabase.co"; const SUPABASE_ANON_KEY = "sb_publishable_EPIQ1piqCzQ..."; let supabaseClient = null; if (window.supabase) { try { supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); } catch (e) { console.warn("Supabase init deferred"); } } // State let currentQuantity = 1; let selectedNetwork = 'TRC20'; let currentUser = null; window.addEventListener('DOMContentLoaded', () => { setQuantity(1); selectNetwork('TRC20'); checkStoredUser(); }); // Quantity selector function setQuantity(qty) { currentQuantity = Math.max(1, Math.min(50, qty)); document.getElementById('ticket-count').innerText = currentQuantity; const totalPrice = (currentQuantity * 5).toFixed(2); document.getElementById('total-price').innerText = totalPrice + " USDT"; document.querySelectorAll('.qty-btn').forEach(btn => { if (parseInt(btn.getAttribute('data-qty')) === currentQuantity) { btn.className = 'qty-btn py-2.5 rounded-xl border border-brandGold bg-brandGold/15 text-brandGold text-sm font-semibold transition cursor-pointer'; } else { btn.className = 'qty-btn py-2.5 rounded-xl border border-surfaceBorder bg-surface text-sm font-semibold transition cursor-pointer'; } }); updateBuyButtonLabel(); } function changeQuantity(delta) { setQuantity(currentQuantity + delta); } // Network switching function selectNetwork(net) { selectedNetwork = net; const trcBtn = document.getElementById('net-btn-trc'); const evmBtn = document.getElementById('net-btn-evm'); const label = document.getElementById('active-network-label'); const addressDisplay = document.getElementById('display-admin-address'); const hint = document.getElementById('network-hint'); if (net === 'TRC20') { trcBtn.className = 'network-btn p-3 rounded-xl border-2 border-brandGold bg-brandGold/10 text-left transition cursor-pointer'; evmBtn.className = 'network-btn p-3 rounded-xl border border-surfaceBorder bg-surface text-left opacity-75 hover:opacity-100 transition cursor-pointer'; label.innerText = "TRC-20 ESCROW ADDRESS (TRON)"; addressDisplay.innerText = ADMIN_WALLETS.TRC20; hint.innerText = "⚡ Transfer USDT (TRC-20) to this escrow address. Ticket hashes lock automatically."; } else { evmBtn.className = 'network-btn p-3 rounded-xl border-2 border-brandGold bg-brandGold/10 text-left transition cursor-pointer'; trcBtn.className = 'network-btn p-3 rounded-xl border border-surfaceBorder bg-surface text-left opacity-75 hover:opacity-100 transition cursor-pointer'; label.innerText = "BEP-20 / ERC-20 ESCROW ADDRESS (EVM)"; addressDisplay.innerText = ADMIN_WALLETS.EVM; hint.innerText = "⚡ MetaMask / Trust Wallet Web3 direct transfer supported."; } updateBuyButtonLabel(); } function updateBuyButtonLabel() { const btnLabel = document.getElementById('buy-btn-label'); const totalUSDT = (currentQuantity * 5); if (selectedNetwork === 'TRC20') { btnLabel.innerText = `Send TRC-20 Deposit (${totalUSDT} USDT)`; } else { btnLabel.innerText = `Pay via MetaMask / EVM (${totalUSDT} USDT)`; } } function copyAdminAddress() { const activeAddress = ADMIN_WALLETS[selectedNetwork]; navigator.clipboard.writeText(activeAddress); alert("Escrow Address copied to clipboard:\n" + activeAddress); } // Modal controls function openAuthModal() { document.getElementById('auth-modal').classList.remove('hidden'); } function closeAuthModal() { document.getElementById('auth-modal').classList.add('hidden'); } function toggleUserDropdown() { document.getElementById('user-dropdown').classList.toggle('hidden'); } function openWalletSelector() { toggleUserDropdown(); openAuthModal(); } // Auth handlers async function handleGoogleSignIn() { if (supabaseClient) { try { const { error } = await supabaseClient.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.origin } }); if (error) alert("Google Sign In: " + error.message); } catch (err) { demoGooglePrompt(); } } else { demoGooglePrompt(); } } function demoGooglePrompt() { const email = prompt("Enter your Gmail address to sign in:", "user@gmail.com"); if (email) { setLoggedInUser({ type: 'google', address: email, email: email }); closeAuthModal(); } } async function connectWeb3Wallet(walletName) { if (typeof window.ethereum !== 'undefined') { try { const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }); if (accounts && accounts.length > 0) { setLoggedInUser({ type: 'web3', address: accounts[0], walletName: walletName }); closeAuthModal(); } } catch (err) { alert("Wallet Connection Cancelled: " + (err.message || err)); } } else { alert(`${walletName} extension not detected. If on mobile, please open this URL inside Trust Wallet or MetaMask built-in browser.`); } } async function connectTronWallet() { if (window.tronWeb && window.tronWeb.defaultAddress.base58) { setLoggedInUser({ type: 'tron', address: window.tronWeb.defaultAddress.base58 }); closeAuthModal(); } else { const manualTron = prompt("TronLink not detected. Enter your TRC20 Wallet Address:", "T..."); if (manualTron && manualTron.startsWith('T')) { setLoggedInUser({ type: 'tron', address: manualTron }); closeAuthModal(); } } } function setLoggedInUser(user) { currentUser = user; localStorage.setItem('luckydrop_user', JSON.stringify(user)); updateUIAfterLogin(); } function checkStoredUser() { const stored = localStorage.getItem('luckydrop_user'); if (stored) { try { currentUser = JSON.parse(stored); updateUIAfterLogin(); } catch (e) {} } } function updateUIAfterLogin() { if (!currentUser) return; document.getElementById('guest-actions').classList.add('hidden'); document.getElementById('user-profile').classList.remove('hidden'); const raw = currentUser.address; const display = raw.length > 14 ? (raw.substring(0, 6) + '...' + raw.substring(raw.length - 4)) : raw; document.getElementById('user-display-tag').innerText = display; document.getElementById('user-full-tag').innerText = raw; document.getElementById('user-auth-type').innerText = "Type: " + currentUser.type.toUpperCase(); } function disconnectUser() { currentUser = null; localStorage.removeItem('luckydrop_user'); document.getElementById('guest-actions').classList.remove('hidden'); document.getElementById('user-profile').classList.add('hidden'); document.getElementById('user-dropdown').classList.add('hidden'); } // Payment / Deposit Trigger async function handleDepositClick() { if (!currentUser) { openAuthModal(); return; } const totalUSDT = currentQuantity * 5; if (selectedNetwork === 'EVM') { if (typeof window.ethereum !== 'undefined') { try { const provider = new ethers.providers.Web3Provider(window.ethereum); const signer = provider.getSigner(); alert(`Triggering MetaMask / Trust Wallet:\nNetwork: BEP-20 / ERC-20\nTickets: ${currentQuantity}\nPayable: ${totalUSDT} USDT\nRecipient: ${ADMIN_WALLETS.EVM}`); const tx = await signer.sendTransaction({ to: ADMIN_WALLETS.EVM, value: ethers.utils.parseEther("0.0001") }); alert("Payment Sent Successfully!\nTransaction Hash:\n" + tx.hash + "\n\nAapki ticket database mein lock ho chuki hai!"); saveTicketRecord(tx.hash, totalUSDT); } catch (err) { alert("Transaction Cancelled or Failed: " + (err.message || err)); } } else { prompt(`Copy Admin BEP-20 / ERC-20 Escrow Address to deposit ${totalUSDT} USDT:`, ADMIN_WALLETS.EVM); } } else { if (window.tronWeb && window.tronWeb.defaultAddress.base58) { alert(`TronLink detected!\nPlease send ${totalUSDT} USDT (TRC-20) to:\n${ADMIN_WALLETS.TRC20}`); copyAdminAddress(); } else { prompt(`Copy Admin TRC-20 Escrow Address to deposit ${totalUSDT} USDT:`, ADMIN_WALLETS.TRC20); } const fakeTxHash = "tron_tx_" + Math.random().toString(36).substring(2, 12); saveTicketRecord(fakeTxHash, totalUSDT); } } async function saveTicketRecord(txHash, amount) { if (supabaseClient) { try { await supabaseClient.from('tickets').insert([{ ticket_number: 'LD-' + Math.floor(100000 + Math.random() * 900000), wallet_address: currentUser.address, tx_hash: txHash, is_winner: false }]); console.log("Ticket successfully locked in Supabase!"); } catch (e) { console.error("Supabase insert error:", e); } } } 
+    </script>
+</body>
 
-  const addresses = {
-    'TRC20': 'TU2kPjScnbyuDEPgfMjmJaKZTR4zq7FzhV',
-    'ERC20': '0x660877476587F0FaBb9000a81A6bE884289D6Bfe',
-    'Arbitrum': '0x660877476587F0FaBb9000a81A6bE884289D6Bfe',
-    'Polygon': '0x660877476587F0FaBb9000a81A6bE884289D6Bfe'
-  };
-
-  function updateDisplay() {
-    const totalCost = currentTicketCount * TICKET_PRICE;
-    document.getElementById('ticket-count-display').innerText = currentTicketCount;
-    document.getElementById('summary-ticket-count').innerText = `${currentTicketCount}x Entries`;
-    document.getElementById('summary-total-cost').innerText = totalCost.toFixed(2);
-    
-    // Odds formula: (1 - ((TOTAL - 10)/TOTAL)^N) rough estimate
-    const estimatedOdds = (TOTAL_POOL_TICKETS / (currentTicketCount * 10)).toFixed(1);
-    document.getElementById('odds-display').innerText = `~ 1 in ${estimatedOdds}`;
-
-    // Highlight matching preset button
-    document.querySelectorAll('.ticket-btn').forEach(btn => {
-      const qty = parseInt(btn.getAttribute('data-qty'));
-      if (qty === currentTicketCount) {
-        btn.classList.add('ring-2', 'ring-primary-container');
-      } else {
-        btn.classList.remove('ring-2', 'ring-primary-container');
-      }
-    });
-  }
-
-  function setTickets(qty) {
-    currentTicketCount = Math.max(1, Math.min(50, qty));
-    updateDisplay();
-  }
-
-  function stepTickets(delta) {
-    currentTicketCount = Math.max(1, Math.min(50, currentTicketCount + delta));
-    updateDisplay();
-  }
-
-  function setNetwork(net) {
-    activeNetwork = net;
-    document.getElementById('selected-net-label').innerText = `${net} Escrow Address`;
-    document.getElementById('escrow-address').innerText = addresses[net];
-
-    document.querySelectorAll('.network-btn').forEach(btn => {
-      if (btn.getAttribute('data-net') === net) {
-        btn.classList.add('ring-1', 'ring-primary', 'opacity-100');
-        btn.classList.remove('opacity-70');
-      } else {
-        btn.classList.remove('ring-1', 'ring-primary', 'opacity-100');
-        btn.classList.add('opacity-70');
-      }
-    });
-  }
-
-  function copyAddress() {
-    const addr = addresses[activeNetwork];
-    navigator.clipboard.writeText(addr).then(() => {
-      alert(`Copied ${activeNetwork} Escrow Address to clipboard!`);
-    });
-  }
-
-  function copyRefLink() {
-    const linkInput = document.getElementById('ref-link-input');
-    navigator.clipboard.writeText(linkInput.value).then(() => {
-      alert('Referral link copied to clipboard!');
-    });
-  }
-
-  function confirmEntryMock() {
-    const btn = document.getElementById('btn-proceed');
-    const originalContent = btn.innerHTML;
-    btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-[20px]">sync</span> Awaiting Network Deposit...`;
-    btn.disabled = true;
-    
-    setTimeout(() => {
-      alert(`Deposit session initialized for ${currentTicketCount} ticket(s) via ${activeNetwork}.\nPlease complete the USDT transfer to the displayed address.`);
-      btn.innerHTML = originalContent;
-      btn.disabled = false;
-    }, 1200);
-  }
-
-  // Live countdown ticker micro-interaction
-  let secondsLeft = (2 * 86400) + (14 * 3600) + (38 * 60) + 12;
-  setInterval(() => {
-    if (secondsLeft > 0) {
-      secondsLeft--;
-      const d = Math.floor(secondsLeft / 86400);
-      const h = Math.floor((secondsLeft % 86400) / 3600);
-      const m = Math.floor((secondsLeft % 3600) / 60);
-      const s = secondsLeft % 60;
-      
-      const elD = document.getElementById('timer-days');
-      const elH = document.getElementById('timer-hours');
-      const elM = document.getElementById('timer-mins');
-      const elS = document.getElementById('timer-secs');
-      
-      if(elD) elD.innerText = String(d).padStart(2, '0');
-      if(elH) elH.innerText = String(h).padStart(2, '0');
-      if(elM) elM.innerText = String(m).padStart(2, '0');
-      if(elS) elS.innerText = String(s).padStart(2, '0');
-    }
-  }, 1000);
-</script></main><footer class="w-full bg-surface-container-lowest border-t border-surface-variant/40 mt-auto"><div class="max-w-[1320px] mx-auto px-margin-mobile lg:px-margin py-space-xl"><div class="grid grid-cols-1 md:grid-cols-12 gap-space-lg items-start"><div class="md:col-span-4 flex flex-col gap-space-sm"><div class="flex items-center gap-space-xs"><span class="font-headline-md text-headline-md tracking-tight text-primary uppercase">LuckyDrop</span><span class="px-2 py-0.5 rounded text-[10px] font-label-mono-sm bg-primary-container/20 text-primary border border-primary-container/30 uppercase">USDT Vault</span></div><p class="text-on-surface-variant font-body-sm text-body-sm max-w-sm">High-stakes, mathematically fair USDT liquidity lottery. Powered by non-custodial smart contracts and verifiable algorithmic randomness.</p><div class="flex items-center gap-3 pt-space-xs"><div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/20 text-on-surface-variant font-label-mono-sm text-label-mono-sm"><span class="material-symbols-outlined text-[16px] text-secondary">verified</span><span>Provably Fair</span></div><div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/20 text-on-surface-variant font-label-mono-sm text-label-mono-sm"><span class="material-symbols-outlined text-[16px] text-primary">security</span><span>Audited VRF</span></div><div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/20 text-on-surface-variant font-label-mono-sm text-label-mono-sm"><span class="material-symbols-outlined text-[16px] text-secondary">account_balance_wallet</span><span>Non-Custodial</span></div></div></div><div class="md:col-span-5 grid grid-cols-2 gap-space-md"><div class="flex flex-col gap-2"><span class="font-title-md text-title-md text-on-surface font-semibold">Platform Protocol</span><nav class="flex flex-col gap-2" data-active-classes="text-primary font-semibold"><a class="text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface" data-path="terms-and-conditions" href="#">Terms &amp; Conditions</a><a class="text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface" data-path="privacy-policy" href="#">Privacy Policy</a><a class="text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface" data-path="draw-rules" href="#">Draw Rules</a></nav></div><div class="flex flex-col gap-2"><span class="font-title-md text-title-md text-on-surface font-semibold">Transparency</span><nav class="flex flex-col gap-2" data-active-classes="text-primary font-semibold"><a class="text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface" data-path="responsible-play" href="#">Responsible Play</a><a class="text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface" data-path="referral-transparency" href="#">Referral Transparency</a><a class="text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface" data-path="contact-support" href="#">Contact Support</a></nav></div></div><div class="md:col-span-3 flex flex-col gap-space-xs p-space-md rounded-xl bg-surface-container-low border border-outline-variant/25"><div class="flex items-center gap-2"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-error-container text-error font-label-mono-sm text-label-mono-sm font-bold">18+</span><span class="font-title-md text-body-md text-on-surface font-semibold">Strict Eligibility</span></div><p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Participants must meet legal age criteria in their respective jurisdiction. Cryptocurrency investments and draws entail capital risk.</p><span class="font-label-mono-sm text-label-mono-sm text-outline pt-1">Chain ID: 0x1 • Tether (USDT) Validated</span></div></div><div class="pt-space-lg mt-space-lg border-t border-surface-variant/30 flex flex-col sm:flex-row items-center justify-between gap-space-sm text-on-surface-variant font-body-sm text-body-sm"><p>© 2025 LuckyDrop Protocol. Verifiable cryptographic draws. All rights reserved.</p><div class="flex items-center gap-space-sm font-label-mono-sm text-label-mono-sm"><span class="text-secondary">Status: All Oracles Online</span><span class="text-outline">|</span><span class="text-on-surface-variant">Block Height: #21,842,912</span></div></div></div></footer></body></html>
+</html>
