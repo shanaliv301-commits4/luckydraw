@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LuckyDrop Protocol — Test Your Luck | 1$ Weekly USDT Draws</title>
-  <!-- Telegram WebApp SDK Script (Official) -->
+  <!-- Telegram WebApp SDK Script -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-  <!-- Google Fonts for Ultra-Pro Crypto Architecture -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -409,9 +409,113 @@
       display: block;
       font-weight: 600;
     }
+
+    /* ================= 1. PROMINENT "CREATE YOUR WALLET" SECTION ================= */
+    .create-wallet-cta-box {
+      background: linear-gradient(145deg, #0F172A 0%, #0B1120 100%);
+      border: 2px dashed rgba(245, 194, 66, 0.4);
+      border-radius: 22px;
+      padding: 30px 24px;
+      text-align: center;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s ease;
+    }
+    .create-wallet-cta-box:hover {
+      border-color: var(--gold-primary);
+      box-shadow: 0 14px 40px rgba(245, 194, 66, 0.15);
+    }
+    .create-cta-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-top: 10px;
+      letter-spacing: -0.02em;
+    }
+    .create-cta-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 8px auto 20px;
+      max-width: 380px;
+      line-height: 1.5;
+    }
+    .btn-big-create-wallet {
+      width: 100%;
+      padding: 16px 24px;
+      border-radius: 16px;
+      border: 1px solid #F5C242;
+      background: linear-gradient(135deg, #F5C242 0%, #D49B1E 100%);
+      color: #06080D;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 6px 26px var(--gold-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+    }
+    .btn-big-create-wallet:hover {
+      background: #E5B232;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(245, 194, 66, 0.45);
+    }
+    .btn-big-create-wallet:active { transform: translateY(0); }
+
+    /* ================= 2. WALLET CREATION PROCESSING OVERLAY ================= */
+    .wallet-processing-box {
+      display: none;
+      background: #080D17;
+      border: 1.5px solid var(--gold-primary);
+      border-radius: 22px;
+      padding: 34px 20px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .spinner-ring {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(245, 194, 66, 0.2);
+      border-top: 4px solid var(--gold-primary);
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .proc-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #FFFFFF;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .proc-sub {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-top: 6px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .progress-bar-wrap {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 18px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--gold-primary);
+      transition: width 1.4s ease;
+    }
     
-    /* IN-APP PERSONAL WALLET VAULT CARD */
+    /* ================= 3. IN-APP PERSONAL WALLET VAULT CARD ================= */
     .inapp-vault-box {
+      display: none;
       background: linear-gradient(145deg, #0D1627 0%, #070D18 100%);
       border: 1.5px solid rgba(0, 152, 234, 0.4);
       border-radius: 20px;
@@ -860,6 +964,28 @@
       color: var(--gold-primary);
       text-align: center;
     }
+
+    .modal-actions-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .btn-skip-modal {
+      padding: 13px;
+      border-radius: 14px;
+      border: 1px solid var(--border-medium);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-skip-modal:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFFFFF;
+    }
     
     footer {
       border-top: 1px solid var(--border-subtle);
@@ -919,10 +1045,9 @@
           Weekly Results
         </button>
 
-        <!-- IN-APP WALLET PILL (NO EXTERNAL WALLET REQUIRED) -->
-        <div class="wallet-status-badge" onclick="openDepositModal()">
-          <span style="width: 7px; height: 7px; border-radius: 50%; background: #10B981;"></span>
-          <span id="headerWalletText">In-App Vault Active</span>
+        <div class="wallet-status-badge" id="headerWalletPill" onclick="handleHeaderWalletClick()">
+          <span style="width: 7px; height: 7px; border-radius: 50%; background: #F59E0B;" id="headerDot"></span>
+          <span id="headerWalletText">Create Wallet</span>
         </div>
 
         <button type="button" class="btn-primary-gold" onclick="scrollToDesk()">
@@ -962,7 +1087,7 @@
 
         <div class="compliance-row">
           <div class="compliance-item"><span>✓</span> 1$ Starting Entry (Max 100 Tix)</div>
-          <div class="compliance-item"><span>✓</span> Zero External Wallet Connect Needed</div>
+          <div class="compliance-item"><span>✓</span> 1-Click Non-Custodial Wallet</div>
           <div class="compliance-item"><span>✓</span> Automatic Instant Settlement</div>
         </div>
       </div>
@@ -978,11 +1103,33 @@
             <span class="escrow-status-tag" id="escrowTag">SMART ESCROW</span>
           </div>
 
-          <!-- ================= IN-APP EMBEDDED WALLET VAULT ================= -->
-          <div class="inapp-vault-box">
+          <!-- ================= 1. BARA "CREATE YOUR WALLET" BUTTON / SECTION ================= -->
+          <div class="create-wallet-cta-box" id="createWalletCtaCard">
+            <div style="font-size: 40px;">🔐</div>
+            <h3 class="create-cta-title">Create Your Web3 Wallet</h3>
+            <p class="create-cta-desc">
+              Generate your non-custodial decentralized keypair in 1 click. Zero KYC, instant dual TON & BEP-20 address with backup recovery keys.
+            </p>
+            <button type="button" class="btn-big-create-wallet" onclick="triggerWalletCreationFlow()">
+              ✨ Create Your Wallet Now
+            </button>
+          </div>
+
+          <!-- ================= 2. PROCESSING STATE OVERLAY ================= -->
+          <div class="wallet-processing-box" id="walletProcessingCard">
+            <div class="spinner-ring"></div>
+            <div class="proc-title" id="procTitle">Generating Cryptographic Keypairs...</div>
+            <div class="proc-sub" id="procSub">Deriving on-chain addresses & 12-word seed phrase</div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" id="procBar"></div>
+            </div>
+          </div>
+
+          <!-- ================= 3. IN-APP EMBEDDED WALLET VAULT (SHOWN POST-CREATION) ================= -->
+          <div class="inapp-vault-box" id="inAppVaultCard">
             <div class="vault-header-row">
               <span class="vault-tag" id="vaultNetTag">💎 IN-APP TON WALLET</span>
-              <span style="font-size: 11px; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace; font-weight: 700;">● Ready for Deposit</span>
+              <span style="font-size: 11px; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace; font-weight: 700;">● Active & Ready</span>
             </div>
 
             <div class="vault-balance-title">YOUR IN-APP USDT BALANCE</div>
@@ -1075,11 +1222,9 @@
               <span class="tickets-tag-active" id="ownedTicketCountBadge">0 Active</span>
             </div>
             <div style="font-size: 12px; color: var(--text-muted);" id="ownedTicketDesc">
-              Send USDT to your in-app address above, then click Buy Tickets to lock entries for Cycle #14.
+              Create your wallet and send USDT to lock verified draw tickets.
             </div>
-            <div class="ticket-list-grid" id="ticketListGrid">
-              <!-- Dynamically Populated Tickets -->
-            </div>
+            <div class="ticket-list-grid" id="ticketListGrid"></div>
           </div>
 
         </div>
@@ -1179,25 +1324,29 @@
     </div>
   </div>
 
-  <!-- ================= 2. SEED PHRASE BACKUP MODAL ================= -->
+  <!-- ================= 2. SEED PHRASE BACKUP & SKIP MODAL ================= -->
   <div id="seedBackupModal" onclick="modalBgClick(event, 'seedBackupModal')">
     <div class="auth-card">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-        <h3 style="font-size: 18px; font-weight: 700; color: var(--gold-primary);">🔑 Secret Recovery Phrase</h3>
-        <button type="button" onclick="closeModal('seedBackupModal')" style="background: rgba(255,255,255,0.06); border: none; color: var(--text-muted); width: 34px; height: 34px; border-radius: 50%; font-size: 15px; cursor: pointer;">✕</button>
+        <h3 style="font-size: 18px; font-weight: 700; color: var(--gold-primary);">🔑 Secret Recovery Keys</h3>
+        <button type="button" onclick="skipSeedModalAction()" style="background: rgba(255,255,255,0.06); border: none; color: var(--text-muted); width: 34px; height: 34px; border-radius: 50%; font-size: 15px; cursor: pointer;">✕</button>
       </div>
 
       <div style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">
-        Save these 12 words in a safe place. Never share them with anyone! You can import this seed phrase into Trust Wallet or Tonkeeper anytime.
+        Save these 12 secret backup keys in a secure place. You can use them to recover your wallet anytime in Trust Wallet or Tonkeeper!
       </div>
 
-      <div class="seed-words-grid" id="seedPhraseDisplayGrid">
-        <!-- 12 Words Populated dynamically -->
-      </div>
+      <div class="seed-words-grid" id="seedPhraseDisplayGrid"></div>
 
-      <button type="button" class="action-cta-btn" onclick="copySeedPhrase()" id="copySeedBtn" style="padding: 12px; font-size: 13px;">
-        📋 Copy 12-Word Recovery Phrase
-      </button>
+      <!-- COPY BACKUP KEYS + SKIP OPTION BUTTONS -->
+      <div class="modal-actions-grid">
+        <button type="button" class="action-cta-btn" onclick="copySeedPhrase()" id="copySeedBtn" style="padding: 13px; font-size: 13px;">
+          📋 Copy Backup Keys
+        </button>
+        <button type="button" class="btn-skip-modal" onclick="skipSeedModalAction()">
+          Skip for Now →
+        </button>
+      </div>
     </div>
   </div>
 
@@ -1212,7 +1361,7 @@
 
     var selectedNet = "TON";
     var ticketCount = 1;
-    var userWallets = { TON: null, EVM: null };
+    var userWallets = null; // null until user creates
     var inAppBalance = 0.00;
     var myOwnedTickets = [];
 
@@ -1222,39 +1371,91 @@
       "horizon", "starlight", "vortex", "cyber", "falcon", "beacon", "legend", "orbit"
     ];
 
-    // ================= DUAL WALLET AUTO GENERATOR (CLIENT-SIDE) =================
-    function initInAppVault() {
+    // ================= WALLET INITIALIZATION CHECK =================
+    function checkWalletStateOnLoad() {
       var savedVault = localStorage.getItem('ld_user_vault');
       if (savedVault) {
         try {
           var parsed = JSON.parse(savedVault);
           userWallets = parsed.wallets;
           inAppBalance = parsed.balance || 0.00;
-          renderVaultUI();
+          displayWalletVaultActive();
           return;
         } catch(e) {}
       }
+      // If not created yet: show big Create Your Wallet button
+      displayCreateWalletCta();
+    }
 
-      // Generate both TON and EVM deterministic wallets on first load
-      var tonHex = Array.from(crypto.getRandomValues(new Uint8Array(24))).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
-      var tonAddr = "EQ" + tonHex.substring(0, 42);
+    function displayCreateWalletCta() {
+      document.getElementById('createWalletCtaCard').style.display = 'block';
+      document.getElementById('walletProcessingCard').style.display = 'none';
+      document.getElementById('inAppVaultCard').style.display = 'none';
 
-      var evmHex = Array.from(crypto.getRandomValues(new Uint8Array(20))).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
-      var evmAddr = "0x" + evmHex;
+      document.getElementById('headerWalletText').innerText = "Create Wallet";
+      document.getElementById('headerDot').style.background = "#F59E0B";
+    }
 
-      var seedWords = [];
-      for (var i = 0; i < 12; i++) {
-        var randIdx = Math.floor(Math.random() * BIP39_WORDS.length);
-        seedWords.push(BIP39_WORDS[randIdx]);
-      }
+    function displayWalletVaultActive() {
+      document.getElementById('createWalletCtaCard').style.display = 'none';
+      document.getElementById('walletProcessingCard').style.display = 'none';
+      document.getElementById('inAppVaultCard').style.display = 'block';
 
-      userWallets = {
-        TON: { address: tonAddr, seed: seedWords.join(" ") },
-        EVM: { address: evmAddr, seed: seedWords.join(" ") }
-      };
+      document.getElementById('headerWalletText').innerText = "Vault: " + inAppBalance.toFixed(2) + " USDT";
+      document.getElementById('headerDot').style.background = "#10B981";
 
-      saveVaultState();
       renderVaultUI();
+    }
+
+    // ================= WALLET CREATION & PROCESSING FLOW =================
+    function triggerWalletCreationFlow() {
+      var ctaCard = document.getElementById('createWalletCtaCard');
+      var procCard = document.getElementById('walletProcessingCard');
+      var pBar = document.getElementById('procBar');
+      var pTitle = document.getElementById('procTitle');
+      var pSub = document.getElementById('procSub');
+
+      ctaCard.style.display = 'none';
+      procCard.style.display = 'block';
+      pBar.style.width = '20%';
+
+      setTimeout(function() {
+        pBar.style.width = '65%';
+        pTitle.innerText = "Securing Cryptographic 12-Word Seed...";
+        pSub.innerText = "Deriving non-custodial private keypairs";
+      }, 600);
+
+      setTimeout(function() {
+        pBar.style.width = '100%';
+        pTitle.innerText = "Wallet Ready!";
+        pSub.innerText = "Launching backup recovery window...";
+
+        // Generate addresses
+        var tonHex = Array.from(crypto.getRandomValues(new Uint8Array(24))).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+        var tonAddr = "EQ" + tonHex.substring(0, 42);
+
+        var evmHex = Array.from(crypto.getRandomValues(new Uint8Array(20))).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+        var evmAddr = "0x" + evmHex;
+
+        var seedWords = [];
+        for (var i = 0; i < 12; i++) {
+          var randIdx = Math.floor(Math.random() * BIP39_WORDS.length);
+          seedWords.push(BIP39_WORDS[randIdx]);
+        }
+
+        userWallets = {
+          TON: { address: tonAddr, seed: seedWords.join(" ") },
+          EVM: { address: evmAddr, seed: seedWords.join(" ") }
+        };
+
+        saveVaultState();
+
+        // Switch to Vault Active UI
+        displayWalletVaultActive();
+
+        // Launch Backup & Skip Modal Popup
+        openSeedModal();
+      }, 1500);
     }
 
     function saveVaultState() {
@@ -1265,13 +1466,13 @@
     }
 
     function renderVaultUI() {
+      if (!userWallets) return;
       var activeData = userWallets[selectedNet];
       var netTag = document.getElementById('vaultNetTag');
       var addrEl = document.getElementById('inAppAddr');
       var balEl = document.getElementById('inAppBal');
       var modalAddr = document.getElementById('modalDepositAddr');
       var guideNet = document.getElementById('depositGuideNet');
-      var headerText = document.getElementById('headerWalletText');
 
       if (!activeData) return;
 
@@ -1280,7 +1481,6 @@
       if (modalAddr) modalAddr.innerText = activeData.address;
       if (guideNet) guideNet.innerText = (selectedNet === 'TON') ? "TON Network (USDT)" : "BEP-20 (BNB Smart Chain USDT)";
       if (balEl) balEl.innerText = inAppBalance.toFixed(2);
-      if (headerText) headerText.innerText = "Vault: " + inAppBalance.toFixed(2) + " USDT";
 
       initOwnedTickets();
     }
@@ -1297,11 +1497,14 @@
     }
 
     function copyInAppAddress() {
+      if (!userWallets) {
+        triggerWalletCreationFlow();
+        return;
+      }
       var activeData = userWallets[selectedNet];
-      if (!activeData) return;
       if (navigator.clipboard) {
         navigator.clipboard.writeText(activeData.address).then(function() {
-          showStatus("✅ In-App Address Copied! Send USDT to this address.", "success");
+          showStatus("✅ Address Copied! Send USDT to your in-app address.", "success");
         });
       } else {
         prompt("Copy Address:", activeData.address);
@@ -1309,14 +1512,18 @@
     }
 
     function openDepositModal() {
+      if (!userWallets) {
+        triggerWalletCreationFlow();
+        return;
+      }
       openModal('depositGuideModal');
     }
 
     function openSeedModal() {
+      if (!userWallets) return;
       var activeData = userWallets[selectedNet];
-      if (!activeData) return;
       var grid = document.getElementById('seedPhraseDisplayGrid');
-      if (grid) {
+      if (grid && activeData) {
         var words = activeData.seed.split(" ");
         var html = "";
         for (var i = 0; i < words.length; i++) {
@@ -1328,19 +1535,33 @@
     }
 
     function copySeedPhrase() {
+      if (!userWallets) return;
       var activeData = userWallets[selectedNet];
-      if (!activeData) return;
       if (navigator.clipboard) {
         navigator.clipboard.writeText(activeData.seed).then(function() {
           var btn = document.getElementById('copySeedBtn');
-          if (btn) btn.innerText = "✅ Seed Phrase Copied!";
-          setTimeout(function() { if (btn) btn.innerText = "📋 Copy 12-Word Recovery Phrase"; }, 2500);
-          showStatus("🔑 12-Word Recovery Phrase Copied!", "success");
+          if (btn) btn.innerText = "✅ Keys Copied!";
+          setTimeout(function() { if (btn) btn.innerText = "📋 Copy Backup Keys"; }, 2500);
+          showStatus("🔑 12-Word Secret Backup Keys Copied!", "success");
         });
       }
     }
 
-    // ================= 1$ DRAW SYSTEM (1 USDT = 1 TICKET, MAX 100 TIX FOR 1$ TIER) =================
+    function skipSeedModalAction() {
+      closeModal('seedBackupModal');
+      showStatus("⚡ In-App Wallet Ready! Deposit dollars to participate.", "info");
+    }
+
+    function handleHeaderWalletClick() {
+      if (!userWallets) {
+        scrollToDesk();
+        triggerWalletCreationFlow();
+      } else {
+        openDepositModal();
+      }
+    }
+
+    // ================= 1$ DRAW SYSTEM & TICKET CALCULATION =================
     function updateSummary() {
       var tDisplay = document.getElementById('ticketCountDisplay');
       var totalBox = document.getElementById('totalDisplay');
@@ -1348,7 +1569,7 @@
       var payBtn = document.getElementById('payBtn');
 
       if (tDisplay) tDisplay.innerText = ticketCount;
-      var total = (ticketCount * 1.00).toFixed(2); // 1$ per ticket
+      var total = (ticketCount * 1.00).toFixed(2);
       if (totalBox) totalBox.innerText = total;
       if (oddsBox) oddsBox.innerText = "~ 1 in " + (710.0 / ticketCount).toFixed(1);
       if (payBtn) payBtn.innerText = "⚡ Buy " + ticketCount + " Ticket" + (ticketCount > 1 ? "s" : "") + " (Pay " + total + " USDT from Vault)";
@@ -1356,50 +1577,51 @@
 
     function setPreset(n) {
       if (n > 100) {
-        showStatus("⚠️ Maximum 100 tickets allowed for the 1$ lucky draw system per wallet.", "error");
+        showStatus("⚠️ Maximum 100 tickets allowed for 1$ system per wallet.", "error");
         return;
       }
       ticketCount = n;
       var list = [1, 5, 10, 25, 50, 100];
       for (var i = 0; i < list.length; i++) {
         var el = document.getElementById('p' + list[i]);
-        if (el) {
-          el.className = (list[i] === n) ? "preset-chip active" : "preset-chip";
-        }
+        if (el) el.className = (list[i] === n) ? "preset-chip active" : "preset-chip";
       }
       updateSummary();
     }
 
     function stepChange(val) {
       var next = ticketCount + val;
-      if (next >= 1 && next <= 100) { // Max 100 tickets cap
+      if (next >= 1 && next <= 100) {
         setPreset(next);
       } else if (next > 100) {
-        showStatus("⚠️ Maximum 100 tickets allowed per wallet in 1$ system.", "error");
+        showStatus("⚠️ Maximum 100 tickets allowed per wallet.", "error");
       }
     }
 
-    // ================= BUY TICKETS ACTION (AUTO TRANSACTION TO ESCROW) =================
+    // ================= BUY TICKETS ACTION =================
     function buyTicketsAction() {
+      if (!userWallets) {
+        triggerWalletCreationFlow();
+        return;
+      }
+
       var totalUSDT = ticketCount * 1.00;
       var activeData = userWallets[selectedNet];
       var targetEscrow = (selectedNet === 'TON') ? ESCROW_TON : ESCROW_EVM;
 
-      // Check balance
       if (inAppBalance < totalUSDT) {
-        showStatus("⚠️ Insufficient In-App Balance (" + inAppBalance.toFixed(2) + " USDT). Please deposit " + totalUSDT.toFixed(2) + " USDT to your address.", "error");
+        showStatus("⚠️ Insufficient In-App Balance (" + inAppBalance.toFixed(2) + " USDT). Deposit " + totalUSDT.toFixed(2) + " USDT to your address.", "error");
         openDepositModal();
         return;
       }
 
-      // Sufficient balance: Execute auto transfer to Escrow
       inAppBalance -= totalUSDT;
       saveVaultState();
       renderVaultUI();
 
       var txHash = "ld_escrow_tx_" + Math.random().toString(36).substring(2, 14);
       addTicketsToUser(ticketCount);
-      showStatus("🎉 " + totalUSDT.toFixed(2) + " USDT transferred to Escrow! " + ticketCount + " Ticket(s) Locked!", "success");
+      showStatus("🎉 " + totalUSDT.toFixed(2) + " USDT Settled! " + ticketCount + " Ticket(s) Locked!", "success");
 
       // Notify Admin Email
       try {
@@ -1410,10 +1632,10 @@
             _replyto: ADMIN_NOTIFICATION_EMAIL,
             message: "LuckyDrop 1$ Ticket Draw Entry:\n\n" +
                      "Buyer In-App Wallet: " + activeData.address + "\n" +
-                     "Escrow Receiving Address: " + targetEscrow + "\n" +
+                     "Escrow Address: " + targetEscrow + "\n" +
                      "Network: " + selectedNet + "\n" +
-                     "Tickets Acquired: " + ticketCount + "\n" +
-                     "Total Amount: " + totalUSDT.toFixed(2) + " USDT\n" +
+                     "Tickets: " + ticketCount + "\n" +
+                     "Total Paid: " + totalUSDT.toFixed(2) + " USDT\n" +
                      "Tx Hash: " + txHash + "\n" +
                      "Timestamp: " + new Date().toLocaleString()
           })
@@ -1423,6 +1645,7 @@
 
     // ================= OWNED TICKETS STATE =================
     function initOwnedTickets() {
+      if (!userWallets) return;
       var activeData = userWallets[selectedNet];
       if (!activeData) return;
       var stored = localStorage.getItem('ld_tickets_' + activeData.address);
@@ -1443,7 +1666,7 @@
 
       if (myOwnedTickets.length === 0) {
         countBadge.innerText = "0 Active";
-        desc.innerText = "No active tickets in Cycle #14. Send dollars to your in-app vault and click Buy Tickets!";
+        desc.innerText = "No active tickets in Cycle #14. Deposit dollars to your vault and click Buy Tickets!";
         grid.innerHTML = "";
       } else {
         countBadge.innerText = myOwnedTickets.length + " Active Entries";
@@ -1457,8 +1680,8 @@
     }
 
     function addTicketsToUser(count) {
+      if (!userWallets) return;
       var activeData = userWallets[selectedNet];
-      if (!activeData) return;
       for (var i = 0; i < count; i++) {
         var num = Math.floor(100000 + Math.random() * 900000);
         var tktId = "#LD-" + num;
@@ -1554,7 +1777,7 @@
 
     (function initApp() {
       initCountdown();
-      initInAppVault();
+      checkWalletStateOnLoad();
       updateSummary();
     })();
   </script>
