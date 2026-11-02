@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>LuckyDrop Protocol — Provably Fair 1$ USDT Draws | Referral & Withdrawal Hub</title>
   
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -16,17 +16,17 @@
   <style>
     :root {
       --bg-base: #070B16;
-      --bg-surface: rgba(15, 23, 42, 0.75);
-      --bg-surface-inner: rgba(7, 12, 24, 0.9);
+      --bg-surface: rgba(15, 23, 42, 0.85);
+      --bg-surface-inner: rgba(7, 12, 24, 0.95);
       --gold-primary: #F5C242;
       --gold-hover: #E5B232;
-      --gold-glow: rgba(245, 194, 66, 0.3);
+      --gold-glow: rgba(245, 194, 66, 0.35);
       --emerald-accent: #10B981;
-      --emerald-glow: rgba(16, 185, 129, 0.25);
+      --emerald-glow: rgba(16, 185, 129, 0.3);
       --ton-blue: #0098EA;
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-medium: rgba(255, 255, 255, 0.16);
-      --border-gold: rgba(245, 194, 66, 0.4);
+      --border-subtle: rgba(255, 255, 255, 0.1);
+      --border-medium: rgba(255, 255, 255, 0.18);
+      --border-gold: rgba(245, 194, 66, 0.45);
       --text-main: #F8FAFC;
       --text-muted: #94A3B8;
       --text-dim: #64748B;
@@ -37,9 +37,9 @@
     body {
       background-color: var(--bg-base);
       background-image: 
-        radial-gradient(circle at 50% -10%, rgba(245, 194, 66, 0.12) 0%, transparent 60%),
-        radial-gradient(circle at 85% 20%, rgba(0, 152, 234, 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 10% 45%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 50% -10%, rgba(245, 194, 66, 0.14) 0%, transparent 60%),
+        radial-gradient(circle at 85% 20%, rgba(0, 152, 234, 0.14) 0%, transparent 50%),
+        radial-gradient(circle at 10% 45%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
         linear-gradient(180deg, #070B16 0%, #0A1020 50%, #060912 100%);
       background-attachment: fixed;
       color: var(--text-main);
@@ -50,12 +50,12 @@
       overflow-x: hidden;
     }
 
-    /* TOP LIVE STRIP */
+    /* TOP LIVE TICKER STRIP */
     .top-strip {
-      background: rgba(11, 17, 33, 0.88);
+      background: rgba(11, 17, 33, 0.92);
       border-bottom: 1px solid var(--border-subtle);
-      padding: 8px 20px;
-      font-size: 12px;
+      padding: 8px 16px;
+      font-size: 11px;
       font-family: 'JetBrains Mono', monospace;
       color: var(--text-muted);
       display: flex;
@@ -80,7 +80,7 @@
     /* HEADER */
     header {
       border-bottom: 1px solid var(--border-subtle);
-      background: rgba(7, 11, 22, 0.85);
+      background: rgba(7, 11, 22, 0.9);
       backdrop-filter: blur(20px);
       position: sticky;
       top: 0;
@@ -89,34 +89,36 @@
     .header-inner {
       max-width: 1240px;
       margin: 0 auto;
-      padding: 0 24px;
-      height: 76px;
+      padding: 0 16px;
+      height: 72px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 10px;
     }
     .brand-box {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       cursor: pointer;
+      flex-shrink: 0;
     }
     .brand-icon {
-      width: 42px;
-      height: 42px;
+      width: 38px;
+      height: 38px;
       border-radius: 12px;
       background: linear-gradient(135deg, #F5C242 0%, #D49B1E 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 21px;
+      font-size: 20px;
       color: #070B16;
       font-weight: 800;
       box-shadow: 0 4px 18px var(--gold-glow);
     }
     .brand-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 21px;
+      font-size: 19px;
       font-weight: 800;
       letter-spacing: -0.03em;
     }
@@ -124,65 +126,93 @@
 
     .header-actions {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       align-items: center;
+      flex-wrap: wrap;
     }
+
+    /* ALWAYS VISIBLE ACTION BUTTONS */
     .btn-withdraw-header {
-      padding: 10px 16px;
-      border-radius: 12px;
-      border: 1px solid rgba(16, 185, 129, 0.4);
-      background: rgba(16, 185, 129, 0.12);
-      color: var(--emerald-accent);
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(16, 185, 129, 0.5);
+      background: rgba(16, 185, 129, 0.16);
+      color: #34D399;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 6px;
       transition: all 0.2s ease;
+      white-space: nowrap;
     }
     .btn-withdraw-header:hover {
       background: var(--emerald-accent);
       color: #070B16;
     }
-    .btn-connect-header {
-      padding: 10px 18px;
-      border-radius: 12px;
-      border: 1px solid var(--border-gold);
-      background: rgba(245, 194, 66, 0.12);
-      color: var(--gold-primary);
+
+    .btn-referral-header {
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 152, 234, 0.5);
+      background: rgba(0, 152, 234, 0.16);
+      color: #38BDF8;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-referral-header:hover {
+      background: #0098EA;
+      color: #FFFFFF;
+    }
+
+    .btn-connect-header {
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border-gold);
+      background: rgba(245, 194, 66, 0.14);
+      color: var(--gold-primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
     }
     .btn-connect-header:hover {
       background: var(--gold-primary);
       color: #070B16;
     }
+
     .connected-box {
       display: none;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
     .connected-pill {
-      padding: 9px 14px;
-      border-radius: 12px;
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.4);
       color: var(--emerald-accent);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       cursor: pointer;
     }
     .btn-disconnect-sm {
-      padding: 8px 12px;
+      padding: 8px 10px;
       border-radius: 10px;
       border: 1px solid rgba(239, 68, 68, 0.4);
       background: rgba(239, 68, 68, 0.12);
@@ -191,11 +221,6 @@
       font-size: 11px;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.15s ease;
-    }
-    .btn-disconnect-sm:hover {
-      background: #EF4444;
-      color: #FFFFFF;
     }
 
     /* MAIN */
@@ -203,18 +228,18 @@
       flex: 1;
       max-width: 1240px;
       margin: 0 auto;
-      padding: 40px 24px;
+      padding: 30px 16px;
       width: 100%;
     }
     .hero-layout {
       display: grid;
       grid-template-columns: 1.1fr 1fr;
-      gap: 46px;
+      gap: 36px;
       align-items: start;
     }
-    @media (max-width: 920px) {
-      .hero-layout { grid-template-columns: 1fr; gap: 32px; }
-      main { padding: 24px 16px; }
+    @media (max-width: 900px) {
+      .hero-layout { grid-template-columns: 1fr; gap: 24px; }
+      main { padding: 20px 12px; }
     }
 
     /* LEFT HERO */
@@ -227,20 +252,20 @@
       background: linear-gradient(90deg, rgba(245, 194, 66, 0.16) 0%, rgba(0, 152, 234, 0.1) 100%);
       border: 1px solid var(--border-gold);
       color: var(--gold-primary);
-      font-size: 12px;
+      font-size: 11px;
       font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
     h1 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 48px;
+      font-size: 42px;
       font-weight: 800;
-      line-height: 1.12;
+      line-height: 1.15;
       letter-spacing: -0.035em;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
-    @media (max-width: 600px) { h1 { font-size: 34px; } }
+    @media (max-width: 600px) { h1 { font-size: 32px; } }
     .gold-gradient {
       background: linear-gradient(135deg, #FFF0B3 0%, #F5C242 50%, #D49B1E 100%);
       -webkit-background-clip: text;
@@ -248,130 +273,126 @@
     }
     p.hero-desc {
       color: var(--text-muted);
-      font-size: 15px;
-      line-height: 1.65;
-      margin-bottom: 30px;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 24px;
       max-width: 520px;
     }
 
     .matrix-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 30px;
+      gap: 10px;
+      margin-bottom: 24px;
     }
     .matrix-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: 16px;
-      padding: 16px;
+      padding: 14px;
       backdrop-filter: blur(12px);
     }
     .m-title {
-      font-size: 11px;
+      font-size: 10px;
       color: var(--text-dim);
       font-family: 'JetBrains Mono', monospace;
       text-transform: uppercase;
       font-weight: 600;
     }
     .m-value {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 800;
       color: #FFFFFF;
       font-family: 'JetBrains Mono', monospace;
       margin-top: 4px;
     }
 
-    /* REFERRAL HUB CARD (VIRAL FEATURE) */
+    /* PROMINENT REFERRAL SYSTEM CARD */
     .referral-card {
       background: var(--bg-surface);
-      border: 1px solid var(--border-gold);
+      border: 2px solid rgba(245, 194, 66, 0.45);
       border-radius: 20px;
-      padding: 22px;
+      padding: 20px;
       backdrop-filter: blur(16px);
-      margin-bottom: 24px;
+      margin-bottom: 22px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
     .ref-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
     .ref-link-box {
       display: flex;
       gap: 8px;
-      margin-top: 10px;
+      margin-top: 12px;
     }
     .ref-input {
       flex: 1;
       background: var(--bg-surface-inner);
       border: 1px solid var(--border-subtle);
       border-radius: 12px;
-      padding: 10px 14px;
+      padding: 10px 12px;
       color: #FFFFFF;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+      font-size: 11px;
       outline: none;
     }
     .btn-copy-ref {
-      padding: 10px 16px;
+      padding: 10px 14px;
       border-radius: 12px;
       border: 1px solid var(--border-gold);
-      background: rgba(245, 194, 66, 0.15);
+      background: rgba(245, 194, 66, 0.18);
       color: var(--gold-primary);
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.15s ease;
       white-space: nowrap;
+      transition: all 0.15s ease;
     }
-    .btn-copy-ref:hover {
-      background: var(--gold-primary);
-      color: #070B16;
-    }
+    .btn-copy-ref:hover { background: var(--gold-primary); color: #070B16; }
+
     .btn-tg-share {
       padding: 10px 14px;
       border-radius: 12px;
-      border: 1px solid rgba(0, 152, 234, 0.4);
-      background: rgba(0, 152, 234, 0.15);
+      border: 1px solid rgba(0, 152, 234, 0.5);
+      background: rgba(0, 152, 234, 0.18);
       color: #38BDF8;
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.15s ease;
       white-space: nowrap;
+      transition: all 0.15s ease;
     }
-    .btn-tg-share:hover {
-      background: #0098EA;
-      color: #FFFFFF;
-    }
+    .btn-tg-share:hover { background: #0098EA; color: #FFFFFF; }
 
-    /* RIGHT DESK CARD */
+    /* RIGHT TICKET DESK */
     .desk-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-medium);
-      border-radius: 26px;
-      padding: 30px;
+      border-radius: 24px;
+      padding: 24px;
       backdrop-filter: blur(24px);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
     }
     .desk-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 22px;
-      padding-bottom: 14px;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
       border-bottom: 1px solid var(--border-subtle);
     }
     .protocol-tag {
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.3);
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.35);
       color: var(--emerald-accent);
-      padding: 4px 10px;
+      padding: 4px 8px;
       border-radius: 8px;
-      font-size: 11px;
+      font-size: 10px;
       font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
     }
@@ -380,12 +401,12 @@
     .net-matrix {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 18px;
+      gap: 8px;
+      margin-bottom: 16px;
     }
     .net-tab {
-      padding: 12px;
-      border-radius: 14px;
+      padding: 10px;
+      border-radius: 12px;
       border: 1px solid var(--border-subtle);
       background: var(--bg-surface-inner);
       cursor: pointer;
@@ -394,57 +415,56 @@
     }
     .net-tab.active {
       border-color: var(--gold-primary);
-      background: rgba(245, 194, 66, 0.1);
+      background: rgba(245, 194, 66, 0.12);
     }
 
     /* ESCROW BOX */
     .escrow-box {
       background: var(--bg-surface-inner);
       border: 1px solid var(--border-gold);
-      border-radius: 16px;
-      padding: 14px;
-      margin-bottom: 20px;
+      border-radius: 14px;
+      padding: 12px;
+      margin-bottom: 18px;
     }
     .escrow-val {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+      font-size: 11px;
       color: var(--emerald-accent);
       word-break: break-all;
       margin-top: 6px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 6px;
     }
     .copy-btn {
       background: rgba(245, 194, 66, 0.15);
       border: 1px solid var(--gold-primary);
       color: var(--gold-primary);
-      padding: 5px 12px;
+      padding: 4px 10px;
       border-radius: 8px;
-      font-size: 11px;
+      font-size: 10px;
       cursor: pointer;
       font-family: 'JetBrains Mono', monospace;
       white-space: nowrap;
-      transition: all 0.15s ease;
     }
-    .copy-btn:hover { background: var(--gold-primary); color: #070B16; }
 
     /* PRESETS */
     .preset-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-bottom: 16px;
+      gap: 6px;
+      margin-bottom: 14px;
     }
     .preset-btn {
       background: var(--bg-surface-inner);
       border: 1px solid var(--border-subtle);
       color: var(--text-main);
-      padding: 11px 4px;
-      border-radius: 12px;
+      padding: 10px 4px;
+      border-radius: 10px;
       font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
-      font-size: 13px;
+      font-size: 12px;
       cursor: pointer;
       text-align: center;
       transition: all 0.15s ease;
@@ -462,18 +482,18 @@
       justify-content: space-between;
       background: var(--bg-surface-inner);
       border: 1px solid var(--border-subtle);
-      border-radius: 14px;
-      padding: 6px 14px;
-      margin-bottom: 20px;
+      border-radius: 12px;
+      padding: 6px 12px;
+      margin-bottom: 18px;
     }
     .step-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border-subtle);
       color: #FFFFFF;
-      font-size: 19px;
+      font-size: 18px;
       font-weight: 700;
       cursor: pointer;
     }
@@ -483,30 +503,30 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       border-top: 1px solid var(--border-subtle);
-      padding-top: 14px;
+      padding-top: 12px;
     }
 
     /* 1-CLICK AUTOMATIC TRANSFER BUTTON (TRANSFER NOW) */
     .btn-transfer-auto {
       width: 100%;
-      padding: 16px;
-      border-radius: 16px;
+      padding: 15px;
+      border-radius: 14px;
       border: none;
       background: linear-gradient(135deg, #F5C242 0%, #D49B1E 100%);
       color: #070B16;
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 800;
       cursor: pointer;
       box-shadow: 0 6px 24px var(--gold-glow);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
       transition: all 0.2s ease;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .btn-transfer-auto:hover {
       background: var(--gold-hover);
@@ -518,11 +538,11 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     .btn-quick-provider {
-      padding: 12px;
-      border-radius: 12px;
+      padding: 11px;
+      border-radius: 10px;
       border: 1px solid var(--border-subtle);
       background: var(--bg-surface-inner);
       color: #FFFFFF;
@@ -534,20 +554,15 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      transition: all 0.15s ease;
-    }
-    .btn-quick-provider:hover {
-      border-color: var(--border-gold);
-      background: rgba(245, 194, 66, 0.1);
     }
 
     /* MANUAL CONFIRMATION ACCORDION SECTION */
     .manual-confirm-wrap {
       background: rgba(0, 0, 0, 0.35);
       border: 1px solid var(--border-medium);
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 20px;
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 18px;
     }
     .manual-toggle-btn {
       width: 100%;
@@ -555,7 +570,7 @@
       border: none;
       color: var(--text-muted);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       cursor: pointer;
       display: flex;
@@ -566,8 +581,8 @@
     .manual-toggle-btn:hover { color: var(--gold-primary); }
     .manual-content {
       display: block;
-      margin-top: 12px;
-      padding-top: 12px;
+      margin-top: 10px;
+      padding-top: 10px;
       border-top: 1px solid var(--border-subtle);
     }
     .verify-input {
@@ -578,33 +593,27 @@
       padding: 10px 12px;
       color: #FFFFFF;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+      font-size: 11px;
       outline: none;
       margin-bottom: 8px;
     }
-    .verify-input:focus { border-color: var(--gold-primary); }
 
     .btn-confirm-hash {
       width: 100%;
-      padding: 12px;
-      border-radius: 12px;
+      padding: 11px;
+      border-radius: 10px;
       border: 1px solid var(--border-gold);
       background: rgba(245, 194, 66, 0.15);
       color: var(--gold-primary);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.15s ease;
-    }
-    .btn-confirm-hash:hover {
-      background: var(--gold-primary);
-      color: #070B16;
     }
 
     #toastMsg {
       display: none;
-      margin-top: 14px;
+      margin-top: 12px;
       padding: 12px;
       border-radius: 12px;
       font-size: 12px;
@@ -615,23 +624,23 @@
 
     /* OWNED TICKETS */
     .tickets-vault-card {
-      margin-top: 20px;
+      margin-top: 18px;
       background: var(--bg-surface-inner);
       border: 1px solid var(--border-gold);
-      border-radius: 18px;
-      padding: 18px;
+      border-radius: 16px;
+      padding: 16px;
     }
     .ticket-chip {
       display: inline-block;
       background: rgba(245, 194, 66, 0.12);
       border: 1px solid var(--gold-primary);
       color: var(--gold-primary);
-      padding: 6px 12px;
+      padding: 5px 10px;
       border-radius: 8px;
-      font-size: 12px;
+      font-size: 11px;
       font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
-      margin: 4px;
+      margin: 3px;
     }
 
     /* MODAL SHARED STYLES */
@@ -644,43 +653,38 @@
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 16px;
     }
     .dialog-box {
       width: 100%;
-      max-width: 440px;
+      max-width: 420px;
       background: #0F1626;
       border: 1px solid var(--border-gold);
-      border-radius: 24px;
-      padding: 26px;
+      border-radius: 22px;
+      padding: 24px;
       text-align: center;
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
     }
     .wallet-choice-btn {
       width: 100%;
-      padding: 14px;
-      border-radius: 14px;
+      padding: 13px;
+      border-radius: 12px;
       border: 1px solid var(--border-subtle);
       background: rgba(255, 255, 255, 0.04);
       color: #FFFFFF;
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 13px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 10px;
-      transition: all 0.15s ease;
-    }
-    .wallet-choice-btn:hover {
-      border-color: var(--gold-primary);
-      background: rgba(245, 194, 66, 0.1);
+      margin-bottom: 8px;
     }
 
     .form-group {
       text-align: left;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     .form-label {
       font-size: 11px;
@@ -688,26 +692,25 @@
       font-family: 'JetBrains Mono', monospace;
       text-transform: uppercase;
       font-weight: 700;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       display: block;
     }
     .form-input {
       width: 100%;
       background: var(--bg-surface-inner);
       border: 1px solid var(--border-medium);
-      border-radius: 12px;
-      padding: 12px 14px;
+      border-radius: 10px;
+      padding: 10px 12px;
       color: #FFFFFF;
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       outline: none;
     }
-    .form-input:focus { border-color: var(--gold-primary); }
 
     .btn-submit-action {
       width: 100%;
-      padding: 14px;
-      border-radius: 14px;
+      padding: 13px;
+      border-radius: 12px;
       border: none;
       background: linear-gradient(135deg, #10B981 0%, #059669 100%);
       color: #FFFFFF;
@@ -716,19 +719,14 @@
       font-weight: 800;
       cursor: pointer;
       box-shadow: 0 4px 20px var(--emerald-glow);
-      transition: all 0.15s ease;
-      margin-top: 10px;
-    }
-    .btn-submit-action:hover {
-      background: #10B981;
-      transform: translateY(-1px);
+      margin-top: 8px;
     }
 
     footer {
       border-top: 1px solid var(--border-subtle);
-      padding: 24px;
+      padding: 20px;
       text-align: center;
-      font-size: 12px;
+      font-size: 11px;
       color: var(--text-dim);
       font-family: 'JetBrains Mono', monospace;
     }
@@ -739,7 +737,7 @@
   <!-- TOP STRIP -->
   <div class="top-strip">
     <div><span class="live-dot"></span> <strong>LUCKYDROP</strong> • CYCLE #14 LIVE</div>
-    <div>AUTOMATED SETTLEMENT • REFERRAL & WITHDRAWAL ACTIVE</div>
+    <div>AUTOMATED SETTLEMENT • REFERRALS & WITHDRAWALS ACTIVE</div>
   </div>
 
   <!-- HEADER -->
@@ -751,12 +749,17 @@
       </div>
 
       <div class="header-actions">
-        <!-- 1. WITHDRAWAL BUTTON -->
+        <!-- 1. WITHDRAWAL BUTTON (HIGHLIGHTED) -->
         <button type="button" class="btn-withdraw-header" onclick="openWithdrawModal()">
           💸 Withdraw
         </button>
 
-        <!-- 2. CONNECT / CONNECTED WALLET -->
+        <!-- 2. REFERRAL BUTTON (DIRECT SCROLL / MODAL) -->
+        <button type="button" class="btn-referral-header" onclick="scrollToReferralSection()">
+          👥 Referrals
+        </button>
+
+        <!-- 3. CONNECT / CONNECTED WALLET BUTTON -->
         <button type="button" class="btn-connect-header" id="btnConnectHeader" onclick="openWalletModal()">
           🔗 Connect Wallet
         </button>
@@ -765,7 +768,7 @@
             ● Connected
           </div>
           <button type="button" class="btn-disconnect-sm" onclick="disconnectWallet()">
-            Disconnect
+            Exit
           </button>
         </div>
       </div>
@@ -788,47 +791,47 @@
         <div class="matrix-row">
           <div class="matrix-card">
             <div class="m-title">Weekly Pool</div>
-            <div class="m-value" style="color: var(--gold-primary);">2,500 <span style="font-size: 12px; color: var(--text-muted);">USDT</span></div>
+            <div class="m-value" style="color: var(--gold-primary);">2,500 <span style="font-size: 11px; color: var(--text-muted);">USDT</span></div>
           </div>
           <div class="matrix-card">
             <div class="m-title">Min Ticket</div>
-            <div class="m-value" style="color: #60A5FA;">1.00 <span style="font-size: 12px; color: var(--text-muted);">USDT</span></div>
+            <div class="m-value" style="color: #60A5FA;">1.00 <span style="font-size: 11px; color: var(--text-muted);">USDT</span></div>
           </div>
           <div class="matrix-card">
             <div class="m-title">Cycle Closes</div>
-            <div class="m-value" style="color: var(--emerald-accent); font-size: 18px;" id="cycleTimer">2d 14h 28m</div>
+            <div class="m-value" style="color: var(--emerald-accent); font-size: 16px;" id="cycleTimer">2d 14h 28m</div>
           </div>
         </div>
 
-        <!-- VIRAL REFERRAL SYSTEM SECTION -->
-        <div class="referral-card">
+        <!-- VIRAL REFERRAL SYSTEM SECTION (TARGETED ANCHOR) -->
+        <div class="referral-card" id="referralSection">
           <div class="ref-header">
             <div>
               <span style="font-size: 11px; color: var(--gold-primary); font-family: 'JetBrains Mono', monospace; font-weight: 700;">VIRAL AFFILIATE HUB</span>
-              <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 17px; margin-top: 2px;">Your Unique Referral Link</h4>
+              <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; margin-top: 2px;">Your Unique Referral Link</h4>
             </div>
-            <span style="font-size: 12px; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace; font-weight: 700;">
-              🎁 10% Lifetime Bonus
+            <span style="font-size: 11px; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace; font-weight: 700; background: rgba(16, 185, 129, 0.15); padding: 4px 8px; border-radius: 8px; border: 1px solid var(--emerald-accent);">
+              🎁 10% Bonus Active
             </span>
           </div>
           <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">
-            Invite friends to LuckyDrop! Every time your referral buys a ticket, you earn free tickets and instant USDT rewards.
+            Share your personal referral link with friends. Every time someone enters the draw via your link, you get free tickets and automatic USDT rewards!
           </p>
           <div class="ref-link-box">
             <input type="text" id="referralLinkInput" class="ref-input" readonly value="https://luckydraw-five-phi.vercel.app/?ref=LD-CONNECT-WALLET" />
             <button type="button" class="btn-copy-ref" onclick="copyReferralLink()">📋 Copy Link</button>
-            <button type="button" class="btn-tg-share" onclick="shareOnTelegram()">📱 Share</button>
+            <button type="button" class="btn-tg-share" onclick="shareOnTelegram()">📱 Share on TG</button>
           </div>
-          <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">
-            <span>Invited: <strong id="refCount" style="color: #FFFFFF;">0 Users</strong></span>
-            <span>Earnings: <strong id="refReward" style="color: var(--emerald-accent);">0.00 USDT</strong></span>
+          <div style="display: flex; justify-content: space-between; margin-top: 12px; font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">
+            <span>Invited Members: <strong id="refCount" style="color: #FFFFFF;">0 Active</strong></span>
+            <span>Earned Rewards: <strong id="refReward" style="color: var(--emerald-accent);">0.00 USDT</strong></span>
           </div>
         </div>
 
-        <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid var(--emerald-accent); border-radius: 16px; padding: 16px; font-size: 13px; color: #A7F3D0; line-height: 1.6;">
-          🔒 <strong>Seamless Payment & Settlement Architecture:</strong><br>
-          • <strong>Tonkeeper / Telegram:</strong> Direct universal link with verified bounceable recipient.<br>
-          • <strong>MetaMask / Trust:</strong> Direct web3 in-app transfer confirmation prompt.
+        <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid var(--emerald-accent); border-radius: 16px; padding: 14px; font-size: 12px; color: #A7F3D0; line-height: 1.6;">
+          🔒 <strong>Automated Payout & Non-Custodial Security:</strong><br>
+          • <strong>Withdrawals:</strong> Click "Withdraw" anytime to transfer balance to your personal wallet.<br>
+          • <strong>Draws:</strong> 100% Provably fair on-chain selection.
         </div>
       </div>
 
@@ -837,8 +840,8 @@
         <div class="desk-card">
           <div class="desk-header">
             <div>
-              <span style="font-size: 11px; color: var(--gold-primary); font-family: 'JetBrains Mono', monospace; font-weight: 700;">INSTANT SETTLEMENT</span>
-              <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 800; margin-top: 2px;">Acquire Draw Tickets</h3>
+              <span style="font-size: 10px; color: var(--gold-primary); font-family: 'JetBrains Mono', monospace; font-weight: 700;">INSTANT SETTLEMENT</span>
+              <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 19px; font-weight: 800; margin-top: 2px;">Acquire Draw Tickets</h3>
             </div>
             <span class="protocol-tag">AUTOMATED ESCROW</span>
           </div>
@@ -846,18 +849,18 @@
           <!-- NETWORK TABS -->
           <div class="net-matrix">
             <div class="net-tab active" id="tabTON" onclick="switchNetwork('TON')">
-              <div style="font-size: 13px; font-weight: 700; color: #38BDF8;">💎 TON Network</div>
-              <div style="font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; margin-top: 2px;">Tonkeeper / Telegram</div>
+              <div style="font-size: 12px; font-weight: 700; color: #38BDF8;">💎 TON Network</div>
+              <div style="font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; margin-top: 2px;">Tonkeeper / Telegram</div>
             </div>
             <div class="net-tab" id="tabBEP" onclick="switchNetwork('BEP20')">
-              <div style="font-size: 13px; font-weight: 700; color: #F5C242;">⚡ BEP-20 (BNB)</div>
-              <div style="font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; margin-top: 2px;">Trust Wallet / MetaMask</div>
+              <div style="font-size: 12px; font-weight: 700; color: #F5C242;">⚡ BEP-20 (BNB)</div>
+              <div style="font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; margin-top: 2px;">Trust Wallet / MetaMask</div>
             </div>
           </div>
 
           <!-- ESCROW TARGET DISPLAY -->
           <div class="escrow-box">
-            <div style="font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; text-transform: uppercase;" id="escrowLabel">
+            <div style="font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; text-transform: uppercase;" id="escrowLabel">
               TON RECEIVING ESCROW ADDRESS
             </div>
             <div class="escrow-val">
@@ -879,8 +882,8 @@
           <!-- STEPPER -->
           <div class="stepper-box">
             <button type="button" class="step-btn" onclick="step(-1)">−</button>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 800; color: var(--gold-primary);">
-              <span id="ticketCount">1</span> <span style="font-size: 12px; color: var(--text-muted);">Tickets</span>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 800; color: var(--gold-primary);">
+              <span id="ticketCount">1</span> <span style="font-size: 11px; color: var(--text-muted);">Tickets</span>
             </div>
             <button type="button" class="step-btn" onclick="step(1)">+</button>
           </div>
@@ -888,12 +891,12 @@
           <!-- TOTAL & ODDS -->
           <div class="overview-row">
             <div>
-              <div style="font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">TOTAL PAYABLE:</div>
-              <div style="font-size: 24px; font-weight: 800; font-family: 'JetBrains Mono', monospace;"><span id="totalAmount">1.00</span> USDT</div>
+              <div style="font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">TOTAL PAYABLE:</div>
+              <div style="font-size: 22px; font-weight: 800; font-family: 'JetBrains Mono', monospace;"><span id="totalAmount">1.00</span> USDT</div>
             </div>
             <div style="text-align: right;">
-              <div style="font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">ESTIMATED ODDS:</div>
-              <div style="font-size: 13px; font-weight: 700; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace;" id="odds">~ 1 in 710.0</div>
+              <div style="font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">ESTIMATED ODDS:</div>
+              <div style="font-size: 12px; font-weight: 700; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace;" id="odds">~ 1 in 710.0</div>
             </div>
           </div>
 
@@ -905,10 +908,10 @@
           <!-- QUICK PROVIDER SWITCH BUTTONS -->
           <div class="quick-actions-row">
             <button type="button" class="btn-quick-provider" onclick="triggerTonkeeperDirect()">
-              <span>💎 Open Tonkeeper</span>
+              <span>💎 Tonkeeper</span>
             </button>
             <button type="button" class="btn-quick-provider" onclick="triggerTelegramWalletDirect()">
-              <span>📱 Open Telegram</span>
+              <span>📱 Telegram</span>
             </button>
           </div>
 
@@ -934,11 +937,11 @@
 
           <!-- OWNED TICKETS VAULT -->
           <div class="tickets-vault-card" id="ticketsVault">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-              <strong style="font-size: 14px;">🎟️ Your Verified Tickets:</strong>
-              <span style="font-size: 12px; color: var(--gold-primary); font-family: 'JetBrains Mono', monospace;" id="verifiedBadge">0 Tickets</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <strong style="font-size: 13px;">🎟️ Your Verified Tickets:</strong>
+              <span style="font-size: 11px; color: var(--gold-primary); font-family: 'JetBrains Mono', monospace;" id="verifiedBadge">0 Tickets</span>
             </div>
-            <div id="verifiedTicketsList" style="font-size: 12px; color: var(--text-muted);">
+            <div id="verifiedTicketsList" style="font-size: 11px; color: var(--text-muted);">
               No tickets verified yet. Click "Transfer Now" or submit your Tx Hash to acquire tickets.
             </div>
           </div>
@@ -952,12 +955,12 @@
   <div id="withdrawModal" class="modal-backdrop" onclick="withdrawModalClick(event)">
     <div class="dialog-box">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 19px; font-weight: 800;">Withdraw Funds</h3>
+        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 800;">💸 Withdraw Funds</h3>
         <button type="button" onclick="closeWithdrawModal()" style="background: none; border: none; color: var(--text-dim); font-size: 20px; cursor: pointer;">✕</button>
       </div>
 
-      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 18px; line-height: 1.5;">
-        Withdraw your lottery winnings and referral commission directly to your personal wallet.
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.5;">
+        Withdraw your draw winnings or referral commission directly to your external personal wallet.
       </p>
 
       <div class="form-group">
@@ -970,7 +973,7 @@
 
       <div class="form-group">
         <label class="form-label">Destination Wallet Address</label>
-        <input type="text" id="withdrawAddressInput" class="form-input" placeholder="Paste your personal TON or BEP-20 address" />
+        <input type="text" id="withdrawAddressInput" class="form-input" placeholder="Paste EQ... (TON) or 0x... (BEP20) address" />
       </div>
 
       <div class="form-group">
@@ -982,8 +985,8 @@
         ⚡ Confirm & Request Withdrawal
       </button>
 
-      <div style="margin-top: 14px; font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">
-        * Automated non-custodial payouts processed within 15 minutes.
+      <div style="margin-top: 12px; font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">
+        * Processed directly via smart contract settlement within 15 minutes.
       </div>
     </div>
   </div>
@@ -992,15 +995,15 @@
   <div id="walletModal" class="modal-backdrop" onclick="walletModalClick(event)">
     <div class="dialog-box">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 19px; font-weight: 800;">Connect Real Wallet</h3>
+        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 800;">Connect Real Wallet</h3>
         <button type="button" onclick="closeWalletModal()" style="background: none; border: none; color: var(--text-dim); font-size: 20px; cursor: pointer;">✕</button>
       </div>
 
-      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 18px; line-height: 1.5;">
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.5;">
         Connect your genuine Web3 wallet or paste your address. (Zero demo / test values).
       </p>
 
-      <!-- 1. TONKEEPER / TELEGRAM 1-CLICK OPTION -->
+      <!-- 1. TONKEEPER / TELEGRAM OPTION -->
       <button type="button" class="wallet-choice-btn" onclick="connectTonkeeperOption()">
         <span style="display: flex; align-items: center; gap: 8px;">
           <span>💎</span>
@@ -1028,10 +1031,10 @@
       </button>
 
       <!-- 4. MANUAL REAL ADDRESS ENTRY / PASTE -->
-      <div style="margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border-subtle); text-align: left;">
+      <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border-subtle); text-align: left;">
         <label class="form-label">Or Paste Your Real Wallet Address</label>
         <input type="text" id="manualWalletInput" class="form-input" style="margin-bottom: 10px;" placeholder="Paste EQ... (TON) or 0x... (BEP20) address" />
-        <button type="button" class="btn-confirm-hash" style="padding: 12px;" onclick="confirmManualAddress()">
+        <button type="button" class="btn-confirm-hash" style="padding: 11px;" onclick="confirmManualAddress()">
           ✓ Confirm & Connect Address
         </button>
       </div>
@@ -1053,7 +1056,7 @@
     var connectedProvider = null;
     var ownedTickets = [];
 
-    // Initialize Telegram WebApp if active
+    // Telegram WebApp auto setup
     if (window.Telegram && window.Telegram.WebApp) {
       try {
         window.Telegram.WebApp.ready();
@@ -1104,6 +1107,7 @@
 
     function openWithdrawModal() {
       if (!userConnectedWallet) {
+        showToast("ℹ️ Please connect your wallet first to withdraw.", "info");
         openWalletModal();
         return;
       }
@@ -1118,7 +1122,19 @@
       if (e.target && e.target.id === 'withdrawModal') closeWithdrawModal();
     }
 
-    /* 1. TONKEEPER / TELEGRAM CONNECT */
+    function scrollToReferralSection() {
+      var sec = document.getElementById('referralSection');
+      if (sec) {
+        sec.scrollIntoView({ behavior: 'smooth' });
+        sec.style.borderColor = '#F5C242';
+        sec.style.boxShadow = '0 0 25px rgba(245, 194, 66, 0.4)';
+        setTimeout(function() {
+          sec.style.boxShadow = 'none';
+        }, 2000);
+      }
+    }
+
+    /* WALLET CONNECT IMPLEMENTATIONS */
     function connectTonkeeperOption() {
       connectedProvider = "Tonkeeper";
       if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
@@ -1137,7 +1153,6 @@
       saveVerifiedWallet(userTonAddr.trim(), "Tonkeeper");
     }
 
-    /* 2. METAMASK CONNECT */
     async function connectMetaMaskOption() {
       connectedProvider = "MetaMask";
       if (typeof window.ethereum !== 'undefined') {
@@ -1160,7 +1175,6 @@
       }
     }
 
-    /* 3. TRUST WALLET CONNECT */
     async function connectTrustWalletOption() {
       connectedProvider = "Trust Wallet";
       if (typeof window.trustwallet !== 'undefined' || typeof window.ethereum !== 'undefined') {
@@ -1181,7 +1195,6 @@
       }
     }
 
-    /* 4. MANUAL PASTE & CONFIRM */
     function confirmManualAddress() {
       var input = document.getElementById('manualWalletInput');
       var val = input ? input.value.trim() : "";
@@ -1226,9 +1239,7 @@
       showToast("Wallet Disconnected successfully.", "info");
     }
 
-    /* ====================================================================
-       👥 REFERRAL SYSTEM LOGIC
-       ==================================================================== */
+    /* REFERRAL SYSTEM LOGIC */
     function updateReferralLink() {
       var refInput = document.getElementById('referralLinkInput');
       if (!refInput) return;
@@ -1236,7 +1247,7 @@
         var shortCode = userConnectedWallet.substring(2, 8).toUpperCase();
         refInput.value = "https://luckydraw-five-phi.vercel.app/?ref=" + shortCode;
       } else {
-        refInput.value = "https://luckydraw-five-phi.vercel.app/?ref=LD-CONNECT-WALLET";
+        refInput.value = "https://luckydraw-five-phi.vercel.app/?ref=LD-MEMBER";
       }
     }
 
@@ -1261,9 +1272,7 @@
       }
     }
 
-    /* ====================================================================
-       💸 WITHDRAWAL REQUEST LOGIC
-       ==================================================================== */
+    /* WITHDRAWAL REQUEST LOGIC */
     function submitWithdrawalRequest() {
       var net = document.getElementById('withdrawNetwork').value;
       var addr = document.getElementById('withdrawAddressInput').value.trim();
@@ -1328,7 +1337,7 @@
       var btnText = document.getElementById('autoTransferBtnText');
       if (btnText) {
         if (activeNetwork === 'TON') {
-          btnText.innerText = total + " USDT via Tonkeeper / Telegram";
+          btnText.innerText = total + " USDT via Tonkeeper";
         } else {
           btnText.innerText = total + " USDT via Web3 Wallet";
         }
@@ -1347,9 +1356,7 @@
       }
     }
 
-    /* ====================================================================
-       🚀 1-CLICK AUTOMATIC TRANSFER HANDLER (TELEGRAM SAFE & COMPLIANT)
-       ==================================================================== */
+    /* 1-CLICK AUTOMATIC TRANSFER HANDLER */
     async function handleAutoTransferNow() {
       if (!userConnectedWallet) {
         openWalletModal();
@@ -1358,12 +1365,12 @@
 
       var total = (selectedTickets * 1.00).toFixed(2);
 
-      // --- CASE 1: TON NETWORK ---
+      // TON NETWORK
       if (activeNetwork === 'TON') {
         navigator.clipboard.writeText(MY_TON_ESCROW).catch(function(){});
         var tonUniversalLink = "https://app.tonkeeper.com/transfer/" + MY_TON_ESCROW;
         
-        showToast("🚀 Opening Tonkeeper... (Escrow address auto-copied!)", "success");
+        showToast("🚀 Opening Tonkeeper... (Escrow address copied!)", "success");
 
         if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openLink) {
           window.Telegram.WebApp.openLink(tonUniversalLink);
@@ -1372,17 +1379,17 @@
         }
 
         setTimeout(function() {
-          showToast("ℹ️ Tonkeeper opened! Complete payment, then paste your Transaction Hash below.", "info");
+          showToast("ℹ️ Complete transfer in Tonkeeper, then paste Tx Hash below.", "info");
         }, 1500);
         return;
       }
 
-      // --- CASE 2: EVM / BEP-20 ---
+      // EVM / BEP-20
       if (activeNetwork === 'BEP20') {
         navigator.clipboard.writeText(MY_BEP20_ESCROW).catch(function(){});
         if (typeof window.ethereum !== 'undefined') {
           try {
-            showToast("⏳ Requesting wallet approval in MetaMask / Trust Wallet...", "info");
+            showToast("⏳ Requesting wallet approval...", "info");
             var provider = new ethers.providers.Web3Provider(window.ethereum);
             var signer = provider.getSigner();
 
@@ -1395,7 +1402,7 @@
             allocateTickets(tx.hash, total);
             return;
           } catch(err) {
-            showToast("⚠️ Direct Web3 prompt closed. Address copied! Paste Tx Hash when sent.", "info");
+            showToast("⚠️ Direct prompt closed. Address copied! Paste Tx Hash when sent.", "info");
           }
         } else {
           var trustLink = "https://link.trustwallet.com/send?asset=c20000714&address=" + MY_BEP20_ESCROW;
@@ -1417,7 +1424,7 @@
       } else {
         window.open(url, "_blank");
       }
-      showToast("💎 Opening Tonkeeper... (Escrow address auto-copied!)", "success");
+      showToast("💎 Opening Tonkeeper... (Address copied!)", "success");
     }
 
     function triggerTelegramWalletDirect() {
@@ -1428,7 +1435,7 @@
       } else {
         window.open(url, "_blank");
       }
-      showToast("📱 Opening Telegram Wallet... (Escrow address auto-copied!)", "success");
+      showToast("📱 Opening Telegram Wallet... (Address copied!)", "success");
     }
 
     /* MANUAL TRANSACTION HASH CONFIRMATION */
@@ -1529,14 +1536,10 @@
         toast.style.background = 'rgba(239, 68, 68, 0.15)';
         toast.style.border = '1px solid #EF4444';
         toast.style.color = '#EF4444';
-      } else if (type === 'success') {
+      } else {
         toast.style.background = 'rgba(16, 185, 129, 0.15)';
         toast.style.border = '1px solid #10B981';
         toast.style.color = '#10B981';
-      } else {
-        toast.style.background = 'rgba(245, 194, 66, 0.15)';
-        toast.style.border = '1px solid #F5C242';
-        toast.style.color = '#F5C242';
       }
       setTimeout(function() { toast.style.display = 'none'; }, 6000);
     }
@@ -1549,6 +1552,7 @@
         applyConnectedState();
       }
       updateUI();
+      updateReferralLink();
     })();
   </script>
 </body>
