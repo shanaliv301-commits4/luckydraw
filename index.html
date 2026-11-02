@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>LuckyDrop Protocol — Provably Fair 1$ USDT Draws | Seamless Web3 Settlement</title>
+  <title>LuckyDrop Protocol — Provably Fair 1$ USDT Draws | Telegram Mini App</title>
   
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
@@ -90,7 +90,7 @@
       max-width: 1240px;
       margin: 0 auto;
       padding: 0 16px;
-      height: 72px;
+      height: 70px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -132,7 +132,7 @@
     }
 
     .btn-connect-header {
-      padding: 9px 16px;
+      padding: 9px 15px;
       border-radius: 12px;
       border: 1px solid var(--border-gold);
       background: rgba(245, 194, 66, 0.14);
@@ -188,12 +188,12 @@
       color: var(--gold-primary);
     }
 
-    /* DROPDOWN MENU POPOVER */
+    /* DROPDOWN MENU */
     .dots-dropdown {
       position: absolute;
       top: 52px;
       right: 0;
-      width: 240px;
+      width: 250px;
       background: #0F1626;
       border: 1px solid var(--border-gold);
       border-radius: 18px;
@@ -249,18 +249,18 @@
       flex: 1;
       max-width: 1240px;
       margin: 0 auto;
-      padding: 30px 16px;
+      padding: 26px 16px;
       width: 100%;
     }
     .hero-layout {
       display: grid;
       grid-template-columns: 1.1fr 1fr;
-      gap: 36px;
+      gap: 32px;
       align-items: start;
     }
     @media (max-width: 900px) {
-      .hero-layout { grid-template-columns: 1fr; gap: 24px; }
-      main { padding: 20px 12px; }
+      .hero-layout { grid-template-columns: 1fr; gap: 20px; }
+      main { padding: 18px 12px; }
     }
 
     /* LEFT HERO */
@@ -276,17 +276,17 @@
       font-size: 11px;
       font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     h1 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 42px;
+      font-size: 40px;
       font-weight: 800;
       line-height: 1.15;
       letter-spacing: -0.035em;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
-    @media (max-width: 600px) { h1 { font-size: 32px; } }
+    @media (max-width: 600px) { h1 { font-size: 30px; } }
     .gold-gradient {
       background: linear-gradient(135deg, #FFF0B3 0%, #F5C242 50%, #D49B1E 100%);
       -webkit-background-clip: text;
@@ -296,7 +296,7 @@
       color: var(--text-muted);
       font-size: 14px;
       line-height: 1.6;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       max-width: 520px;
     }
 
@@ -304,13 +304,13 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     .matrix-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: 16px;
-      padding: 14px;
+      padding: 12px 14px;
       backdrop-filter: blur(12px);
     }
     .m-title {
@@ -321,74 +321,67 @@
       font-weight: 600;
     }
     .m-value {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 800;
       color: #FFFFFF;
       font-family: 'JetBrains Mono', monospace;
       margin-top: 4px;
     }
 
-    /* REFERRAL CARD */
-    .referral-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-gold);
-      border-radius: 20px;
-      padding: 20px;
-      backdrop-filter: blur(16px);
-      margin-bottom: 22px;
-      transition: all 0.3s ease;
-    }
-    .ref-header {
+    /* COMPACT SLEEK REFERRAL ACTION BAR (NO HUGE SPACE) */
+    .compact-ref-bar {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
-    }
-    .ref-link-box {
-      display: flex;
-      gap: 8px;
-      margin-top: 12px;
-    }
-    .ref-input {
-      flex: 1;
-      background: var(--bg-surface-inner);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 10px 12px;
-      color: #FFFFFF;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      outline: none;
-    }
-    .btn-copy-ref {
-      padding: 10px 14px;
-      border-radius: 12px;
+      justify-content: space-between;
+      gap: 10px;
+      background: rgba(15, 23, 42, 0.65);
       border: 1px solid var(--border-gold);
-      background: rgba(245, 194, 66, 0.18);
+      border-radius: 16px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(16px);
+      flex-wrap: wrap;
+    }
+    .ref-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-pill-ref {
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border-gold);
+      background: rgba(245, 194, 66, 0.16);
       color: var(--gold-primary);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       cursor: pointer;
-      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       transition: all 0.15s ease;
+      white-space: nowrap;
     }
-    .btn-copy-ref:hover { background: var(--gold-primary); color: #070B16; }
+    .btn-pill-ref:hover { background: var(--gold-primary); color: #070B16; }
 
-    .btn-tg-share {
-      padding: 10px 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(0, 152, 234, 0.5);
-      background: rgba(0, 152, 234, 0.18);
+    .btn-pill-share {
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 152, 234, 0.4);
+      background: rgba(0, 152, 234, 0.16);
       color: #38BDF8;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       cursor: pointer;
-      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       transition: all 0.15s ease;
+      white-space: nowrap;
     }
-    .btn-tg-share:hover { background: #0098EA; color: #FFFFFF; }
+    .btn-pill-share:hover { background: #0098EA; color: #FFFFFF; }
 
     /* RIGHT TICKET DESK */
     .desk-card {
@@ -770,7 +763,7 @@
       </div>
 
       <div class="header-actions">
-        <!-- 1. CONNECT WALLET BUTTON (OR CONNECTED PILL) -->
+        <!-- 1. CONNECT WALLET BUTTON / CONNECTED PILL -->
         <button type="button" class="btn-connect-header" id="btnConnectHeader" onclick="openWalletModal()">
           🔗 Connect Wallet
         </button>
@@ -790,9 +783,14 @@
             <span>Withdraw Funds</span>
           </button>
           
-          <button type="button" class="dropdown-item" onclick="triggerMenuAction('referrals')">
-            <span>👥</span>
-            <span>Referral Program</span>
+          <button type="button" class="dropdown-item" onclick="triggerMenuAction('copy-ref')">
+            <span>🎁</span>
+            <span>Copy My Referral Link</span>
+          </button>
+
+          <button type="button" class="dropdown-item" onclick="triggerMenuAction('share-tg')">
+            <span>📱</span>
+            <span>Share Bot On Telegram</span>
           </button>
 
           <button type="button" class="dropdown-item" onclick="triggerMenuAction('copy-wallet')">
@@ -839,34 +837,28 @@
           </div>
         </div>
 
-        <!-- VIRAL REFERRAL SYSTEM SECTION -->
-        <div class="referral-card" id="referralSection">
-          <div class="ref-header">
+        <!-- CLEAN COMPACT REFERRAL ACTION BAR -->
+        <div class="compact-ref-bar">
+          <div class="ref-bar-left">
+            <span style="font-size: 13px;">🎁</span>
             <div>
-              <span style="font-size: 11px; color: var(--gold-primary); font-family: 'JetBrains Mono', monospace; font-weight: 700;">VIRAL AFFILIATE HUB</span>
-              <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; margin-top: 2px;">Your Unique Referral Link</h4>
+              <div style="font-size: 12px; font-weight: 700; color: #FFFFFF;">Telegram Referral Link</div>
+              <div style="font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">Earn 10% bonus on friend entries</div>
             </div>
-            <span style="font-size: 11px; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace; font-weight: 700; background: rgba(16, 185, 129, 0.15); padding: 4px 8px; border-radius: 8px; border: 1px solid var(--emerald-accent);">
-              🎁 10% Bonus Active
-            </span>
           </div>
-          <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">
-            Share your personal referral link with friends. Every time someone enters the draw via your link, you get free tickets and automatic USDT rewards!
-          </p>
-          <div class="ref-link-box">
-            <input type="text" id="referralLinkInput" class="ref-input" readonly value="https://luckydraw-five-phi.vercel.app/?ref=LD-MEMBER" />
-            <button type="button" class="btn-copy-ref" onclick="copyReferralLink()">📋 Copy Link</button>
-            <button type="button" class="btn-tg-share" onclick="shareOnTelegram()">📱 Share on TG</button>
-          </div>
-          <div style="display: flex; justify-content: space-between; margin-top: 12px; font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">
-            <span>Invited Members: <strong id="refCount" style="color: #FFFFFF;">0 Active</strong></span>
-            <span>Earned Rewards: <strong id="refReward" style="color: var(--emerald-accent);">0.00 USDT</strong></span>
+          <div style="display: flex; gap: 8px;">
+            <button type="button" class="btn-pill-ref" onclick="copyReferralLink()">
+              📋 Copy Link
+            </button>
+            <button type="button" class="btn-pill-share" onclick="shareOnTelegram()">
+              📱 Share
+            </button>
           </div>
         </div>
 
         <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid var(--emerald-accent); border-radius: 16px; padding: 14px; font-size: 12px; color: #A7F3D0; line-height: 1.6;">
           🔒 <strong>Automated Payout & Non-Custodial Security:</strong><br>
-          • <strong>Withdrawals & Settings:</strong> Access via header <strong>⋮</strong> menu anytime.<br>
+          • <strong>Withdrawals & Referral Options:</strong> Accessible anytime via the <strong>⋮</strong> header menu.<br>
           • <strong>Draws:</strong> 100% Provably fair on-chain selection.
         </div>
       </div>
@@ -936,7 +928,7 @@
             </div>
           </div>
 
-          <!-- 1-CLICK AUTOMATIC TRANSFER BUTTON (MAIN CTA) -->
+          <!-- 1-CLICK AUTOMATIC TRANSFER BUTTON (TRANSFER NOW) -->
           <button type="button" class="btn-transfer-auto" id="autoTransferBtn" onclick="handleAutoTransferNow()">
             ⚡ Transfer Now (<span id="autoTransferBtnText">1.00 USDT via Tonkeeper</span>)
           </button>
@@ -1086,6 +1078,9 @@
     var MY_TON_ESCROW = "EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N";
     var MY_BEP20_ESCROW = "0x660877476587F0FaBb9000a81A6bE884289D6Bfe";
 
+    // 🌟 OFFICIAL TELEGRAM MINI APP LINK BASE
+    var TELEGRAM_APP_BASE_URL = "http://t.me/Luckydrop_miniusdt_bot/Draw";
+
     var activeNetwork = "TON";
     var selectedTickets = 1;
     var userConnectedWallet = null;
@@ -1137,8 +1132,10 @@
       closeDotsMenu();
       if (action === 'withdraw') {
         openWithdrawModal();
-      } else if (action === 'referrals') {
-        scrollToReferralSection();
+      } else if (action === 'copy-ref') {
+        copyReferralLink();
+      } else if (action === 'share-tg') {
+        shareOnTelegram();
       } else if (action === 'copy-wallet') {
         if (!userConnectedWallet) {
           showToast("ℹ️ No wallet connected yet. Connect wallet first.", "info");
@@ -1150,6 +1147,45 @@
         });
       } else if (action === 'disconnect') {
         disconnectWallet();
+      }
+    }
+
+    /* ====================================================================
+       REFERRAL LINK CREATION & MERGING WITH TELEGRAM BOT
+       ==================================================================== */
+    function getTelegramReferralLink() {
+      var refCode = "ref_MEMBER";
+      if (userConnectedWallet) {
+        refCode = "ref_" + userConnectedWallet.substring(2, 8).toUpperCase();
+      } else {
+        var cached = localStorage.getItem('ld_guest_ref');
+        if (!cached) {
+          cached = "ref_" + Math.random().toString(36).substring(2, 8).toUpperCase();
+          localStorage.setItem('ld_guest_ref', cached);
+        }
+        refCode = cached;
+      }
+      return TELEGRAM_APP_BASE_URL + "?startapp=" + refCode;
+    }
+
+    function copyReferralLink() {
+      var link = getTelegramReferralLink();
+      navigator.clipboard.writeText(link).then(function() {
+        showToast("✅ Telegram Referral Link Copied!\n" + link, "success");
+      }).catch(function() {
+        prompt("Copy your referral link:", link);
+      });
+    }
+
+    function shareOnTelegram() {
+      var link = getTelegramReferralLink();
+      var text = encodeURIComponent("🎁 Enter LuckyDrop Weekly 1$ USDT Draws on Telegram! Provably fair on-chain payouts:\n" + link);
+      var shareUrl = "https://t.me/share/url?url=" + encodeURIComponent(link) + "&text=" + text;
+      
+      if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
+        window.Telegram.WebApp.openTelegramLink(shareUrl);
+      } else {
+        window.open(shareUrl, "_blank");
       }
     }
 
@@ -1209,18 +1245,6 @@
     }
     function withdrawModalClick(e) {
       if (e.target && e.target.id === 'withdrawModal') closeWithdrawModal();
-    }
-
-    function scrollToReferralSection() {
-      var sec = document.getElementById('referralSection');
-      if (sec) {
-        sec.scrollIntoView({ behavior: 'smooth' });
-        sec.style.borderColor = '#F5C242';
-        sec.style.boxShadow = '0 0 25px rgba(245, 194, 66, 0.4)';
-        setTimeout(function() {
-          sec.style.boxShadow = 'none';
-        }, 2000);
-      }
     }
 
     /* WALLET CONNECT IMPLEMENTATIONS */
@@ -1301,7 +1325,6 @@
       localStorage.setItem('ld_provider_name', providerName);
       closeWalletModal();
       applyConnectedState();
-      updateReferralLink();
       showToast("🎉 " + providerName + " Connected: " + userConnectedWallet.substring(0, 6) + "..." + userConnectedWallet.substring(userConnectedWallet.length - 4), "success");
     }
 
@@ -1312,7 +1335,6 @@
       pill.style.display = 'inline-flex';
       pill.innerText = userConnectedWallet.substring(0, 6) + "..." + userConnectedWallet.substring(userConnectedWallet.length - 4);
       loadUserTickets();
-      updateReferralLink();
     }
 
     function disconnectWallet() {
@@ -1324,41 +1346,7 @@
       document.getElementById('connectedPill').style.display = 'none';
       var input = document.getElementById('manualWalletInput');
       if (input) input.value = "";
-      updateReferralLink();
       showToast("Wallet Disconnected successfully.", "info");
-    }
-
-    /* REFERRAL SYSTEM LOGIC */
-    function updateReferralLink() {
-      var refInput = document.getElementById('referralLinkInput');
-      if (!refInput) return;
-      if (userConnectedWallet) {
-        var shortCode = userConnectedWallet.substring(2, 8).toUpperCase();
-        refInput.value = "https://luckydraw-five-phi.vercel.app/?ref=" + shortCode;
-      } else {
-        refInput.value = "https://luckydraw-five-phi.vercel.app/?ref=LD-MEMBER";
-      }
-    }
-
-    function copyReferralLink() {
-      var refInput = document.getElementById('referralLinkInput');
-      if (!refInput) return;
-      navigator.clipboard.writeText(refInput.value).then(function() {
-        showToast("✅ Referral Link Copied to Clipboard!", "success");
-      });
-    }
-
-    function shareOnTelegram() {
-      var refInput = document.getElementById('referralLinkInput');
-      var link = refInput ? refInput.value : window.location.href;
-      var text = encodeURIComponent("🎁 Join LuckyDrop Weekly 1$ USDT Draws! High winning odds & provably fair on-chain payouts:\n" + link);
-      var shareUrl = "https://t.me/share/url?url=" + encodeURIComponent(link) + "&text=" + text;
-      
-      if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
-        window.Telegram.WebApp.openTelegramLink(shareUrl);
-      } else {
-        window.open(shareUrl, "_blank");
-      }
     }
 
     /* WITHDRAWAL REQUEST LOGIC */
@@ -1645,7 +1633,6 @@
         applyConnectedState();
       }
       updateUI();
-      updateReferralLink();
     })();
   </script>
 </body>
