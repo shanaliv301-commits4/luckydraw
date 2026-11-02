@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>LuckyDrop Protocol — Provably Fair 1$ USDT Draws | Referral & Withdrawal Hub</title>
+  <title>LuckyDrop Protocol — Provably Fair 1$ USDT Draws | Seamless Web3 Settlement</title>
   
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
@@ -84,7 +84,7 @@
       backdrop-filter: blur(20px);
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
     }
     .header-inner {
       max-width: 1240px;
@@ -94,7 +94,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 12px;
     }
     .brand-box {
       display: flex;
@@ -126,57 +126,14 @@
 
     .header-actions {
       display: flex;
-      gap: 8px;
+      gap: 10px;
       align-items: center;
-      flex-wrap: wrap;
-    }
-
-    /* ALWAYS VISIBLE ACTION BUTTONS */
-    .btn-withdraw-header {
-      padding: 8px 14px;
-      border-radius: 10px;
-      border: 1px solid rgba(16, 185, 129, 0.5);
-      background: rgba(16, 185, 129, 0.16);
-      color: #34D399;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-      white-space: nowrap;
-    }
-    .btn-withdraw-header:hover {
-      background: var(--emerald-accent);
-      color: #070B16;
-    }
-
-    .btn-referral-header {
-      padding: 8px 14px;
-      border-radius: 10px;
-      border: 1px solid rgba(0, 152, 234, 0.5);
-      background: rgba(0, 152, 234, 0.16);
-      color: #38BDF8;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-      white-space: nowrap;
-    }
-    .btn-referral-header:hover {
-      background: #0098EA;
-      color: #FFFFFF;
+      position: relative;
     }
 
     .btn-connect-header {
-      padding: 8px 14px;
-      border-radius: 10px;
+      padding: 9px 16px;
+      border-radius: 12px;
       border: 1px solid var(--border-gold);
       background: rgba(245, 194, 66, 0.14);
       color: var(--gold-primary);
@@ -195,14 +152,9 @@
       color: #070B16;
     }
 
-    .connected-box {
-      display: none;
-      align-items: center;
-      gap: 6px;
-    }
     .connected-pill {
-      padding: 8px 12px;
-      border-radius: 10px;
+      padding: 8px 14px;
+      border-radius: 12px;
       background: rgba(16, 185, 129, 0.14);
       border: 1px solid rgba(16, 185, 129, 0.4);
       color: var(--emerald-accent);
@@ -210,17 +162,86 @@
       font-size: 11px;
       font-weight: 700;
       cursor: pointer;
+      display: none;
+      align-items: center;
+      gap: 6px;
     }
-    .btn-disconnect-sm {
-      padding: 8px 10px;
-      border-radius: 10px;
-      border: 1px solid rgba(239, 68, 68, 0.4);
-      background: rgba(239, 68, 68, 0.12);
-      color: #F87171;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      font-weight: 700;
+
+    /* THREE DOTS MENU BUTTON */
+    .btn-dots-menu {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-medium);
+      color: #FFFFFF;
+      font-size: 19px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-dots-menu:hover, .btn-dots-menu.active {
+      background: rgba(245, 194, 66, 0.15);
+      border-color: var(--gold-primary);
+      color: var(--gold-primary);
+    }
+
+    /* DROPDOWN MENU POPOVER */
+    .dots-dropdown {
+      position: absolute;
+      top: 52px;
+      right: 0;
+      width: 240px;
+      background: #0F1626;
+      border: 1px solid var(--border-gold);
+      border-radius: 18px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85);
+      padding: 8px;
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 10000;
+      backdrop-filter: blur(20px);
+      animation: menuPop 0.15s ease-out;
+    }
+    @keyframes menuPop {
+      from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px;
+      border-radius: 12px;
+      border: none;
+      background: transparent;
+      color: var(--text-main);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      width: 100%;
+    }
+    .dropdown-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--gold-primary);
+    }
+    .dropdown-item.disconnect {
+      color: #F87171;
+    }
+    .dropdown-item.disconnect:hover {
+      background: rgba(239, 68, 68, 0.14);
+      color: #EF4444;
+    }
+    .dropdown-divider {
+      height: 1px;
+      background: var(--border-subtle);
+      margin: 4px 6px;
     }
 
     /* MAIN */
@@ -307,15 +328,15 @@
       margin-top: 4px;
     }
 
-    /* PROMINENT REFERRAL SYSTEM CARD */
+    /* REFERRAL CARD */
     .referral-card {
       background: var(--bg-surface);
-      border: 2px solid rgba(245, 194, 66, 0.45);
+      border: 1px solid var(--border-gold);
       border-radius: 20px;
       padding: 20px;
       backdrop-filter: blur(16px);
       margin-bottom: 22px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
     }
     .ref-header {
       display: flex;
@@ -533,7 +554,7 @@
       transform: translateY(-2px);
     }
 
-    /* DIRECT ONE-TAP BUTTONS */
+    /* DIRECT PROVIDER BUTTONS */
     .quick-actions-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -556,7 +577,7 @@
       gap: 6px;
     }
 
-    /* MANUAL CONFIRMATION ACCORDION SECTION */
+    /* MANUAL TRANSFER & TX HASH FALLBACK ACCORDION */
     .manual-confirm-wrap {
       background: rgba(0, 0, 0, 0.35);
       border: 1px solid var(--border-medium);
@@ -737,7 +758,7 @@
   <!-- TOP STRIP -->
   <div class="top-strip">
     <div><span class="live-dot"></span> <strong>LUCKYDROP</strong> • CYCLE #14 LIVE</div>
-    <div>AUTOMATED SETTLEMENT • REFERRALS & WITHDRAWALS ACTIVE</div>
+    <div>AUTOMATED SETTLEMENT • PROVABLY FAIR 1$ DRAWS</div>
   </div>
 
   <!-- HEADER -->
@@ -749,26 +770,41 @@
       </div>
 
       <div class="header-actions">
-        <!-- 1. WITHDRAWAL BUTTON (HIGHLIGHTED) -->
-        <button type="button" class="btn-withdraw-header" onclick="openWithdrawModal()">
-          💸 Withdraw
-        </button>
-
-        <!-- 2. REFERRAL BUTTON (DIRECT SCROLL / MODAL) -->
-        <button type="button" class="btn-referral-header" onclick="scrollToReferralSection()">
-          👥 Referrals
-        </button>
-
-        <!-- 3. CONNECT / CONNECTED WALLET BUTTON -->
+        <!-- 1. CONNECT WALLET BUTTON (OR CONNECTED PILL) -->
         <button type="button" class="btn-connect-header" id="btnConnectHeader" onclick="openWalletModal()">
           🔗 Connect Wallet
         </button>
-        <div class="connected-box" id="connectedBox">
-          <div class="connected-pill" id="connectedPill" onclick="openWalletModal()">
-            ● Connected
-          </div>
-          <button type="button" class="btn-disconnect-sm" onclick="disconnectWallet()">
-            Exit
+        <div class="connected-pill" id="connectedPill" onclick="openWalletModal()">
+          ● Connected
+        </div>
+
+        <!-- 2. THREE-DOTS MENU TRIGGER (⋮) -->
+        <button type="button" class="btn-dots-menu" id="dotsMenuBtn" onclick="toggleDotsMenu(event)">
+          ⋮
+        </button>
+
+        <!-- 3. POPUP MENU CONTAINER -->
+        <div class="dots-dropdown" id="dotsDropdownMenu">
+          <button type="button" class="dropdown-item" onclick="triggerMenuAction('withdraw')">
+            <span>💸</span>
+            <span>Withdraw Funds</span>
+          </button>
+          
+          <button type="button" class="dropdown-item" onclick="triggerMenuAction('referrals')">
+            <span>👥</span>
+            <span>Referral Program</span>
+          </button>
+
+          <button type="button" class="dropdown-item" onclick="triggerMenuAction('copy-wallet')">
+            <span>📋</span>
+            <span>Copy My Address</span>
+          </button>
+
+          <div class="dropdown-divider"></div>
+
+          <button type="button" class="dropdown-item disconnect" onclick="triggerMenuAction('disconnect')">
+            <span>🔌</span>
+            <span>Disconnect Wallet</span>
           </button>
         </div>
       </div>
@@ -803,7 +839,7 @@
           </div>
         </div>
 
-        <!-- VIRAL REFERRAL SYSTEM SECTION (TARGETED ANCHOR) -->
+        <!-- VIRAL REFERRAL SYSTEM SECTION -->
         <div class="referral-card" id="referralSection">
           <div class="ref-header">
             <div>
@@ -818,7 +854,7 @@
             Share your personal referral link with friends. Every time someone enters the draw via your link, you get free tickets and automatic USDT rewards!
           </p>
           <div class="ref-link-box">
-            <input type="text" id="referralLinkInput" class="ref-input" readonly value="https://luckydraw-five-phi.vercel.app/?ref=LD-CONNECT-WALLET" />
+            <input type="text" id="referralLinkInput" class="ref-input" readonly value="https://luckydraw-five-phi.vercel.app/?ref=LD-MEMBER" />
             <button type="button" class="btn-copy-ref" onclick="copyReferralLink()">📋 Copy Link</button>
             <button type="button" class="btn-tg-share" onclick="shareOnTelegram()">📱 Share on TG</button>
           </div>
@@ -830,7 +866,7 @@
 
         <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid var(--emerald-accent); border-radius: 16px; padding: 14px; font-size: 12px; color: #A7F3D0; line-height: 1.6;">
           🔒 <strong>Automated Payout & Non-Custodial Security:</strong><br>
-          • <strong>Withdrawals:</strong> Click "Withdraw" anytime to transfer balance to your personal wallet.<br>
+          • <strong>Withdrawals & Settings:</strong> Access via header <strong>⋮</strong> menu anytime.<br>
           • <strong>Draws:</strong> 100% Provably fair on-chain selection.
         </div>
       </div>
@@ -1064,6 +1100,59 @@
       } catch(e) {}
     }
 
+    /* ====================================================================
+       THREE-DOTS MENU CONTROL
+       ==================================================================== */
+    function toggleDotsMenu(e) {
+      e.stopPropagation();
+      var menu = document.getElementById('dotsDropdownMenu');
+      var btn = document.getElementById('dotsMenuBtn');
+      if (menu.style.display === 'flex') {
+        menu.style.display = 'none';
+        btn.classList.remove('active');
+      } else {
+        menu.style.display = 'flex';
+        btn.classList.add('active');
+      }
+    }
+
+    function closeDotsMenu() {
+      var menu = document.getElementById('dotsDropdownMenu');
+      var btn = document.getElementById('dotsMenuBtn');
+      if (menu) menu.style.display = 'none';
+      if (btn) btn.classList.remove('active');
+    }
+
+    document.addEventListener('click', function(e) {
+      var menu = document.getElementById('dotsDropdownMenu');
+      var btn = document.getElementById('dotsMenuBtn');
+      if (menu && menu.style.display === 'flex') {
+        if (!menu.contains(e.target) && e.target !== btn) {
+          closeDotsMenu();
+        }
+      }
+    });
+
+    function triggerMenuAction(action) {
+      closeDotsMenu();
+      if (action === 'withdraw') {
+        openWithdrawModal();
+      } else if (action === 'referrals') {
+        scrollToReferralSection();
+      } else if (action === 'copy-wallet') {
+        if (!userConnectedWallet) {
+          showToast("ℹ️ No wallet connected yet. Connect wallet first.", "info");
+          openWalletModal();
+          return;
+        }
+        navigator.clipboard.writeText(userConnectedWallet).then(function() {
+          showToast("✅ Connected Wallet Address Copied!", "success");
+        });
+      } else if (action === 'disconnect') {
+        disconnectWallet();
+      }
+    }
+
     function switchNetwork(net) {
       activeNetwork = net;
       var tabTON = document.getElementById('tabTON');
@@ -1219,8 +1308,8 @@
     function applyConnectedState() {
       if (!userConnectedWallet) return;
       document.getElementById('btnConnectHeader').style.display = 'none';
-      document.getElementById('connectedBox').style.display = 'flex';
       var pill = document.getElementById('connectedPill');
+      pill.style.display = 'inline-flex';
       pill.innerText = userConnectedWallet.substring(0, 6) + "..." + userConnectedWallet.substring(userConnectedWallet.length - 4);
       loadUserTickets();
       updateReferralLink();
@@ -1232,7 +1321,7 @@
       localStorage.removeItem('ld_verified_wallet');
       localStorage.removeItem('ld_provider_name');
       document.getElementById('btnConnectHeader').style.display = 'flex';
-      document.getElementById('connectedBox').style.display = 'none';
+      document.getElementById('connectedPill').style.display = 'none';
       var input = document.getElementById('manualWalletInput');
       if (input) input.value = "";
       updateReferralLink();
@@ -1536,10 +1625,14 @@
         toast.style.background = 'rgba(239, 68, 68, 0.15)';
         toast.style.border = '1px solid #EF4444';
         toast.style.color = '#EF4444';
-      } else {
+      } else if (type === 'success') {
         toast.style.background = 'rgba(16, 185, 129, 0.15)';
         toast.style.border = '1px solid #10B981';
         toast.style.color = '#10B981';
+      } else {
+        toast.style.background = 'rgba(245, 194, 66, 0.15)';
+        toast.style.border = '1px solid #F5C242';
+        toast.style.color = '#F5C242';
       }
       setTimeout(function() { toast.style.display = 'none'; }, 6000);
     }
