@@ -428,7 +428,7 @@
       transform: translateY(-2px);
     }
 
-    /* QUICK ACTION BUTTONS (TONKEEPER & TELEGRAM) */
+    /* DIRECT ONE-TAP BUTTONS */
     .quick-actions-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -436,7 +436,7 @@
       margin-bottom: 14px;
     }
     .btn-quick-provider {
-      padding: 11px;
+      padding: 12px;
       border-radius: 12px;
       border: 1px solid var(--border-subtle);
       background: var(--bg-surface-inner);
@@ -897,6 +897,14 @@
     var connectedProvider = null;
     var ownedTickets = [];
 
+    // Initialize Telegram WebApp if active
+    if (window.Telegram && window.Telegram.WebApp) {
+      try {
+        window.Telegram.WebApp.ready();
+        window.Telegram.WebApp.expand();
+      } catch(e) {}
+    }
+
     function switchNetwork(net) {
       activeNetwork = net;
       var tabTON = document.getElementById('tabTON');
@@ -1088,7 +1096,7 @@
     }
 
     /* ====================================================================
-       🚀 1-CLICK AUTOMATIC TRANSFER HANDLER (FIXED FOR ZERO INVALID ERROR)
+       🚀 1-CLICK AUTOMATIC TRANSFER HANDLER (TELEGRAM SAFE & COMPLIANT)
        ==================================================================== */
     async function handleAutoTransferNow() {
       if (!userConnectedWallet) {
@@ -1100,31 +1108,18 @@
 
       // --- CASE 1: TON NETWORK ---
       if (activeNetwork === 'TON') {
-        // Auto-copy address to user clipboard first so it's always ready!
+        // Auto-copy address to user clipboard
         navigator.clipboard.writeText(MY_TON_ESCROW).catch(function(){});
 
-        // 1. Official Tonkeeper Universal Web Link (100% Guaranteed No-Error Format)
-        var tonUniversalLink = "https://app.tonkeeper.com/transfer/" + MY_TON_ESCROW + "?text=" + encodeURIComponent("LuckyDrop Draw #" + selectedTickets + " Tickets");
+        var tonUniversalLink = "https://app.tonkeeper.com/transfer/" + MY_TON_ESCROW;
         
-        // 2. Direct URI deep link fallback
-        var tonDirectUri = "ton://transfer/" + MY_TON_ESCROW;
+        showToast("🚀 Opening Tonkeeper... (Escrow address auto-copied to clipboard!)", "success");
 
-        showToast("🚀 Opening Tonkeeper... (Escrow Address auto-copied to clipboard!)", "success");
-
-        if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
-          try {
-            window.Telegram.WebApp.openTelegramLink(tonUniversalLink);
-          } catch(e) {
-            window.location.href = tonUniversalLink;
-          }
+        // Telegram WebApp openLink method (prevents Telegram block/warning)
+        if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openLink) {
+          window.Telegram.WebApp.openLink(tonUniversalLink);
         } else {
-          // Open Tonkeeper app reliably
-          var link = document.createElement('a');
-          link.href = tonUniversalLink;
-          link.target = "_blank";
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
+          window.open(tonUniversalLink, "_blank");
         }
 
         setTimeout(function() {
@@ -1155,7 +1150,11 @@
           }
         } else {
           var trustLink = "https://link.trustwallet.com/send?asset=c20000714&address=" + MY_BEP20_ESCROW;
-          window.location.href = trustLink;
+          if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openLink) {
+            window.Telegram.WebApp.openLink(trustLink);
+          } else {
+            window.open(trustLink, "_blank");
+          }
           showToast("ℹ️ Opening Trust Wallet. Once confirmed, paste Tx Hash below.", "info");
         }
       }
@@ -1164,7 +1163,11 @@
     function triggerTonkeeperDirect() {
       navigator.clipboard.writeText(MY_TON_ESCROW).catch(function(){});
       var url = "https://app.tonkeeper.com/transfer/" + MY_TON_ESCROW;
-      window.open(url, "_blank");
+      if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openLink) {
+        window.Telegram.WebApp.openLink(url);
+      } else {
+        window.open(url, "_blank");
+      }
       showToast("💎 Opening Tonkeeper... (Escrow address auto-copied!)", "success");
     }
 
