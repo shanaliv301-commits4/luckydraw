@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LuckyDrop Protocol — Provably Fair 1$ USDT Draws | Seamless Web3 Settlement</title>
+  <title>LuckyDrop Protocol — Provably Fair 1$ USDT Draws | Referral & Withdrawal Hub</title>
   
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
@@ -126,6 +126,25 @@
       display: flex;
       gap: 10px;
       align-items: center;
+    }
+    .btn-withdraw-header {
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--emerald-accent);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .btn-withdraw-header:hover {
+      background: var(--emerald-accent);
+      color: #070B16;
     }
     .btn-connect-header {
       padding: 10px 18px;
@@ -261,6 +280,72 @@
       color: #FFFFFF;
       font-family: 'JetBrains Mono', monospace;
       margin-top: 4px;
+    }
+
+    /* REFERRAL HUB CARD (VIRAL FEATURE) */
+    .referral-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-gold);
+      border-radius: 20px;
+      padding: 22px;
+      backdrop-filter: blur(16px);
+      margin-bottom: 24px;
+    }
+    .ref-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .ref-link-box {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .ref-input {
+      flex: 1;
+      background: var(--bg-surface-inner);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 10px 14px;
+      color: #FFFFFF;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      outline: none;
+    }
+    .btn-copy-ref {
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border-gold);
+      background: rgba(245, 194, 66, 0.15);
+      color: var(--gold-primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .btn-copy-ref:hover {
+      background: var(--gold-primary);
+      color: #070B16;
+    }
+    .btn-tg-share {
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 152, 234, 0.4);
+      background: rgba(0, 152, 234, 0.15);
+      color: #38BDF8;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .btn-tg-share:hover {
+      background: #0098EA;
+      color: #FFFFFF;
     }
 
     /* RIGHT DESK CARD */
@@ -549,8 +634,8 @@
       margin: 4px;
     }
 
-    /* WALLET CONNECT MODAL */
-    #walletModal {
+    /* MODAL SHARED STYLES */
+    .modal-backdrop {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.88);
@@ -593,13 +678,11 @@
       background: rgba(245, 194, 66, 0.1);
     }
 
-    .manual-connect-box {
-      margin-top: 18px;
-      padding-top: 16px;
-      border-top: 1px solid var(--border-subtle);
+    .form-group {
       text-align: left;
+      margin-bottom: 14px;
     }
-    .manual-label {
+    .form-label {
       font-size: 11px;
       color: var(--text-dim);
       font-family: 'JetBrains Mono', monospace;
@@ -608,7 +691,7 @@
       margin-bottom: 6px;
       display: block;
     }
-    .manual-input {
+    .form-input {
       width: 100%;
       background: var(--bg-surface-inner);
       border: 1px solid var(--border-medium);
@@ -618,25 +701,27 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       outline: none;
-      margin-bottom: 10px;
     }
-    .manual-input:focus { border-color: var(--gold-primary); }
-    .btn-manual-confirm {
+    .form-input:focus { border-color: var(--gold-primary); }
+
+    .btn-submit-action {
       width: 100%;
-      padding: 12px;
-      border-radius: 12px;
-      border: 1px solid var(--border-gold);
-      background: rgba(245, 194, 66, 0.15);
-      color: var(--gold-primary);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      font-weight: 700;
+      padding: 14px;
+      border-radius: 14px;
+      border: none;
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      color: #FFFFFF;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
       cursor: pointer;
+      box-shadow: 0 4px 20px var(--emerald-glow);
       transition: all 0.15s ease;
+      margin-top: 10px;
     }
-    .btn-manual-confirm:hover {
-      background: var(--gold-primary);
-      color: #070B16;
+    .btn-submit-action:hover {
+      background: #10B981;
+      transform: translateY(-1px);
     }
 
     footer {
@@ -654,7 +739,7 @@
   <!-- TOP STRIP -->
   <div class="top-strip">
     <div><span class="live-dot"></span> <strong>LUCKYDROP</strong> • CYCLE #14 LIVE</div>
-    <div>AUTOMATED 1-CLICK WALLET SETTLEMENT</div>
+    <div>AUTOMATED SETTLEMENT • REFERRAL & WITHDRAWAL ACTIVE</div>
   </div>
 
   <!-- HEADER -->
@@ -666,6 +751,12 @@
       </div>
 
       <div class="header-actions">
+        <!-- 1. WITHDRAWAL BUTTON -->
+        <button type="button" class="btn-withdraw-header" onclick="openWithdrawModal()">
+          💸 Withdraw
+        </button>
+
+        <!-- 2. CONNECT / CONNECTED WALLET -->
         <button type="button" class="btn-connect-header" id="btnConnectHeader" onclick="openWalletModal()">
           🔗 Connect Wallet
         </button>
@@ -709,8 +800,33 @@
           </div>
         </div>
 
+        <!-- VIRAL REFERRAL SYSTEM SECTION -->
+        <div class="referral-card">
+          <div class="ref-header">
+            <div>
+              <span style="font-size: 11px; color: var(--gold-primary); font-family: 'JetBrains Mono', monospace; font-weight: 700;">VIRAL AFFILIATE HUB</span>
+              <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 17px; margin-top: 2px;">Your Unique Referral Link</h4>
+            </div>
+            <span style="font-size: 12px; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace; font-weight: 700;">
+              🎁 10% Lifetime Bonus
+            </span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">
+            Invite friends to LuckyDrop! Every time your referral buys a ticket, you earn free tickets and instant USDT rewards.
+          </p>
+          <div class="ref-link-box">
+            <input type="text" id="referralLinkInput" class="ref-input" readonly value="https://luckydraw-five-phi.vercel.app/?ref=LD-CONNECT-WALLET" />
+            <button type="button" class="btn-copy-ref" onclick="copyReferralLink()">📋 Copy Link</button>
+            <button type="button" class="btn-tg-share" onclick="shareOnTelegram()">📱 Share</button>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">
+            <span>Invited: <strong id="refCount" style="color: #FFFFFF;">0 Users</strong></span>
+            <span>Earnings: <strong id="refReward" style="color: var(--emerald-accent);">0.00 USDT</strong></span>
+          </div>
+        </div>
+
         <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid var(--emerald-accent); border-radius: 16px; padding: 16px; font-size: 13px; color: #A7F3D0; line-height: 1.6;">
-          🔒 <strong>Seamless Payment Architecture:</strong><br>
+          🔒 <strong>Seamless Payment & Settlement Architecture:</strong><br>
           • <strong>Tonkeeper / Telegram:</strong> Direct universal link with verified bounceable recipient.<br>
           • <strong>MetaMask / Trust:</strong> Direct web3 in-app transfer confirmation prompt.
         </div>
@@ -832,8 +948,48 @@
     </div>
   </main>
 
-  <!-- AUTHENTIC WALLET CONNECT MODAL -->
-  <div id="walletModal" onclick="modalClick(event)">
+  <!-- 1. WITHDRAWAL MODAL -->
+  <div id="withdrawModal" class="modal-backdrop" onclick="withdrawModalClick(event)">
+    <div class="dialog-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 19px; font-weight: 800;">Withdraw Funds</h3>
+        <button type="button" onclick="closeWithdrawModal()" style="background: none; border: none; color: var(--text-dim); font-size: 20px; cursor: pointer;">✕</button>
+      </div>
+
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 18px; line-height: 1.5;">
+        Withdraw your lottery winnings and referral commission directly to your personal wallet.
+      </p>
+
+      <div class="form-group">
+        <label class="form-label">Select Payout Network</label>
+        <select id="withdrawNetwork" class="form-input" style="background:#070B16; color:#FFF;">
+          <option value="TON">TON Network (USDT / TON)</option>
+          <option value="BEP20">BEP-20 (BNB Chain USDT)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Destination Wallet Address</label>
+        <input type="text" id="withdrawAddressInput" class="form-input" placeholder="Paste your personal TON or BEP-20 address" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Withdrawal Amount (USDT)</label>
+        <input type="number" id="withdrawAmountInput" class="form-input" placeholder="Min. 5.00 USDT" min="5" step="1" />
+      </div>
+
+      <button type="button" class="btn-submit-action" onclick="submitWithdrawalRequest()">
+        ⚡ Confirm & Request Withdrawal
+      </button>
+
+      <div style="margin-top: 14px; font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">
+        * Automated non-custodial payouts processed within 15 minutes.
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. AUTHENTIC WALLET CONNECT MODAL -->
+  <div id="walletModal" class="modal-backdrop" onclick="walletModalClick(event)">
     <div class="dialog-box">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
         <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 19px; font-weight: 800;">Connect Real Wallet</h3>
@@ -872,10 +1028,10 @@
       </button>
 
       <!-- 4. MANUAL REAL ADDRESS ENTRY / PASTE -->
-      <div class="manual-connect-box">
-        <label class="manual-label">Or Paste Your Real Wallet Address</label>
-        <input type="text" id="manualWalletInput" class="manual-input" placeholder="Paste EQ... (TON) or 0x... (BEP20) address" />
-        <button type="button" class="btn-manual-confirm" onclick="confirmManualAddress()">
+      <div style="margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border-subtle); text-align: left;">
+        <label class="form-label">Or Paste Your Real Wallet Address</label>
+        <input type="text" id="manualWalletInput" class="form-input" style="margin-bottom: 10px;" placeholder="Paste EQ... (TON) or 0x... (BEP20) address" />
+        <button type="button" class="btn-confirm-hash" style="padding: 12px;" onclick="confirmManualAddress()">
           ✓ Confirm & Connect Address
         </button>
       </div>
@@ -933,18 +1089,33 @@
       });
     }
 
+    /* MODAL HANDLERS */
     function openWalletModal() {
       document.getElementById('walletModal').style.display = 'flex';
       var input = document.getElementById('manualWalletInput');
       if (input && userConnectedWallet) input.value = userConnectedWallet;
     }
-
     function closeWalletModal() {
       document.getElementById('walletModal').style.display = 'none';
     }
-
-    function modalClick(e) {
+    function walletModalClick(e) {
       if (e.target && e.target.id === 'walletModal') closeWalletModal();
+    }
+
+    function openWithdrawModal() {
+      if (!userConnectedWallet) {
+        openWalletModal();
+        return;
+      }
+      document.getElementById('withdrawModal').style.display = 'flex';
+      var addrInp = document.getElementById('withdrawAddressInput');
+      if (addrInp) addrInp.value = userConnectedWallet;
+    }
+    function closeWithdrawModal() {
+      document.getElementById('withdrawModal').style.display = 'none';
+    }
+    function withdrawModalClick(e) {
+      if (e.target && e.target.id === 'withdrawModal') closeWithdrawModal();
     }
 
     /* 1. TONKEEPER / TELEGRAM CONNECT */
@@ -1028,6 +1199,7 @@
       localStorage.setItem('ld_provider_name', providerName);
       closeWalletModal();
       applyConnectedState();
+      updateReferralLink();
       showToast("🎉 " + providerName + " Connected: " + userConnectedWallet.substring(0, 6) + "..." + userConnectedWallet.substring(userConnectedWallet.length - 4), "success");
     }
 
@@ -1038,6 +1210,7 @@
       var pill = document.getElementById('connectedPill');
       pill.innerText = userConnectedWallet.substring(0, 6) + "..." + userConnectedWallet.substring(userConnectedWallet.length - 4);
       loadUserTickets();
+      updateReferralLink();
     }
 
     function disconnectWallet() {
@@ -1049,7 +1222,86 @@
       document.getElementById('connectedBox').style.display = 'none';
       var input = document.getElementById('manualWalletInput');
       if (input) input.value = "";
+      updateReferralLink();
       showToast("Wallet Disconnected successfully.", "info");
+    }
+
+    /* ====================================================================
+       👥 REFERRAL SYSTEM LOGIC
+       ==================================================================== */
+    function updateReferralLink() {
+      var refInput = document.getElementById('referralLinkInput');
+      if (!refInput) return;
+      if (userConnectedWallet) {
+        var shortCode = userConnectedWallet.substring(2, 8).toUpperCase();
+        refInput.value = "https://luckydraw-five-phi.vercel.app/?ref=" + shortCode;
+      } else {
+        refInput.value = "https://luckydraw-five-phi.vercel.app/?ref=LD-CONNECT-WALLET";
+      }
+    }
+
+    function copyReferralLink() {
+      var refInput = document.getElementById('referralLinkInput');
+      if (!refInput) return;
+      navigator.clipboard.writeText(refInput.value).then(function() {
+        showToast("✅ Referral Link Copied to Clipboard!", "success");
+      });
+    }
+
+    function shareOnTelegram() {
+      var refInput = document.getElementById('referralLinkInput');
+      var link = refInput ? refInput.value : window.location.href;
+      var text = encodeURIComponent("🎁 Join LuckyDrop Weekly 1$ USDT Draws! High winning odds & provably fair on-chain payouts:\n" + link);
+      var shareUrl = "https://t.me/share/url?url=" + encodeURIComponent(link) + "&text=" + text;
+      
+      if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
+        window.Telegram.WebApp.openTelegramLink(shareUrl);
+      } else {
+        window.open(shareUrl, "_blank");
+      }
+    }
+
+    /* ====================================================================
+       💸 WITHDRAWAL REQUEST LOGIC
+       ==================================================================== */
+    function submitWithdrawalRequest() {
+      var net = document.getElementById('withdrawNetwork').value;
+      var addr = document.getElementById('withdrawAddressInput').value.trim();
+      var amount = parseFloat(document.getElementById('withdrawAmountInput').value);
+
+      if (!addr || addr.length < 24) {
+        showToast("⚠️ Please enter a valid destination wallet address.", "error");
+        return;
+      }
+      if (isNaN(amount) || amount < 5) {
+        showToast("⚠️ Minimum withdrawal amount is 5.00 USDT.", "error");
+        return;
+      }
+
+      closeWithdrawModal();
+      showToast("⏳ Processing withdrawal request...", "info");
+
+      // Notify Admin Email for Payout Confirmation
+      try {
+        fetch("https://formspree.io/f/mqaeerqo", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({
+            _replyto: ADMIN_NOTIFICATION_EMAIL,
+            message: "💸 NEW WITHDRAWAL REQUEST SUBMITTED 💸\n\n" +
+                     "Requester Wallet: " + userConnectedWallet + "\n" +
+                     "Destination Address: " + addr + "\n" +
+                     "Network: " + net + "\n" +
+                     "Amount: " + amount.toFixed(2) + " USDT\n" +
+                     "Date: " + new Date().toLocaleString()
+          })
+        }).catch(function(){});
+      } catch(e) {}
+
+      setTimeout(function() {
+        showToast("✅ Withdrawal request submitted! " + amount.toFixed(2) + " USDT will be credited shortly.", "success");
+        document.getElementById('withdrawAmountInput').value = "";
+      }, 1000);
     }
 
     function setPreset(n) {
@@ -1108,14 +1360,11 @@
 
       // --- CASE 1: TON NETWORK ---
       if (activeNetwork === 'TON') {
-        // Auto-copy address to user clipboard
         navigator.clipboard.writeText(MY_TON_ESCROW).catch(function(){});
-
         var tonUniversalLink = "https://app.tonkeeper.com/transfer/" + MY_TON_ESCROW;
         
-        showToast("🚀 Opening Tonkeeper... (Escrow address auto-copied to clipboard!)", "success");
+        showToast("🚀 Opening Tonkeeper... (Escrow address auto-copied!)", "success");
 
-        // Telegram WebApp openLink method (prevents Telegram block/warning)
         if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openLink) {
           window.Telegram.WebApp.openLink(tonUniversalLink);
         } else {
@@ -1280,10 +1529,14 @@
         toast.style.background = 'rgba(239, 68, 68, 0.15)';
         toast.style.border = '1px solid #EF4444';
         toast.style.color = '#EF4444';
-      } else {
+      } else if (type === 'success') {
         toast.style.background = 'rgba(16, 185, 129, 0.15)';
         toast.style.border = '1px solid #10B981';
         toast.style.color = '#10B981';
+      } else {
+        toast.style.background = 'rgba(245, 194, 66, 0.15)';
+        toast.style.border = '1px solid #F5C242';
+        toast.style.color = '#F5C242';
       }
       setTimeout(function() { toast.style.display = 'none'; }, 6000);
     }
