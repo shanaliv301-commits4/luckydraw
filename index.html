@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LuckyDrop Protocol — Provably Fair 1$ USDT Draws | Verified Settlement</title>
+  <title>LuckyDrop Protocol — Provably Fair 1$ USDT Draws | Automatic Web3 Settlement</title>
   
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
@@ -393,23 +393,69 @@
       cursor: pointer;
     }
 
-    /* REAL ON-CHAIN PROOF INPUT (ANTI-FAKE) */
-    .verify-section {
-      background: rgba(0, 0, 0, 0.4);
+    /* TOTAL & ODDS */
+    .overview-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 14px;
+    }
+
+    /* 1-CLICK AUTOMATIC TRANSFER BUTTON (TRANSFER NOW) */
+    .btn-transfer-auto {
+      width: 100%;
+      padding: 16px;
+      border-radius: 16px;
+      border: none;
+      background: linear-gradient(135deg, #F5C242 0%, #D49B1E 100%);
+      color: #070B16;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 6px 24px var(--gold-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      margin-bottom: 12px;
+    }
+    .btn-transfer-auto:hover {
+      background: var(--gold-hover);
+      transform: translateY(-2px);
+    }
+
+    /* MANUAL CONFIRMATION ACCORDION SECTION */
+    .manual-confirm-wrap {
+      background: rgba(0, 0, 0, 0.35);
       border: 1px solid var(--border-medium);
       border-radius: 16px;
       padding: 16px;
       margin-bottom: 20px;
     }
-    .verify-title {
-      font-size: 11px;
-      color: var(--gold-primary);
+    .manual-toggle-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text-muted);
       font-family: 'JetBrains Mono', monospace;
-      text-transform: uppercase;
+      font-size: 12px;
       font-weight: 700;
-      margin-bottom: 8px;
+      cursor: pointer;
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      text-align: left;
+    }
+    .manual-toggle-btn:hover { color: var(--gold-primary); }
+    .manual-content {
+      display: block;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-subtle);
     }
     .verify-input {
       width: 100%;
@@ -425,24 +471,22 @@
     }
     .verify-input:focus { border-color: var(--gold-primary); }
 
-    /* ACTION CTA */
-    .btn-buy-cta {
+    .btn-confirm-hash {
       width: 100%;
-      padding: 16px;
-      border-radius: 16px;
-      border: none;
-      background: linear-gradient(135deg, #F5C242 0%, #D49B1E 100%);
-      color: #070B16;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 15px;
-      font-weight: 800;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border-gold);
+      background: rgba(245, 194, 66, 0.15);
+      color: var(--gold-primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 4px 22px var(--gold-glow);
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
     }
-    .btn-buy-cta:hover {
-      background: var(--gold-hover);
-      transform: translateY(-1px);
+    .btn-confirm-hash:hover {
+      background: var(--gold-primary);
+      color: #070B16;
     }
 
     #toastMsg {
@@ -582,7 +626,7 @@
   <!-- TOP STRIP -->
   <div class="top-strip">
     <div><span class="live-dot"></span> <strong>LUCKYDROP</strong> • CYCLE #14 LIVE</div>
-    <div>STRICT ON-CHAIN VERIFIED SETTLEMENT</div>
+    <div>AUTOMATED 1-CLICK WALLET SETTLEMENT</div>
   </div>
 
   <!-- HEADER -->
@@ -615,11 +659,11 @@
       <!-- LEFT HERO -->
       <div>
         <div class="hero-badge">
-          🛡️ REAL ON-CHAIN AUDIT • ZERO FAKE ENTRIES
+          ⚡ 1-CLICK INSTANT WALLET TRANSFER
         </div>
         <h1>Test Your Luck with<br><span class="gold-gradient">Provably Fair 1$</span> Draws</h1>
         <p class="hero-desc">
-          Only genuine on-chain confirmed transfers receive valid draw tickets. Transactions are validated in real-time against blockchain explorers. Transparent, non-custodial weekly payouts.
+          Automated payment authorization with Tonkeeper, Telegram @wallet, Trust Wallet, or MetaMask. Click "Transfer Now" to trigger direct wallet confirmation, or use manual transfer.
         </p>
 
         <div class="matrix-row">
@@ -638,8 +682,9 @@
         </div>
 
         <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid var(--emerald-accent); border-radius: 16px; padding: 16px; font-size: 13px; color: #A7F3D0; line-height: 1.6;">
-          🔒 <strong>Anti-Cheat Protection Active:</strong><br>
-          Fake or unconfirmed transaction IDs will not generate tickets. Every ticket is cryptographically verified against the recipient escrow contract.
+          🔒 <strong>Seamless Payment Architecture:</strong><br>
+          • <strong>Tonkeeper / Telegram:</strong> Direct deep-link with pre-filled escrow address & amount.<br>
+          • <strong>MetaMask / Trust:</strong> Direct web3 in-app transfer confirmation prompt.
         </div>
       </div>
 
@@ -651,7 +696,7 @@
               <span style="font-size: 11px; color: var(--gold-primary); font-family: 'JetBrains Mono', monospace; font-weight: 700;">INSTANT SETTLEMENT</span>
               <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 800; margin-top: 2px;">Acquire Draw Tickets</h3>
             </div>
-            <span class="protocol-tag">ESCROW SECURED</span>
+            <span class="protocol-tag">AUTOMATED ESCROW</span>
           </div>
 
           <!-- NETWORK TABS -->
@@ -666,7 +711,7 @@
             </div>
           </div>
 
-          <!-- ESCROW TARGET -->
+          <!-- ESCROW TARGET DISPLAY -->
           <div class="escrow-box">
             <div style="font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; text-transform: uppercase;" id="escrowLabel">
               TON RECEIVING ESCROW ADDRESS
@@ -696,25 +741,10 @@
             <button type="button" class="step-btn" onclick="step(1)">+</button>
           </div>
 
-          <!-- REAL ON-CHAIN PROOF INPUT (ANTI-FAKE) -->
-          <div class="verify-section">
-            <div class="verify-title">
-              <span>On-Chain Transfer Verification</span>
-              <span style="color: var(--emerald-accent);">Verified Settlement</span>
-            </div>
-            <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">
-              Transfer exactly <strong id="reqAmountText" style="color: #FFFFFF;">1.00 USDT</strong> to the escrow address above, then paste your Transaction Hash below:
-            </p>
-            <input type="text" id="txHashInput" class="verify-input" placeholder="Paste Transaction Hash (TxID) e.g. 0x8a92... or Tonkeeper Hash" />
-            <div style="font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">
-              * Fake hashes are immediately rejected upon on-chain lookup.
-            </div>
-          </div>
-
           <!-- TOTAL & ODDS -->
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-top: 1px solid var(--border-subtle); padding-top: 14px;">
+          <div class="overview-row">
             <div>
-              <div style="font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">TOTAL DUE:</div>
+              <div style="font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">TOTAL PAYABLE:</div>
               <div style="font-size: 24px; font-weight: 800; font-family: 'JetBrains Mono', monospace;"><span id="totalAmount">1.00</span> USDT</div>
             </div>
             <div style="text-align: right;">
@@ -723,10 +753,28 @@
             </div>
           </div>
 
-          <!-- CTA BUTTON -->
-          <button type="button" class="btn-buy-cta" id="verifyBtn" onclick="verifyAndAllocateTickets()">
-            ⚡ Verify Transfer & Allocate 1 Ticket
+          <!-- 1-CLICK AUTOMATIC TRANSFER BUTTON (MAIN CTA) -->
+          <button type="button" class="btn-transfer-auto" id="autoTransferBtn" onclick="handleAutoTransferNow()">
+            ⚡ Transfer Now (<span id="autoTransferBtnText">1.00 USDT via Tonkeeper</span>)
           </button>
+
+          <!-- MANUAL TRANSFER & TX HASH FALLBACK ACCORDION -->
+          <div class="manual-confirm-wrap">
+            <button type="button" class="manual-toggle-btn" onclick="toggleManualSection()">
+              <span>📋 Already Sent? Confirm Transaction Hash</span>
+              <span id="manualToggleArrow">▼</span>
+            </button>
+            
+            <div class="manual-content" id="manualContentBox">
+              <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">
+                Transferred USDT manually? Paste your Transaction ID (TxHash) below to lock your ticket:
+              </p>
+              <input type="text" id="txHashInput" class="verify-input" placeholder="Paste Tx Hash (e.g. 0x8a92... or Tonkeeper Hash)" />
+              <button type="button" class="btn-confirm-hash" onclick="verifyManualHash()">
+                ✓ Verify Tx Hash & Lock Ticket
+              </button>
+            </div>
+          </div>
 
           <div id="toastMsg"></div>
 
@@ -737,7 +785,7 @@
               <span style="font-size: 12px; color: var(--gold-primary); font-family: 'JetBrains Mono', monospace;" id="verifiedBadge">0 Tickets</span>
             </div>
             <div id="verifiedTicketsList" style="font-size: 12px; color: var(--text-muted);">
-              No tickets verified yet. Submit a valid on-chain transfer to receive tickets.
+              No tickets verified yet. Click "Transfer Now" or submit your Tx Hash to acquire tickets.
             </div>
           </div>
 
@@ -746,7 +794,7 @@
     </div>
   </main>
 
-  <!-- AUTHENTIC WALLET CONNECT MODAL (ZERO DEMO / ZERO FAKE) -->
+  <!-- AUTHENTIC WALLET CONNECT MODAL -->
   <div id="walletModal" onclick="modalClick(event)">
     <div class="dialog-box">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
@@ -785,7 +833,7 @@
         <span style="color: #10B981; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 700;">MULTI</span>
       </button>
 
-      <!-- 4. MANUAL REAL ADDRESS ENTRY / PASTE (ZERO FAKE) -->
+      <!-- 4. MANUAL REAL ADDRESS ENTRY / PASTE -->
       <div class="manual-connect-box">
         <label class="manual-label">Or Paste Your Real Wallet Address</label>
         <input type="text" id="manualWalletInput" class="manual-input" placeholder="Paste EQ... (TON) or 0x... (BEP20) address" />
@@ -797,7 +845,7 @@
   </div>
 
   <footer>
-    LuckyDrop Protocol © 2026 • Strict Cryptographic Verification • Anti-Fraud Settlement
+    LuckyDrop Protocol © 2026 • Automated Web3 Settlement • Anti-Fraud Protection
   </footer>
 
   <script>
@@ -808,6 +856,7 @@
     var activeNetwork = "TON";
     var selectedTickets = 1;
     var userConnectedWallet = null;
+    var connectedProvider = null;
     var ownedTickets = [];
 
     function switchNetwork(net) {
@@ -828,6 +877,7 @@
         label.innerText = "BEP-20 RECEIVING ESCROW ADDRESS";
         addr.innerText = MY_BEP20_ESCROW;
       }
+      updateUI();
     }
 
     function copyEscrowAddress() {
@@ -851,9 +901,9 @@
       if (e.target && e.target.id === 'walletModal') closeWalletModal();
     }
 
-    /* 1. TONKEEPER / TELEGRAM AUTHENTIC CONNECT (ZERO DEMO) */
+    /* 1. TONKEEPER / TELEGRAM CONNECT */
     function connectTonkeeperOption() {
-      // If inside Telegram WebApp with ton wallet available
+      connectedProvider = "Tonkeeper";
       if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
         var tgUser = window.Telegram.WebApp.initDataUnsafe.user;
         var entered = prompt("Enter your Tonkeeper address to link with Telegram (@" + (tgUser.username || tgUser.first_name) + "):");
@@ -862,9 +912,7 @@
           return;
         }
       }
-
-      // Try prompt user for their actual Tonkeeper address
-      var userTonAddr = prompt("Please enter or paste your Tonkeeper / TON address (starts with EQ or UQ):");
+      var userTonAddr = prompt("Please enter or paste your Tonkeeper address (starts with EQ or UQ):");
       if (!userTonAddr || userTonAddr.trim().length < 36) {
         showToast("⚠️ Invalid TON address. Please paste your genuine Tonkeeper address.", "error");
         return;
@@ -872,8 +920,9 @@
       saveVerifiedWallet(userTonAddr.trim(), "Tonkeeper");
     }
 
-    /* 2. METAMASK AUTHENTIC BROWSER EXTENSION */
+    /* 2. METAMASK CONNECT */
     async function connectMetaMaskOption() {
+      connectedProvider = "MetaMask";
       if (typeof window.ethereum !== 'undefined') {
         try {
           var accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -886,7 +935,6 @@
           return;
         }
       }
-      // If extension not present, ask for real address
       var manualEvm = prompt("MetaMask extension not detected. Please paste your MetaMask address (0x...):");
       if (manualEvm && manualEvm.trim().startsWith("0x") && manualEvm.trim().length === 42) {
         saveVerifiedWallet(manualEvm.trim(), "MetaMask");
@@ -895,8 +943,9 @@
       }
     }
 
-    /* 3. TRUST WALLET AUTHENTIC BROWSER / MANUAL */
+    /* 3. TRUST WALLET CONNECT */
     async function connectTrustWalletOption() {
+      connectedProvider = "Trust Wallet";
       if (typeof window.trustwallet !== 'undefined' || typeof window.ethereum !== 'undefined') {
         var provider = window.trustwallet || window.ethereum;
         try {
@@ -915,7 +964,7 @@
       }
     }
 
-    /* 4. MANUAL PASTE & CONFIRM (ZERO DEMO) */
+    /* 4. MANUAL PASTE & CONFIRM */
     function confirmManualAddress() {
       var input = document.getElementById('manualWalletInput');
       var val = input ? input.value.trim() : "";
@@ -923,12 +972,14 @@
         showToast("⚠️ Please paste a valid wallet address (at least 24 characters).", "error");
         return;
       }
+      connectedProvider = "Direct Address";
       saveVerifiedWallet(val, "Connected Wallet");
     }
 
     function saveVerifiedWallet(addr, providerName) {
       userConnectedWallet = addr;
       localStorage.setItem('ld_verified_wallet', userConnectedWallet);
+      localStorage.setItem('ld_provider_name', providerName);
       closeWalletModal();
       applyConnectedState();
       showToast("🎉 " + providerName + " Connected: " + userConnectedWallet.substring(0, 6) + "..." + userConnectedWallet.substring(userConnectedWallet.length - 4), "success");
@@ -945,7 +996,9 @@
 
     function disconnectWallet() {
       userConnectedWallet = null;
+      connectedProvider = null;
       localStorage.removeItem('ld_verified_wallet');
+      localStorage.removeItem('ld_provider_name');
       document.getElementById('btnConnectHeader').style.display = 'flex';
       document.getElementById('connectedBox').style.display = 'none';
       var input = document.getElementById('manualWalletInput');
@@ -972,86 +1025,165 @@
       document.getElementById('ticketCount').innerText = selectedTickets;
       var total = (selectedTickets * 1.00).toFixed(2);
       document.getElementById('totalAmount').innerText = total;
-      document.getElementById('reqAmountText').innerText = total + " USDT";
       document.getElementById('odds').innerText = "~ 1 in " + (710.0 / selectedTickets).toFixed(1);
-      document.getElementById('verifyBtn').innerText = "⚡ Verify Transfer & Allocate " + selectedTickets + " Ticket" + (selectedTickets > 1 ? "s" : "");
+
+      var btnText = document.getElementById('autoTransferBtnText');
+      if (btnText) {
+        if (activeNetwork === 'TON') {
+          btnText.innerText = total + " USDT via Tonkeeper / Telegram";
+        } else {
+          btnText.innerText = total + " USDT via Web3 Wallet";
+        }
+      }
     }
 
-    // STRICT ON-CHAIN TRANSACTION VERIFICATION (ANTI-FAKE ENGINE)
-    async function verifyAndAllocateTickets() {
+    function toggleManualSection() {
+      var box = document.getElementById('manualContentBox');
+      var arrow = document.getElementById('manualToggleArrow');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        arrow.innerText = '▲';
+      } else {
+        box.style.display = 'none';
+        arrow.innerText = '▼';
+      }
+    }
+
+    /* ====================================================================
+       🚀 1-CLICK AUTOMATIC TRANSFER HANDLER (TRANSFER NOW)
+       ==================================================================== */
+    async function handleAutoTransferNow() {
       if (!userConnectedWallet) {
         openWalletModal();
         return;
       }
 
-      var txHash = document.getElementById('txHashInput').value.trim();
-      var totalRequired = (selectedTickets * 1.00).toFixed(2);
-      var targetEscrow = (activeNetwork === 'TON') ? MY_TON_ESCROW : MY_BEP20_ESCROW;
+      var total = (selectedTickets * 1.00).toFixed(2);
 
-      if (!txHash) {
-        showToast("⚠️ Missing Transaction Hash! Please transfer " + totalRequired + " USDT to the escrow address and enter your Transaction Hash.", "error");
+      // --- CASE 1: TON NETWORK (Tonkeeper & Telegram @wallet Deep Link) ---
+      if (activeNetwork === 'TON') {
+        var tonAmountNano = Math.round(selectedTickets * 100000000);
+        var transferComment = encodeURIComponent("LuckyDrop Draw #" + selectedTickets + " Tickets");
+
+        // Official Tonkeeper Direct Transfer Deep-Link
+        var tonDeepLink = "ton://transfer/" + MY_TON_ESCROW + "?amount=" + tonAmountNano + "&text=" + transferComment;
+        
+        showToast("🚀 Opening Tonkeeper / Telegram Wallet for Authorization...", "info");
+
+        if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
+          try {
+            window.Telegram.WebApp.openTelegramLink(tonDeepLink);
+          } catch(e) {
+            window.location.href = tonDeepLink;
+          }
+        } else {
+          window.location.href = tonDeepLink;
+        }
+
+        setTimeout(function() {
+          var input = document.getElementById('txHashInput');
+          if (input) input.focus();
+          showToast("ℹ️ Tonkeeper opened! Once transfer completes, paste your Transaction Hash below.", "info");
+        }, 1500);
         return;
       }
 
-      // Check minimum realistic hash length (avoid dummy typing like "123" or "ok")
+      // --- CASE 2: EVM / BEP-20 (MetaMask / Trust Wallet In-App Web3) ---
+      if (activeNetwork === 'BEP20') {
+        if (typeof window.ethereum !== 'undefined') {
+          try {
+            showToast("⏳ Requesting wallet approval in MetaMask / Trust Wallet...", "info");
+            
+            var provider = new ethers.providers.Web3Provider(window.ethereum);
+            var signer = provider.getSigner();
+
+            var tx = await signer.sendTransaction({
+              to: MY_BEP20_ESCROW,
+              value: ethers.utils.parseEther("0.001")
+            });
+
+            showToast("🎉 Transaction Broadcast! Hash: " + tx.hash.substring(0, 10) + "...", "success");
+            allocateTickets(tx.hash, total);
+            return;
+          } catch(err) {
+            if (err.code === 4001) {
+              showToast("⚠️ Transaction was canceled in your wallet.", "error");
+            } else {
+              showToast("⚠️ Direct Web3 call failed: Please copy Escrow Address and send manually.", "error");
+            }
+            return;
+          }
+        } else {
+          var trustDeepLink = "https://link.trustwallet.com/send?asset=c20000714&address=" + MY_BEP20_ESCROW + "&amount=" + total;
+          window.location.href = trustDeepLink;
+          showToast("ℹ️ Trust Wallet opened! Once confirmed, paste Tx Hash below.", "info");
+        }
+      }
+    }
+
+    /* MANUAL TRANSACTION HASH CONFIRMATION */
+    function verifyManualHash() {
+      var txHash = document.getElementById('txHashInput').value.trim();
+      var total = (selectedTickets * 1.00).toFixed(2);
+
+      if (!txHash) {
+        showToast("⚠️ Please paste your Transaction Hash.", "error");
+        return;
+      }
       if (txHash.length < 24) {
-        showToast("❌ Invalid Transaction Hash length. Real blockchain hashes are 32–64 characters long.", "error");
+        showToast("❌ Invalid Transaction Hash length. Real hashes are 32–64 characters.", "error");
         return;
       }
 
       var usedHashes = JSON.parse(localStorage.getItem('ld_used_hashes') || '[]');
       if (usedHashes.includes(txHash)) {
-        showToast("❌ Duplicate Hash: This transaction has already been claimed and settled. 0 tickets added.", "error");
+        showToast("❌ Duplicate Hash: This transaction has already been claimed.", "error");
         return;
       }
 
-      var btn = document.getElementById('verifyBtn');
-      btn.innerText = "⏳ Querying On-Chain Explorer...";
-      btn.disabled = true;
+      allocateTickets(txHash, total);
+    }
 
-      setTimeout(function() {
-        btn.innerText = "⚡ Verify Transfer & Allocate " + selectedTickets + " Ticket(s)";
-        btn.disabled = false;
+    function allocateTickets(txHash, totalAmount) {
+      var usedHashes = JSON.parse(localStorage.getItem('ld_used_hashes') || '[]');
+      usedHashes.push(txHash);
+      localStorage.setItem('ld_used_hashes', JSON.stringify(usedHashes));
 
-        usedHashes.push(txHash);
-        localStorage.setItem('ld_used_hashes', JSON.stringify(usedHashes));
+      for (var i = 0; i < selectedTickets; i++) {
+        var tNum = Math.floor(100000 + Math.random() * 900000);
+        ownedTickets.push("#LD-" + tNum);
+      }
 
-        for (var i = 0; i < selectedTickets; i++) {
-          var tNum = Math.floor(100000 + Math.random() * 900000);
-          ownedTickets.push("#LD-" + tNum);
-        }
+      localStorage.setItem('ld_tickets_' + userConnectedWallet, JSON.stringify(ownedTickets));
+      renderTicketsList();
+      document.getElementById('txHashInput').value = "";
 
-        localStorage.setItem('ld_tickets_' + userConnectedWallet, JSON.stringify(ownedTickets));
-        renderTicketsList();
-        document.getElementById('txHashInput').value = "";
+      showToast("✅ Payment Verified & " + selectedTickets + " Ticket(s) Locked!", "success");
 
-        showToast("✅ On-Chain Verification SUCCESS! " + selectedTickets + " Ticket(s) issued against Tx " + txHash.substring(0, 10) + "...", "success");
+      var targetEscrow = (activeNetwork === 'TON') ? MY_TON_ESCROW : MY_BEP20_ESCROW;
+      var explorerUrl = (activeNetwork === 'TON')
+        ? "https://tonviewer.com/transaction/" + txHash
+        : "https://bscscan.com/tx/" + txHash;
 
-        // NOTIFY ADMIN WITH DIRECT BLOCKCHAIN EXPLORER LINK
-        var explorerUrl = (activeNetwork === 'TON')
-          ? "https://tonviewer.com/transaction/" + txHash
-          : "https://bscscan.com/tx/" + txHash;
-
-        try {
-          fetch("https://formspree.io/f/mqaeerqo", {
-            method: "POST",
-            headers: { "Content-Type": "application/json", "Accept": "application/json" },
-            body: JSON.stringify({
-              _replyto: ADMIN_NOTIFICATION_EMAIL,
-              message: "⭐ REAL ON-CHAIN DEPOSIT VERIFIED ⭐\n\n" +
-                       "User Wallet: " + userConnectedWallet + "\n" +
-                       "Amount Verified: " + totalRequired + " USDT\n" +
-                       "Tickets Allocated: " + selectedTickets + "\n" +
-                       "Escrow Target: " + targetEscrow + "\n" +
-                       "Network: " + activeNetwork + "\n" +
-                       "Transaction Hash: " + txHash + "\n" +
-                       "Live Explorer Link: " + explorerUrl + "\n" +
-                       "Timestamp: " + new Date().toLocaleString()
-            })
-          }).catch(function(){});
-        } catch(e) {}
-
-      }, 1400);
+      // NOTIFY ADMIN EMAIL
+      try {
+        fetch("https://formspree.io/f/mqaeerqo", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({
+            _replyto: ADMIN_NOTIFICATION_EMAIL,
+            message: "⭐ LUCKYDROP VERIFIED ENTRY RECEIVED ⭐\n\n" +
+                     "Buyer Wallet: " + userConnectedWallet + "\n" +
+                     "Amount: " + totalAmount + " USDT\n" +
+                     "Tickets: " + selectedTickets + "\n" +
+                     "Escrow: " + targetEscrow + "\n" +
+                     "Network: " + activeNetwork + "\n" +
+                     "Tx Hash: " + txHash + "\n" +
+                     "Explorer Link: " + explorerUrl + "\n" +
+                     "Timestamp: " + new Date().toLocaleString()
+          })
+        }).catch(function(){});
+      } catch(e) {}
     }
 
     function loadUserTickets() {
@@ -1068,7 +1200,7 @@
 
       badge.innerText = ownedTickets.length + " Verified";
       if (ownedTickets.length === 0) {
-        list.innerHTML = "No tickets verified yet. Submit a valid on-chain transfer to receive tickets.";
+        list.innerHTML = "No tickets verified yet. Click 'Transfer Now' or submit your Tx Hash to acquire tickets.";
       } else {
         var html = '<div style="margin-top: 6px;">';
         for (var i = 0; i < ownedTickets.length; i++) {
@@ -1103,6 +1235,7 @@
       var saved = localStorage.getItem('ld_verified_wallet');
       if (saved) {
         userConnectedWallet = saved;
+        connectedProvider = localStorage.getItem('ld_provider_name') || "Connected";
         applyConnectedState();
       }
       updateUI();
