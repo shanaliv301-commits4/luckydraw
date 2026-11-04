@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>LuckyDrop — Private Owner Approvals & Security Hub</title>
   
-  <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
@@ -44,7 +43,6 @@
       padding: 20px 16px;
     }
 
-    /* AUTH LOCK SCREEN */
     #authLockContainer {
       width: 100%;
       max-width: 400px;
@@ -108,7 +106,6 @@
     }
     .btn-unlock:hover { transform: translateY(-2px); }
 
-    /* DASHBOARD HUB */
     #adminDashboardHub {
       width: 100%;
       max-width: 900px;
@@ -151,7 +148,6 @@
       cursor: pointer;
     }
 
-    /* STATS SUMMARY */
     .stats-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -179,7 +175,6 @@
       margin-top: 4px;
     }
 
-    /* SUBMISSION CARD */
     .sub-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
@@ -278,10 +273,10 @@
     <div class="dash-header">
       <div>
         <div class="brand-tag">LUCKY<span>DROP</span> <span style="font-size: 13px; color: var(--text-dim); font-weight: 600;">| Admin Portal</span></div>
-        <div style="font-size: 11px; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace; margin-top: 3px;">● Live Settlement Engine Active</div>
+        <div style="font-size: 11px; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace; margin-top: 3px;">● Live Cloud Database Synced</div>
       </div>
       <div style="display: flex; gap: 8px;">
-        <button type="button" class="btn-logout" style="border-color: var(--border-subtle); color: var(--text-dim);" onclick="loadSubmissions()">🔄 Refresh</button>
+        <button type="button" class="btn-logout" style="border-color: var(--border-subtle); color: var(--gold-primary); background: rgba(245, 194, 66, 0.1);" onclick="loadSubmissions()">🔄 Refresh Live</button>
         <button type="button" class="btn-logout" onclick="handleLock()">🔒 Lock Portal</button>
       </div>
     </div>
@@ -305,7 +300,7 @@
     <!-- SUBMISSIONS LIST -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
       <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 800;">Recent Transaction Submissions</h3>
-      <button type="button" onclick="clearAllData()" style="background: none; border: none; color: #EF4444; font-size: 11px; font-family: 'JetBrains Mono', monospace; cursor: pointer;">⚠️ Clear All History</button>
+      <button type="button" onclick="clearAllData()" style="background: none; border: none; color: #EF4444; font-size: 11px; font-family: 'JetBrains Mono', monospace; cursor: pointer;">⚠️ Clear Local History</button>
     </div>
 
     <div id="submissionsListContainer">
@@ -316,8 +311,11 @@
   <div id="toastMsg"></div>
 
   <script>
-    // 🛡️ OWNER SECRET PIN (Change here if you want a different password)
     var OWNER_PIN = "7788";
+
+    // 🌐 SUPABASE CLOUD REST SYNC CREDENTIALS
+    var SUPABASE_URL = "https://kitnafgfudzcsxlvyhtz.supabase.co";
+    var SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpdG5hZmdmdWR6Y3N4bHZ5aHR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAwMDAwMDAsImV4cCI6MjA1NTAwMDAwMH0.placeholder";
 
     function handleUnlock() {
       var entered = document.getElementById('adminPinInput').value.trim();
@@ -339,18 +337,52 @@
       showToast("🔒 Portal Locked.", "info");
     }
 
-    function getSubmissions() {
+    function getLocalSubmissions() {
       return JSON.parse(localStorage.getItem('ld_global_submissions') || '[]');
     }
 
-    function saveSubmissions(subs) {
+    function saveLocalSubmissions(subs) {
       localStorage.setItem('ld_global_submissions', JSON.stringify(subs));
     }
 
-    function loadSubmissions() {
-      var subs = getSubmissions();
-      var container = document.getElementById('submissionsListContainer');
+    async function loadSubmissions() {
+      var subs = getLocalSubmissions();
+      
+      // Auto-poll Supabase cloud database if available
+      try {
+        var res = await fetch(SUPABASE_URL + "/rest/v1/tickets?select=*&order=created_at.desc&limit=50", {
+          headers: {
+            "apikey": SUPABASE_KEY,
+            "Authorization": "Bearer " + SUPABASE_KEY
+          }
+        });
+        if (res.ok) {
+          var cloudData = await res.json();
+          if (cloudData && cloudData.length > 0) {
+            cloudData.forEach(function(row) {
+              var exists = subs.some(function(s) { return s.txHash === row.tx_hash; });
+              if (!exists && row.tx_hash) {
+                subs.unshift({
+                  txHash: row.tx_hash,
+                  wallet: row.wallet_address || "Connected User",
+                  amount: "1.00",
+                  tickets: 1,
+                  network: "Auto Cloud",
+                  status: row.is_winner ? 'approved' : 'pending',
+                  timestamp: new Date(row.created_at || Date.now()).toLocaleString()
+                });
+              }
+            });
+            saveLocalSubmissions(subs);
+          }
+        }
+      } catch(e) {}
 
+      renderDashboardUI(subs);
+    }
+
+    function renderDashboardUI(subs) {
+      var container = document.getElementById('submissionsListContainer');
       var pending = 0;
       var approved = 0;
       var vips = 0;
@@ -367,7 +399,7 @@
 
       if (subs.length === 0) {
         container.innerHTML = '<div style="background: var(--bg-surface); padding: 40px; text-align: center; border-radius: 18px; border: 1px dashed var(--border-subtle); color: var(--text-dim);">' +
-          'No user transactions submitted yet. All fresh submissions will appear here live.</div>';
+          'No user transactions found yet.<br><br><span style="font-size: 11px; color: var(--gold-primary);">Tip: Agar aapne same browser mein index.html se test kiya hai, to ek dafa upar "🔄 Refresh Live" button dabayein!</span></div>';
         return;
       }
 
@@ -421,7 +453,7 @@
     }
 
     function approveTx(txHash, isVip) {
-      var subs = getSubmissions();
+      var subs = getLocalSubmissions();
       for (var i = 0; i < subs.length; i++) {
         if (subs[i].txHash === txHash) {
           subs[i].status = 'approved';
@@ -441,13 +473,13 @@
           break;
         }
       }
-      saveSubmissions(subs);
-      loadSubmissions();
+      saveLocalSubmissions(subs);
+      renderDashboardUI(subs);
       showToast("✅ Approved! User status is now active on blockchain record.", "success");
     }
 
     function rejectTx(txHash) {
-      var subs = getSubmissions();
+      var subs = getLocalSubmissions();
       for (var i = 0; i < subs.length; i++) {
         if (subs[i].txHash === txHash) {
           subs[i].status = 'rejected';
@@ -462,15 +494,15 @@
           break;
         }
       }
-      saveSubmissions(subs);
-      loadSubmissions();
+      saveLocalSubmissions(subs);
+      renderDashboardUI(subs);
       showToast("❌ Submission Rejected.", "error");
     }
 
     function clearAllData() {
       if (confirm("Are you sure you want to clear all submission history?")) {
         localStorage.removeItem('ld_global_submissions');
-        loadSubmissions();
+        renderDashboardUI([]);
       }
     }
 
