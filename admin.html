@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>LuckyDrop — Private Owner Approvals & Security Hub</title>
+  
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-base: #060913;
+      --bg-surface: #0E1626;
+      --bg-card: #141E34;
+      --gold-primary: #F5C242;
+      --gold-glow: rgba(245, 194, 66, 0.35);
+      --emerald-accent: #10B981;
+      --red-accent: #EF4444;
+      --purple-vip: #A855F7;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-gold: rgba(245, 194, 66, 0.4);
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-base);
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(245, 194, 66, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 80% 30%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+        linear-gradient(180deg, #060913 0%, #0A1020 100%);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 16px;
+    }
+
+    /* AUTH LOCK SCREEN */
+    #authLockContainer {
+      width: 100%;
+      max-width: 400px;
+      margin-top: 10vh;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-gold);
+      border-radius: 24px;
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(20px);
+    }
+
+    .shield-badge {
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      background: rgba(245, 194, 66, 0.12);
+      border: 1px solid var(--border-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      margin: 0 auto 16px auto;
+      box-shadow: 0 0 25px var(--gold-glow);
+    }
+
+    .pin-input {
+      width: 100%;
+      background: #070C18;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 26px;
+      letter-spacing: 12px;
+      color: var(--gold-primary);
+      outline: none;
+      margin: 18px 0;
+      transition: all 0.2s ease;
+    }
+    .pin-input:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 15px var(--gold-glow);
+    }
+
+    .btn-unlock {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      border: none;
+      background: linear-gradient(135deg, #F5C242 0%, #D49B1E 100%);
+      color: #070B16;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 6px 20px var(--gold-glow);
+      transition: all 0.2s ease;
+    }
+    .btn-unlock:hover { transform: translateY(-2px); }
+
+    /* DASHBOARD HUB */
+    #adminDashboardHub {
+      width: 100%;
+      max-width: 900px;
+      display: none;
+      animation: fadeIn 0.3s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dash-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-gold);
+      border-radius: 20px;
+      padding: 18px 24px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(20px);
+    }
+
+    .brand-tag {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+    }
+    .brand-tag span { color: var(--gold-primary); }
+
+    .btn-logout {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid var(--red-accent);
+      color: var(--red-accent);
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* STATS SUMMARY */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .stat-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+    }
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .stat-val {
+      font-size: 24px;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 4px;
+    }
+
+    /* SUBMISSION CARD */
+    .sub-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 14px;
+      transition: all 0.2s ease;
+    }
+    .sub-card.vip-border { border-color: rgba(168, 85, 247, 0.45); }
+    .sub-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .sub-details {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 12px;
+      border-radius: 12px;
+      margin: 10px 0;
+      word-break: break-all;
+    }
+    .explorer-link {
+      color: #38BDF8;
+      text-decoration: none;
+      font-size: 11.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 6px;
+    }
+
+    .action-btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .btn-act {
+      flex: 1;
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .btn-act.approve { background: #10B981; color: #070B16; }
+    .btn-act.approve:hover { background: #059669; }
+    .btn-act.reject { background: rgba(239, 68, 68, 0.2); color: #EF4444; border: 1px solid #EF4444; }
+    .btn-act.reject:hover { background: #EF4444; color: #FFFFFF; }
+
+    #toastMsg {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #141E34;
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-primary);
+      padding: 12px 24px;
+      border-radius: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      display: none;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      z-index: 99999;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. AUTH LOCK SCREEN -->
+  <div id="authLockContainer">
+    <div class="shield-badge">🛡️</div>
+    <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 800;">Owner Authentication</h2>
+    <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px; line-height: 1.5;">
+      Authorized personnel only. Enter your private 4-digit security PIN:
+    </p>
+
+    <input type="password" id="adminPinInput" class="pin-input" placeholder="••••" maxlength="4" />
+    <button type="button" class="btn-unlock" onclick="handleUnlock()">🔓 Unlock Approvals Hub</button>
+  </div>
+
+  <!-- 2. ADMIN DASHBOARD HUB -->
+  <div id="adminDashboardHub">
+    <div class="dash-header">
+      <div>
+        <div class="brand-tag">LUCKY<span>DROP</span> <span style="font-size: 13px; color: var(--text-dim); font-weight: 600;">| Admin Portal</span></div>
+        <div style="font-size: 11px; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace; margin-top: 3px;">● Live Settlement Engine Active</div>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button type="button" class="btn-logout" style="border-color: var(--border-subtle); color: var(--text-dim);" onclick="loadSubmissions()">🔄 Refresh</button>
+        <button type="button" class="btn-logout" onclick="handleLock()">🔒 Lock Portal</button>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="stat-label">Pending Approval</div>
+        <div class="stat-val" style="color: #FBBF24;" id="statPendingCount">0</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Verified & Active</div>
+        <div class="stat-val" style="color: #10B981;" id="statApprovedCount">0</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">VIP Passes</div>
+        <div class="stat-val" style="color: #C084FC;" id="statVipCount">0</div>
+      </div>
+    </div>
+
+    <!-- SUBMISSIONS LIST -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+      <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 800;">Recent Transaction Submissions</h3>
+      <button type="button" onclick="clearAllData()" style="background: none; border: none; color: #EF4444; font-size: 11px; font-family: 'JetBrains Mono', monospace; cursor: pointer;">⚠️ Clear All History</button>
+    </div>
+
+    <div id="submissionsListContainer">
+      <!-- Populated via JS -->
+    </div>
+  </div>
+
+  <div id="toastMsg"></div>
+
+  <script>
+    // 🛡️ OWNER SECRET PIN (Change here if you want a different password)
+    var OWNER_PIN = "7788";
+
+    function handleUnlock() {
+      var entered = document.getElementById('adminPinInput').value.trim();
+      if (entered === OWNER_PIN) {
+        document.getElementById('authLockContainer').style.display = 'none';
+        document.getElementById('adminDashboardHub').style.display = 'block';
+        loadSubmissions();
+        showToast("🔓 Welcome, Owner! Admin hub unlocked.", "success");
+      } else {
+        showToast("❌ Access Denied: Incorrect PIN!", "error");
+        document.getElementById('adminPinInput').value = "";
+      }
+    }
+
+    function handleLock() {
+      document.getElementById('adminPinInput').value = "";
+      document.getElementById('authLockContainer').style.display = 'block';
+      document.getElementById('adminDashboardHub').style.display = 'none';
+      showToast("🔒 Portal Locked.", "info");
+    }
+
+    function getSubmissions() {
+      return JSON.parse(localStorage.getItem('ld_global_submissions') || '[]');
+    }
+
+    function saveSubmissions(subs) {
+      localStorage.setItem('ld_global_submissions', JSON.stringify(subs));
+    }
+
+    function loadSubmissions() {
+      var subs = getSubmissions();
+      var container = document.getElementById('submissionsListContainer');
+
+      var pending = 0;
+      var approved = 0;
+      var vips = 0;
+
+      for (var i = 0; i < subs.length; i++) {
+        if (subs[i].status === 'pending' || subs[i].status === 'pending_vip') pending++;
+        if (subs[i].status === 'approved') approved++;
+        if (subs[i].tickets === 'VIP' || subs[i].status === 'pending_vip') vips++;
+      }
+
+      document.getElementById('statPendingCount').innerText = pending;
+      document.getElementById('statApprovedCount').innerText = approved;
+      document.getElementById('statVipCount').innerText = vips;
+
+      if (subs.length === 0) {
+        container.innerHTML = '<div style="background: var(--bg-surface); padding: 40px; text-align: center; border-radius: 18px; border: 1px dashed var(--border-subtle); color: var(--text-dim);">' +
+          'No user transactions submitted yet. All fresh submissions will appear here live.</div>';
+        return;
+      }
+
+      var html = '';
+      for (var j = 0; j < subs.length; j++) {
+        var s = subs[j];
+        var isVip = (s.status === 'pending_vip' || s.tickets === 'VIP');
+        var isPending = (s.status === 'pending' || s.status === 'pending_vip');
+        
+        var explorerUrl = s.network && s.network.indexOf('TON') !== -1
+          ? "https://tonviewer.com/transaction/" + s.txHash
+          : "https://bscscan.com/tx/" + s.txHash;
+
+        var statusBadge = '';
+        if (isPending) {
+          statusBadge = '<span style="background: rgba(251, 191, 36, 0.15); border: 1px solid #FBBF24; color: #FBBF24; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 700;">⏳ PENDING VERIFICATION</span>';
+        } else if (s.status === 'approved') {
+          statusBadge = '<span style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10B981; color: #10B981; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 700;">✓ APPROVED & ACTIVE</span>';
+        } else {
+          statusBadge = '<span style="background: rgba(239, 68, 68, 0.15); border: 1px solid #EF4444; color: #EF4444; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 700;">✕ REJECTED (FAKE/UNPAID)</span>';
+        }
+
+        html += '<div class="sub-card ' + (isVip ? 'vip-border' : '') + '">' +
+          '<div class="sub-header">' +
+            '<div>' +
+              '<strong style="font-size: 15px; color: ' + (isVip ? '#C084FC' : 'var(--gold-primary)') + ';">' + 
+                (isVip ? '👑 VIP MEMBERSHIP (50.00 USDT)' : '🎟️ ' + s.tickets + ' Ticket(s) — ' + s.amount + ' USDT') + 
+              '</strong>' +
+              '<div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">' + s.timestamp + ' • Network: <strong>' + s.network + '</strong></div>' +
+            '</div>' +
+            statusBadge +
+          '</div>' +
+
+          '<div class="sub-details">' +
+            '<div><strong>User Wallet:</strong> ' + s.wallet + '</div>' +
+            '<div style="margin-top: 4px;"><strong>Tx Hash:</strong> ' + s.txHash + '</div>' +
+            '<a href="' + explorerUrl + '" target="_blank" class="explorer-link">🔍 View Transaction on Blockchain Explorer ↗</a>' +
+          '</div>';
+
+        if (isPending) {
+          html += '<div class="action-btn-group">' +
+            '<button type="button" class="btn-act approve" onclick="approveTx(\'' + s.txHash + '\', ' + isVip + ')">✓ ' + (isVip ? 'Activate VIP Access' : 'Approve & Lock Tickets') + '</button>' +
+            '<button type="button" class="btn-act reject" onclick="rejectTx(\'' + s.txHash + '\')">✕ Reject (Unpaid)</button>' +
+          '</div>';
+        }
+
+        html += '</div>';
+      }
+
+      container.innerHTML = html;
+    }
+
+    function approveTx(txHash, isVip) {
+      var subs = getSubmissions();
+      for (var i = 0; i < subs.length; i++) {
+        if (subs[i].txHash === txHash) {
+          subs[i].status = 'approved';
+          
+          if (isVip) {
+            localStorage.setItem('ld_is_vip_' + subs[i].wallet, 'true');
+          } else {
+            var userKey = 'ld_tickets_' + subs[i].wallet;
+            var userTickets = JSON.parse(localStorage.getItem(userKey) || '[]');
+            for (var t = 0; t < userTickets.length; t++) {
+              if (userTickets[t].txHash === txHash) {
+                userTickets[t].status = 'verified';
+              }
+            }
+            localStorage.setItem(userKey, JSON.stringify(userTickets));
+          }
+          break;
+        }
+      }
+      saveSubmissions(subs);
+      loadSubmissions();
+      showToast("✅ Approved! User status is now active on blockchain record.", "success");
+    }
+
+    function rejectTx(txHash) {
+      var subs = getSubmissions();
+      for (var i = 0; i < subs.length; i++) {
+        if (subs[i].txHash === txHash) {
+          subs[i].status = 'rejected';
+          var userKey = 'ld_tickets_' + subs[i].wallet;
+          var userTickets = JSON.parse(localStorage.getItem(userKey) || '[]');
+          for (var t = 0; t < userTickets.length; t++) {
+            if (userTickets[t].txHash === txHash) {
+              userTickets[t].status = 'rejected';
+            }
+          }
+          localStorage.setItem(userKey, JSON.stringify(userTickets));
+          break;
+        }
+      }
+      saveSubmissions(subs);
+      loadSubmissions();
+      showToast("❌ Submission Rejected.", "error");
+    }
+
+    function clearAllData() {
+      if (confirm("Are you sure you want to clear all submission history?")) {
+        localStorage.removeItem('ld_global_submissions');
+        loadSubmissions();
+      }
+    }
+
+    function showToast(msg, type) {
+      var t = document.getElementById('toastMsg');
+      t.innerText = msg;
+      t.style.display = 'block';
+      if (type === 'error') {
+        t.style.borderColor = '#EF4444';
+        t.style.color = '#EF4444';
+      } else if (type === 'success') {
+        t.style.borderColor = '#10B981';
+        t.style.color = '#10B981';
+      } else {
+        t.style.borderColor = 'var(--gold-primary)';
+        t.style.color = 'var(--gold-primary)';
+      }
+      setTimeout(function() { t.style.display = 'none'; }, 4000);
+    }
+  </script>
+</body>
+</html>
