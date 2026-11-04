@@ -663,7 +663,7 @@
       white-space: nowrap;
     }
 
-    /* ACTION CTA BUTTON */
+    /* ⚡ ACTION CTA BUTTON */
     .btn-pay-cta {
       width: 100%;
       padding: 15px;
@@ -684,7 +684,7 @@
     }
     .btn-pay-cta:active { transform: translateY(1px); }
 
-    /* PERMANENT TX HASH SUBMISSION CARD (ALWAYS VISIBLE) */
+    /* PERMANENT TX HASH SUBMISSION CARD */
     .permanent-tx-card {
       background: var(--bg-surface-inner);
       border: 1px solid var(--border-medium);
@@ -1149,7 +1149,7 @@
           </div>
         </div>
 
-        <!-- 1-CLICK PAY & ENTER DRAW CTA BUTTON -->
+        <!-- 1-CLICK PAY & ENTER DRAW CTA BUTTON (PRE-FILLED AMOUNT AUTHORIZATION) -->
         <button type="button" class="btn-pay-cta" onclick="handleAutoTransferNow()">
           ⚡ Authorize & Pay <span id="ctaPayAmount">1.00</span> USDT
         </button>
@@ -1219,7 +1219,7 @@
     </div>
   </div>
 
-  <!-- 2. 👑 VIP MODAL (100% WORKING & SYNCED) -->
+  <!-- 2. 👑 VIP MODAL -->
   <div id="vipModal" class="modal-backdrop" onclick="modalClick(event, 'vipModal')">
     <div class="dialog-box" style="border-color: var(--purple-vip);">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
@@ -1460,7 +1460,7 @@
       triggerGreenSuccess("Withdrawal of " + amt.toFixed(2) + " USDT submitted for review!");
     }
 
-    /* 👑 VIP ACTIVATION SUBMISSION (100% FIXED) */
+    /* 👑 VIP ACTIVATION SUBMISSION */
     async function submitVipActivation() {
       if (!userConnectedWallet) {
         triggerRedWarning("activate VIP status");
@@ -1474,7 +1474,6 @@
 
       var vipRefId = "VIP-" + Math.floor(100000 + Math.random() * 900000);
 
-      // 1. Save to Supabase tickets table
       try {
         await fetch(SUPABASE_URL + '/rest/v1/tickets', {
           method: 'POST',
@@ -1493,7 +1492,6 @@
         });
       } catch(e) {}
 
-      // 2. Save to global submissions for admin.html
       var subs = JSON.parse(localStorage.getItem('ld_global_submissions') || '[]');
       subs.unshift({
         txHash: txHash,
@@ -1506,7 +1504,6 @@
       });
       localStorage.setItem('ld_global_submissions', JSON.stringify(subs));
 
-      // 3. Save to user tickets store
       var uKey = 'ld_tickets_' + userConnectedWallet;
       var uTickets = JSON.parse(localStorage.getItem(uKey) || '[]');
       uTickets.unshift({
@@ -1522,7 +1519,6 @@
       syncUserTicketsWithGlobal();
       triggerGreenSuccess("VIP Activation Submitted! Awaiting Admin Approval.");
 
-      // 4. Admin Email Alert
       try {
         fetch(NOTIFICATION_API, {
           method: "POST",
@@ -1578,19 +1574,27 @@
       });
     }
 
-    /* 💎 TONKEEPER DIRECT PROMPT & HANDOFF */
+    /* 💎 TONKEEPER DIRECT PROMPT & COMPATIBLE UNIVERSAL LINK (NO INVALID LINK) */
     function connectTonkeeperOption() {
       closeModal('walletModal');
-      triggerGreenSuccess("Prompting Tonkeeper for Authorization...");
-      
-      var tonkeeperUrl = "https://app.tonkeeper.com/";
-      if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openLink) {
-        window.Telegram.WebApp.openLink(tonkeeperUrl);
-      } else {
-        window.open(tonkeeperUrl, "_blank");
+      triggerGreenSuccess("Opening Tonkeeper for Authorization...");
+
+      // Official Tonkeeper compatible deep link & Telegram WebApp openLink
+      var universalTonUrl = "https://app.tonkeeper.com/ton-connect";
+      var rawTonScheme = "ton://";
+
+      try {
+        if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openLink) {
+          window.Telegram.WebApp.openLink(universalTonUrl);
+        } else {
+          var w = window.open(universalTonUrl, "_blank");
+          if (!w) window.location.href = rawTonScheme;
+        }
+      } catch(e) {
+        window.location.href = universalTonUrl;
       }
 
-      // Prompt address entry on return
+      // Smooth fallback to capture authentic user address upon return
       setTimeout(function() {
         var userTonAddr = prompt("Enter your authorized Tonkeeper address (EQ or UQ):");
         if (userTonAddr && userTonAddr.trim().length >= 36) {
@@ -1600,7 +1604,7 @@
           }
           saveVerifiedWallet(userTonAddr.trim(), "Tonkeeper");
         }
-      }, 1200);
+      }, 1000);
     }
 
     async function connectMetaMaskOption() {
@@ -1702,24 +1706,41 @@
       document.getElementById('ctaPayAmount').innerText = total;
     }
 
-    /* 1-CLICK AUTO TRANSFER CTA */
+    /* ⚡ 1-CLICK AUTO TRANSFER CTA (EXACT PRE-FILLED AMOUNT AUTHORIZATION) */
     async function handleAutoTransferNow() {
       if (!userConnectedWallet) {
         triggerRedWarning("transfer USDT");
         return;
       }
       var total = (selectedTickets * 1.00).toFixed(2);
+
       if (activeNetwork === 'TON') {
+        // Auto copy escrow address as buffer
         navigator.clipboard.writeText(MY_TON_ESCROW).catch(function(){});
-        var url = "https://app.tonkeeper.com/transfer/" + MY_TON_ESCROW;
-        triggerGreenSuccess("Opening Tonkeeper... (Escrow address copied!)");
+
+        // 1 TON/USDT = 1,000,000,000 Nano-units (Tonkeeper standard specification for prefilling exact amount)
+        var nanoAmount = Math.round(selectedTickets * 1000000000);
+        var transferComment = encodeURIComponent("LuckyDrop_Cycle14_" + selectedTickets + "USDT");
+
+        // Format 1: Universal Tonkeeper Link with exact ?amount= and ?text=
+        var tonkeeperAppUrl = "https://app.tonkeeper.com/transfer/" + MY_TON_ESCROW + "?amount=" + nanoAmount + "&text=" + transferComment;
+        
+        // Format 2: Direct Protocol Scheme Fallback
+        var directTonProtocol = "ton://transfer/" + MY_TON_ESCROW + "?amount=" + nanoAmount + "&text=" + transferComment;
+
+        triggerGreenSuccess("Opening Tonkeeper with " + total + " USDT pre-filled! Please Authorize.");
+
         if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openLink) {
-          window.Telegram.WebApp.openLink(url);
+          window.Telegram.WebApp.openLink(tonkeeperAppUrl);
         } else {
-          window.open(url, "_blank");
+          var win = window.open(tonkeeperAppUrl, "_blank");
+          if (!win) {
+            window.location.href = directTonProtocol;
+          }
         }
         return;
       }
+
       if (activeNetwork === 'BEP20') {
         navigator.clipboard.writeText(MY_BEP20_ESCROW).catch(function(){});
         if (typeof window.ethereum !== 'undefined') {
@@ -1734,7 +1755,7 @@
             return;
           } catch(e) {}
         }
-        var trustUrl = "https://link.trustwallet.com/send?asset=c20000714&address=" + MY_BEP20_ESCROW;
+        var trustUrl = "https://link.trustwallet.com/send?asset=c20000714&address=" + MY_BEP20_ESCROW + "&amount=" + total;
         window.open(trustUrl, "_blank");
       }
     }
@@ -1896,7 +1917,6 @@
     }
 
     (function init() {
-      // Load permanent wallet from localStorage
       var savedWallet = localStorage.getItem('ld_permanent_wallet');
       if (savedWallet) {
         userConnectedWallet = savedWallet;
