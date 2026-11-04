@@ -4,21 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>LuckyDrop Protocol — Provably Fair 1$ USDT Draws | Telegram Mini App</title>
-  
+
+  <!-- External SDKs -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
-  <!-- 🌐 SUPABASE OFFICIAL JS SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- Typography -->
+  <!-- Google Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
-  
+
   <style>
     :root {
       --bg-base: #070B16;
-      --bg-surface: rgba(15, 23, 42, 0.85);
+      --bg-surface: rgba(15, 23, 42, 0.88);
       --bg-surface-inner: rgba(7, 12, 24, 0.95);
       --gold-primary: #F5C242;
       --gold-hover: #E5B232;
@@ -38,11 +38,11 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    
+
     body {
       background-color: var(--bg-base);
       background-image: 
-        radial-gradient(circle at 50% -10%, rgba(245, 194, 66, 0.14) 0%, transparent 60%),
+        radial-gradient(circle at 50% -10%, rgba(245, 194, 66, 0.15) 0%, transparent 60%),
         radial-gradient(circle at 85% 20%, rgba(0, 152, 234, 0.14) 0%, transparent 50%),
         radial-gradient(circle at 10% 45%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
         linear-gradient(180deg, #070B16 0%, #0A1020 50%, #060912 100%);
@@ -55,9 +55,12 @@
       overflow-x: hidden;
     }
 
+    /* 🚨 FLOATING TOP RED WARNING ALERT BAR */
     #topWarningAlert {
       position: fixed;
-      top: 0; left: 0; width: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
       background: linear-gradient(90deg, #991B1B 0%, #DC2626 50%, #991B1B 100%);
       color: #FFFFFF;
       padding: 12px 16px;
@@ -72,6 +75,11 @@
       box-shadow: 0 4px 25px var(--red-glow);
       border-bottom: 2px solid #FCA5A5;
       text-align: center;
+      animation: slideDownAlert 0.25s ease-out;
+    }
+    @keyframes slideDownAlert {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
     }
     .btn-alert-connect {
       background: #FFFFFF;
@@ -86,12 +94,14 @@
       margin-left: 8px;
     }
 
+    /* 🔴 LIVE MARQUEE WINNING TICKER STRIP */
     .top-marquee-strip {
       background: linear-gradient(90deg, #0B1121 0%, #151D33 50%, #0B1121 100%);
       border-bottom: 1px solid var(--border-subtle);
       padding: 7px 0;
       overflow: hidden;
       white-space: nowrap;
+      position: relative;
     }
     .marquee-track {
       display: inline-block;
@@ -100,7 +110,12 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
     }
-    .marquee-track span { display: inline-flex; align-items: center; margin-right: 32px; color: var(--text-muted); }
+    .marquee-track span {
+      display: inline-flex;
+      align-items: center;
+      margin-right: 32px;
+      color: var(--text-muted);
+    }
     .marquee-track strong { color: var(--gold-primary); margin: 0 4px; }
     .marquee-track .win-tag { color: var(--emerald-accent); font-weight: 700; }
     @keyframes tickerAnimation {
@@ -108,9 +123,10 @@
       100% { transform: translateX(-50%); }
     }
 
+    /* HEADER */
     header {
       border-bottom: 1px solid var(--border-subtle);
-      background: rgba(7, 11, 22, 0.9);
+      background: rgba(7, 11, 22, 0.92);
       backdrop-filter: blur(20px);
       position: sticky;
       top: 0;
@@ -126,287 +142,783 @@
       justify-content: space-between;
       gap: 12px;
     }
-    .brand-box { display: flex; align-items: center; gap: 10px; cursor: pointer; flex-shrink: 0; }
+    .brand-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
     .brand-icon {
-      width: 38px; height: 38px; border-radius: 12px;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
       background: linear-gradient(135deg, #F5C242 0%, #D49B1E 100%);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px; color: #070B16; font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #070B16;
+      font-weight: 800;
       box-shadow: 0 4px 18px var(--gold-glow);
     }
     .brand-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 19px; font-weight: 800; letter-spacing: -0.03em;
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
     }
     .brand-title span { color: var(--gold-primary); }
 
-    .header-actions { display: flex; gap: 8px; align-items: center; position: relative; }
+    .header-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      position: relative;
+    }
+
     .btn-vip-header {
-      padding: 8px 12px; border-radius: 12px;
+      padding: 8px 12px;
+      border-radius: 12px;
       border: 1px solid rgba(168, 85, 247, 0.45);
       background: rgba(168, 85, 247, 0.15);
-      color: #C084FC; font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; font-weight: 700; cursor: pointer;
+      color: #C084FC;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
     }
+
     .btn-connect-header {
-      padding: 8px 14px; border-radius: 12px;
+      padding: 8px 14px;
+      border-radius: 12px;
       border: 1px solid var(--border-gold);
       background: rgba(245, 194, 66, 0.14);
-      color: var(--gold-primary); font-family: 'JetBrains Mono', monospace;
-      font-size: 12px; font-weight: 700; cursor: pointer;
+      color: var(--gold-primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
     }
     .btn-connect-header:hover { background: var(--gold-primary); color: #070B16; }
 
     .connected-pill {
-      padding: 7px 12px; border-radius: 12px;
+      padding: 7px 12px;
+      border-radius: 12px;
       background: rgba(16, 185, 129, 0.14);
       border: 1px solid rgba(16, 185, 129, 0.4);
-      color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; font-weight: 700; cursor: pointer; display: none;
+      color: var(--emerald-accent);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      gap: 6px;
     }
 
     .btn-dots-menu {
-      width: 38px; height: 38px; border-radius: 12px;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border-medium);
-      color: #FFFFFF; font-size: 19px; display: flex;
-      align-items: center; justify-content: center; cursor: pointer;
+      color: #FFFFFF;
+      font-size: 19px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-dots-menu:hover, .btn-dots-menu.active {
+      background: rgba(245, 194, 66, 0.15);
+      border-color: var(--gold-primary);
+      color: var(--gold-primary);
     }
 
+    /* DROPDOWN MENU (THREE DOTS) */
     .dots-dropdown {
-      position: absolute; top: 50px; right: 0; width: 250px;
-      background: #0F1626; border: 1px solid var(--border-gold);
-      border-radius: 18px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85);
-      padding: 8px; display: none; flex-direction: column; gap: 4px;
+      position: absolute;
+      top: 50px;
+      right: 0;
+      width: 255px;
+      background: #0F1626;
+      border: 1px solid var(--border-gold);
+      border-radius: 18px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85);
+      padding: 8px;
+      display: none;
+      flex-direction: column;
+      gap: 4px;
       z-index: 10000;
+      backdrop-filter: blur(20px);
+      animation: menuPop 0.15s ease-out;
+    }
+    @keyframes menuPop {
+      from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
     .dropdown-item {
-      display: flex; align-items: center; gap: 10px;
-      padding: 11px 14px; border-radius: 12px; border: none;
-      background: transparent; color: var(--text-main);
-      font-family: 'Space Grotesk', sans-serif; font-size: 13px;
-      font-weight: 600; text-align: left; cursor: pointer; width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px;
+      border-radius: 12px;
+      border: none;
+      background: transparent;
+      color: var(--text-main);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      width: 100%;
     }
-    .dropdown-item:hover { background: rgba(255, 255, 255, 0.06); color: var(--gold-primary); }
+    .dropdown-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--gold-primary);
+    }
+    .dropdown-item.vip-item { color: #C084FC; }
     .dropdown-item.disconnect { color: #F87171; }
+    .dropdown-item.disconnect:hover { background: rgba(239, 68, 68, 0.14); color: #EF4444; }
+    .dropdown-divider { height: 1px; background: var(--border-subtle); margin: 4px 6px; }
 
+    /* MAIN */
     main {
-      flex: 1; max-width: 1240px; margin: 0 auto;
-      padding: 24px 16px; width: 100%;
+      flex: 1;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 24px 16px;
+      width: 100%;
     }
     .hero-layout {
-      display: grid; grid-template-columns: 1.15fr 1fr;
-      gap: 32px; align-items: start;
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 32px;
+      align-items: start;
     }
     @media (max-width: 900px) {
       .hero-layout { grid-template-columns: 1fr; gap: 20px; }
       main { padding: 16px 12px; }
     }
 
+    /* LEFT HERO */
     .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 14px; border-radius: 30px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 30px;
       background: linear-gradient(90deg, rgba(245, 194, 66, 0.16) 0%, rgba(0, 152, 234, 0.1) 100%);
-      border: 1px solid var(--border-gold); color: var(--gold-primary);
-      font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 700; margin-bottom: 12px;
+      border: 1px solid var(--border-gold);
+      color: var(--gold-primary);
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      margin-bottom: 12px;
     }
     h1 {
-      font-family: 'Space Grotesk', sans-serif; font-size: 38px;
-      font-weight: 800; line-height: 1.15; letter-spacing: -0.035em; margin-bottom: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+      margin-bottom: 10px;
     }
     @media (max-width: 600px) { h1 { font-size: 29px; } }
     .gold-gradient {
       background: linear-gradient(135deg, #FFF0B3 0%, #F5C242 50%, #D49B1E 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    p.hero-desc { color: var(--text-muted); font-size: 13.5px; line-height: 1.6; margin-bottom: 18px; max-width: 520px; }
+    p.hero-desc {
+      color: var(--text-muted);
+      font-size: 13.5px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+      max-width: 520px;
+    }
 
+    /* BALANCE & DAILY CHECK-IN */
     .wallet-balance-card {
-      background: rgba(15, 23, 42, 0.75); border: 1px solid var(--border-gold);
-      border-radius: 18px; padding: 16px 18px; margin-bottom: 18px;
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid var(--border-gold);
+      border-radius: 18px;
+      padding: 16px 18px;
+      margin-bottom: 18px;
+      backdrop-filter: blur(16px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
     }
     .balance-group { display: flex; gap: 16px; }
-    .bal-sub { font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
-    .bal-val { font-size: 18px; font-family: 'JetBrains Mono', monospace; font-weight: 800; color: #FFFFFF; margin-top: 2px; }
+    .bal-sub {
+      font-size: 10px;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+    }
+    .bal-val {
+      font-size: 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-top: 2px;
+    }
     .btn-claim-daily {
-      padding: 9px 15px; border-radius: 12px; border: 1px solid var(--border-gold);
+      padding: 9px 15px;
+      border-radius: 12px;
+      border: 1px solid var(--border-gold);
       background: linear-gradient(135deg, rgba(245, 194, 66, 0.25) 0%, rgba(212, 155, 30, 0.15) 100%);
-      color: var(--gold-primary); font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; font-weight: 800; cursor: pointer;
+      color: var(--gold-primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .btn-claim-daily:hover { background: var(--gold-primary); color: #070B16; }
+    .btn-claim-daily.claimed {
+      opacity: 0.5;
+      cursor: not-allowed;
+      border-color: var(--border-subtle);
+      color: var(--text-dim);
+      background: rgba(255, 255, 255, 0.05);
     }
 
-    .matrix-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; }
+    /* STATS MATRIX */
+    .matrix-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
     .matrix-card {
-      background: var(--bg-surface); border: 1px solid var(--border-subtle);
-      border-radius: 16px; padding: 12px 14px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 12px 14px;
+      backdrop-filter: blur(12px);
     }
-    .m-title { font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
-    .m-value { font-size: 18px; font-weight: 800; color: #FFFFFF; font-family: 'JetBrains Mono', monospace; margin-top: 4px; }
+    .m-title {
+      font-size: 10px;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .m-value {
+      font-size: 18px;
+      font-weight: 800;
+      color: #FFFFFF;
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 4px;
+    }
 
+    /* REFERRAL BAR */
     .compact-ref-bar {
-      display: flex; align-items: center; justify-content: space-between; gap: 10px;
-      background: rgba(15, 23, 42, 0.65); border: 1px solid var(--border-subtle);
-      border-radius: 16px; padding: 12px 16px; margin-bottom: 18px; flex-wrap: wrap;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 12px 16px;
+      margin-bottom: 18px;
+      backdrop-filter: blur(16px);
+      flex-wrap: wrap;
     }
     .btn-pill-ref {
-      padding: 7px 13px; border-radius: 10px; border: 1px solid var(--border-gold);
-      background: rgba(245, 194, 66, 0.16); color: var(--gold-primary);
-      font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; cursor: pointer;
+      padding: 7px 13px;
+      border-radius: 10px;
+      border: 1px solid var(--border-gold);
+      background: rgba(245, 194, 66, 0.16);
+      color: var(--gold-primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
     }
     .btn-pill-share {
-      padding: 7px 13px; border-radius: 10px; border: 1px solid rgba(0, 152, 234, 0.4);
-      background: rgba(0, 152, 234, 0.16); color: #38BDF8;
-      font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; cursor: pointer;
+      padding: 7px 13px;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 152, 234, 0.4);
+      background: rgba(0, 152, 234, 0.16);
+      color: #38BDF8;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
     }
 
+    /* 🏆 COMPLETE 10-TIER PRIZE MATRIX SECTION (2,500 USDT) */
     .weekly-results-card {
-      background: var(--bg-surface); border: 1px solid var(--border-subtle);
-      border-radius: 20px; padding: 18px; margin-bottom: 20px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 18px;
+      backdrop-filter: blur(16px);
+      margin-bottom: 20px;
     }
+    .res-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .winner-grid-10 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    @media (max-width: 600px) { .winner-grid-10 { grid-template-columns: 1fr; } }
     .winner-item {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 9px 12px; border-radius: 12px; background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.04); margin-bottom: 6px;
-      font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+    }
+    .winner-rank { font-weight: 700; display: inline-flex; align-items: center; gap: 5px; }
+
+    /* RIGHT TICKET DESK */
+    .desk-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-medium);
+      border-radius: 24px;
+      padding: 24px;
+      backdrop-filter: blur(24px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+    }
+    .desk-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .protocol-tag {
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: var(--emerald-accent);
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
     }
 
-    .desk-card {
-      background: var(--bg-surface); border: 1px solid var(--border-medium);
-      border-radius: 24px; padding: 24px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+    .net-matrix {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 16px;
     }
-    .net-matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
     .net-tab {
-      padding: 10px; border-radius: 12px; border: 1px solid var(--border-subtle);
-      background: var(--bg-surface-inner); cursor: pointer; text-align: center;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface-inner);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
     }
-    .net-tab.active { border-color: var(--gold-primary); background: rgba(245, 194, 66, 0.12); }
+    .net-tab.active {
+      border-color: var(--gold-primary);
+      background: rgba(245, 194, 66, 0.12);
+    }
 
     .escrow-box {
-      background: var(--bg-surface-inner); border: 1px solid var(--border-gold);
-      border-radius: 14px; padding: 12px; margin-bottom: 18px;
+      background: var(--bg-surface-inner);
+      border: 1px solid var(--border-gold);
+      border-radius: 14px;
+      padding: 12px;
+      margin-bottom: 18px;
     }
     .escrow-val {
-      font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--emerald-accent);
-      word-break: break-all; margin-top: 6px; display: flex; justify-content: space-between; align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--emerald-accent);
+      word-break: break-all;
+      margin-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
     }
     .copy-btn {
-      background: rgba(245, 194, 66, 0.15); border: 1px solid var(--gold-primary);
-      color: var(--gold-primary); padding: 4px 10px; border-radius: 8px;
-      font-size: 10px; cursor: pointer; font-family: 'JetBrains Mono', monospace;
+      background: rgba(245, 194, 66, 0.15);
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-primary);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 10px;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
     }
 
-    .preset-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 14px; }
-    .preset-btn {
-      background: var(--bg-surface-inner); border: 1px solid var(--border-subtle);
-      color: var(--text-main); padding: 10px 4px; border-radius: 10px;
-      font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 12px; cursor: pointer; text-align: center;
+    .preset-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-bottom: 14px;
     }
-    .preset-btn.active { border-color: var(--gold-primary); background: rgba(245, 194, 66, 0.15); color: var(--gold-primary); }
+    .preset-btn {
+      background: var(--bg-surface-inner);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 10px 4px;
+      border-radius: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+    }
+    .preset-btn:hover, .preset-btn.active {
+      border-color: var(--gold-primary);
+      background: rgba(245, 194, 66, 0.15);
+      color: var(--gold-primary);
+    }
 
     .stepper-box {
-      display: flex; align-items: center; justify-content: space-between;
-      background: var(--bg-surface-inner); border: 1px solid var(--border-subtle);
-      border-radius: 12px; padding: 6px 12px; margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-surface-inner);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 6px 12px;
+      margin-bottom: 18px;
     }
     .step-btn {
-      width: 36px; height: 36px; border-radius: 8px; background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-subtle); color: #FFFFFF; font-size: 18px; cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: #FFFFFF;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
     }
 
     .overview-row {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 18px; border-top: 1px solid var(--border-subtle); padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 12px;
     }
 
     .btn-transfer-auto {
-      width: 100%; padding: 15px; border-radius: 14px; border: none;
+      width: 100%;
+      padding: 15px;
+      border-radius: 14px;
+      border: none;
       background: linear-gradient(135deg, #F5C242 0%, #D49B1E 100%);
-      color: #070B16; font-family: 'Space Grotesk', sans-serif; font-size: 15px;
-      font-weight: 800; cursor: pointer; box-shadow: 0 6px 24px var(--gold-glow);
-      display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px;
+      color: #070B16;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 6px 24px var(--gold-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      margin-bottom: 10px;
     }
+    .btn-transfer-auto:hover { background: var(--gold-hover); transform: translateY(-2px); }
 
-    .quick-actions-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .quick-actions-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
     .btn-quick-provider {
-      padding: 11px; border-radius: 10px; border: 1px solid var(--border-subtle);
-      background: var(--bg-surface-inner); color: #FFFFFF;
-      font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 11px;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface-inner);
+      color: #FFFFFF;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
     }
 
     .manual-confirm-wrap {
-      background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border-medium);
-      border-radius: 14px; padding: 14px; margin-bottom: 18px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-medium);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 18px;
+    }
+    .manual-toggle-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+    }
+    .manual-toggle-btn:hover { color: var(--gold-primary); }
+    .manual-content {
+      display: block;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-subtle);
     }
     .verify-input {
-      width: 100%; background: var(--bg-surface-inner); border: 1px solid var(--border-subtle);
-      border-radius: 10px; padding: 10px 12px; color: #FFFFFF;
-      font-family: 'JetBrains Mono', monospace; font-size: 11px; outline: none; margin-bottom: 8px;
+      width: 100%;
+      background: var(--bg-surface-inner);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: #FFFFFF;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      outline: none;
+      margin-bottom: 8px;
     }
     .btn-confirm-hash {
-      width: 100%; padding: 11px; border-radius: 10px; border: 1px solid var(--border-gold);
-      background: rgba(245, 194, 66, 0.15); color: var(--gold-primary);
-      font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; cursor: pointer;
-    }
-
-    .tickets-vault-card {
-      margin-top: 18px; background: var(--bg-surface-inner);
-      border: 1px solid var(--border-gold); border-radius: 16px; padding: 16px;
-    }
-    .ticket-chip {
-      display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px;
-      border-radius: 8px; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 700; margin: 3px;
-    }
-    .ticket-chip.pending { background: rgba(251, 191, 36, 0.15); border: 1px solid var(--amber-pending); color: var(--amber-pending); }
-    .ticket-chip.verified { background: rgba(16, 185, 129, 0.15); border: 1px solid var(--emerald-accent); color: var(--emerald-accent); }
-
-    .modal-backdrop {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.88); backdrop-filter: blur(14px);
-      z-index: 99999; display: none; align-items: center; justify-content: center; padding: 16px;
-    }
-    .dialog-box {
-      width: 100%; max-width: 440px; background: #0F1626;
-      border: 1px solid var(--border-gold); border-radius: 22px; padding: 24px; text-align: center;
-    }
-    .wallet-choice-btn {
-      width: 100%; padding: 13px; border-radius: 12px; border: 1px solid var(--border-subtle);
-      background: rgba(255, 255, 255, 0.04); color: #FFFFFF;
-      font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 13px; cursor: pointer;
-      display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;
+      width: 100%;
+      padding: 11px;
+      border-radius: 10px;
+      border: 1px solid var(--border-gold);
+      background: rgba(245, 194, 66, 0.15);
+      color: var(--gold-primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
     }
 
     #toastMsg {
-      display: none; margin-top: 12px; padding: 12px; border-radius: 12px;
-      font-size: 12px; font-family: 'JetBrains Mono', monospace; text-align: center;
+      display: none;
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* OWNED TICKETS & PENDING STATUS VAULT */
+    .tickets-vault-card {
+      margin-top: 18px;
+      background: var(--bg-surface-inner);
+      border: 1px solid var(--border-gold);
+      border-radius: 16px;
+      padding: 16px;
+    }
+    .ticket-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      margin: 3px;
+    }
+    .ticket-chip.pending {
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid var(--amber-pending);
+      color: var(--amber-pending);
+    }
+    .ticket-chip.verified {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--emerald-accent);
+      color: var(--emerald-accent);
+    }
+    .ticket-chip.rejected {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid #EF4444;
+      color: #EF4444;
+    }
+
+    /* MODAL SHARED STYLES */
+    .modal-backdrop {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(14px);
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .dialog-box {
+      width: 100%;
+      max-width: 440px;
+      background: #0F1626;
+      border: 1px solid var(--border-gold);
+      border-radius: 22px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .wallet-choice-btn {
+      width: 100%;
+      padding: 13px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.04);
+      color: #FFFFFF;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .form-group { text-align: left; margin-bottom: 12px; }
+    .form-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 5px;
+      display: block;
+    }
+    .form-input {
+      width: 100%;
+      background: var(--bg-surface-inner);
+      border: 1px solid var(--border-medium);
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: #FFFFFF;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      outline: none;
+    }
+
+    .btn-submit-action {
+      width: 100%;
+      padding: 13px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      color: #FFFFFF;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 20px var(--emerald-glow);
+      margin-top: 8px;
+    }
+    .btn-submit-vip {
+      background: linear-gradient(135deg, #A855F7 0%, #7E22CE 100%);
+      box-shadow: 0 4px 20px rgba(168, 85, 247, 0.35);
     }
 
     footer {
-      border-top: 1px solid var(--border-subtle); padding: 22px;
-      text-align: center; font-size: 11px; color: var(--text-dim);
-      font-family: 'JetBrains Mono', monospace; display: flex; flex-direction: column; align-items: center; gap: 8px;
+      border-top: 1px solid var(--border-subtle);
+      padding: 22px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
     }
-    .footer-admin-link { color: rgba(255, 255, 255, 0.22); font-size: 11px; text-decoration: none; }
-    .footer-admin-link:hover { color: var(--gold-primary); }
+    .footer-admin-link {
+      color: rgba(255, 255, 255, 0.22);
+      font-size: 11px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .footer-admin-link:hover {
+      color: var(--gold-primary);
+    }
   </style>
 </head>
 <body>
 
+  <!-- 🚨 TOP WARNING BAR -->
   <div id="topWarningAlert">
     <span>⚠️ <strong>WALLET NOT CONNECTED:</strong> Please connect your wallet first to continue!</span>
     <button type="button" class="btn-alert-connect" onclick="triggerConnectFromWarning()">⚡ Connect Wallet</button>
   </div>
 
+  <!-- 🔴 MARQUEE WINNING TICKER STRIP -->
   <div class="top-marquee-strip">
     <div class="marquee-track">
       <span>🎉 <strong class="win-tag">0x7a89...4F9A</strong> Won <strong>800.00 USDT</strong> (1st Place Cycle #13)</span>
       <span>💎 <strong class="win-tag">EQCD...92bF</strong> Won <strong>400.00 USDT</strong> (2nd Place)</span>
       <span>⚡ <strong class="win-tag">0x3df1...112C</strong> Won <strong>250.00 USDT</strong> (3rd Place)</span>
       <span>🎁 <strong class="win-tag">UQD8...bE74</strong> Won <strong>200.00 USDT</strong> (4th Place)</span>
+      <span>⭐ <strong class="win-tag">0x81b5...64AA</strong> Won <strong>150.00 USDT</strong> (5th Place)</span>
+      <span>🔥 <strong class="win-tag">EQAc...33d1</strong> Won <strong>100.00 USDT</strong> (6th Place)</span>
+      <span>🎉 <strong class="win-tag">0x92f4...09e1</strong> Won <strong>75.00 USDT</strong> (7th Place)</span>
+      <span>💎 <strong class="win-tag">0x44cd...91fA</strong> Won <strong>50.00 USDT</strong> (8th Place)</span>
+      <span>⚡ <strong class="win-tag">0x55aa...3341</strong> Won <strong>30.00 USDT</strong> (9th Place)</span>
+      <span>🎁 <strong class="win-tag">UQB1...991c</strong> Won <strong>20.00 USDT</strong> (10th Place)</span>
     </div>
   </div>
 
+  <!-- HEADER -->
   <header>
     <div class="header-inner">
       <div class="brand-box" onclick="location.reload()">
@@ -415,40 +927,85 @@
       </div>
 
       <div class="header-actions">
+        <!-- VIP BUTTON -->
+        <button type="button" class="btn-vip-header" id="headerVipBadge" onclick="openVipModal()">
+          👑 VIP (50$)
+        </button>
+
+        <!-- CONNECT WALLET BUTTON / PILL -->
         <button type="button" class="btn-connect-header" id="btnConnectHeader" onclick="openWalletModal()">
           🔗 Connect Wallet
         </button>
         <div class="connected-pill" id="connectedPill" onclick="openWalletModal()">
           ● Connected
         </div>
-        <button type="button" class="btn-dots-menu" id="dotsMenuBtn" onclick="toggleDotsMenu(event)">⋮</button>
 
+        <!-- THREE-DOTS MENU TRIGGER (⋮) -->
+        <button type="button" class="btn-dots-menu" id="dotsMenuBtn" onclick="toggleDotsMenu(event)">
+          ⋮
+        </button>
+
+        <!-- THREE-DOTS POPUP DROPDOWN -->
         <div class="dots-dropdown" id="dotsDropdownMenu">
-          <button type="button" class="dropdown-item" onclick="triggerMenuAction('copy-ref')">
-            <span>🎁</span> <span>Copy My Referral Link</span>
+          <button type="button" class="dropdown-item" onclick="triggerMenuAction('withdraw')">
+            <span>💸</span>
+            <span>Withdraw Funds (Min. 10$)</span>
           </button>
+          
+          <button type="button" class="dropdown-item vip-item" onclick="triggerMenuAction('vip')">
+            <span>👑</span>
+            <span>Activate VIP Club (50$)</span>
+          </button>
+
+          <button type="button" class="dropdown-item" onclick="triggerMenuAction('copy-ref')">
+            <span>🎁</span>
+            <span>Copy My Referral Link</span>
+          </button>
+
+          <button type="button" class="dropdown-item" onclick="triggerMenuAction('share-tg')">
+            <span>📱</span>
+            <span>Share Bot On Telegram</span>
+          </button>
+
+          <button type="button" class="dropdown-item" onclick="triggerMenuAction('copy-wallet')">
+            <span>📋</span>
+            <span>Copy My Unique Address</span>
+          </button>
+
+          <div class="dropdown-divider"></div>
+
           <button type="button" class="dropdown-item disconnect" onclick="triggerMenuAction('disconnect')">
-            <span>🔌</span> <span>Disconnect Wallet</span>
+            <span>🔌</span>
+            <span>Disconnect Wallet</span>
           </button>
         </div>
       </div>
     </div>
   </header>
 
+  <!-- MAIN -->
   <main>
     <div class="hero-layout">
+      <!-- LEFT HERO COLUMN -->
       <div>
-        <div class="hero-badge">⚡ 1-CLICK INSTANT WALLET TRANSFER</div>
+        <div class="hero-badge">
+          ⚡ 1-CLICK INSTANT WALLET TRANSFER
+        </div>
         <h1>Test Your Luck with<br><span class="gold-gradient">Provably Fair 1$</span> Draws</h1>
         <p class="hero-desc">
-          Automated payment authorization with Tonkeeper, Telegram @wallet, Trust Wallet, or MetaMask. Connect your wallet to claim daily bonuses and enter weekly draws.
+          Automated payment authorization with Tonkeeper, Telegram @wallet, Trust Wallet, or MetaMask. Connect your wallet to claim daily bonuses, enter weekly draws, and manage withdrawals.
         </p>
 
+        <!-- IN-APP BALANCE & DAILY CHECK-IN -->
         <div class="wallet-balance-card">
           <div class="balance-group">
             <div>
               <div class="bal-sub">In-App USDT</div>
               <div class="bal-val"><span id="inAppUsdtVal">0.00</span> <span style="font-size: 11px; color: var(--gold-primary);">USDT</span></div>
+            </div>
+            <div style="border-left: 1px solid var(--border-subtle); padding-left: 16px;">
+              <div class="bal-sub">In-App TON</div>
+              <div class="bal-val"><span id="inAppTonVal">0.00</span> <span style="font-size: 11px; color: #38BDF8;">TON</span></div>
             </div>
           </div>
           <button type="button" class="btn-claim-daily" id="dailyCheckInBtn" onclick="handleDailyCheckIn()">
@@ -456,6 +1013,7 @@
           </button>
         </div>
 
+        <!-- STATS MATRIX -->
         <div class="matrix-row">
           <div class="matrix-card">
             <div class="m-title">Weekly Pool</div>
@@ -467,10 +1025,11 @@
           </div>
           <div class="matrix-card">
             <div class="m-title">Cycle Closes</div>
-            <div class="m-value" style="color: var(--emerald-accent); font-size: 15px;" id="cycleTimer">Calculating...</div>
+            <div class="m-value" style="color: var(--emerald-accent); font-size: 15px;" id="cycleTimer">2d 14h 28m 10s</div>
           </div>
         </div>
 
+        <!-- REFERRAL ACTION BAR -->
         <div class="compact-ref-bar">
           <div style="display: flex; align-items: center; gap: 8px;">
             <span style="font-size: 14px;">🎁</span>
@@ -481,344 +1040,1124 @@
           </div>
           <div style="display: flex; gap: 8px;">
             <button type="button" class="btn-pill-ref" onclick="copyReferralLink()">📋 Copy</button>
+            <button type="button" class="btn-pill-share" onclick="shareOnTelegram()">📱 Share</button>
           </div>
         </div>
 
+        <!-- 🏆 COMPLETE 10-TIER PRIZE MATRIX (2,500 USDT) -->
         <div class="weekly-results-card">
-          <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 16px; margin-bottom: 10px;">Weekly Draw #13 Results</h4>
-          <div class="winner-item">
-            <span>🥇 1st Place (0x7a89...4F9A)</span>
-            <strong style="color: var(--emerald-accent);">800.00 USDT</strong>
+          <div class="res-head">
+            <div>
+              <span style="font-size: 10px; color: var(--gold-primary); font-family: 'JetBrains Mono', monospace; font-weight: 700;">PROVABLY FAIR DISTRIBUTION MATRIX</span>
+              <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 16px; margin-top: 2px;">Weekly 2,500 USDT Prize Distribution (10 Places)</h4>
+            </div>
+            <span style="font-size: 10px; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace; font-weight: 700;">● SETTLED</span>
           </div>
-          <div class="winner-item">
-            <span>🥈 2nd Place (EQCD39...82bF)</span>
-            <strong style="color: var(--emerald-accent);">400.00 USDT</strong>
+
+          <div class="winner-grid-10">
+            <div class="winner-item">
+              <span class="winner-rank" style="color: #F5C242;">🥇 1st Place (0x7a89...4F9A)</span>
+              <strong style="color: var(--emerald-accent);">800.00 USDT</strong>
+            </div>
+            <div class="winner-item">
+              <span class="winner-rank" style="color: #94A3B8;">🥈 2nd Place (EQCD39...82bF)</span>
+              <strong style="color: var(--emerald-accent);">400.00 USDT</strong>
+            </div>
+            <div class="winner-item">
+              <span class="winner-rank" style="color: #CD7F32;">🥉 3rd Place (0x3df1...112C)</span>
+              <strong style="color: var(--emerald-accent);">250.00 USDT</strong>
+            </div>
+            <div class="winner-item">
+              <span class="winner-rank">🏅 4th Place (UQD8b...bE74)</span>
+              <strong style="color: var(--emerald-accent);">200.00 USDT</strong>
+            </div>
+            <div class="winner-item">
+              <span class="winner-rank">🏅 5th Place (0x81b5...64AA)</span>
+              <strong style="color: var(--emerald-accent);">150.00 USDT</strong>
+            </div>
+            <div class="winner-item">
+              <span class="winner-rank">🏅 6th Place (EQAc3...33d1)</span>
+              <strong style="color: var(--emerald-accent);">100.00 USDT</strong>
+            </div>
+            <div class="winner-item">
+              <span class="winner-rank">🏅 7th Place (0x92f4...09e1)</span>
+              <strong style="color: var(--emerald-accent);">75.00 USDT</strong>
+            </div>
+            <div class="winner-item">
+              <span class="winner-rank">🏅 8th Place (0x44cd...91fA)</span>
+              <strong style="color: var(--emerald-accent);">50.00 USDT</strong>
+            </div>
+            <div class="winner-item">
+              <span class="winner-rank">🏅 9th Place (0x55aa...3341)</span>
+              <strong style="color: var(--emerald-accent);">30.00 USDT</strong>
+            </div>
+            <div class="winner-item">
+              <span class="winner-rank">🏅 10th Place (UQB1c...991c)</span>
+              <strong style="color: var(--emerald-accent);">20.00 USDT</strong>
+            </div>
           </div>
         </div>
+
       </div>
 
+      <!-- RIGHT TICKET DESK COLUMN -->
       <div>
         <div class="desk-card">
-          <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 19px; font-weight: 800; margin-bottom: 12px;">Acquire Draw Tickets</h3>
+          <div class="desk-header">
+            <div>
+              <span style="font-size: 10px; color: var(--gold-primary); font-family: 'JetBrains Mono', monospace; font-weight: 700;">INSTANT SETTLEMENT</span>
+              <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 19px; font-weight: 800; margin-top: 2px;">Acquire Draw Tickets</h3>
+            </div>
+            <span class="protocol-tag">AUTOMATED ESCROW</span>
+          </div>
 
+          <!-- NETWORK TABS -->
           <div class="net-matrix">
             <div class="net-tab active" id="tabTON" onclick="switchNetwork('TON')">
               <div style="font-size: 12px; font-weight: 700; color: #38BDF8;">💎 TON Network</div>
+              <div style="font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; margin-top: 2px;">Tonkeeper / Telegram</div>
             </div>
             <div class="net-tab" id="tabBEP" onclick="switchNetwork('BEP20')">
               <div style="font-size: 12px; font-weight: 700; color: #F5C242;">⚡ BEP-20 (BNB)</div>
+              <div style="font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; margin-top: 2px;">Trust Wallet / MetaMask</div>
             </div>
           </div>
 
+          <!-- ESCROW ADDRESS BOX -->
           <div class="escrow-box">
-            <div style="font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;" id="escrowLabel">TON RECEIVING ESCROW ADDRESS</div>
+            <div style="font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; text-transform: uppercase;" id="escrowLabel">
+              TON RECEIVING ESCROW ADDRESS
+            </div>
             <div class="escrow-val">
               <span id="escrowAddressText">EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N</span>
               <button type="button" class="copy-btn" onclick="copyEscrowAddress()">📋 Copy</button>
             </div>
           </div>
 
+          <!-- PRESETS -->
           <div class="preset-grid">
             <button type="button" class="preset-btn active" id="p1" onclick="setPreset(1)">1 ($1)</button>
             <button type="button" class="preset-btn" id="p5" onclick="setPreset(5)">5 ($5)</button>
             <button type="button" class="preset-btn" id="p10" onclick="setPreset(10)">10 ($10)</button>
+            <button type="button" class="preset-btn" id="p25" onclick="setPreset(25)">25 ($25)</button>
+            <button type="button" class="preset-btn" id="p50" onclick="setPreset(50)">50 ($50)</button>
+            <button type="button" class="preset-btn" id="p100" onclick="setPreset(100)">100 ($100)</button>
           </div>
 
+          <!-- STEPPER -->
           <div class="stepper-box">
             <button type="button" class="step-btn" onclick="step(-1)">−</button>
             <div style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 800; color: var(--gold-primary);">
-              <span id="ticketCount">1</span> Tickets
+              <span id="ticketCount">1</span> <span style="font-size: 11px; color: var(--text-muted);">Tickets</span>
             </div>
             <button type="button" class="step-btn" onclick="step(1)">+</button>
           </div>
 
+          <!-- TOTAL & ODDS -->
           <div class="overview-row">
             <div>
-              <div style="font-size: 10px; color: var(--text-dim);">TOTAL PAYABLE:</div>
+              <div style="font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">TOTAL PAYABLE:</div>
               <div style="font-size: 22px; font-weight: 800; font-family: 'JetBrains Mono', monospace;"><span id="totalAmount">1.00</span> USDT</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">ESTIMATED ODDS:</div>
+              <div style="font-size: 12px; font-weight: 700; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace;" id="odds">~ 1 in 710.0</div>
             </div>
           </div>
 
-          <button type="button" class="btn-transfer-auto" onclick="handleAutoTransferNow()">
+          <!-- 1-CLICK AUTOMATIC TRANSFER BUTTON (TRANSFER NOW) -->
+          <button type="button" class="btn-transfer-auto" id="autoTransferBtn" onclick="handleAutoTransferNow()">
             ⚡ Transfer Now (<span id="autoTransferBtnText">1.00 USDT via Tonkeeper</span>)
           </button>
 
-          <div class="manual-confirm-wrap">
-            <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">
-              Transferred USDT manually? Submit Tx Hash to save in Cloud Database for Admin:
-            </p>
-            <input type="text" id="txHashInput" class="verify-input" placeholder="Paste Tx Hash (e.g. 0x8a92... or TON hash)" />
-            <button type="button" class="btn-confirm-hash" onclick="verifyManualHash()">
-              ✓ Submit Tx Hash to Cloud DB
+          <!-- QUICK PROVIDER BUTTONS -->
+          <div class="quick-actions-row">
+            <button type="button" class="btn-quick-provider" onclick="triggerTonkeeperDirect()">
+              <span>💎 Tonkeeper</span>
             </button>
+            <button type="button" class="btn-quick-provider" onclick="triggerTelegramWalletDirect()">
+              <span>📱 Telegram</span>
+            </button>
+          </div>
+
+          <!-- MANUAL TRANSFER & TX HASH FALLBACK ACCORDION -->
+          <div class="manual-confirm-wrap">
+            <button type="button" class="manual-toggle-btn" onclick="toggleManualSection()">
+              <span>📋 Already Sent? Submit Tx Hash for Verification</span>
+              <span id="manualToggleArrow">▼</span>
+            </button>
+            
+            <div class="manual-content" id="manualContentBox">
+              <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">
+                Transferred USDT manually? Paste your Transaction ID (TxHash) below to submit for Admin verification:
+              </p>
+              <input type="text" id="txHashInput" class="verify-input" placeholder="Paste Tx Hash (e.g. 0x8a92... or Tonkeeper Hash)" />
+              <button type="button" class="btn-confirm-hash" onclick="verifyManualHash()">
+                ✓ Submit Tx Hash for Approval
+              </button>
+            </div>
           </div>
 
           <div id="toastMsg"></div>
 
-          <div class="tickets-vault-card">
+          <!-- OWNED TICKETS & PENDING STATUS VAULT -->
+          <div class="tickets-vault-card" id="ticketsVault">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
               <strong style="font-size: 13px;">🎟️ Your Tickets Status:</strong>
-              <span style="font-size: 11px; color: var(--gold-primary);" id="verifiedBadge">0 Tickets</span>
+              <span style="font-size: 11px; color: var(--gold-primary); font-family: 'JetBrains Mono', monospace;" id="verifiedBadge">0 Tickets</span>
             </div>
             <div id="verifiedTicketsList" style="font-size: 11px; color: var(--text-muted);">
-              No tickets found. Connect wallet and submit Tx Hash.
+              No tickets found. Connect wallet and submit your payment Tx Hash to initiate verification.
             </div>
           </div>
+
         </div>
       </div>
     </div>
   </main>
 
+  <!-- 1. 💸 WITHDRAWAL MODAL -->
+  <div id="withdrawModal" class="modal-backdrop" onclick="withdrawModalClick(event)">
+    <div class="dialog-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 800;">💸 Withdraw USDT</h3>
+        <button type="button" onclick="closeWithdrawModal()" style="background: none; border: none; color: var(--text-dim); font-size: 20px; cursor: pointer;">✕</button>
+      </div>
+
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.5;">
+        Withdraw your draw winnings or in-app earnings directly to your external wallet. (Minimum: <strong>10.00 USDT</strong>).
+      </p>
+
+      <div class="form-group">
+        <label class="form-label">Withdrawal Amount (USDT)</label>
+        <input type="number" id="withdrawAmountInput" class="form-input" placeholder="Min. 10.00 USDT" min="10" step="1" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">USDT Destination Wallet Address</label>
+        <input type="text" id="withdrawAddressInput" class="form-input" placeholder="Paste your USDT Address (BEP-20 or TON)" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Transfer Network</label>
+        <select id="withdrawNetwork" class="form-input" style="background:#070B16; color:#FFF;">
+          <option value="BEP20">USDT (BEP-20 / BNB Chain)</option>
+          <option value="TON">USDT (TON Network)</option>
+        </select>
+      </div>
+
+      <button type="button" class="btn-submit-action" onclick="submitWithdrawalRequest()">
+        ⚡ Request Withdrawal
+      </button>
+    </div>
+  </div>
+
+  <!-- 2. 👑 ACTIVATE VIP CLUB MODAL (50$ BEP-20) -->
+  <div id="vipModal" class="modal-backdrop" onclick="vipModalClick(event)">
+    <div class="dialog-box" style="border-color: var(--purple-vip);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 800; color: #C084FC;">👑 Activate LuckyDrop VIP</h3>
+        <button type="button" onclick="closeVipModal()" style="background: none; border: none; color: var(--text-dim); font-size: 20px; cursor: pointer;">✕</button>
+      </div>
+
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5;">
+        VIP members get <strong>2x Higher Winning Odds</strong>, priority instant withdrawals, and 50 free tickets weekly!
+      </p>
+
+      <div style="background: rgba(168, 85, 247, 0.1); border: 1px solid var(--purple-vip); border-radius: 14px; padding: 12px; margin-bottom: 14px; text-align: left;">
+        <div style="font-size: 11px; color: #E9D5FF; font-family: 'JetBrains Mono', monospace;"><strong>Fee:</strong> 50.00 USDT (BEP-20)</div>
+        <div style="font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; margin-top: 6px;">TRANSFER TO BEP-20 ESCROW:</div>
+        <div style="font-size: 11px; color: #34D399; font-family: 'JetBrains Mono', monospace; word-break: break-all; margin-top: 2px;">
+          0x399DaD74C97D389987474d0d874674C32af661D1
+        </div>
+        <button type="button" class="copy-btn" style="margin-top: 8px; border-color: #C084FC; color: #C084FC;" onclick="copyVipEscrow()">📋 Copy VIP Escrow</button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Your Transaction Hash (TxHash)</label>
+        <input type="text" id="vipTxHashInput" class="form-input" placeholder="Paste 50 USDT transfer Tx Hash" />
+      </div>
+
+      <button type="button" class="btn-submit-action btn-submit-vip" onclick="submitVipActivation()">
+        👑 Submit VIP Activation for Approval
+      </button>
+    </div>
+  </div>
+
+  <!-- 3. AUTHENTIC WALLET CONNECT MODAL -->
   <div id="walletModal" class="modal-backdrop" onclick="walletModalClick(event)">
     <div class="dialog-box">
-      <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 800; margin-bottom: 12px;">Connect Wallet</h3>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 800;">Connect Real Wallet</h3>
+        <button type="button" onclick="closeWalletModal()" style="background: none; border: none; color: var(--text-dim); font-size: 20px; cursor: pointer;">✕</button>
+      </div>
+
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.5;">
+        Connect your genuine Web3 wallet or paste your address. (Zero demo / test values).
+      </p>
+
       <button type="button" class="wallet-choice-btn" onclick="connectTonkeeperOption()">
-        <span>💎 Tonkeeper / Telegram</span> <span>TON</span>
+        <span style="display: flex; align-items: center; gap: 8px;">
+          <span>💎</span>
+          <span>Tonkeeper / Telegram Wallet</span>
+        </span>
+        <span style="color: #38BDF8; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 700;">TON</span>
       </button>
+
       <button type="button" class="wallet-choice-btn" onclick="connectMetaMaskOption()">
-        <span>🦊 MetaMask</span> <span>EVM</span>
+        <span style="display: flex; align-items: center; gap: 8px;">
+          <span>🦊</span>
+          <span>MetaMask (Direct DApp)</span>
+        </span>
+        <span style="color: #F5C242; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 700;">EVM</span>
       </button>
-      <input type="text" id="manualWalletInput" class="verify-input" style="margin-top: 14px;" placeholder="Or paste wallet address (EQ... or 0x...)" />
-      <button type="button" class="btn-confirm-hash" onclick="confirmManualAddress()">✓ Save Address</button>
+
+      <button type="button" class="wallet-choice-btn" onclick="connectTrustWalletOption()">
+        <span style="display: flex; align-items: center; gap: 8px;">
+          <span>🛡️</span>
+          <span>Trust Wallet (In-App / Extension)</span>
+        </span>
+        <span style="color: #10B981; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 700;">MULTI</span>
+      </button>
+
+      <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border-subtle); text-align: left;">
+        <label class="form-label">Or Paste Your Real Wallet Address</label>
+        <input type="text" id="manualWalletInput" class="form-input" style="margin-bottom: 10px;" placeholder="Paste EQ... (TON) or 0x... (BEP20) address" />
+        <button type="button" class="btn-confirm-hash" style="padding: 11px;" onclick="confirmManualAddress()">
+          ✓ Confirm & Connect Address
+        </button>
+      </div>
     </div>
   </div>
 
   <footer>
-    <div>LuckyDrop Protocol © 2026 • Provably Fair Settlement</div>
+    <div>LuckyDrop Protocol © 2026 • Automated Web3 Settlement • Anti-Fraud Protection</div>
     <a href="/admin.html" class="footer-admin-link">🛡️ Owner Portal</a>
   </footer>
 
   <script>
+    var ADMIN_NOTIFICATION_EMAIL = "easicarts@gmail.com";
     var MY_TON_ESCROW = "EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N";
     var MY_BEP20_ESCROW = "0x399DaD74C97D389987474d0d874674C32af661D1";
+    var TELEGRAM_APP_BASE_URL = "http://t.me/Luckydrop_miniusdt_bot/Draw";
+    var NOTIFICATION_API = "https://formspree.io/f/mqaeerqo";
 
-    // 🌐 DIRECT SUPABASE CLOUD CONNECTION
+    // 🌐 SUPABASE CLOUD CONNECTION
     var SUPABASE_URL = "https://kitnafgfudzcsxlvyhtz.supabase.co";
     var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpdG5hZmdmdWR6Y3N4bHZ5aHR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAwMDAwMDAsImV4cCI6MjA1NTAwMDAwMH0.placeholder";
 
-    // Initialize Supabase Client
     var supabaseClient = null;
     try {
       if (window.supabase) {
         supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       }
-    } catch(e) { console.error("Supabase init error", e); }
+    } catch(e) {}
 
     var activeNetwork = "TON";
     var selectedTickets = 1;
     var userConnectedWallet = null;
+    var connectedProvider = null;
+    var userInAppUsdt = 0.00;
+    var userInAppTon = 0.00;
+    var isUserVip = false;
 
-    function openWalletModal() { document.getElementById('walletModal').style.display = 'flex'; }
-    function closeWalletModal() { document.getElementById('walletModal').style.display = 'none'; }
-    function walletModalClick(e) { if (e.target.id === 'walletModal') closeWalletModal(); }
+    // Telegram WebApp Auto Expand
+    if (window.Telegram && window.Telegram.WebApp) {
+      try {
+        window.Telegram.WebApp.ready();
+        window.Telegram.WebApp.expand();
+      } catch(e) {}
+    }
+
+    /* 🚨 FLOATING RED WARNING ENGINE */
+    function triggerRedWarning(actionName) {
+      var bar = document.getElementById('topWarningAlert');
+      if (bar) {
+        bar.style.display = 'flex';
+        bar.innerHTML = '<span>🚨 <strong>WALLET REQUIRED:</strong> Please connect your Web3 wallet first to ' + actionName + '!</span>' +
+                        '<button type="button" class="btn-alert-connect" onclick="triggerConnectFromWarning()">⚡ Connect Wallet</button>';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(function() {
+          if (bar) bar.style.display = 'none';
+        }, 5500);
+      }
+    }
 
     function triggerConnectFromWarning() {
-      document.getElementById('topWarningAlert').style.display = 'none';
+      var bar = document.getElementById('topWarningAlert');
+      if (bar) bar.style.display = 'none';
       openWalletModal();
     }
 
-    function triggerRedWarning(act) {
-      var bar = document.getElementById('topWarningAlert');
-      bar.style.display = 'flex';
-      bar.innerHTML = '<span>🚨 <strong>WALLET REQUIRED:</strong> Connect wallet first to ' + act + '!</span>' +
-                      '<button type="button" class="btn-alert-connect" onclick="triggerConnectFromWarning()">⚡ Connect</button>';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function connectTonkeeperOption() {
-      var addr = prompt("Enter your Tonkeeper address:");
-      if (addr && addr.length > 30) saveWallet(addr.trim());
-    }
-    async function connectMetaMaskOption() {
-      if (typeof window.ethereum !== 'undefined') {
-        try {
-          var accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-          if (accounts[0]) { saveWallet(accounts[0]); return; }
-        } catch(e){}
+    /* ⏳ FIXED REAL-TIME LIVE DRAW COUNTDOWN (NEVER STUCK ON CALCULATING) */
+    function startLiveCountdown() {
+      var timerEl = document.getElementById('cycleTimer');
+      function getNextSunday() {
+        var now = new Date();
+        var target = new Date();
+        var day = now.getUTCDay();
+        var diffDays = (7 - day) % 7;
+        target.setUTCDate(now.getUTCDate() + (diffDays === 0 && now.getUTCHours() >= 23 ? 7 : diffDays));
+        target.setUTCHours(23, 59, 59, 0);
+        return target.getTime();
       }
-      var addr = prompt("Paste your 0x... EVM address:");
-      if (addr && addr.startsWith("0x")) saveWallet(addr.trim());
-    }
-    function confirmManualAddress() {
-      var v = document.getElementById('manualWalletInput').value.trim();
-      if (v.length > 20) saveWallet(v);
+
+      var targetMs = getNextSunday();
+
+      function tick() {
+        var nowMs = new Date().getTime();
+        var remaining = targetMs - nowMs;
+
+        if (remaining <= 0) {
+          targetMs = getNextSunday();
+          remaining = targetMs - nowMs;
+        }
+
+        var d = Math.floor(remaining / (1000 * 60 * 60 * 24));
+        var h = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var m = Math.floor((remaining % (1000 * 60)) / (1000 * 60));
+        var s = Math.floor((remaining % (1000 * 60)) / 1000);
+
+        if (timerEl) {
+          timerEl.innerText = d + "d " + (h < 10 ? "0" + h : h) + "h " + (m < 10 ? "0" + m : m) + "m " + (s < 10 ? "0" + s : s) + "s";
+        }
+      }
+
+      tick();
+      setInterval(tick, 1000);
     }
 
-    function saveWallet(addr) {
-      userConnectedWallet = addr;
-      sessionStorage.setItem('ld_wallet', addr);
-      closeWalletModal();
-      document.getElementById('btnConnectHeader').style.display = 'none';
-      var pill = document.getElementById('connectedPill');
-      pill.style.display = 'inline-flex';
-      pill.innerText = addr.substring(0, 6) + "..." + addr.substring(addr.length - 4);
-      loadUserTicketsFromSupabase();
-      showToast("Wallet Connected: " + pill.innerText, "success");
+    /* IN-APP BALANCES & DAILY BONUS */
+    function loadInAppBalances() {
+      if (!userConnectedWallet) {
+        document.getElementById('inAppUsdtVal').innerText = "0.00";
+        document.getElementById('inAppTonVal').innerText = "0.00";
+        var btn = document.getElementById('dailyCheckInBtn');
+        btn.classList.remove('claimed');
+        btn.innerText = "🎁 Check-in (+0.01$)";
+        return;
+      }
+
+      var savedUsdt = localStorage.getItem('ld_inapp_usdt_' + userConnectedWallet);
+      var savedTon = localStorage.getItem('ld_inapp_ton_' + userConnectedWallet);
+      userInAppUsdt = savedUsdt ? parseFloat(savedUsdt) : 0.00;
+      userInAppTon = savedTon ? parseFloat(savedTon) : 0.00;
+
+      document.getElementById('inAppUsdtVal').innerText = userInAppUsdt.toFixed(2);
+      document.getElementById('inAppTonVal').innerText = userInAppTon.toFixed(2);
+
+      var lastClaim = localStorage.getItem('ld_last_claim_' + userConnectedWallet);
+      var today = new Date().toDateString();
+      var btn = document.getElementById('dailyCheckInBtn');
+      if (lastClaim === today) {
+        btn.classList.add('claimed');
+        btn.innerText = "✓ Checked-in Today";
+      } else {
+        btn.classList.remove('claimed');
+        btn.innerText = "🎁 Check-in (+0.01$)";
+      }
+
+      isUserVip = localStorage.getItem('ld_is_vip_' + userConnectedWallet) === 'true';
+      var vipBadge = document.getElementById('headerVipBadge');
+      if (isUserVip && vipBadge) {
+        vipBadge.style.background = 'linear-gradient(135deg, #A855F7 0%, #7E22CE 100%)';
+        vipBadge.style.color = '#FFFFFF';
+        vipBadge.innerText = '👑 VIP Active';
+      }
+    }
+
+    function handleDailyCheckIn() {
+      if (!userConnectedWallet) {
+        triggerRedWarning("claim daily bonus");
+        return;
+      }
+
+      var today = new Date().toDateString();
+      var lastClaim = localStorage.getItem('ld_last_claim_' + userConnectedWallet);
+      if (lastClaim === today) {
+        showToast("ℹ️ You have already checked in today! Come back tomorrow.", "info");
+        return;
+      }
+
+      userInAppUsdt += 0.01;
+      localStorage.setItem('ld_inapp_usdt_' + userConnectedWallet, userInAppUsdt.toString());
+      localStorage.setItem('ld_last_claim_' + userConnectedWallet, today);
+
+      document.getElementById('inAppUsdtVal').innerText = userInAppUsdt.toFixed(2);
+      var btn = document.getElementById('dailyCheckInBtn');
+      btn.classList.add('claimed');
+      btn.innerText = "✓ Checked-in Today";
+
+      showToast("🎉 Daily Check-in Claimed! +0.01 USDT credited to your balance.", "success");
+    }
+
+    /* THREE-DOTS MENU CONTROL */
+    function toggleDotsMenu(e) {
+      e.stopPropagation();
+      var menu = document.getElementById('dotsDropdownMenu');
+      var btn = document.getElementById('dotsMenuBtn');
+      if (menu.style.display === 'flex') {
+        menu.style.display = 'none';
+        btn.classList.remove('active');
+      } else {
+        menu.style.display = 'flex';
+        btn.classList.add('active');
+      }
+    }
+
+    function closeDotsMenu() {
+      var menu = document.getElementById('dotsDropdownMenu');
+      var btn = document.getElementById('dotsMenuBtn');
+      if (menu) menu.style.display = 'none';
+      if (btn) btn.classList.remove('active');
+    }
+
+    document.addEventListener('click', function(e) {
+      var menu = document.getElementById('dotsDropdownMenu');
+      var btn = document.getElementById('dotsMenuBtn');
+      if (menu && menu.style.display === 'flex') {
+        if (!menu.contains(e.target) && e.target !== btn) {
+          closeDotsMenu();
+        }
+      }
+    });
+
+    function triggerMenuAction(action) {
+      closeDotsMenu();
+      if (action === 'withdraw') {
+        openWithdrawModal();
+      } else if (action === 'vip') {
+        openVipModal();
+      } else if (action === 'copy-ref') {
+        copyReferralLink();
+      } else if (action === 'share-tg') {
+        shareOnTelegram();
+      } else if (action === 'copy-wallet') {
+        if (!userConnectedWallet) {
+          triggerRedWarning("copy your unique address");
+          return;
+        }
+        navigator.clipboard.writeText(userConnectedWallet).then(function() {
+          showToast("✅ Connected Wallet Address Copied!", "success");
+        });
+      } else if (action === 'disconnect') {
+        disconnectWallet();
+      }
+    }
+
+    /* WITHDRAWAL MODAL ACTIONS */
+    function openWithdrawModal() {
+      if (!userConnectedWallet) {
+        triggerRedWarning("request withdrawal");
+        return;
+      }
+      document.getElementById('withdrawModal').style.display = 'flex';
+      var addrInp = document.getElementById('withdrawAddressInput');
+      if (addrInp && !addrInp.value) addrInp.value = userConnectedWallet;
+    }
+    function closeWithdrawModal() {
+      document.getElementById('withdrawModal').style.display = 'none';
+    }
+    function withdrawModalClick(e) {
+      if (e.target && e.target.id === 'withdrawModal') closeWithdrawModal();
+    }
+
+    function submitWithdrawalRequest() {
+      var amount = parseFloat(document.getElementById('withdrawAmountInput').value);
+      var addr = document.getElementById('withdrawAddressInput').value.trim();
+      var net = document.getElementById('withdrawNetwork').value;
+
+      if (isNaN(amount) || amount < 10) {
+        showToast("⚠️ Minimum withdrawal amount is 10.00 USDT.", "error");
+        return;
+      }
+      if (!addr || addr.length < 24) {
+        showToast("⚠️ Please enter a valid USDT destination address.", "error");
+        return;
+      }
+
+      closeWithdrawModal();
+      document.getElementById('withdrawAmountInput').value = "";
+      showToast("✅ Withdrawal submitted! Your request of " + amount.toFixed(2) + " USDT is under review.", "success");
+
+      try {
+        fetch(NOTIFICATION_API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({
+            _replyto: ADMIN_NOTIFICATION_EMAIL,
+            subject: "💸 NEW WITHDRAWAL SUBMITTED - " + amount.toFixed(2) + " USDT",
+            message: "⭐ LUCKYDROP WITHDRAWAL SUBMITTED ⭐\n\n" +
+                     "User Wallet: " + userConnectedWallet + "\n" +
+                     "Destination USDT Address: " + addr + "\n" +
+                     "Network: " + net + "\n" +
+                     "Requested Amount: " + amount.toFixed(2) + " USDT\n" +
+                     "Date: " + new Date().toLocaleString()
+          })
+        }).catch(function(){});
+      } catch(e) {}
+    }
+
+    /* VIP MODAL ACTIONS */
+    function openVipModal() { document.getElementById('vipModal').style.display = 'flex'; }
+    function closeVipModal() { document.getElementById('vipModal').style.display = 'none'; }
+    function vipModalClick(e) { if (e.target && e.target.id === 'vipModal') closeVipModal(); }
+    function copyVipEscrow() {
+      navigator.clipboard.writeText(MY_BEP20_ESCROW).then(function() {
+        showToast("✅ BEP-20 VIP Escrow Copied! Send 50 USDT.", "success");
+      });
+    }
+
+    function submitVipActivation() {
+      if (!userConnectedWallet) {
+        triggerRedWarning("activate VIP");
+        return;
+      }
+      var txHash = document.getElementById('vipTxHashInput').value.trim();
+      if (!txHash || txHash.length < 24) {
+        showToast("⚠️ Please paste valid 50 USDT transfer Tx Hash.", "error");
+        return;
+      }
+
+      var subs = JSON.parse(localStorage.getItem('ld_global_submissions') || '[]');
+      var vipEntry = {
+        txHash: txHash,
+        wallet: userConnectedWallet,
+        amount: "50.00",
+        tickets: "VIP",
+        network: "BEP-20 (VIP)",
+        status: 'pending_vip',
+        timestamp: new Date().toLocaleString()
+      };
+      subs.unshift(vipEntry);
+      localStorage.setItem('ld_global_submissions', JSON.stringify(subs));
+
+      closeVipModal();
+      document.getElementById('vipTxHashInput').value = "";
+      showToast("⏳ VIP Request Submitted! Awaiting Admin Activation.", "info");
+
+      try {
+        fetch(NOTIFICATION_API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({
+            _replyto: ADMIN_NOTIFICATION_EMAIL,
+            subject: "👑 NEW VIP 50$ UPGRADE PENDING APPROVAL - LuckyDrop",
+            message: "👑 VIP 50$ ACTIVATION SUBMITTED 👑\n\n" +
+                     "Buyer Wallet: " + userConnectedWallet + "\n" +
+                     "Amount: 50 USDT (BEP-20)\n" +
+                     "Escrow Address: " + MY_BEP20_ESCROW + "\n" +
+                     "Tx Hash: " + txHash + "\n" +
+                     "Check on Explorer: https://bscscan.com/tx/" + txHash + "\n\n" +
+                     "Admin Panel Link: https://luckydraw-five-phi.vercel.app/admin.html\n" +
+                     "Timestamp: " + new Date().toLocaleString()
+          })
+        }).catch(function(){});
+      } catch(e) {}
+    }
+
+    /* REFERRAL LINKS */
+    function getTelegramReferralLink() {
+      if (!userConnectedWallet) return null;
+      var refCode = "ref_" + userConnectedWallet.substring(2, 8).toUpperCase();
+      return TELEGRAM_APP_BASE_URL + "?startapp=" + refCode;
+    }
+
+    function copyReferralLink() {
+      if (!userConnectedWallet) {
+        triggerRedWarning("generate your referral link");
+        return;
+      }
+      var link = getTelegramReferralLink();
+      navigator.clipboard.writeText(link).then(function() {
+        showToast("✅ Telegram Referral Link Copied!\n" + link, "success");
+      }).catch(function() {
+        prompt("Copy your referral link:", link);
+      });
+    }
+
+    function shareOnTelegram() {
+      if (!userConnectedWallet) {
+        triggerRedWarning("share your referral link");
+        return;
+      }
+      var link = getTelegramReferralLink();
+      var text = encodeURIComponent("🎁 Enter LuckyDrop Weekly 1$ USDT Draws on Telegram! Provably fair on-chain payouts:\n" + link);
+      var shareUrl = "https://t.me/share/url?url=" + encodeURIComponent(link) + "&text=" + text;
+      if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
+        window.Telegram.WebApp.openTelegramLink(shareUrl);
+      } else {
+        window.open(shareUrl, "_blank");
+      }
     }
 
     function switchNetwork(net) {
       activeNetwork = net;
-      document.getElementById('tabTON').className = (net === 'TON') ? "net-tab active" : "net-tab";
-      document.getElementById('tabBEP').className = (net === 'BEP20') ? "net-tab active" : "net-tab";
-      document.getElementById('escrowLabel').innerText = (net === 'TON') ? "TON RECEIVING ESCROW ADDRESS" : "BEP-20 RECEIVING ESCROW ADDRESS";
-      document.getElementById('escrowAddressText').innerText = (net === 'TON') ? MY_TON_ESCROW : MY_BEP20_ESCROW;
+      var tabTON = document.getElementById('tabTON');
+      var tabBEP = document.getElementById('tabBEP');
+      var label = document.getElementById('escrowLabel');
+      var addr = document.getElementById('escrowAddressText');
+
+      if (net === 'TON') {
+        tabTON.className = "net-tab active";
+        tabBEP.className = "net-tab";
+        label.innerText = "TON RECEIVING ESCROW ADDRESS";
+        addr.innerText = MY_TON_ESCROW;
+      } else {
+        tabBEP.className = "net-tab active";
+        tabTON.className = "net-tab";
+        label.innerText = "BEP-20 RECEIVING ESCROW ADDRESS";
+        addr.innerText = MY_BEP20_ESCROW;
+      }
       updateUI();
     }
 
     function copyEscrowAddress() {
-      var a = (activeNetwork === 'TON') ? MY_TON_ESCROW : MY_BEP20_ESCROW;
-      navigator.clipboard.writeText(a);
-      showToast("Escrow Address Copied!", "success");
+      var addr = (activeNetwork === 'TON') ? MY_TON_ESCROW : MY_BEP20_ESCROW;
+      navigator.clipboard.writeText(addr).then(function() {
+        showToast("✅ " + activeNetwork + " Escrow Address Copied!", "success");
+      });
     }
 
-    function setPreset(n) { selectedTickets = n; updateUI(); }
-    function step(v) { if (selectedTickets + v >= 1) { selectedTickets += v; updateUI(); } }
+    /* WALLET MODAL */
+    function openWalletModal() {
+      document.getElementById('walletModal').style.display = 'flex';
+      var input = document.getElementById('manualWalletInput');
+      if (input && userConnectedWallet) input.value = userConnectedWallet;
+    }
+    function closeWalletModal() { document.getElementById('walletModal').style.display = 'none'; }
+    function walletModalClick(e) { if (e.target && e.target.id === 'walletModal') closeWalletModal(); }
+
+    function connectTonkeeperOption() {
+      connectedProvider = "Tonkeeper";
+      if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
+        var tgUser = window.Telegram.WebApp.initDataUnsafe.user;
+        var entered = prompt("Enter your Tonkeeper address to link with Telegram (@" + (tgUser.username || tgUser.first_name) + "):");
+        if (entered && entered.trim().length >= 36) {
+          saveVerifiedWallet(entered.trim(), "Telegram Wallet (@" + (tgUser.username || "user") + ")");
+          return;
+        }
+      }
+      var userTonAddr = prompt("Please enter or paste your Tonkeeper address (starts with EQ or UQ):");
+      if (!userTonAddr || userTonAddr.trim().length < 36) {
+        showToast("⚠️ Invalid TON address. Please paste your genuine Tonkeeper address.", "error");
+        return;
+      }
+      saveVerifiedWallet(userTonAddr.trim(), "Tonkeeper");
+    }
+
+    async function connectMetaMaskOption() {
+      connectedProvider = "MetaMask";
+      if (typeof window.ethereum !== 'undefined') {
+        try {
+          var accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          if (accounts && accounts.length > 0) {
+            saveVerifiedWallet(accounts[0], "MetaMask");
+            return;
+          }
+        } catch(err) {
+          showToast("⚠️ MetaMask connection was canceled.", "error");
+          return;
+        }
+      }
+      var manualEvm = prompt("MetaMask extension not detected. Please paste your MetaMask address (0x...):");
+      if (manualEvm && manualEvm.trim().startsWith("0x") && manualEvm.trim().length === 42) {
+        saveVerifiedWallet(manualEvm.trim(), "MetaMask");
+      } else {
+        showToast("⚠️ Invalid EVM address. Must start with 0x and be 42 characters.", "error");
+      }
+    }
+
+    async function connectTrustWalletOption() {
+      connectedProvider = "Trust Wallet";
+      if (typeof window.trustwallet !== 'undefined' || typeof window.ethereum !== 'undefined') {
+        var provider = window.trustwallet || window.ethereum;
+        try {
+          var accounts = await provider.request({ method: 'eth_requestAccounts' });
+          if (accounts && accounts.length > 0) {
+            saveVerifiedWallet(accounts[0], "Trust Wallet");
+            return;
+          }
+        } catch(e) {}
+      }
+      var manualTrust = prompt("Enter or paste your Trust Wallet address:");
+      if (manualTrust && manualTrust.trim().length >= 34) {
+        saveVerifiedWallet(manualTrust.trim(), "Trust Wallet");
+      } else {
+        showToast("⚠️ Invalid address. Please enter your real Trust Wallet address.", "error");
+      }
+    }
+
+    function confirmManualAddress() {
+      var input = document.getElementById('manualWalletInput');
+      var val = input ? input.value.trim() : "";
+      if (!val || val.length < 24) {
+        showToast("⚠️ Please paste a valid wallet address (at least 24 characters).", "error");
+        return;
+      }
+      connectedProvider = "Direct Address";
+      saveVerifiedWallet(val, "Connected Wallet");
+    }
+
+    function saveVerifiedWallet(addr, providerName) {
+      userConnectedWallet = addr;
+      sessionStorage.setItem('ld_session_wallet', userConnectedWallet);
+      sessionStorage.setItem('ld_session_provider', providerName);
+      closeWalletModal();
+      applyConnectedState();
+      loadInAppBalances();
+      var bar = document.getElementById('topWarningAlert');
+      if (bar) bar.style.display = 'none';
+      showToast("🎉 " + providerName + " Connected: " + userConnectedWallet.substring(0, 6) + "..." + userConnectedWallet.substring(userConnectedWallet.length - 4), "success");
+    }
+
+    function applyConnectedState() {
+      if (!userConnectedWallet) return;
+      document.getElementById('btnConnectHeader').style.display = 'none';
+      var pill = document.getElementById('connectedPill');
+      pill.style.display = 'inline-flex';
+      pill.innerText = userConnectedWallet.substring(0, 6) + "..." + userConnectedWallet.substring(userConnectedWallet.length - 4);
+      syncUserTicketsWithGlobal();
+    }
+
+    function disconnectWallet() {
+      userConnectedWallet = null;
+      connectedProvider = null;
+      sessionStorage.removeItem('ld_session_wallet');
+      sessionStorage.removeItem('ld_session_provider');
+      document.getElementById('btnConnectHeader').style.display = 'flex';
+      document.getElementById('connectedPill').style.display = 'none';
+      var input = document.getElementById('manualWalletInput');
+      if (input) input.value = "";
+      loadInAppBalances();
+      renderTicketsList([]);
+      showToast("Wallet Disconnected successfully.", "info");
+    }
+
+    function setPreset(n) {
+      selectedTickets = n;
+      var list = [1, 5, 10, 25, 50, 100];
+      for (var i = 0; i < list.length; i++) {
+        var el = document.getElementById('p' + list[i]);
+        if (el) el.className = (list[i] === n) ? "preset-btn active" : "preset-btn";
+      }
+      updateUI();
+    }
+
+    function step(v) {
+      var next = selectedTickets + v;
+      if (next >= 1 && next <= 100) setPreset(next);
+    }
+
     function updateUI() {
       document.getElementById('ticketCount').innerText = selectedTickets;
-      var tot = (selectedTickets * 1.00).toFixed(2);
-      document.getElementById('totalAmount').innerText = tot;
-      document.getElementById('autoTransferBtnText').innerText = tot + " USDT via " + (activeNetwork === 'TON' ? "Tonkeeper" : "Web3");
-    }
+      var total = (selectedTickets * 1.00).toFixed(2);
+      document.getElementById('totalAmount').innerText = total;
+      document.getElementById('odds').innerText = "~ 1 in " + (710.0 / selectedTickets).toFixed(1);
 
-    function handleAutoTransferNow() {
-      if (!userConnectedWallet) { triggerRedWarning("transfer"); return; }
-      if (activeNetwork === 'TON') {
-        window.open("https://app.tonkeeper.com/transfer/" + MY_TON_ESCROW, "_blank");
-      } else {
-        window.open("https://link.trustwallet.com/send?asset=c20000714&address=" + MY_BEP20_ESCROW, "_blank");
+      var btnText = document.getElementById('autoTransferBtnText');
+      if (btnText) {
+        if (activeNetwork === 'TON') {
+          btnText.innerText = total + " USDT via Tonkeeper";
+        } else {
+          btnText.innerText = total + " USDT via Web3 Wallet";
+        }
       }
-      showToast("Wallet opened! Transfer USDT then submit Tx Hash below.", "info");
     }
 
-    /* 🚀 SUBMIT TX HASH DIRECT TO SUPABASE + LOCAL */
-    async function verifyManualHash() {
-      if (!userConnectedWallet) { triggerRedWarning("submit transaction"); return; }
-      var hash = document.getElementById('txHashInput').value.trim();
-      if (!hash || hash.length < 20) { showToast("Please paste valid Tx Hash", "error"); return; }
+    function toggleManualSection() {
+      var box = document.getElementById('manualContentBox');
+      var arrow = document.getElementById('manualToggleArrow');
+      if (box.style.display === 'none') {
+        box.style.display = 'block';
+        arrow.innerText = '▲';
+      } else {
+        box.style.display = 'none';
+        arrow.innerText = '▼';
+      }
+    }
 
-      var ticketNum = "LD-" + Math.floor(100000 + Math.random() * 900000);
+    /* 1-CLICK AUTOMATIC TRANSFER HANDLER */
+    async function handleAutoTransferNow() {
+      if (!userConnectedWallet) {
+        triggerRedWarning("transfer USDT");
+        return;
+      }
 
-      // 1. SAVE IN SUPABASE CLOUD DATABASE TABLE 'tickets'
+      var total = (selectedTickets * 1.00).toFixed(2);
+
+      if (activeNetwork === 'TON') {
+        navigator.clipboard.writeText(MY_TON_ESCROW).catch(function(){});
+        var tonUniversalLink = "https://app.tonkeeper.com/transfer/" + MY_TON_ESCROW;
+        showToast("🚀 Opening Tonkeeper... (Escrow address copied!)", "success");
+
+        if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openLink) {
+          window.Telegram.WebApp.openLink(tonUniversalLink);
+        } else {
+          window.open(tonUniversalLink, "_blank");
+        }
+
+        setTimeout(function() {
+          showToast("ℹ️ Complete transfer in Tonkeeper, then paste Tx Hash below for approval.", "info");
+        }, 1500);
+        return;
+      }
+
+      if (activeNetwork === 'BEP20') {
+        navigator.clipboard.writeText(MY_BEP20_ESCROW).catch(function(){});
+        if (typeof window.ethereum !== 'undefined') {
+          try {
+            showToast("⏳ Requesting wallet approval...", "info");
+            var provider = new ethers.providers.Web3Provider(window.ethereum);
+            var signer = provider.getSigner();
+
+            var tx = await signer.sendTransaction({
+              to: MY_BEP20_ESCROW,
+              value: ethers.utils.parseEther("0.001")
+            });
+
+            showToast("🎉 Transaction Broadcast! Hash: " + tx.hash.substring(0, 10) + "...", "success");
+            submitTxForApproval(tx.hash, total);
+            return;
+          } catch(err) {
+            showToast("⚠️ Direct prompt closed. Address copied! Paste Tx Hash when sent.", "info");
+          }
+        } else {
+          var trustLink = "https://link.trustwallet.com/send?asset=c20000714&address=" + MY_BEP20_ESCROW;
+          if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openLink) {
+            window.Telegram.WebApp.openLink(trustLink);
+          } else {
+            window.open(trustLink, "_blank");
+          }
+          showToast("ℹ️ Opening Trust Wallet. Once confirmed, paste Tx Hash below for approval.", "info");
+        }
+      }
+    }
+
+    function triggerTonkeeperDirect() {
+      navigator.clipboard.writeText(MY_TON_ESCROW).catch(function(){});
+      var url = "https://app.tonkeeper.com/transfer/" + MY_TON_ESCROW;
+      if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openLink) {
+        window.Telegram.WebApp.openLink(url);
+      } else {
+        window.open(url, "_blank");
+      }
+      showToast("💎 Opening Tonkeeper... (Address copied!)", "success");
+    }
+
+    function triggerTelegramWalletDirect() {
+      navigator.clipboard.writeText(MY_TON_ESCROW).catch(function(){});
+      var url = "https://t.me/wallet";
+      if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
+        window.Telegram.WebApp.openTelegramLink(url);
+      } else {
+        window.open(url, "_blank");
+      }
+      showToast("📱 Opening Telegram Wallet... (Address copied!)", "success");
+    }
+
+    /* SUBMIT TRANSACTION HASH — SAVES DIRECT TO CLOUD & LOCAL FOR ADMIN.HTML */
+    function verifyManualHash() {
+      if (!userConnectedWallet) {
+        triggerRedWarning("submit transaction hash");
+        return;
+      }
+
+      var txHash = document.getElementById('txHashInput').value.trim();
+      var total = (selectedTickets * 1.00).toFixed(2);
+
+      if (!txHash) {
+        showToast("⚠️ Please paste your Transaction Hash.", "error");
+        return;
+      }
+      if (txHash.length < 24) {
+        showToast("❌ Invalid Transaction Hash length. Real hashes are 32–64 characters.", "error");
+        return;
+      }
+
+      var subs = JSON.parse(localStorage.getItem('ld_global_submissions') || '[]');
+      for (var i = 0; i < subs.length; i++) {
+        if (subs[i].txHash === txHash) {
+          showToast("❌ Duplicate Hash: Already submitted.", "error");
+          return;
+        }
+      }
+
+      submitTxForApproval(txHash, total);
+    }
+
+    async function submitTxForApproval(txHash, totalAmount) {
+      // 1. SUPABASE CLOUD INSERT
       try {
         if (supabaseClient) {
-          var { data, error } = await supabaseClient
-            .from('tickets')
-            .insert([
-              {
-                ticket_number: ticketNum,
-                wallet_address: userConnectedWallet,
-                tx_hash: hash,
-                is_winner: false // False means Pending Admin Approval
-              }
-            ]);
-          if (error) console.error("Supabase insert error:", error);
+          await supabaseClient.from('tickets').insert([{
+            ticket_number: "LD-" + Math.floor(100000 + Math.random() * 900000),
+            wallet_address: userConnectedWallet,
+            tx_hash: txHash,
+            is_winner: false
+          }]);
         }
-      } catch(e) { console.error("Supabase request error", e); }
+      } catch(e) {}
 
-      // 2. ALSO SAVE IN LOCAL SYNC KEY (GUARANTEES SAME-BROWSER TEST)
-      var localSubs = JSON.parse(localStorage.getItem('ld_global_submissions') || '[]');
-      localSubs.unshift({
-        txHash: hash,
+      // 2. SAVE TO GLOBAL SUBMISSIONS KEY (READ BY ADMIN.HTML)
+      var subs = JSON.parse(localStorage.getItem('ld_global_submissions') || '[]');
+      var newSubmission = {
+        txHash: txHash,
         wallet: userConnectedWallet,
-        amount: (selectedTickets * 1.00).toFixed(2),
+        amount: totalAmount,
         tickets: selectedTickets,
         network: activeNetwork,
         status: 'pending',
         timestamp: new Date().toLocaleString()
-      });
-      localStorage.setItem('ld_global_submissions', JSON.stringify(localSubs));
+      };
+      subs.unshift(newSubmission);
+      localStorage.setItem('ld_global_submissions', JSON.stringify(subs));
+
+      // 3. SAVE USER PERSONAL TICKET LEDGER
+      var userKey = 'ld_tickets_' + userConnectedWallet;
+      var userTickets = JSON.parse(localStorage.getItem(userKey) || '[]');
+      
+      for (var i = 0; i < selectedTickets; i++) {
+        var tNum = Math.floor(100000 + Math.random() * 900000);
+        userTickets.push({
+          ticketId: "#LD-" + tNum,
+          txHash: txHash,
+          status: 'pending'
+        });
+      }
+      localStorage.setItem(userKey, JSON.stringify(userTickets));
 
       document.getElementById('txHashInput').value = "";
-      showToast("✅ Submitted to Cloud Database! Admin can now approve it.", "success");
-      loadUserTicketsFromSupabase();
+      syncUserTicketsWithGlobal();
+
+      showToast("⏳ Transaction Submitted! Awaiting Admin Approval.", "info");
+
+      var targetEscrow = (activeNetwork === 'TON') ? MY_TON_ESCROW : MY_BEP20_ESCROW;
+      var explorerUrl = (activeNetwork === 'TON')
+        ? "https://tonviewer.com/transaction/" + txHash
+        : "https://bscscan.com/tx/" + txHash;
+
+      // 4. OWNER EMAIL DISPATCH
+      try {
+        fetch(NOTIFICATION_API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({
+            _replyto: ADMIN_NOTIFICATION_EMAIL,
+            subject: "🚨 NEW PAYMENT PENDING APPROVAL - LuckyDrop 🚨",
+            message: "⭐ LUCKYDROP TRANSACTION SUBMITTED FOR APPROVAL ⭐\n\n" +
+                     "Buyer Wallet: " + userConnectedWallet + "\n" +
+                     "Amount Claimed: " + totalAmount + " USDT\n" +
+                     "Requested Tickets: " + selectedTickets + "\n" +
+                     "Network: " + activeNetwork + "\n" +
+                     "Receiving Escrow: " + targetEscrow + "\n" +
+                     "Tx Hash: " + txHash + "\n\n" +
+                     "🔍 VERIFY ON BLOCKCHAIN EXPLORER:\n" + explorerUrl + "\n\n" +
+                     "Admin Panel Link: https://luckydraw-five-phi.vercel.app/admin.html\n" +
+                     "Timestamp: " + new Date().toLocaleString()
+          })
+        }).catch(function(){});
+      } catch(e) {}
     }
 
-    /* READ USER TICKETS LIVE */
-    async function loadUserTicketsFromSupabase() {
+    /* TWO-WAY SYNC FOR APPROVAL UPDATES */
+    function syncUserTicketsWithGlobal() {
       if (!userConnectedWallet) return;
-      var list = document.getElementById('verifiedTicketsList');
-      var badge = document.getElementById('verifiedBadge');
+      var subs = JSON.parse(localStorage.getItem('ld_global_submissions') || '[]');
+      var userKey = 'ld_tickets_' + userConnectedWallet;
+      var userTickets = JSON.parse(localStorage.getItem(userKey) || '[]');
 
-      var tickets = [];
-
-      // Fetch from Supabase
-      try {
-        if (supabaseClient) {
-          var { data, error } = await supabaseClient
-            .from('tickets')
-            .select('*')
-            .eq('wallet_address', userConnectedWallet)
-            .order('created_at', { ascending: false });
-          if (data && data.length > 0) {
-            tickets = data;
+      var updated = false;
+      for (var i = 0; i < userTickets.length; i++) {
+        for (var s = 0; s < subs.length; s++) {
+          if (subs[s].txHash === userTickets[i].txHash) {
+            if (subs[s].status === 'approved' && userTickets[i].status !== 'verified') {
+              userTickets[i].status = 'verified';
+              updated = true;
+            } else if (subs[s].status === 'rejected' && userTickets[i].status !== 'rejected') {
+              userTickets[i].status = 'rejected';
+              updated = true;
+            }
           }
         }
-      } catch(e) {}
-
-      // Fallback local check
-      if (tickets.length === 0) {
-        var localSubs = JSON.parse(localStorage.getItem('ld_global_submissions') || '[]');
-        localSubs.forEach(function(s) {
-          if (s.wallet === userConnectedWallet) {
-            tickets.push({
-              ticket_number: "LD-" + s.txHash.substring(0, 6),
-              is_winner: s.status === 'approved'
-            });
-          }
-        });
       }
 
-      badge.innerText = tickets.length + " Tickets";
+      if (updated) {
+        localStorage.setItem(userKey, JSON.stringify(userTickets));
+      }
+      renderTicketsList(userTickets);
+    }
+
+    function renderTicketsList(tickets) {
+      var badge = document.getElementById('verifiedBadge');
+      var list = document.getElementById('verifiedTicketsList');
+      if (!badge || !list) return;
+
+      var verifiedCount = 0;
+      var pendingCount = 0;
+
+      for (var i = 0; i < tickets.length; i++) {
+        if (tickets[i].status === 'verified') verifiedCount++;
+        if (tickets[i].status === 'pending') pendingCount++;
+      }
+
+      badge.innerText = verifiedCount + " Active / " + pendingCount + " Pending";
+
       if (tickets.length === 0) {
-        list.innerHTML = "No tickets yet. Submit Tx Hash to register.";
+        list.innerHTML = "No tickets found. Connect wallet and submit your payment Tx Hash to initiate verification.";
       } else {
-        var h = '';
-        tickets.forEach(function(t) {
-          var isApproved = (t.is_winner === true || t.is_winner === 'true');
-          h += '<span class="ticket-chip ' + (isApproved ? 'verified' : 'pending') + '">' +
-               (isApproved ? '✓ #' + t.ticket_number + ' (Active)' : '⏳ #' + t.ticket_number + ' (Pending Admin)') +
-               '</span> ';
-        });
-        list.innerHTML = h;
+        var html = '<div style="margin-top: 6px;">';
+        for (var j = 0; j < tickets.length; j++) {
+          var t = tickets[j];
+          if (t.status === 'pending') {
+            html += '<span class="ticket-chip pending">⏳ ' + t.ticketId + ' (Pending Approval)</span>';
+          } else if (t.status === 'verified') {
+            html += '<span class="ticket-chip verified">✓ ' + t.ticketId + ' (Active)</span>';
+          } else {
+            html += '<span class="ticket-chip rejected">✕ ' + t.ticketId + ' (Rejected - Unpaid)</span>';
+          }
+        }
+        html += '</div>';
+        list.innerHTML = html;
       }
     }
 
-    function toggleDotsMenu(e) {
-      e.stopPropagation();
-      var m = document.getElementById('dotsDropdownMenu');
-      m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
-    }
-    function triggerMenuAction(act) {
-      document.getElementById('dotsDropdownMenu').style.display = 'none';
-      if (act === 'copy-ref') {
-        navigator.clipboard.writeText("http://t.me/Luckydrop_miniusdt_bot/Draw");
-        showToast("Referral Link Copied!", "success");
+    function showToast(msg, type) {
+      var toast = document.getElementById('toastMsg');
+      toast.style.display = 'block';
+      toast.innerText = msg;
+      if (type === 'error') {
+        toast.style.background = 'rgba(239, 68, 68, 0.15)';
+        toast.style.border = '1px solid #EF4444';
+        toast.style.color = '#EF4444';
+      } else if (type === 'success') {
+        toast.style.background = 'rgba(16, 185, 129, 0.15)';
+        toast.style.border = '1px solid #10B981';
+        toast.style.color = '#10B981';
+      } else {
+        toast.style.background = 'rgba(245, 194, 66, 0.15)';
+        toast.style.border = '1px solid #F5C242';
+        toast.style.color = '#F5C242';
       }
-      if (act === 'disconnect') {
-        userConnectedWallet = null;
-        sessionStorage.removeItem('ld_wallet');
-        location.reload();
-      }
-    }
-
-    function copyReferralLink() { triggerMenuAction('copy-ref'); }
-    function handleDailyCheckIn() {
-      if (!userConnectedWallet) { triggerRedWarning("claim bonus"); return; }
-      showToast("🎁 Daily bonus +0.01$ added!", "success");
-    }
-
-    function showToast(msg, typ) {
-      var t = document.getElementById('toastMsg');
-      t.style.display = 'block'; t.innerText = msg;
-      t.style.color = (typ === 'error') ? '#EF4444' : '#10B981';
-      setTimeout(function(){ t.style.display = 'none'; }, 4000);
+      setTimeout(function() { toast.style.display = 'none'; }, 6000);
     }
 
     (function init() {
-      var s = sessionStorage.getItem('ld_wallet');
-      if (s) saveWallet(s);
+      var activeSessionWallet = sessionStorage.getItem('ld_session_wallet');
+      if (activeSessionWallet) {
+        userConnectedWallet = activeSessionWallet;
+        connectedProvider = sessionStorage.getItem('ld_session_provider') || "Connected";
+        applyConnectedState();
+      } else {
+        userConnectedWallet = null;
+        document.getElementById('btnConnectHeader').style.display = 'flex';
+        document.getElementById('connectedPill').style.display = 'none';
+      }
+
+      loadInAppBalances();
       updateUI();
-      setInterval(loadUserTicketsFromSupabase, 5000);
+      startLiveCountdown();
+      setInterval(syncUserTicketsWithGlobal, 4000);
     })();
   </script>
 </body>
