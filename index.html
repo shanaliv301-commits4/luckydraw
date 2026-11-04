@@ -4,17 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>LuckyDrop Protocol — Provably Fair 1$ USDT Draws | Telegram Mini App</title>
-
   <!-- External SDKs -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <!-- Google Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
-
   <style>
     :root {
       --bg-base: #070B16;
@@ -36,9 +33,7 @@
       --text-muted: #94A3B8;
       --text-dim: #64748B;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       background-color: var(--bg-base);
       background-image: 
@@ -54,7 +49,6 @@
       flex-direction: column;
       overflow-x: hidden;
     }
-
     /* 🚨 FLOATING TOP RED WARNING ALERT BAR */
     #topWarningAlert {
       position: fixed;
@@ -93,7 +87,6 @@
       cursor: pointer;
       margin-left: 8px;
     }
-
     /* 🔴 LIVE MARQUEE WINNING TICKER STRIP */
     .top-marquee-strip {
       background: linear-gradient(90deg, #0B1121 0%, #151D33 50%, #0B1121 100%);
@@ -122,7 +115,6 @@
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
-
     /* HEADER */
     header {
       border-bottom: 1px solid var(--border-subtle);
@@ -169,14 +161,12 @@
       letter-spacing: -0.03em;
     }
     .brand-title span { color: var(--gold-primary); }
-
     .header-actions {
       display: flex;
       gap: 8px;
       align-items: center;
       position: relative;
     }
-
     .btn-vip-header {
       padding: 8px 12px;
       border-radius: 12px;
@@ -193,7 +183,6 @@
       transition: all 0.2s ease;
       white-space: nowrap;
     }
-
     .btn-connect-header {
       padding: 8px 14px;
       border-radius: 12px;
@@ -211,7 +200,6 @@
       white-space: nowrap;
     }
     .btn-connect-header:hover { background: var(--gold-primary); color: #070B16; }
-
     .connected-pill {
       padding: 7px 12px;
       border-radius: 12px;
@@ -226,7 +214,6 @@
       align-items: center;
       gap: 6px;
     }
-
     .btn-dots-menu {
       width: 38px;
       height: 38px;
@@ -246,7 +233,6 @@
       border-color: var(--gold-primary);
       color: var(--gold-primary);
     }
-
     /* DROPDOWN MENU (THREE DOTS) */
     .dots-dropdown {
       position: absolute;
@@ -294,7 +280,6 @@
     .dropdown-item.disconnect { color: #F87171; }
     .dropdown-item.disconnect:hover { background: rgba(239, 68, 68, 0.14); color: #EF4444; }
     .dropdown-divider { height: 1px; background: var(--border-subtle); margin: 4px 6px; }
-
     /* MAIN */
     main {
       flex: 1;
@@ -313,7 +298,6 @@
       .hero-layout { grid-template-columns: 1fr; gap: 20px; }
       main { padding: 16px 12px; }
     }
-
     /* LEFT HERO */
     .hero-badge {
       display: inline-flex;
@@ -350,7 +334,6 @@
       margin-bottom: 18px;
       max-width: 520px;
     }
-
     /* BALANCE & DAILY CHECK-IN */
     .wallet-balance-card {
       background: rgba(15, 23, 42, 0.75);
@@ -402,7 +385,6 @@
       color: var(--text-dim);
       background: rgba(255, 255, 255, 0.05);
     }
-
     /* STATS MATRIX */
     .matrix-row {
       display: grid;
@@ -431,7 +413,6 @@
       font-family: 'JetBrains Mono', monospace;
       margin-top: 4px;
     }
-
     /* REFERRAL BAR */
     .compact-ref-bar {
       display: flex;
@@ -476,7 +457,6 @@
       gap: 6px;
       white-space: nowrap;
     }
-
     /* 🏆 COMPLETE 10-TIER PRIZE MATRIX SECTION (2,500 USDT) */
     .weekly-results-card {
       background: var(--bg-surface);
@@ -512,7 +492,6 @@
       font-size: 11px;
     }
     .winner-rank { font-weight: 700; display: inline-flex; align-items: center; gap: 5px; }
-
     /* RIGHT TICKET DESK */
     .desk-card {
       background: var(--bg-surface);
@@ -540,7 +519,6 @@
       font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
     }
-
     .net-matrix {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -560,7 +538,6 @@
       border-color: var(--gold-primary);
       background: rgba(245, 194, 66, 0.12);
     }
-
     .escrow-box {
       background: var(--bg-surface-inner);
       border: 1px solid var(--border-gold);
@@ -590,7 +567,6 @@
       font-family: 'JetBrains Mono', monospace;
       white-space: nowrap;
     }
-
     .preset-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -615,7 +591,6 @@
       background: rgba(245, 194, 66, 0.15);
       color: var(--gold-primary);
     }
-
     .stepper-box {
       display: flex;
       align-items: center;
@@ -637,7 +612,6 @@
       font-weight: 700;
       cursor: pointer;
     }
-
     .overview-row {
       display: flex;
       justify-content: space-between;
@@ -646,7 +620,6 @@
       border-top: 1px solid var(--border-subtle);
       padding-top: 12px;
     }
-
     .btn-transfer-auto {
       width: 100%;
       padding: 15px;
@@ -667,7 +640,6 @@
       margin-bottom: 10px;
     }
     .btn-transfer-auto:hover { background: var(--gold-hover); transform: translateY(-2px); }
-
     .quick-actions-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -689,7 +661,6 @@
       justify-content: center;
       gap: 6px;
     }
-
     .manual-confirm-wrap {
       background: rgba(0, 0, 0, 0.35);
       border: 1px solid var(--border-medium);
@@ -742,7 +713,6 @@
       font-weight: 700;
       cursor: pointer;
     }
-
     #toastMsg {
       display: none;
       margin-top: 12px;
@@ -753,7 +723,6 @@
       text-align: center;
       line-height: 1.5;
     }
-
     /* OWNED TICKETS & PENDING STATUS VAULT */
     .tickets-vault-card {
       margin-top: 18px;
@@ -788,7 +757,6 @@
       border: 1px solid #EF4444;
       color: #EF4444;
     }
-
     /* MODAL SHARED STYLES */
     .modal-backdrop {
       position: fixed;
@@ -829,7 +797,6 @@
       justify-content: space-between;
       margin-bottom: 8px;
     }
-
     .form-group { text-align: left; margin-bottom: 12px; }
     .form-label {
       font-size: 11px;
@@ -851,7 +818,6 @@
       font-size: 12px;
       outline: none;
     }
-
     .btn-submit-action {
       width: 100%;
       padding: 13px;
@@ -870,7 +836,6 @@
       background: linear-gradient(135deg, #A855F7 0%, #7E22CE 100%);
       box-shadow: 0 4px 20px rgba(168, 85, 247, 0.35);
     }
-
     footer {
       border-top: 1px solid var(--border-subtle);
       padding: 22px;
@@ -895,13 +860,11 @@
   </style>
 </head>
 <body>
-
   <!-- 🚨 TOP WARNING BAR -->
   <div id="topWarningAlert">
     <span>⚠️ <strong>WALLET NOT CONNECTED:</strong> Please connect your wallet first to continue!</span>
     <button type="button" class="btn-alert-connect" onclick="triggerConnectFromWarning()">⚡ Connect Wallet</button>
   </div>
-
   <!-- 🔴 MARQUEE WINNING TICKER STRIP -->
   <div class="top-marquee-strip">
     <div class="marquee-track">
@@ -917,7 +880,6 @@
       <span>🎁 <strong class="win-tag">UQB1...991c</strong> Won <strong>20.00 USDT</strong> (10th Place)</span>
     </div>
   </div>
-
   <!-- HEADER -->
   <header>
     <div class="header-inner">
@@ -925,13 +887,11 @@
         <div class="brand-icon">💧</div>
         <div class="brand-title">LUCKY<span>DROP</span></div>
       </div>
-
       <div class="header-actions">
         <!-- VIP BUTTON -->
         <button type="button" class="btn-vip-header" id="headerVipBadge" onclick="openVipModal()">
           👑 VIP (50$)
         </button>
-
         <!-- CONNECT WALLET BUTTON / PILL -->
         <button type="button" class="btn-connect-header" id="btnConnectHeader" onclick="openWalletModal()">
           🔗 Connect Wallet
@@ -939,12 +899,10 @@
         <div class="connected-pill" id="connectedPill" onclick="openWalletModal()">
           ● Connected
         </div>
-
         <!-- THREE-DOTS MENU TRIGGER (⋮) -->
         <button type="button" class="btn-dots-menu" id="dotsMenuBtn" onclick="toggleDotsMenu(event)">
           ⋮
         </button>
-
         <!-- THREE-DOTS POPUP DROPDOWN -->
         <div class="dots-dropdown" id="dotsDropdownMenu">
           <button type="button" class="dropdown-item" onclick="triggerMenuAction('withdraw')">
@@ -956,24 +914,19 @@
             <span>👑</span>
             <span>Activate VIP Club (50$)</span>
           </button>
-
           <button type="button" class="dropdown-item" onclick="triggerMenuAction('copy-ref')">
             <span>🎁</span>
             <span>Copy My Referral Link</span>
           </button>
-
           <button type="button" class="dropdown-item" onclick="triggerMenuAction('share-tg')">
             <span>📱</span>
             <span>Share Bot On Telegram</span>
           </button>
-
           <button type="button" class="dropdown-item" onclick="triggerMenuAction('copy-wallet')">
             <span>📋</span>
             <span>Copy My Unique Address</span>
           </button>
-
           <div class="dropdown-divider"></div>
-
           <button type="button" class="dropdown-item disconnect" onclick="triggerMenuAction('disconnect')">
             <span>🔌</span>
             <span>Disconnect Wallet</span>
@@ -982,7 +935,6 @@
       </div>
     </div>
   </header>
-
   <!-- MAIN -->
   <main>
     <div class="hero-layout">
@@ -995,7 +947,6 @@
         <p class="hero-desc">
           Automated payment authorization with Tonkeeper, Telegram @wallet, Trust Wallet, or MetaMask. Connect your wallet to claim daily bonuses, enter weekly draws, and manage withdrawals.
         </p>
-
         <!-- IN-APP BALANCE & DAILY CHECK-IN -->
         <div class="wallet-balance-card">
           <div class="balance-group">
@@ -1012,7 +963,6 @@
             🎁 Check-in (+0.01$)
           </button>
         </div>
-
         <!-- STATS MATRIX -->
         <div class="matrix-row">
           <div class="matrix-card">
@@ -1028,7 +978,6 @@
             <div class="m-value" style="color: var(--emerald-accent); font-size: 15px;" id="cycleTimer">2d 14h 28m 10s</div>
           </div>
         </div>
-
         <!-- REFERRAL ACTION BAR -->
         <div class="compact-ref-bar">
           <div style="display: flex; align-items: center; gap: 8px;">
@@ -1043,8 +992,7 @@
             <button type="button" class="btn-pill-share" onclick="shareOnTelegram()">📱 Share</button>
           </div>
         </div>
-
-        <!-- 🏆 COMPLETE 10-TIER PRIZE MATRIX (2,500 USDT) -->
+        <!-- 🏆 COMPLETE 10-TIER PRIZE MATRIX (2,500 USDT) --!>
         <div class="weekly-results-card">
           <div class="res-head">
             <div>
@@ -1053,7 +1001,6 @@
             </div>
             <span style="font-size: 10px; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace; font-weight: 700;">● SETTLED</span>
           </div>
-
           <div class="winner-grid-10">
             <div class="winner-item">
               <span class="winner-rank" style="color: #F5C242;">🥇 1st Place (0x7a89...4F9A)</span>
@@ -1097,9 +1044,7 @@
             </div>
           </div>
         </div>
-
       </div>
-
       <!-- RIGHT TICKET DESK COLUMN -->
       <div>
         <div class="desk-card">
@@ -1110,7 +1055,6 @@
             </div>
             <span class="protocol-tag">AUTOMATED ESCROW</span>
           </div>
-
           <!-- NETWORK TABS -->
           <div class="net-matrix">
             <div class="net-tab active" id="tabTON" onclick="switchNetwork('TON')">
@@ -1122,7 +1066,6 @@
               <div style="font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; margin-top: 2px;">Trust Wallet / MetaMask</div>
             </div>
           </div>
-
           <!-- ESCROW ADDRESS BOX -->
           <div class="escrow-box">
             <div style="font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; text-transform: uppercase;" id="escrowLabel">
@@ -1133,7 +1076,6 @@
               <button type="button" class="copy-btn" onclick="copyEscrowAddress()">📋 Copy</button>
             </div>
           </div>
-
           <!-- PRESETS -->
           <div class="preset-grid">
             <button type="button" class="preset-btn active" id="p1" onclick="setPreset(1)">1 ($1)</button>
@@ -1143,7 +1085,6 @@
             <button type="button" class="preset-btn" id="p50" onclick="setPreset(50)">50 ($50)</button>
             <button type="button" class="preset-btn" id="p100" onclick="setPreset(100)">100 ($100)</button>
           </div>
-
           <!-- STEPPER -->
           <div class="stepper-box">
             <button type="button" class="step-btn" onclick="step(-1)">−</button>
@@ -1152,7 +1093,6 @@
             </div>
             <button type="button" class="step-btn" onclick="step(1)">+</button>
           </div>
-
           <!-- TOTAL & ODDS -->
           <div class="overview-row">
             <div>
@@ -1164,12 +1104,10 @@
               <div style="font-size: 12px; font-weight: 700; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace;" id="odds">~ 1 in 710.0</div>
             </div>
           </div>
-
           <!-- 1-CLICK AUTOMATIC TRANSFER BUTTON (TRANSFER NOW) -->
           <button type="button" class="btn-transfer-auto" id="autoTransferBtn" onclick="handleAutoTransferNow()">
             ⚡ Transfer Now (<span id="autoTransferBtnText">1.00 USDT via Tonkeeper</span>)
           </button>
-
           <!-- QUICK PROVIDER BUTTONS -->
           <div class="quick-actions-row">
             <button type="button" class="btn-quick-provider" onclick="triggerTonkeeperDirect()">
@@ -1179,7 +1117,6 @@
               <span>📱 Telegram</span>
             </button>
           </div>
-
           <!-- MANUAL TRANSFER & TX HASH FALLBACK ACCORDION -->
           <div class="manual-confirm-wrap">
             <button type="button" class="manual-toggle-btn" onclick="toggleManualSection()">
@@ -1197,9 +1134,7 @@
               </button>
             </div>
           </div>
-
           <div id="toastMsg"></div>
-
           <!-- OWNED TICKETS & PENDING STATUS VAULT -->
           <div class="tickets-vault-card" id="ticketsVault">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
@@ -1210,12 +1145,10 @@
               No tickets found. Connect wallet and submit your payment Tx Hash to initiate verification.
             </div>
           </div>
-
         </div>
       </div>
     </div>
   </main>
-
   <!-- 1. 💸 WITHDRAWAL MODAL -->
   <div id="withdrawModal" class="modal-backdrop" onclick="withdrawModalClick(event)">
     <div class="dialog-box">
@@ -1223,21 +1156,17 @@
         <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 800;">💸 Withdraw USDT</h3>
         <button type="button" onclick="closeWithdrawModal()" style="background: none; border: none; color: var(--text-dim); font-size: 20px; cursor: pointer;">✕</button>
       </div>
-
       <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.5;">
         Withdraw your draw winnings or in-app earnings directly to your external wallet. (Minimum: <strong>10.00 USDT</strong>).
       </p>
-
       <div class="form-group">
         <label class="form-label">Withdrawal Amount (USDT)</label>
         <input type="number" id="withdrawAmountInput" class="form-input" placeholder="Min. 10.00 USDT" min="10" step="1" />
       </div>
-
       <div class="form-group">
         <label class="form-label">USDT Destination Wallet Address</label>
         <input type="text" id="withdrawAddressInput" class="form-input" placeholder="Paste your USDT Address (BEP-20 or TON)" />
       </div>
-
       <div class="form-group">
         <label class="form-label">Transfer Network</label>
         <select id="withdrawNetwork" class="form-input" style="background:#070B16; color:#FFF;">
@@ -1245,13 +1174,11 @@
           <option value="TON">USDT (TON Network)</option>
         </select>
       </div>
-
       <button type="button" class="btn-submit-action" onclick="submitWithdrawalRequest()">
         ⚡ Request Withdrawal
       </button>
     </div>
   </div>
-
   <!-- 2. 👑 ACTIVATE VIP CLUB MODAL (50$ BEP-20) -->
   <div id="vipModal" class="modal-backdrop" onclick="vipModalClick(event)">
     <div class="dialog-box" style="border-color: var(--purple-vip);">
@@ -1259,11 +1186,9 @@
         <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 800; color: #C084FC;">👑 Activate LuckyDrop VIP</h3>
         <button type="button" onclick="closeVipModal()" style="background: none; border: none; color: var(--text-dim); font-size: 20px; cursor: pointer;">✕</button>
       </div>
-
       <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5;">
         VIP members get <strong>2x Higher Winning Odds</strong>, priority instant withdrawals, and 50 free tickets weekly!
       </p>
-
       <div style="background: rgba(168, 85, 247, 0.1); border: 1px solid var(--purple-vip); border-radius: 14px; padding: 12px; margin-bottom: 14px; text-align: left;">
         <div style="font-size: 11px; color: #E9D5FF; font-family: 'JetBrains Mono', monospace;"><strong>Fee:</strong> 50.00 USDT (BEP-20)</div>
         <div style="font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; margin-top: 6px;">TRANSFER TO BEP-20 ESCROW:</div>
@@ -1272,18 +1197,15 @@
         </div>
         <button type="button" class="copy-btn" style="margin-top: 8px; border-color: #C084FC; color: #C084FC;" onclick="copyVipEscrow()">📋 Copy VIP Escrow</button>
       </div>
-
       <div class="form-group">
         <label class="form-label">Your Transaction Hash (TxHash)</label>
         <input type="text" id="vipTxHashInput" class="form-input" placeholder="Paste 50 USDT transfer Tx Hash" />
       </div>
-
       <button type="button" class="btn-submit-action btn-submit-vip" onclick="submitVipActivation()">
         👑 Submit VIP Activation for Approval
       </button>
     </div>
   </div>
-
   <!-- 3. AUTHENTIC WALLET CONNECT MODAL -->
   <div id="walletModal" class="modal-backdrop" onclick="walletModalClick(event)">
     <div class="dialog-box">
@@ -1291,11 +1213,9 @@
         <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 800;">Connect Real Wallet</h3>
         <button type="button" onclick="closeWalletModal()" style="background: none; border: none; color: var(--text-dim); font-size: 20px; cursor: pointer;">✕</button>
       </div>
-
       <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.5;">
         Connect your genuine Web3 wallet or paste your address. (Zero demo / test values).
       </p>
-
       <button type="button" class="wallet-choice-btn" onclick="connectTonkeeperOption()">
         <span style="display: flex; align-items: center; gap: 8px;">
           <span>💎</span>
@@ -1303,7 +1223,6 @@
         </span>
         <span style="color: #38BDF8; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 700;">TON</span>
       </button>
-
       <button type="button" class="wallet-choice-btn" onclick="connectMetaMaskOption()">
         <span style="display: flex; align-items: center; gap: 8px;">
           <span>🦊</span>
@@ -1311,7 +1230,6 @@
         </span>
         <span style="color: #F5C242; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 700;">EVM</span>
       </button>
-
       <button type="button" class="wallet-choice-btn" onclick="connectTrustWalletOption()">
         <span style="display: flex; align-items: center; gap: 8px;">
           <span>🛡️</span>
@@ -1319,7 +1237,6 @@
         </span>
         <span style="color: #10B981; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 700;">MULTI</span>
       </button>
-
       <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border-subtle); text-align: left;">
         <label class="form-label">Or Paste Your Real Wallet Address</label>
         <input type="text" id="manualWalletInput" class="form-input" style="margin-bottom: 10px;" placeholder="Paste EQ... (TON) or 0x... (BEP20) address" />
@@ -1329,30 +1246,27 @@
       </div>
     </div>
   </div>
-
   <footer>
     <div>LuckyDrop Protocol © 2026 • Automated Web3 Settlement • Anti-Fraud Protection</div>
     <a href="/admin.html" class="footer-admin-link">🛡️ Owner Portal</a>
   </footer>
-
   <script>
     var ADMIN_NOTIFICATION_EMAIL = "easicarts@gmail.com";
     var MY_TON_ESCROW = "EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N";
     var MY_BEP20_ESCROW = "0x399DaD74C97D389987474d0d874674C32af661D1";
     var TELEGRAM_APP_BASE_URL = "http://t.me/Luckydrop_miniusdt_bot/Draw";
     var NOTIFICATION_API = "https://formspree.io/f/mqaeerqo";
-
-    // 🌐 SUPABASE CLOUD CONNECTION
+    
+    // 🌐 REAL SUPABASE CLOUD CONNECTION
     var SUPABASE_URL = "https://kitnafgfudzcsxlvyhtz.supabase.co";
-    var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpdG5hZmdmdWR6Y3N4bHZ5aHR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAwMDAwMDAsImV4cCI6MjA1NTAwMDAwMH0.placeholder";
-
+    var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpdG5hZmdmdWR6Y3N4bHZ5aHR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkxMTU2MzgsImV4cCI6MjEwNDY5MTYzOH0._U5ofL7vUdC6jU0xsbezPUOhaSi4LcXelCR_0ZjOuvI";
     var supabaseClient = null;
     try {
       if (window.supabase) {
         supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       }
     } catch(e) {}
-
+    
     var activeNetwork = "TON";
     var selectedTickets = 1;
     var userConnectedWallet = null;
@@ -1360,7 +1274,7 @@
     var userInAppUsdt = 0.00;
     var userInAppTon = 0.00;
     var isUserVip = false;
-
+    
     // Telegram WebApp Auto Expand
     if (window.Telegram && window.Telegram.WebApp) {
       try {
@@ -1368,7 +1282,6 @@
         window.Telegram.WebApp.expand();
       } catch(e) {}
     }
-
     /* 🚨 FLOATING RED WARNING ENGINE */
     function triggerRedWarning(actionName) {
       var bar = document.getElementById('topWarningAlert');
@@ -1382,13 +1295,11 @@
         }, 5500);
       }
     }
-
     function triggerConnectFromWarning() {
       var bar = document.getElementById('topWarningAlert');
       if (bar) bar.style.display = 'none';
       openWalletModal();
     }
-
     /* ⏳ FIXED REAL-TIME LIVE DRAW COUNTDOWN (NEVER STUCK ON CALCULATING) */
     function startLiveCountdown() {
       var timerEl = document.getElementById('cycleTimer');
@@ -1401,32 +1312,25 @@
         target.setUTCHours(23, 59, 59, 0);
         return target.getTime();
       }
-
       var targetMs = getNextSunday();
-
       function tick() {
         var nowMs = new Date().getTime();
         var remaining = targetMs - nowMs;
-
         if (remaining <= 0) {
           targetMs = getNextSunday();
           remaining = targetMs - nowMs;
         }
-
         var d = Math.floor(remaining / (1000 * 60 * 60 * 24));
         var h = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var m = Math.floor((remaining % (1000 * 60)) / (1000 * 60));
+        var m = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
         var s = Math.floor((remaining % (1000 * 60)) / 1000);
-
         if (timerEl) {
           timerEl.innerText = d + "d " + (h < 10 ? "0" + h : h) + "h " + (m < 10 ? "0" + m : m) + "m " + (s < 10 ? "0" + s : s) + "s";
         }
       }
-
       tick();
       setInterval(tick, 1000);
     }
-
     /* IN-APP BALANCES & DAILY BONUS */
     function loadInAppBalances() {
       if (!userConnectedWallet) {
@@ -1437,15 +1341,12 @@
         btn.innerText = "🎁 Check-in (+0.01$)";
         return;
       }
-
       var savedUsdt = localStorage.getItem('ld_inapp_usdt_' + userConnectedWallet);
       var savedTon = localStorage.getItem('ld_inapp_ton_' + userConnectedWallet);
       userInAppUsdt = savedUsdt ? parseFloat(savedUsdt) : 0.00;
       userInAppTon = savedTon ? parseFloat(savedTon) : 0.00;
-
       document.getElementById('inAppUsdtVal').innerText = userInAppUsdt.toFixed(2);
       document.getElementById('inAppTonVal').innerText = userInAppTon.toFixed(2);
-
       var lastClaim = localStorage.getItem('ld_last_claim_' + userConnectedWallet);
       var today = new Date().toDateString();
       var btn = document.getElementById('dailyCheckInBtn');
@@ -1456,7 +1357,6 @@
         btn.classList.remove('claimed');
         btn.innerText = "🎁 Check-in (+0.01$)";
       }
-
       isUserVip = localStorage.getItem('ld_is_vip_' + userConnectedWallet) === 'true';
       var vipBadge = document.getElementById('headerVipBadge');
       if (isUserVip && vipBadge) {
@@ -1465,32 +1365,26 @@
         vipBadge.innerText = '👑 VIP Active';
       }
     }
-
     function handleDailyCheckIn() {
       if (!userConnectedWallet) {
         triggerRedWarning("claim daily bonus");
         return;
       }
-
       var today = new Date().toDateString();
       var lastClaim = localStorage.getItem('ld_last_claim_' + userConnectedWallet);
       if (lastClaim === today) {
         showToast("ℹ️ You have already checked in today! Come back tomorrow.", "info");
         return;
       }
-
       userInAppUsdt += 0.01;
       localStorage.setItem('ld_inapp_usdt_' + userConnectedWallet, userInAppUsdt.toString());
       localStorage.setItem('ld_last_claim_' + userConnectedWallet, today);
-
       document.getElementById('inAppUsdtVal').innerText = userInAppUsdt.toFixed(2);
       var btn = document.getElementById('dailyCheckInBtn');
       btn.classList.add('claimed');
       btn.innerText = "✓ Checked-in Today";
-
       showToast("🎉 Daily Check-in Claimed! +0.01 USDT credited to your balance.", "success");
     }
-
     /* THREE-DOTS MENU CONTROL */
     function toggleDotsMenu(e) {
       e.stopPropagation();
@@ -1504,14 +1398,12 @@
         btn.classList.add('active');
       }
     }
-
     function closeDotsMenu() {
       var menu = document.getElementById('dotsDropdownMenu');
       var btn = document.getElementById('dotsMenuBtn');
       if (menu) menu.style.display = 'none';
       if (btn) btn.classList.remove('active');
     }
-
     document.addEventListener('click', function(e) {
       var menu = document.getElementById('dotsDropdownMenu');
       var btn = document.getElementById('dotsMenuBtn');
@@ -1521,7 +1413,6 @@
         }
       }
     });
-
     function triggerMenuAction(action) {
       closeDotsMenu();
       if (action === 'withdraw') {
@@ -1544,7 +1435,6 @@
         disconnectWallet();
       }
     }
-
     /* WITHDRAWAL MODAL ACTIONS */
     function openWithdrawModal() {
       if (!userConnectedWallet) {
@@ -1561,12 +1451,10 @@
     function withdrawModalClick(e) {
       if (e.target && e.target.id === 'withdrawModal') closeWithdrawModal();
     }
-
     function submitWithdrawalRequest() {
       var amount = parseFloat(document.getElementById('withdrawAmountInput').value);
       var addr = document.getElementById('withdrawAddressInput').value.trim();
       var net = document.getElementById('withdrawNetwork').value;
-
       if (isNaN(amount) || amount < 10) {
         showToast("⚠️ Minimum withdrawal amount is 10.00 USDT.", "error");
         return;
@@ -1575,11 +1463,9 @@
         showToast("⚠️ Please enter a valid USDT destination address.", "error");
         return;
       }
-
       closeWithdrawModal();
       document.getElementById('withdrawAmountInput').value = "";
       showToast("✅ Withdrawal submitted! Your request of " + amount.toFixed(2) + " USDT is under review.", "success");
-
       try {
         fetch(NOTIFICATION_API, {
           method: "POST",
@@ -1597,7 +1483,6 @@
         }).catch(function(){});
       } catch(e) {}
     }
-
     /* VIP MODAL ACTIONS */
     function openVipModal() { document.getElementById('vipModal').style.display = 'flex'; }
     function closeVipModal() { document.getElementById('vipModal').style.display = 'none'; }
@@ -1607,7 +1492,6 @@
         showToast("✅ BEP-20 VIP Escrow Copied! Send 50 USDT.", "success");
       });
     }
-
     function submitVipActivation() {
       if (!userConnectedWallet) {
         triggerRedWarning("activate VIP");
@@ -1618,7 +1502,6 @@
         showToast("⚠️ Please paste valid 50 USDT transfer Tx Hash.", "error");
         return;
       }
-
       var subs = JSON.parse(localStorage.getItem('ld_global_submissions') || '[]');
       var vipEntry = {
         txHash: txHash,
@@ -1631,11 +1514,9 @@
       };
       subs.unshift(vipEntry);
       localStorage.setItem('ld_global_submissions', JSON.stringify(subs));
-
       closeVipModal();
       document.getElementById('vipTxHashInput').value = "";
       showToast("⏳ VIP Request Submitted! Awaiting Admin Activation.", "info");
-
       try {
         fetch(NOTIFICATION_API, {
           method: "POST",
@@ -1655,14 +1536,12 @@
         }).catch(function(){});
       } catch(e) {}
     }
-
     /* REFERRAL LINKS */
     function getTelegramReferralLink() {
       if (!userConnectedWallet) return null;
       var refCode = "ref_" + userConnectedWallet.substring(2, 8).toUpperCase();
       return TELEGRAM_APP_BASE_URL + "?startapp=" + refCode;
     }
-
     function copyReferralLink() {
       if (!userConnectedWallet) {
         triggerRedWarning("generate your referral link");
@@ -1675,7 +1554,6 @@
         prompt("Copy your referral link:", link);
       });
     }
-
     function shareOnTelegram() {
       if (!userConnectedWallet) {
         triggerRedWarning("share your referral link");
@@ -1690,14 +1568,12 @@
         window.open(shareUrl, "_blank");
       }
     }
-
     function switchNetwork(net) {
       activeNetwork = net;
       var tabTON = document.getElementById('tabTON');
       var tabBEP = document.getElementById('tabBEP');
       var label = document.getElementById('escrowLabel');
       var addr = document.getElementById('escrowAddressText');
-
       if (net === 'TON') {
         tabTON.className = "net-tab active";
         tabBEP.className = "net-tab";
@@ -1711,14 +1587,12 @@
       }
       updateUI();
     }
-
     function copyEscrowAddress() {
       var addr = (activeNetwork === 'TON') ? MY_TON_ESCROW : MY_BEP20_ESCROW;
       navigator.clipboard.writeText(addr).then(function() {
         showToast("✅ " + activeNetwork + " Escrow Address Copied!", "success");
       });
     }
-
     /* WALLET MODAL */
     function openWalletModal() {
       document.getElementById('walletModal').style.display = 'flex';
@@ -1727,7 +1601,6 @@
     }
     function closeWalletModal() { document.getElementById('walletModal').style.display = 'none'; }
     function walletModalClick(e) { if (e.target && e.target.id === 'walletModal') closeWalletModal(); }
-
     function connectTonkeeperOption() {
       connectedProvider = "Tonkeeper";
       if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
@@ -1745,7 +1618,6 @@
       }
       saveVerifiedWallet(userTonAddr.trim(), "Tonkeeper");
     }
-
     async function connectMetaMaskOption() {
       connectedProvider = "MetaMask";
       if (typeof window.ethereum !== 'undefined') {
@@ -1767,7 +1639,6 @@
         showToast("⚠️ Invalid EVM address. Must start with 0x and be 42 characters.", "error");
       }
     }
-
     async function connectTrustWalletOption() {
       connectedProvider = "Trust Wallet";
       if (typeof window.trustwallet !== 'undefined' || typeof window.ethereum !== 'undefined') {
@@ -1787,7 +1658,6 @@
         showToast("⚠️ Invalid address. Please enter your real Trust Wallet address.", "error");
       }
     }
-
     function confirmManualAddress() {
       var input = document.getElementById('manualWalletInput');
       var val = input ? input.value.trim() : "";
@@ -1798,7 +1668,6 @@
       connectedProvider = "Direct Address";
       saveVerifiedWallet(val, "Connected Wallet");
     }
-
     function saveVerifiedWallet(addr, providerName) {
       userConnectedWallet = addr;
       sessionStorage.setItem('ld_session_wallet', userConnectedWallet);
@@ -1810,7 +1679,6 @@
       if (bar) bar.style.display = 'none';
       showToast("🎉 " + providerName + " Connected: " + userConnectedWallet.substring(0, 6) + "..." + userConnectedWallet.substring(userConnectedWallet.length - 4), "success");
     }
-
     function applyConnectedState() {
       if (!userConnectedWallet) return;
       document.getElementById('btnConnectHeader').style.display = 'none';
@@ -1819,7 +1687,6 @@
       pill.innerText = userConnectedWallet.substring(0, 6) + "..." + userConnectedWallet.substring(userConnectedWallet.length - 4);
       syncUserTicketsWithGlobal();
     }
-
     function disconnectWallet() {
       userConnectedWallet = null;
       connectedProvider = null;
@@ -1833,7 +1700,6 @@
       renderTicketsList([]);
       showToast("Wallet Disconnected successfully.", "info");
     }
-
     function setPreset(n) {
       selectedTickets = n;
       var list = [1, 5, 10, 25, 50, 100];
@@ -1843,18 +1709,15 @@
       }
       updateUI();
     }
-
     function step(v) {
       var next = selectedTickets + v;
       if (next >= 1 && next <= 100) setPreset(next);
     }
-
     function updateUI() {
       document.getElementById('ticketCount').innerText = selectedTickets;
       var total = (selectedTickets * 1.00).toFixed(2);
       document.getElementById('totalAmount').innerText = total;
       document.getElementById('odds').innerText = "~ 1 in " + (710.0 / selectedTickets).toFixed(1);
-
       var btnText = document.getElementById('autoTransferBtnText');
       if (btnText) {
         if (activeNetwork === 'TON') {
@@ -1864,7 +1727,6 @@
         }
       }
     }
-
     function toggleManualSection() {
       var box = document.getElementById('manualContentBox');
       var arrow = document.getElementById('manualToggleArrow');
@@ -1876,33 +1738,27 @@
         arrow.innerText = '▼';
       }
     }
-
     /* 1-CLICK AUTOMATIC TRANSFER HANDLER */
     async function handleAutoTransferNow() {
       if (!userConnectedWallet) {
         triggerRedWarning("transfer USDT");
         return;
       }
-
       var total = (selectedTickets * 1.00).toFixed(2);
-
       if (activeNetwork === 'TON') {
         navigator.clipboard.writeText(MY_TON_ESCROW).catch(function(){});
         var tonUniversalLink = "https://app.tonkeeper.com/transfer/" + MY_TON_ESCROW;
         showToast("🚀 Opening Tonkeeper... (Escrow address copied!)", "success");
-
         if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openLink) {
           window.Telegram.WebApp.openLink(tonUniversalLink);
         } else {
           window.open(tonUniversalLink, "_blank");
         }
-
         setTimeout(function() {
           showToast("ℹ️ Complete transfer in Tonkeeper, then paste Tx Hash below for approval.", "info");
         }, 1500);
         return;
       }
-
       if (activeNetwork === 'BEP20') {
         navigator.clipboard.writeText(MY_BEP20_ESCROW).catch(function(){});
         if (typeof window.ethereum !== 'undefined') {
@@ -1910,12 +1766,10 @@
             showToast("⏳ Requesting wallet approval...", "info");
             var provider = new ethers.providers.Web3Provider(window.ethereum);
             var signer = provider.getSigner();
-
             var tx = await signer.sendTransaction({
               to: MY_BEP20_ESCROW,
               value: ethers.utils.parseEther("0.001")
             });
-
             showToast("🎉 Transaction Broadcast! Hash: " + tx.hash.substring(0, 10) + "...", "success");
             submitTxForApproval(tx.hash, total);
             return;
@@ -1933,7 +1787,6 @@
         }
       }
     }
-
     function triggerTonkeeperDirect() {
       navigator.clipboard.writeText(MY_TON_ESCROW).catch(function(){});
       var url = "https://app.tonkeeper.com/transfer/" + MY_TON_ESCROW;
@@ -1944,7 +1797,6 @@
       }
       showToast("💎 Opening Tonkeeper... (Address copied!)", "success");
     }
-
     function triggerTelegramWalletDirect() {
       navigator.clipboard.writeText(MY_TON_ESCROW).catch(function(){});
       var url = "https://t.me/wallet";
@@ -1955,17 +1807,14 @@
       }
       showToast("📱 Opening Telegram Wallet... (Address copied!)", "success");
     }
-
     /* SUBMIT TRANSACTION HASH — SAVES DIRECT TO CLOUD & LOCAL FOR ADMIN.HTML */
     function verifyManualHash() {
       if (!userConnectedWallet) {
         triggerRedWarning("submit transaction hash");
         return;
       }
-
       var txHash = document.getElementById('txHashInput').value.trim();
       var total = (selectedTickets * 1.00).toFixed(2);
-
       if (!txHash) {
         showToast("⚠️ Please paste your Transaction Hash.", "error");
         return;
@@ -1974,7 +1823,6 @@
         showToast("❌ Invalid Transaction Hash length. Real hashes are 32–64 characters.", "error");
         return;
       }
-
       var subs = JSON.parse(localStorage.getItem('ld_global_submissions') || '[]');
       for (var i = 0; i < subs.length; i++) {
         if (subs[i].txHash === txHash) {
@@ -1982,22 +1830,49 @@
           return;
         }
       }
-
       submitTxForApproval(txHash, total);
     }
-
     async function submitTxForApproval(txHash, totalAmount) {
-      // 1. SUPABASE CLOUD INSERT
+      var generatedTicketNo = "LD-" + Math.floor(100000 + Math.random() * 900000);
+      
+      // 1. SUPABASE CLOUD INSERT (Direct REST API Call + SDK Fallback)
       try {
-        if (supabaseClient) {
-          await supabaseClient.from('tickets').insert([{
-            ticket_number: "LD-" + Math.floor(100000 + Math.random() * 900000),
+        var res = await fetch(SUPABASE_URL + '/rest/v1/tickets', {
+          method: 'POST',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=representation'
+          },
+          body: JSON.stringify({
+            ticket_number: generatedTicketNo,
             wallet_address: userConnectedWallet,
             tx_hash: txHash,
             is_winner: false
-          }]);
+          })
+        });
+        if (res.ok) {
+          console.log("✅ Supabase row successfully inserted via REST API!");
+        } else {
+          var errJson = await res.json();
+          console.warn("Supabase REST response:", errJson);
         }
-      } catch(e) {}
+      } catch(e) {
+        console.warn("Direct REST insert issue, attempting SDK fallback:", e);
+        try {
+          if (supabaseClient) {
+            await supabaseClient.from('tickets').insert([{
+              ticket_number: generatedTicketNo,
+              wallet_address: userConnectedWallet,
+              tx_hash: txHash,
+              is_winner: false
+            }]);
+          }
+        } catch(err2) {
+          console.error("SDK error:", err2);
+        }
+      }
 
       // 2. SAVE TO GLOBAL SUBMISSIONS KEY (READ BY ADMIN.HTML)
       var subs = JSON.parse(localStorage.getItem('ld_global_submissions') || '[]');
@@ -2026,11 +1901,9 @@
         });
       }
       localStorage.setItem(userKey, JSON.stringify(userTickets));
-
       document.getElementById('txHashInput').value = "";
       syncUserTicketsWithGlobal();
-
-      showToast("⏳ Transaction Submitted! Awaiting Admin Approval.", "info");
+      showToast("⏳ Transaction Submitted! Awaiting Admin Approval. (Ticket: " + generatedTicketNo + ")", "info");
 
       var targetEscrow = (activeNetwork === 'TON') ? MY_TON_ESCROW : MY_BEP20_ESCROW;
       var explorerUrl = (activeNetwork === 'TON')
@@ -2059,14 +1932,12 @@
         }).catch(function(){});
       } catch(e) {}
     }
-
     /* TWO-WAY SYNC FOR APPROVAL UPDATES */
     function syncUserTicketsWithGlobal() {
       if (!userConnectedWallet) return;
       var subs = JSON.parse(localStorage.getItem('ld_global_submissions') || '[]');
       var userKey = 'ld_tickets_' + userConnectedWallet;
       var userTickets = JSON.parse(localStorage.getItem(userKey) || '[]');
-
       var updated = false;
       for (var i = 0; i < userTickets.length; i++) {
         for (var s = 0; s < subs.length; s++) {
@@ -2081,28 +1952,22 @@
           }
         }
       }
-
       if (updated) {
         localStorage.setItem(userKey, JSON.stringify(userTickets));
       }
       renderTicketsList(userTickets);
     }
-
     function renderTicketsList(tickets) {
       var badge = document.getElementById('verifiedBadge');
       var list = document.getElementById('verifiedTicketsList');
       if (!badge || !list) return;
-
       var verifiedCount = 0;
       var pendingCount = 0;
-
       for (var i = 0; i < tickets.length; i++) {
         if (tickets[i].status === 'verified') verifiedCount++;
         if (tickets[i].status === 'pending') pendingCount++;
       }
-
       badge.innerText = verifiedCount + " Active / " + pendingCount + " Pending";
-
       if (tickets.length === 0) {
         list.innerHTML = "No tickets found. Connect wallet and submit your payment Tx Hash to initiate verification.";
       } else {
@@ -2121,7 +1986,6 @@
         list.innerHTML = html;
       }
     }
-
     function showToast(msg, type) {
       var toast = document.getElementById('toastMsg');
       toast.style.display = 'block';
@@ -2141,7 +2005,6 @@
       }
       setTimeout(function() { toast.style.display = 'none'; }, 6000);
     }
-
     (function init() {
       var activeSessionWallet = sessionStorage.getItem('ld_session_wallet');
       if (activeSessionWallet) {
@@ -2153,7 +2016,6 @@
         document.getElementById('btnConnectHeader').style.display = 'flex';
         document.getElementById('connectedPill').style.display = 'none';
       }
-
       loadInAppBalances();
       updateUI();
       startLiveCountdown();
