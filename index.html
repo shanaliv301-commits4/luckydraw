@@ -116,7 +116,7 @@
       margin-left: 6px;
     }
 
-    /* 🔴 RUNNING MARQUEE TICKER (WITH "TRY YOUR LUCK" HIGHLIGHT) */
+    /* 🔴 RUNNING MARQUEE TICKER */
     .top-marquee-strip {
       background: linear-gradient(90deg, #0D111D 0%, #151C2C 50%, #0D111D 100%);
       border-bottom: 1px solid var(--border-subtle);
@@ -258,6 +258,44 @@
       width: 100%;
     }
 
+    /* VIEW MANAGEMENT */
+    .app-view {
+      display: none;
+      animation: fadeInView 0.2s ease-in-out;
+    }
+    .app-view.active-view {
+      display: block;
+    }
+    @keyframes fadeInView {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* BACK BUTTON BAR (VIEW 2) */
+    .view-back-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .btn-back-nav {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 7px 14px;
+      border-radius: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-back-nav:active { transform: scale(0.97); }
+
     /* HERO SECTION */
     .hero-center-box {
       text-align: center;
@@ -359,7 +397,7 @@
       white-space: nowrap;
     }
 
-    /* IN-APP BALANCE STRIP (BELOW QUICK BUTTONS) */
+    /* IN-APP BALANCE STRIP */
     .inapp-balance-strip {
       background: var(--bg-surface-inner);
       border: 1px solid var(--border-subtle);
@@ -425,10 +463,50 @@
       justify-content: space-between;
     }
 
-    /* TICKET ACQUISITION TERMINAL */
+    /* PROMO BANNER IN HOME VIEW (LEADS TO VIEW 2) */
+    .promo-ticket-banner {
+      background: linear-gradient(135deg, rgba(245, 194, 66, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%);
+      border: 1px solid var(--border-gold);
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      cursor: pointer;
+    }
+    .promo-ticket-banner:active { transform: scale(0.98); }
+    .promo-text-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: #FFFFFF;
+    }
+    .promo-text-sub {
+      font-size: 10.5px;
+      color: var(--gold-primary);
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 2px;
+    }
+    .btn-promo-buy {
+      background: var(--gold-primary);
+      color: #0B0E14;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    /* DEDICATED TICKET TERMINAL (VIEW 2) */
     .terminal-card {
       background: var(--bg-surface);
-      border: 1px solid var(--border-medium);
+      border: 1px solid var(--border-gold);
       border-radius: 20px;
       padding: 18px 16px;
       margin-bottom: 18px;
@@ -444,7 +522,7 @@
     }
     .terminal-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 800;
       letter-spacing: -0.02em;
     }
@@ -461,8 +539,8 @@
       margin-bottom: 12px;
     }
     .step-btn {
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       border-radius: 8px;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--border-subtle);
@@ -473,7 +551,7 @@
     }
     .step-val {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 800;
       color: var(--gold-primary);
     }
@@ -511,7 +589,7 @@
       margin-bottom: 14px;
     }
     .net-tab {
-      padding: 9px;
+      padding: 10px;
       border-radius: 11px;
       border: 1px solid var(--border-subtle);
       background: var(--bg-surface-inner);
@@ -524,7 +602,7 @@
       background: rgba(245, 194, 66, 0.12);
     }
     .net-tab-title {
-      font-size: 11.5px;
+      font-size: 12px;
       font-weight: 700;
       color: #FFFFFF;
     }
@@ -569,13 +647,13 @@
     /* ACTION CTA BUTTON */
     .btn-pay-cta {
       width: 100%;
-      padding: 14px;
+      padding: 15px;
       border-radius: 13px;
       border: none;
       background: linear-gradient(135deg, #F5C242 0%, #D49B1E 100%);
       color: #0B0E14;
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 14px;
+      font-size: 14.5px;
       font-weight: 800;
       cursor: pointer;
       box-shadow: 0 4px 18px var(--gold-glow);
@@ -583,48 +661,54 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .btn-pay-cta:active { transform: translateY(1px); }
 
-    /* MANUAL ACCORDION */
-    .manual-toggle-btn {
+    /* FAILED TO CONNECT MANUAL FALLBACK ACCORDION */
+    .fallback-toggle-btn {
       width: 100%;
       background: none;
       border: none;
       color: var(--text-dim);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
+      font-size: 11px;
       font-weight: 700;
       cursor: pointer;
       text-align: center;
-      padding: 4px 0;
+      padding: 6px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
     }
-    .manual-toggle-btn:hover { color: var(--gold-primary); }
-    .manual-content {
+    .fallback-toggle-btn:hover { color: var(--gold-primary); }
+    .fallback-content-box {
       display: none;
-      margin-top: 8px;
-      padding-top: 8px;
-      border-top: 1px solid var(--border-subtle);
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 12px;
+      background: var(--bg-surface-inner);
+      border: 1px solid var(--border-subtle);
     }
     .verify-input {
       width: 100%;
-      background: var(--bg-surface-inner);
-      border: 1px solid var(--border-subtle);
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-medium);
       border-radius: 9px;
-      padding: 9px 10px;
+      padding: 10px 11px;
       color: #FFFFFF;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
+      font-size: 11px;
       outline: none;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
     .btn-confirm-hash {
       width: 100%;
-      padding: 10px;
+      padding: 11px;
       border-radius: 9px;
       border: 1px solid var(--border-gold);
-      background: rgba(245, 194, 66, 0.15);
+      background: rgba(245, 194, 66, 0.16);
       color: var(--gold-primary);
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
@@ -828,7 +912,7 @@
   <!-- HEADER -->
   <header>
     <div class="header-inner">
-      <div class="brand-box" onclick="location.reload()">
+      <div class="brand-box" onclick="switchToView('home')">
         <div class="brand-icon">💧</div>
         <div class="brand-title">Lucky<span>Drop</span></div>
       </div>
@@ -846,195 +930,229 @@
     </div>
   </header>
 
-  <!-- MAIN -->
+  <!-- MAIN CONTAINER (TWO SEPARATE VIEWS) -->
   <main>
-    <!-- HERO POOL BOX -->
-    <div class="hero-center-box">
-      <div class="cycle-badge">
-        ● CYCLE #14 • WEEKLY GRAND DRAW
+    
+    <!-- ============================================== -->
+    <!-- VIEW 1: HOME MAIN DASHBOARD (CLEAN & NO CLUTTER) -->
+    <!-- ============================================== -->
+    <div id="viewHome" class="app-view active-view">
+      <!-- HERO POOL BOX -->
+      <div class="hero-center-box">
+        <div class="cycle-badge">
+          ● CYCLE #14 • WEEKLY GRAND DRAW
+        </div>
+        <div class="pool-sublabel">Guaranteed Prize Pool • 100% USDT</div>
+        <div class="big-pool-val"><span>$</span>2,500.00</div>
+        <div class="pool-subdetails">
+          <span>10 Prize Tiers</span>
+          <span>•</span>
+          <span style="color: var(--gold-primary);">1st Place: 800 USDT</span>
+          <span>•</span>
+          <span style="color: var(--emerald-accent);">$1 / Ticket</span>
+        </div>
+        <div class="vrf-tag">
+          🛡️ Chainlink VRF Certified #048-VRF
+        </div>
       </div>
-      <div class="pool-sublabel">Guaranteed Prize Pool • 100% USDT</div>
-      <div class="big-pool-val"><span>$</span>2,500.00</div>
-      <div class="pool-subdetails">
-        <span>10 Prize Tiers</span>
-        <span>•</span>
-        <span style="color: var(--gold-primary);">1st Place: 800 USDT</span>
-        <span>•</span>
-        <span style="color: var(--emerald-accent);">$1 / Ticket</span>
-      </div>
-      <div class="vrf-tag">
-        🛡️ Chainlink VRF Certified #048-VRF
-      </div>
-    </div>
 
-    <!-- 4-ACTION QUICK HUB -->
-    <div class="quick-tiles-grid">
-      <div class="action-tile" onclick="scrollToTicketDesk()">
-        <div class="action-tile-icon" style="color: var(--gold-primary);">🎟️</div>
-        <div class="action-tile-text">Enter Draw</div>
+      <!-- 4-ACTION QUICK TILES -->
+      <div class="quick-tiles-grid">
+        <div class="action-tile" onclick="switchToView('tickets')">
+          <div class="action-tile-icon" style="color: var(--gold-primary);">🎟️</div>
+          <div class="action-tile-text">Enter Draw</div>
+        </div>
+        <div class="action-tile" onclick="handleDailyCheckIn()">
+          <div class="action-tile-icon" style="color: var(--emerald-accent);">🎁</div>
+          <div class="action-tile-text" id="dailyCheckInLabel">Claim Daily</div>
+        </div>
+        <div class="action-tile" onclick="openWithdrawModal()">
+          <div class="action-tile-icon" style="color: #60A5FA;">💸</div>
+          <div class="action-tile-text">Withdraw</div>
+        </div>
+        <div class="action-tile" onclick="copyReferralLink()">
+          <div class="action-tile-icon" style="color: #C084FC;">👥</div>
+          <div class="action-tile-text">Invite & Earn</div>
+        </div>
       </div>
-      <div class="action-tile" onclick="handleDailyCheckIn()">
-        <div class="action-tile-icon" style="color: var(--emerald-accent);">🎁</div>
-        <div class="action-tile-text" id="dailyCheckInLabel">Claim Daily</div>
-      </div>
-      <div class="action-tile" onclick="openWithdrawModal()">
-        <div class="action-tile-icon" style="color: #60A5FA;">💸</div>
-        <div class="action-tile-text">Withdraw</div>
-      </div>
-      <div class="action-tile" onclick="copyReferralLink()">
-        <div class="action-tile-icon" style="color: #C084FC;">👥</div>
-        <div class="action-tile-text">Invite & Earn</div>
-      </div>
-    </div>
 
-    <!-- IN-APP BALANCE STRIP (DEFAULT 0.00) -->
-    <div class="inapp-balance-strip">
-      <div class="inapp-bal-item">
-        <span style="color: var(--text-dim);">USDT:</span>
-        <strong id="inAppUsdtVal" style="color: #FFFFFF;">0.00</strong>
+      <!-- IN-APP BALANCE STRIP (DEFAULT 0.00) -->
+      <div class="inapp-balance-strip">
+        <div class="inapp-bal-item">
+          <span style="color: var(--text-dim);">USDT:</span>
+          <strong id="inAppUsdtVal" style="color: #FFFFFF;">0.00</strong>
+        </div>
+        <div class="inapp-bal-item">
+          <span style="color: var(--text-dim);">TON:</span>
+          <strong id="inAppTonVal" style="color: #38BDF8;">0.00</strong>
+        </div>
+        <span class="inapp-bal-badge">+$0.01 Daily Bonus</span>
       </div>
-      <div class="inapp-bal-item">
-        <span style="color: var(--text-dim);">TON:</span>
-        <strong id="inAppTonVal" style="color: #38BDF8;">0.00</strong>
-      </div>
-      <span class="inapp-bal-badge">+$0.01 Daily Bonus</span>
-    </div>
 
-    <!-- DUAL SUMMARY CARDS -->
-    <div class="dual-cards-row">
-      <!-- YOUR TICKETS (DEFAULT 0) -->
-      <div class="summary-card" style="border-color: rgba(245, 194, 66, 0.35);">
+      <!-- DUAL SUMMARY CARDS -->
+      <div class="dual-cards-row">
+        <!-- YOUR TICKETS (DEFAULT 0) -->
+        <div class="summary-card" style="border-color: rgba(245, 194, 66, 0.35);">
+          <div>
+            <div class="card-label">Your Tickets</div>
+            <div class="card-main-val" id="summaryActiveTickets" style="color: var(--gold-primary);">0 <span style="font-size: 11px; color: var(--text-muted);">Active</span></div>
+          </div>
+          <div class="card-footer-meta">
+            <span>Odds: <strong id="summaryOdds" style="color: var(--emerald-accent);">~1:710</strong></span>
+            <span>Bal: <strong id="summaryBal">$0.00</strong></span>
+          </div>
+        </div>
+
+        <!-- DRAW CYCLE STATUS -->
+        <div class="summary-card">
+          <div>
+            <div class="card-label">Draw Cycle #14</div>
+            <div class="card-main-val">$2,500 <span style="font-size: 11px; color: #38BDF8;">USDT</span></div>
+          </div>
+          <div class="card-footer-meta">
+            <span>Closes: <strong id="cycleTimer" style="color: var(--emerald-accent);">2d 14h 28m</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROMO BANNER THAT LEADS TO TICKETS VIEW -->
+      <div class="promo-ticket-banner" onclick="switchToView('tickets')">
         <div>
-          <div class="card-label">Your Tickets</div>
-          <div class="card-main-val" id="summaryActiveTickets" style="color: var(--gold-primary);">0 <span style="font-size: 11px; color: var(--text-muted);">Active</span></div>
+          <div class="promo-text-title">🎟️ ACQUIRE TICKETS</div>
+          <div class="promo-text-sub">Instant VRF minting with TON or BEP-20</div>
         </div>
-        <div class="card-footer-meta">
-          <span>Odds: <strong id="summaryOdds" style="color: var(--emerald-accent);">~1:710</strong></span>
-          <span>Bal: <strong id="summaryBal">$0.00</strong></span>
+        <button type="button" class="btn-promo-buy">⚡ Buy</button>
+      </div>
+
+      <!-- YOUR TICKETS STATUS VAULT -->
+      <div class="tickets-vault-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <strong style="font-size: 12px;">🎟️ Your Entries & Verification:</strong>
+          <span style="font-size: 10.5px; color: var(--gold-primary); font-family: 'JetBrains Mono', monospace;" id="verifiedBadge">0 Tickets Active</span>
+        </div>
+        <div id="verifiedTicketsList" style="font-size: 11px; color: var(--text-dim);">
+          0 Tickets Active • Connect wallet and enter draw to view cryptographic tickets.
         </div>
       </div>
 
-      <!-- DRAW CYCLE STATUS -->
-      <div class="summary-card">
-        <div>
-          <div class="card-label">Draw Cycle #14</div>
-          <div class="card-main-val">$2,500 <span style="font-size: 11px; color: #38BDF8;">USDT</span></div>
+      <!-- PRIZE POOL & WINNERS ARCHIVE -->
+      <div class="archive-card">
+        <div class="archive-header">
+          <strong style="font-size: 13px;">🏆 Prize Pool & Winners</strong>
+          <span style="font-size: 10px; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace; font-weight: 700;">10 Guaranteed Spots</span>
         </div>
-        <div class="card-footer-meta">
-          <span>Closes: <strong id="cycleTimer" style="color: var(--emerald-accent);">2d 14h 28m</strong></span>
+        <div class="winner-row-item">
+          <span>🥇 1st Place (0x7a89...4F9A)</span>
+          <strong style="color: var(--emerald-accent);">+800.00 USDT</strong>
+        </div>
+        <div class="winner-row-item">
+          <span>🥈 2nd Place (EQCD39...82bF)</span>
+          <strong style="color: var(--emerald-accent);">+400.00 USDT</strong>
+        </div>
+        <div class="winner-row-item">
+          <span>🥉 3rd Place (0x3b11...99e1)</span>
+          <strong style="color: var(--emerald-accent);">+250.00 USDT</strong>
         </div>
       </div>
     </div>
 
-    <!-- TICKET ACQUISITION TERMINAL -->
-    <div class="terminal-card" id="ticketTerminalSection">
-      <div class="terminal-header">
-        <div>
-          <div style="font-size: 9.5px; color: var(--gold-primary); font-family: 'JetBrains Mono', monospace; font-weight: 700;">ACQUIRE LUCKYDROP TICKETS</div>
-          <div class="terminal-title">1 TICKET = 1 USDT</div>
-        </div>
-        <span style="font-size: 10px; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace; font-weight: 700;">● INSTANT ESCROW</span>
-      </div>
 
-      <!-- STEPPER -->
-      <div class="stepper-box">
-        <button type="button" class="step-btn" onclick="step(-1)">−</button>
-        <div class="step-val">
-          <span id="ticketCount">1</span> <span style="font-size: 11px; color: var(--text-muted);">Ticket</span>
-        </div>
-        <button type="button" class="step-btn" onclick="step(1)">+</button>
-      </div>
-
-      <!-- PRESETS -->
-      <div class="preset-grid">
-        <button type="button" class="preset-btn active" id="p1" onclick="setPreset(1)">1 ($1)</button>
-        <button type="button" class="preset-btn" id="p5" onclick="setPreset(5)">5 ($5)</button>
-        <button type="button" class="preset-btn" id="p10" onclick="setPreset(10)">10 ($10)</button>
-        <button type="button" class="preset-btn" id="p25" onclick="setPreset(25)">25 ($25)</button>
-        <button type="button" class="preset-btn" id="p50" onclick="setPreset(50)">50 ($50)</button>
-      </div>
-
-      <!-- NETWORK SWITCH -->
-      <div class="net-matrix">
-        <div class="net-tab active" id="tabTON" onclick="switchNetwork('TON')">
-          <div class="net-tab-title" style="color: #38BDF8;">💎 TON USDT</div>
-          <div class="net-tab-sub">Telegram / Tonkeeper</div>
-        </div>
-        <div class="net-tab" id="tabBEP" onclick="switchNetwork('BEP20')">
-          <div class="net-tab-title" style="color: var(--gold-primary);">⚡ BEP-20 USDT</div>
-          <div class="net-tab-sub">BNB Chain / Trust</div>
-        </div>
-      </div>
-
-      <!-- ESCROW ADDRESS BOX -->
-      <div class="escrow-box">
-        <div style="font-size: 9.5px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;" id="escrowLabel">
-          OFFICIAL VAULT ESCROW • DIRECT DEPOSIT
-        </div>
-        <div class="escrow-val">
-          <span id="escrowAddressText">EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N</span>
-          <button type="button" class="copy-btn" onclick="copyEscrowAddress()">Copy</button>
-        </div>
-      </div>
-
-      <!-- 1-CLICK PAY & ENTER DRAW CTA BUTTON -->
-      <button type="button" class="btn-pay-cta" onclick="handleAutoTransferNow()">
-        ⚡ Pay <span id="ctaPayAmount">1.00</span> USDT & Enter Draw
-      </button>
-
-      <!-- MANUAL TX HASH SUBMIT ACCORDION -->
-      <div>
-        <button type="button" class="manual-toggle-btn" onclick="toggleManualSection()">
-          Already sent? Submit Tx Hash for Instant Approval ▼
+    <!-- ============================================================== -->
+    <!-- VIEW 2: DEDICATED TICKET ACQUISITION SCREEN (WITH "← BACK" BUTTON) -->
+    <!-- ============================================================== -->
+    <div id="viewTickets" class="app-view">
+      <!-- SLEEK BACK BUTTON BAR -->
+      <div class="view-back-bar">
+        <button type="button" class="btn-back-nav" onclick="switchToView('home')">
+          ← Back to Main
         </button>
-        <div class="manual-content" id="manualContentBox">
-          <input type="text" id="txHashInput" class="verify-input" placeholder="Paste Tx Hash (0x... or Tonkeeper Hash)" />
-          <button type="button" class="btn-confirm-hash" onclick="verifyManualHash()">
-            ✓ Submit Tx Hash for Verification
-          </button>
+        <span style="font-size: 11px; color: var(--gold-primary); font-family: 'JetBrains Mono', monospace; font-weight: 700;">
+          CYCLE #14 ENTRY DESK
+        </span>
+      </div>
+
+      <!-- TICKET ACQUISITION TERMINAL -->
+      <div class="terminal-card">
+        <div class="terminal-header">
+          <div>
+            <div style="font-size: 9.5px; color: var(--gold-primary); font-family: 'JetBrains Mono', monospace; font-weight: 700;">SELECT QUANTITY</div>
+            <div class="terminal-title">1 TICKET = 1 USDT</div>
+          </div>
+          <span style="font-size: 10px; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace; font-weight: 700;">● INSTANT ESCROW</span>
         </div>
-      </div>
-    </div>
 
-    <!-- YOUR TICKETS STATUS VAULT -->
-    <div class="tickets-vault-card">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-        <strong style="font-size: 12px;">🎟️ Your Entries & Verification:</strong>
-        <span style="font-size: 10.5px; color: var(--gold-primary); font-family: 'JetBrains Mono', monospace;" id="verifiedBadge">0 Tickets Active</span>
-      </div>
-      <div id="verifiedTicketsList" style="font-size: 11px; color: var(--text-dim);">
-        0 Tickets Active • Connect wallet and enter draw to view cryptographic tickets.
-      </div>
-    </div>
+        <!-- STEPPER -->
+        <div class="stepper-box">
+          <button type="button" class="step-btn" onclick="step(-1)">−</button>
+          <div class="step-val">
+            <span id="ticketCount">1</span> <span style="font-size: 11px; color: var(--text-muted);">Ticket</span>
+          </div>
+          <button type="button" class="step-btn" onclick="step(1)">+</button>
+        </div>
 
-    <!-- PRIZE POOL & WINNERS ARCHIVE -->
-    <div class="archive-card">
-      <div class="archive-header">
-        <strong style="font-size: 13px;">🏆 Prize Pool & Winners</strong>
-        <span style="font-size: 10px; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace; font-weight: 700;">10 Guaranteed Spots</span>
-      </div>
-      <div class="winner-row-item">
-        <span>🥇 1st Place (0x7a89...4F9A)</span>
-        <strong style="color: var(--emerald-accent);">+800.00 USDT</strong>
-      </div>
-      <div class="winner-row-item">
-        <span>🥈 2nd Place (EQCD39...82bF)</span>
-        <strong style="color: var(--emerald-accent);">+400.00 USDT</strong>
-      </div>
-      <div class="winner-row-item">
-        <span>🥉 3rd Place (0x3b11...99e1)</span>
-        <strong style="color: var(--emerald-accent);">+250.00 USDT</strong>
+        <!-- PRESETS -->
+        <div class="preset-grid">
+          <button type="button" class="preset-btn active" id="p1" onclick="setPreset(1)">1 ($1)</button>
+          <button type="button" class="preset-btn" id="p5" onclick="setPreset(5)">5 ($5)</button>
+          <button type="button" class="preset-btn" id="p10" onclick="setPreset(10)">10 ($10)</button>
+          <button type="button" class="preset-btn" id="p25" onclick="setPreset(25)">25 ($25)</button>
+          <button type="button" class="preset-btn" id="p50" onclick="setPreset(50)">50 ($50)</button>
+        </div>
+
+        <!-- NETWORK SWITCH -->
+        <div class="net-matrix">
+          <div class="net-tab active" id="tabTON" onclick="switchNetwork('TON')">
+            <div class="net-tab-title" style="color: #38BDF8;">💎 TON USDT</div>
+            <div class="net-tab-sub">Telegram / Tonkeeper</div>
+          </div>
+          <div class="net-tab" id="tabBEP" onclick="switchNetwork('BEP20')">
+            <div class="net-tab-title" style="color: var(--gold-primary);">⚡ BEP-20 USDT</div>
+            <div class="net-tab-sub">BNB Chain / Trust</div>
+          </div>
+        </div>
+
+        <!-- ESCROW ADDRESS BOX -->
+        <div class="escrow-box">
+          <div style="font-size: 9.5px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;" id="escrowLabel">
+            OFFICIAL VAULT ESCROW • DIRECT DEPOSIT
+          </div>
+          <div class="escrow-val">
+            <span id="escrowAddressText">EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N</span>
+            <button type="button" class="copy-btn" onclick="copyEscrowAddress()">Copy</button>
+          </div>
+        </div>
+
+        <!-- 1-CLICK PAY & ENTER DRAW CTA BUTTON -->
+        <button type="button" class="btn-pay-cta" onclick="handleAutoTransferNow()">
+          ⚡ Authorize & Pay <span id="ctaPayAmount">1.00</span> USDT
+        </button>
+
+        <!-- "FAILED TO CONNECT?" MANUAL ESCROW & TX HASH FALLBACK -->
+        <div>
+          <button type="button" class="fallback-toggle-btn" onclick="toggleManualSection()">
+            Failed to connect? Manual Escrow Fallback ▼
+          </button>
+          <div class="fallback-content-box" id="manualContentBox">
+            <div style="font-size: 10.5px; color: var(--text-muted); margin-bottom: 8px; line-height: 1.4;">
+              If your wallet app did not open automatically, copy the Escrow address above, transfer your USDT manually, and paste your Tx Hash below for instant verification:
+            </div>
+            <input type="text" id="txHashInput" class="verify-input" placeholder="Paste Tx Hash (0x... or Tonkeeper Hash)" />
+            <button type="button" class="btn-confirm-hash" onclick="verifyManualHash()">
+              ✓ Submit Tx Hash for Instant Approval
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </main>
 
   <!-- FIXED BOTTOM NAVIGATION BAR -->
   <div class="bottom-nav-bar">
-    <div class="nav-tab-item active" onclick="scrollToTicketDesk()">
+    <div class="nav-tab-item active" id="navHomeTab" onclick="switchToView('home')">
       <div class="nav-tab-icon">🎲</div>
       <div>Draw</div>
     </div>
-    <div class="nav-tab-item" onclick="scrollToTicketDesk()">
+    <div class="nav-tab-item" id="navTicketsTab" onclick="switchToView('tickets')">
       <div class="nav-tab-icon">🎟️</div>
       <div>Tickets</div>
     </div>
@@ -1163,6 +1281,27 @@
         window.Telegram.WebApp.ready();
         window.Telegram.WebApp.expand();
       } catch(e) {}
+    }
+
+    /* 🔄 VIEW SWITCHER ENGINE (HOME vs TICKETS) */
+    function switchToView(viewName) {
+      var vHome = document.getElementById('viewHome');
+      var vTickets = document.getElementById('viewTickets');
+      var navHome = document.getElementById('navHomeTab');
+      var navTickets = document.getElementById('navTicketsTab');
+
+      if (viewName === 'tickets') {
+        vHome.classList.remove('active-view');
+        vTickets.classList.add('active-view');
+        if (navHome) navHome.classList.remove('active');
+        if (navTickets) navTickets.classList.add('active');
+      } else {
+        vTickets.classList.remove('active-view');
+        vHome.classList.add('active-view');
+        if (navTickets) navTickets.classList.remove('active');
+        if (navHome) navHome.classList.add('active');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     /* 🟢 TOP FLOATING SUCCESS ENGINE */
@@ -1428,9 +1567,6 @@
       var total = (selectedTickets * 1.00).toFixed(2);
       document.getElementById('ctaPayAmount').innerText = total;
     }
-    function scrollToTicketDesk() {
-      document.getElementById('ticketTerminalSection').scrollIntoView({ behavior: 'smooth' });
-    }
     function toggleManualSection() {
       var box = document.getElementById('manualContentBox');
       box.style.display = (box.style.display === 'block') ? 'none' : 'block';
@@ -1537,6 +1673,7 @@
       document.getElementById('txHashInput').value = "";
       syncUserTicketsWithGlobal();
       triggerGreenSuccess("Transaction Submitted! Awaiting Admin Approval.");
+      switchToView('home'); // Automatically return user to Home to see pending tickets!
 
       // 4. OWNER EMAIL ALERT
       try {
