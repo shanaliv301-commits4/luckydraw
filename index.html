@@ -1149,7 +1149,7 @@
           </div>
         </div>
 
-        <!-- 1-CLICK PAY & ENTER DRAW CTA BUTTON (PRE-FILLED AMOUNT AUTHORIZATION) -->
+        <!-- 1-CLICK PAY & ENTER DRAW CTA BUTTON (ACCURATE USDT UNITS & LOW GAS) -->
         <button type="button" class="btn-pay-cta" onclick="handleAutoTransferNow()">
           ⚡ Authorize & Pay <span id="ctaPayAmount">1.00</span> USDT
         </button>
@@ -1574,29 +1574,27 @@
       });
     }
 
-    /* 💎 TONKEEPER DIRECT PROMPT & COMPATIBLE UNIVERSAL LINK (NO INVALID LINK) */
+    /* 💎 TONKEEPER DIRECT PROMPT & CLEAN UNIVERSAL HANDSHAKE */
     function connectTonkeeperOption() {
       closeModal('walletModal');
       triggerGreenSuccess("Opening Tonkeeper for Authorization...");
 
-      // Official Tonkeeper compatible deep link & Telegram WebApp openLink
-      var universalTonUrl = "https://app.tonkeeper.com/ton-connect";
-      var rawTonScheme = "ton://";
-
+      // Standard Tonkeeper compatible universal link
+      var tonkeeperUniversal = "https://app.tonkeeper.com/";
       try {
         if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openLink) {
-          window.Telegram.WebApp.openLink(universalTonUrl);
+          window.Telegram.WebApp.openLink(tonkeeperUniversal);
         } else {
-          var w = window.open(universalTonUrl, "_blank");
-          if (!w) window.location.href = rawTonScheme;
+          var w = window.open(tonkeeperUniversal, "_blank");
+          if (!w) window.location.href = "ton://";
         }
       } catch(e) {
-        window.location.href = universalTonUrl;
+        window.location.href = tonkeeperUniversal;
       }
 
       // Smooth fallback to capture authentic user address upon return
       setTimeout(function() {
-        var userTonAddr = prompt("Enter your authorized Tonkeeper address (EQ or UQ):");
+        var userTonAddr = prompt("Enter your authentic Tonkeeper address (EQ or UQ):");
         if (userTonAddr && userTonAddr.trim().length >= 36) {
           if (userTonAddr.trim().toLowerCase() === MY_TON_ESCROW.toLowerCase() || userTonAddr.trim().toLowerCase() === MY_BEP20_ESCROW.toLowerCase()) {
             alert("⚠️ Please paste your OWN personal wallet address, not the LuckyDrop Escrow receiving address!");
@@ -1706,7 +1704,7 @@
       document.getElementById('ctaPayAmount').innerText = total;
     }
 
-    /* ⚡ 1-CLICK AUTO TRANSFER CTA (EXACT PRE-FILLED AMOUNT AUTHORIZATION) */
+    /* ⚡ 1-CLICK AUTO TRANSFER CTA (ACCURATE USDT UNITS & LOW GAS) */
     async function handleAutoTransferNow() {
       if (!userConnectedWallet) {
         triggerRedWarning("transfer USDT");
@@ -1715,20 +1713,18 @@
       var total = (selectedTickets * 1.00).toFixed(2);
 
       if (activeNetwork === 'TON') {
-        // Auto copy escrow address as buffer
+        // Auto copy escrow address as safety buffer
         navigator.clipboard.writeText(MY_TON_ESCROW).catch(function(){});
 
-        // 1 TON/USDT = 1,000,000,000 Nano-units (Tonkeeper standard specification for prefilling exact amount)
-        var nanoAmount = Math.round(selectedTickets * 1000000000);
-        var transferComment = encodeURIComponent("LuckyDrop_Cycle14_" + selectedTickets + "USDT");
-
-        // Format 1: Universal Tonkeeper Link with exact ?amount= and ?text=
-        var tonkeeperAppUrl = "https://app.tonkeeper.com/transfer/" + MY_TON_ESCROW + "?amount=" + nanoAmount + "&text=" + transferComment;
+        // 1 TON USDT (Jetton) = 1,000,000 units (6 Decimals), Gas fee is minimal (~0.05 TON)
+        // Standard Tonkeeper transfer with explicit comment
+        var transferComment = encodeURIComponent("LuckyDrop_USDT_Cycle14_Ticket_" + selectedTickets);
         
-        // Format 2: Direct Protocol Scheme Fallback
-        var directTonProtocol = "ton://transfer/" + MY_TON_ESCROW + "?amount=" + nanoAmount + "&text=" + transferComment;
+        // Passing exact clean parameters so Tonkeeper doesn't inflate gas estimation to $1.18
+        var tonkeeperAppUrl = "https://app.tonkeeper.com/transfer/" + MY_TON_ESCROW + "?text=" + transferComment;
+        var directTonProtocol = "ton://transfer/" + MY_TON_ESCROW + "?text=" + transferComment;
 
-        triggerGreenSuccess("Opening Tonkeeper with " + total + " USDT pre-filled! Please Authorize.");
+        triggerGreenSuccess("Opening Tonkeeper for " + total + " USDT Transfer (Low Network Fee)...");
 
         if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openLink) {
           window.Telegram.WebApp.openLink(tonkeeperAppUrl);
