@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>LuckyDrop — Private Owner Approvals & Security Hub</title>
   
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
@@ -18,21 +19,17 @@
       --gold-glow: rgba(245, 194, 66, 0.35);
       --emerald-accent: #10B981;
       --red-accent: #EF4444;
-      --purple-vip: #A855F7;
       --border-subtle: rgba(255, 255, 255, 0.08);
       --border-gold: rgba(245, 194, 66, 0.4);
       --text-main: #F8FAFC;
       --text-muted: #94A3B8;
       --text-dim: #64748B;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       background-color: var(--bg-base);
       background-image: 
         radial-gradient(circle at 50% 0%, rgba(245, 194, 66, 0.12) 0%, transparent 60%),
-        radial-gradient(circle at 80% 30%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
         linear-gradient(180deg, #060913 0%, #0A1020 100%);
       color: var(--text-main);
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -42,280 +39,123 @@
       align-items: center;
       padding: 20px 16px;
     }
-
     #authLockContainer {
-      width: 100%;
-      max-width: 400px;
-      margin-top: 10vh;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-gold);
-      border-radius: 24px;
-      padding: 32px 24px;
-      text-align: center;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(20px);
+      width: 100%; max-width: 400px; margin-top: 10vh;
+      background: var(--bg-surface); border: 1px solid var(--border-gold);
+      border-radius: 24px; padding: 32px 24px; text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px);
     }
-
     .shield-badge {
-      width: 64px;
-      height: 64px;
-      border-radius: 20px;
-      background: rgba(245, 194, 66, 0.12);
-      border: 1px solid var(--border-gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      margin: 0 auto 16px auto;
-      box-shadow: 0 0 25px var(--gold-glow);
+      width: 64px; height: 64px; border-radius: 20px;
+      background: rgba(245, 194, 66, 0.12); border: 1px solid var(--border-gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 30px; margin: 0 auto 16px auto;
     }
-
     .pin-input {
-      width: 100%;
-      background: #070C18;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 14px;
-      padding: 14px;
-      text-align: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 26px;
-      letter-spacing: 12px;
-      color: var(--gold-primary);
-      outline: none;
-      margin: 18px 0;
-      transition: all 0.2s ease;
+      width: 100%; background: #070C18; border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 14px; padding: 14px; text-align: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 26px;
+      letter-spacing: 12px; color: var(--gold-primary); outline: none; margin: 18px 0;
     }
-    .pin-input:focus {
-      border-color: var(--gold-primary);
-      box-shadow: 0 0 15px var(--gold-glow);
-    }
-
     .btn-unlock {
-      width: 100%;
-      padding: 14px;
-      border-radius: 14px;
-      border: none;
+      width: 100%; padding: 14px; border-radius: 14px; border: none;
       background: linear-gradient(135deg, #F5C242 0%, #D49B1E 100%);
-      color: #070B16;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 15px;
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 6px 20px var(--gold-glow);
-      transition: all 0.2s ease;
+      color: #070B16; font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px; font-weight: 800; cursor: pointer;
     }
-    .btn-unlock:hover { transform: translateY(-2px); }
-
-    #adminDashboardHub {
-      width: 100%;
-      max-width: 900px;
-      display: none;
-      animation: fadeIn 0.3s ease-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
+    #adminDashboardHub { width: 100%; max-width: 900px; display: none; }
     .dash-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-gold);
-      border-radius: 20px;
-      padding: 18px 24px;
-      margin-bottom: 24px;
-      backdrop-filter: blur(20px);
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--bg-surface); border: 1px solid var(--border-gold);
+      border-radius: 20px; padding: 18px 24px; margin-bottom: 24px;
     }
-
-    .brand-tag {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 20px;
-      font-weight: 800;
-    }
-    .brand-tag span { color: var(--gold-primary); }
-
-    .btn-logout {
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid var(--red-accent);
-      color: var(--red-accent);
-      padding: 8px 16px;
-      border-radius: 10px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-    .stat-box {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 16px;
-      text-align: center;
-    }
-    .stat-label {
-      font-size: 11px;
-      color: var(--text-dim);
-      font-family: 'JetBrains Mono', monospace;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-    .stat-val {
-      font-size: 24px;
-      font-weight: 800;
-      font-family: 'JetBrains Mono', monospace;
-      margin-top: 4px;
-    }
-
-    .sub-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 14px;
-      transition: all 0.2s ease;
-    }
-    .sub-card.vip-border { border-color: rgba(168, 85, 247, 0.45); }
-    .sub-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
+    .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+    .stat-box { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 16px; text-align: center; }
+    .stat-val { font-size: 24px; font-weight: 800; font-family: 'JetBrains Mono', monospace; margin-top: 4px; }
+    .sub-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 18px; padding: 20px; margin-bottom: 14px; }
+    .sub-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
     .sub-details {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.8;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 12px;
-      border-radius: 12px;
-      margin: 10px 0;
-      word-break: break-all;
-    }
-    .explorer-link {
-      color: #38BDF8;
-      text-decoration: none;
-      font-size: 11.5px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      margin-top: 6px;
-    }
-
-    .action-btn-group {
-      display: flex;
-      gap: 10px;
-      margin-top: 14px;
+      font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      color: var(--text-muted); background: rgba(0, 0, 0, 0.3); padding: 12px;
+      border-radius: 12px; margin: 10px 0; word-break: break-all;
     }
     .btn-act {
-      flex: 1;
-      padding: 12px;
-      border-radius: 12px;
-      border: none;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 13.5px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: all 0.2s ease;
+      flex: 1; padding: 12px; border-radius: 12px; border: none;
+      font-family: 'Space Grotesk', sans-serif; font-size: 13.5px; font-weight: 700;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;
     }
     .btn-act.approve { background: #10B981; color: #070B16; }
-    .btn-act.approve:hover { background: #059669; }
     .btn-act.reject { background: rgba(239, 68, 68, 0.2); color: #EF4444; border: 1px solid #EF4444; }
-    .btn-act.reject:hover { background: #EF4444; color: #FFFFFF; }
-
     #toastMsg {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #141E34;
-      border: 1px solid var(--gold-primary);
-      color: var(--gold-primary);
-      padding: 12px 24px;
-      border-radius: 14px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      display: none;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-      z-index: 99999;
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: #141E34; border: 1px solid var(--gold-primary); color: var(--gold-primary);
+      padding: 12px 24px; border-radius: 14px; font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; display: none; z-index: 99999;
     }
   </style>
 </head>
 <body>
 
-  <!-- 1. AUTH LOCK SCREEN -->
+  <!-- AUTH LOCK -->
   <div id="authLockContainer">
     <div class="shield-badge">🛡️</div>
     <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 800;">Owner Authentication</h2>
-    <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px; line-height: 1.5;">
-      Authorized personnel only. Enter your private 4-digit security PIN:
-    </p>
-
+    <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 6px;">Enter your 4-digit security PIN:</p>
     <input type="password" id="adminPinInput" class="pin-input" placeholder="••••" maxlength="4" />
     <button type="button" class="btn-unlock" onclick="handleUnlock()">🔓 Unlock Approvals Hub</button>
   </div>
 
-  <!-- 2. ADMIN DASHBOARD HUB -->
+  <!-- DASHBOARD -->
   <div id="adminDashboardHub">
     <div class="dash-header">
       <div>
-        <div class="brand-tag">LUCKY<span>DROP</span> <span style="font-size: 13px; color: var(--text-dim); font-weight: 600;">| Admin Portal</span></div>
-        <div style="font-size: 11px; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace; margin-top: 3px;">● Live Cloud Database Synced</div>
+        <div style="font-size: 20px; font-weight: 800; font-family: 'Space Grotesk', sans-serif;">LUCKY<span style="color:var(--gold-primary);">DROP</span> <span style="font-size: 13px; color: var(--text-dim);">| Admin Portal</span></div>
+        <div style="font-size: 11px; color: var(--emerald-accent); font-family: 'JetBrains Mono', monospace; margin-top: 3px;" id="cloudSyncStatus">● Live Cloud Active</div>
       </div>
       <div style="display: flex; gap: 8px;">
-        <button type="button" class="btn-logout" style="border-color: var(--border-subtle); color: var(--gold-primary); background: rgba(245, 194, 66, 0.1);" onclick="loadSubmissions()">🔄 Refresh Live</button>
-        <button type="button" class="btn-logout" onclick="handleLock()">🔒 Lock Portal</button>
+        <button type="button" style="background: rgba(245, 194, 66, 0.15); border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 8px 14px; border-radius: 10px; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 700; cursor: pointer;" onclick="loadSubmissions()">🔄 Refresh Live</button>
+        <button type="button" style="background: rgba(239, 68, 68, 0.15); border: 1px solid #EF4444; color: #EF4444; padding: 8px 14px; border-radius: 10px; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 700; cursor: pointer;" onclick="handleLock()">🔒 Lock</button>
       </div>
+    </div>
+
+    <!-- MANUAL LOOKUP / QUICK ADD BAR -->
+    <div style="background: var(--bg-surface); border: 1px solid var(--border-gold); border-radius: 16px; padding: 14px; margin-bottom: 20px; display: flex; gap: 8px;">
+      <input type="text" id="manualTxLookupInput" placeholder="Paste user Tx Hash to manually pull/verify if needed..." style="flex: 1; background: #070C18; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 10px 14px; color: #FFF; font-family: 'JetBrains Mono', monospace; font-size: 12px; outline: none;" />
+      <button type="button" onclick="manualAddSubmission()" style="padding: 10px 16px; border-radius: 10px; border: none; background: var(--gold-primary); color: #070B16; font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 12px; cursor: pointer;">🔍 Lookup / Add</button>
     </div>
 
     <!-- STATS -->
     <div class="stats-row">
       <div class="stat-box">
-        <div class="stat-label">Pending Approval</div>
+        <div style="font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">PENDING APPROVAL</div>
         <div class="stat-val" style="color: #FBBF24;" id="statPendingCount">0</div>
       </div>
       <div class="stat-box">
-        <div class="stat-label">Verified & Active</div>
+        <div style="font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">VERIFIED & ACTIVE</div>
         <div class="stat-val" style="color: #10B981;" id="statApprovedCount">0</div>
       </div>
       <div class="stat-box">
-        <div class="stat-label">VIP Passes</div>
-        <div class="stat-val" style="color: #C084FC;" id="statVipCount">0</div>
+        <div style="font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">TOTAL SUBMISSIONS</div>
+        <div class="stat-val" style="color: #FFF;" id="statTotalCount">0</div>
       </div>
     </div>
 
-    <!-- SUBMISSIONS LIST -->
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-      <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 800;">Recent Transaction Submissions</h3>
-      <button type="button" onclick="clearAllData()" style="background: none; border: none; color: #EF4444; font-size: 11px; font-family: 'JetBrains Mono', monospace; cursor: pointer;">⚠️ Clear Local History</button>
-    </div>
-
-    <div id="submissionsListContainer">
-      <!-- Populated via JS -->
-    </div>
+    <div id="submissionsListContainer"></div>
   </div>
 
   <div id="toastMsg"></div>
 
   <script>
     var OWNER_PIN = "7788";
-
-    // 🌐 SUPABASE CLOUD REST SYNC CREDENTIALS
     var SUPABASE_URL = "https://kitnafgfudzcsxlvyhtz.supabase.co";
-    var SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpdG5hZmdmdWR6Y3N4bHZ5aHR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAwMDAwMDAsImV4cCI6MjA1NTAwMDAwMH0.placeholder";
+    var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpdG5hZmdmdWR6Y3N4bHZ5aHR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAwMDAwMDAsImV4cCI6MjA1NTAwMDAwMH0.placeholder";
+
+    var supabaseClient = null;
+    try {
+      if (window.supabase) {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      }
+    } catch(e) {}
 
     function handleUnlock() {
       var entered = document.getElementById('adminPinInput').value.trim();
@@ -323,18 +163,15 @@
         document.getElementById('authLockContainer').style.display = 'none';
         document.getElementById('adminDashboardHub').style.display = 'block';
         loadSubmissions();
-        showToast("🔓 Welcome, Owner! Admin hub unlocked.", "success");
+        showToast("🔓 Welcome, Owner! Hub unlocked.", "success");
       } else {
-        showToast("❌ Access Denied: Incorrect PIN!", "error");
-        document.getElementById('adminPinInput').value = "";
+        showToast("❌ Incorrect PIN!", "error");
       }
     }
 
     function handleLock() {
-      document.getElementById('adminPinInput').value = "";
       document.getElementById('authLockContainer').style.display = 'block';
       document.getElementById('adminDashboardHub').style.display = 'none';
-      showToast("🔒 Portal Locked.", "info");
     }
 
     function getLocalSubmissions() {
@@ -347,28 +184,26 @@
 
     async function loadSubmissions() {
       var subs = getLocalSubmissions();
-      
-      // Auto-poll Supabase cloud database if available
+
+      // Read live from Supabase tickets table
       try {
-        var res = await fetch(SUPABASE_URL + "/rest/v1/tickets?select=*&order=created_at.desc&limit=50", {
-          headers: {
-            "apikey": SUPABASE_KEY,
-            "Authorization": "Bearer " + SUPABASE_KEY
-          }
-        });
-        if (res.ok) {
-          var cloudData = await res.json();
-          if (cloudData && cloudData.length > 0) {
-            cloudData.forEach(function(row) {
+        if (supabaseClient) {
+          var { data, error } = await supabaseClient
+            .from('tickets')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+          if (data && data.length > 0) {
+            data.forEach(function(row) {
               var exists = subs.some(function(s) { return s.txHash === row.tx_hash; });
               if (!exists && row.tx_hash) {
                 subs.unshift({
                   txHash: row.tx_hash,
-                  wallet: row.wallet_address || "Connected User",
+                  wallet: row.wallet_address || "User Wallet",
                   amount: "1.00",
                   tickets: 1,
-                  network: "Auto Cloud",
-                  status: row.is_winner ? 'approved' : 'pending',
+                  network: (row.wallet_address && row.wallet_address.startsWith("0x")) ? "BEP-20" : "TON",
+                  status: (row.is_winner === true) ? 'approved' : 'pending',
                   timestamp: new Date(row.created_at || Date.now()).toLocaleString()
                 });
               }
@@ -378,149 +213,133 @@
         }
       } catch(e) {}
 
-      renderDashboardUI(subs);
+      renderUI(subs);
     }
 
-    function renderDashboardUI(subs) {
+    function renderUI(subs) {
       var container = document.getElementById('submissionsListContainer');
-      var pending = 0;
-      var approved = 0;
-      var vips = 0;
+      var pending = 0, approved = 0;
 
       for (var i = 0; i < subs.length; i++) {
         if (subs[i].status === 'pending' || subs[i].status === 'pending_vip') pending++;
         if (subs[i].status === 'approved') approved++;
-        if (subs[i].tickets === 'VIP' || subs[i].status === 'pending_vip') vips++;
       }
 
       document.getElementById('statPendingCount').innerText = pending;
       document.getElementById('statApprovedCount').innerText = approved;
-      document.getElementById('statVipCount').innerText = vips;
+      document.getElementById('statTotalCount').innerText = subs.length;
 
       if (subs.length === 0) {
         container.innerHTML = '<div style="background: var(--bg-surface); padding: 40px; text-align: center; border-radius: 18px; border: 1px dashed var(--border-subtle); color: var(--text-dim);">' +
-          'No user transactions found yet.<br><br><span style="font-size: 11px; color: var(--gold-primary);">Tip: Agar aapne same browser mein index.html se test kiya hai, to ek dafa upar "🔄 Refresh Live" button dabayein!</span></div>';
+          'No transaction submissions recorded yet.<br><br>' +
+          '<span style="font-size: 11px; color: var(--gold-primary);">Tip: Agar user ne mobile se submit kiya hai to upar "Lookup / Add" bar me Tx Hash paste karke direct add kar sakte hain ya Supabase me RLS disable karein!</span></div>';
         return;
       }
 
       var html = '';
       for (var j = 0; j < subs.length; j++) {
         var s = subs[j];
-        var isVip = (s.status === 'pending_vip' || s.tickets === 'VIP');
         var isPending = (s.status === 'pending' || s.status === 'pending_vip');
-        
-        var explorerUrl = s.network && s.network.indexOf('TON') !== -1
+        var isVip = (s.tickets === 'VIP' || s.status === 'pending_vip');
+
+        var explorerUrl = (s.network && s.network.indexOf('TON') !== -1)
           ? "https://tonviewer.com/transaction/" + s.txHash
           : "https://bscscan.com/tx/" + s.txHash;
 
-        var statusBadge = '';
-        if (isPending) {
-          statusBadge = '<span style="background: rgba(251, 191, 36, 0.15); border: 1px solid #FBBF24; color: #FBBF24; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 700;">⏳ PENDING VERIFICATION</span>';
-        } else if (s.status === 'approved') {
-          statusBadge = '<span style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10B981; color: #10B981; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 700;">✓ APPROVED & ACTIVE</span>';
-        } else {
-          statusBadge = '<span style="background: rgba(239, 68, 68, 0.15); border: 1px solid #EF4444; color: #EF4444; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 700;">✕ REJECTED (FAKE/UNPAID)</span>';
-        }
+        var badge = isPending
+          ? '<span style="background: rgba(251, 191, 36, 0.15); border: 1px solid #FBBF24; color: #FBBF24; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 700;">⏳ PENDING VERIFICATION</span>'
+          : (s.status === 'approved'
+             ? '<span style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10B981; color: #10B981; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 700;">✓ APPROVED</span>'
+             : '<span style="background: rgba(239, 68, 68, 0.15); border: 1px solid #EF4444; color: #EF4444; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 700;">✕ REJECTED</span>');
 
-        html += '<div class="sub-card ' + (isVip ? 'vip-border' : '') + '">' +
+        html += '<div class="sub-card">' +
           '<div class="sub-header">' +
             '<div>' +
               '<strong style="font-size: 15px; color: ' + (isVip ? '#C084FC' : 'var(--gold-primary)') + ';">' + 
                 (isVip ? '👑 VIP MEMBERSHIP (50.00 USDT)' : '🎟️ ' + s.tickets + ' Ticket(s) — ' + s.amount + ' USDT') + 
               '</strong>' +
-              '<div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">' + s.timestamp + ' • Network: <strong>' + s.network + '</strong></div>' +
+              '<div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">' + s.timestamp + ' • Network: ' + s.network + '</div>' +
             '</div>' +
-            statusBadge +
+            badge +
           '</div>' +
-
           '<div class="sub-details">' +
             '<div><strong>User Wallet:</strong> ' + s.wallet + '</div>' +
             '<div style="margin-top: 4px;"><strong>Tx Hash:</strong> ' + s.txHash + '</div>' +
-            '<a href="' + explorerUrl + '" target="_blank" class="explorer-link">🔍 View Transaction on Blockchain Explorer ↗</a>' +
+            '<a href="' + explorerUrl + '" target="_blank" style="color: #38BDF8; font-size: 11px; text-decoration: none; display: inline-block; margin-top: 6px;">🔍 View on Blockchain Explorer ↗</a>' +
           '</div>';
 
         if (isPending) {
-          html += '<div class="action-btn-group">' +
-            '<button type="button" class="btn-act approve" onclick="approveTx(\'' + s.txHash + '\', ' + isVip + ')">✓ ' + (isVip ? 'Activate VIP Access' : 'Approve & Lock Tickets') + '</button>' +
-            '<button type="button" class="btn-act reject" onclick="rejectTx(\'' + s.txHash + '\')">✕ Reject (Unpaid)</button>' +
+          html += '<div style="display: flex; gap: 10px; margin-top: 14px;">' +
+            '<button type="button" class="btn-act approve" onclick="approveTx(\'' + s.txHash + '\')">✓ Approve & Lock Tickets</button>' +
+            '<button type="button" class="btn-act reject" onclick="rejectTx(\'' + s.txHash + '\')">✕ Reject</button>' +
           '</div>';
         }
-
         html += '</div>';
       }
-
       container.innerHTML = html;
     }
 
-    function approveTx(txHash, isVip) {
+    async function approveTx(txHash) {
       var subs = getLocalSubmissions();
       for (var i = 0; i < subs.length; i++) {
         if (subs[i].txHash === txHash) {
           subs[i].status = 'approved';
-          
-          if (isVip) {
-            localStorage.setItem('ld_is_vip_' + subs[i].wallet, 'true');
-          } else {
-            var userKey = 'ld_tickets_' + subs[i].wallet;
-            var userTickets = JSON.parse(localStorage.getItem(userKey) || '[]');
-            for (var t = 0; t < userTickets.length; t++) {
-              if (userTickets[t].txHash === txHash) {
-                userTickets[t].status = 'verified';
-              }
-            }
-            localStorage.setItem(userKey, JSON.stringify(userTickets));
-          }
           break;
         }
       }
       saveLocalSubmissions(subs);
-      renderDashboardUI(subs);
-      showToast("✅ Approved! User status is now active on blockchain record.", "success");
+
+      // Supabase me status sync update
+      try {
+        if (supabaseClient) {
+          await supabaseClient.from('tickets').update({ is_winner: true }).eq('tx_hash', txHash);
+        }
+      } catch(e) {}
+
+      renderUI(subs);
+      showToast("✅ Approved successfully!", "success");
     }
 
-    function rejectTx(txHash) {
+    async function rejectTx(txHash) {
       var subs = getLocalSubmissions();
       for (var i = 0; i < subs.length; i++) {
         if (subs[i].txHash === txHash) {
           subs[i].status = 'rejected';
-          var userKey = 'ld_tickets_' + subs[i].wallet;
-          var userTickets = JSON.parse(localStorage.getItem(userKey) || '[]');
-          for (var t = 0; t < userTickets.length; t++) {
-            if (userTickets[t].txHash === txHash) {
-              userTickets[t].status = 'rejected';
-            }
-          }
-          localStorage.setItem(userKey, JSON.stringify(userTickets));
           break;
         }
       }
       saveLocalSubmissions(subs);
-      renderDashboardUI(subs);
+      renderUI(subs);
       showToast("❌ Submission Rejected.", "error");
     }
 
-    function clearAllData() {
-      if (confirm("Are you sure you want to clear all submission history?")) {
-        localStorage.removeItem('ld_global_submissions');
-        renderDashboardUI([]);
+    function manualAddSubmission() {
+      var hash = document.getElementById('manualTxLookupInput').value.trim();
+      if (!hash || hash.length < 20) {
+        showToast("Please paste valid Tx Hash", "error");
+        return;
       }
+      var subs = getLocalSubmissions();
+      subs.unshift({
+        txHash: hash,
+        wallet: "Manual/Direct User",
+        amount: "1.00",
+        tickets: 1,
+        network: hash.startsWith("0x") ? "BEP-20" : "TON",
+        status: 'pending',
+        timestamp: new Date().toLocaleString()
+      });
+      saveLocalSubmissions(subs);
+      document.getElementById('manualTxLookupInput').value = "";
+      renderUI(subs);
+      showToast("✅ Tx Hash added to queue! You can now Approve it.", "success");
     }
 
     function showToast(msg, type) {
       var t = document.getElementById('toastMsg');
-      t.innerText = msg;
-      t.style.display = 'block';
-      if (type === 'error') {
-        t.style.borderColor = '#EF4444';
-        t.style.color = '#EF4444';
-      } else if (type === 'success') {
-        t.style.borderColor = '#10B981';
-        t.style.color = '#10B981';
-      } else {
-        t.style.borderColor = 'var(--gold-primary)';
-        t.style.color = 'var(--gold-primary)';
-      }
-      setTimeout(function() { t.style.display = 'none'; }, 4000);
+      t.innerText = msg; t.style.display = 'block';
+      t.style.color = (type === 'error') ? '#EF4444' : '#10B981';
+      setTimeout(function(){ t.style.display = 'none'; }, 4000);
     }
   </script>
 </body>
